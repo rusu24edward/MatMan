@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+
 
 using namespace std;
 
@@ -76,6 +78,17 @@ public:
 		data = d;
 	}
 
+	// name
+	const string& getName() const {
+		return name;
+	}
+	string& getName() {
+		return name;
+	}
+	void setName(const string& n) {
+		name = n;
+	}
+
 
 	// print
 	void Print() const {
@@ -83,7 +96,7 @@ public:
 		cout << "\tCols: " << nCols << endl;
 		for (vector<vector<double>>::const_iterator
 			 i = data.begin(); i != data.end(); ++i) {
-			cout << "[ ";
+			cout << "\t\t[ ";
 			for (vector<double>::const_iterator
 				 j = i->begin(); j != i->end(); ++j) {
 				cout << *j << " ";
@@ -105,6 +118,7 @@ private:
 		nRows = mat.getRows();
 		nCols = mat.getCols();
 		data = mat.getData();
+		name = "NotNamed";
 	}
 
 	void copy(const vector<vector<double>>& d) {
@@ -116,24 +130,28 @@ private:
 		nRows = d.size();
 		nCols = checkNumberOfColumns;
 		data = d;
+		name = "NotNamed";
 	}
 
 	void reset() {
 		nRows = 0;
 		nCols = 0;
 		data = vector<vector<double>>();
+		name = "NotNamed";
 	}
 
 	void reset(int r, int c) {
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, 0.));
+		name = "NotNamed";
 	}
 
 	void reset(int r, int c, double value) {
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, value));
+		name = "NotNamed";
 	}
 
 
@@ -141,10 +159,9 @@ private:
 	// --- Underlying Data --- //
 	int nRows;
 	int nCols;
+	string name;
 
 	vector<vector<double>> data;
-
-	//TODO: add matrix name
 };
 
 #endif
