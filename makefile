@@ -13,5 +13,5 @@ tutorial.o: tutorial.cpp Matrix.h
 # 	g++ -c MainUtils.cpp Matrix.h
 
 clean:
-	rm -rf MainUtils.o tutorial.o tutorial.exe
+	rm -rf tutorial.o tutorial.exe
 
