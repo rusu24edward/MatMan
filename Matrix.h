@@ -77,6 +77,34 @@ public:
 	}
 
 
+	// element insertion/extraction
+	const double extract(int r, int c) const {
+		return data[r][c];
+	}
+	const double operator()(int r, int c) const {
+		return data[r][c];
+	}
+	double extract(int r, int c) {
+		return data[r][c];
+	}
+	double operator()(int r, int c) {
+		return data[r][c];
+	}
+	void insert(int r, int c, double value) {
+		data[r][c] = value;
+	}
+	// In order to make this function happen, I need to setup iterators that point
+	// to a specific location or a range of locations (including the entire thing)
+	// that need to be updated.
+	// TODO: implement iterators
+	// void insert(double value) {
+		// insert the value at the location of the iterators.
+	//}
+	// void operator=(double value) {
+		// insert the value at the location of the iterators.
+	// }
+
+
 	// print
 	void Print() const {
 		cout << "\n\tRows: " << nRows << endl;
