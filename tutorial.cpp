@@ -5,6 +5,10 @@
 #include "Matrix.h"
 
 int TestMatrix();
+void Print(const Matrix&, int);
+
+
+
 
 int main (int argc, char** argv) {
 
@@ -15,25 +19,55 @@ int main (int argc, char** argv) {
 	return status;
 }
 
+
+
+
+
+
+
 int TestMatrix() {
 	try{
-		Matrix matOne;
-		Matrix matTwo(2,2);
-		Matrix matThree(matOne);
+		Matrix mat1;
+		Print(mat1, 1);
 
-		matOne.setCols(12);
-		matOne.setRows(3);
+		Matrix mat2(2,2);
+		Print(mat2, 2);
 
-		Matrix matFour = matOne;
+		Matrix mat3(mat1);
+		Print(mat3, 3);
 
-		std::cout << "Matrix 1: " << matOne << std::endl;
-		std::cout << "Matrix 2: " << matTwo << std::endl;
-		std::cout << "Matrix 3: " << matThree << std::endl;
-		std::cout << "Matrix 4: " << matFour << std::endl;
+		mat1.setCols(12);
+		mat1.setRows(3);
+		Print(mat1, 1);
+
+		Matrix mat4 = mat1;
+		Print(mat4, 4);
+
+		Matrix mat5(2,2,1.);
+		Print(mat5, 5);
+
+		Matrix mat6 = mat5;
+		Print(mat6, 6);
+
+		std::vector<std::vector<double>> vec1(9, vector<double>(2, -1.0));
+		Matrix mat7(vec1);
+		Print(mat7, 7);
+
+		Matrix mat8 = vec1;
+		Print(mat8, 8);
+
+		mat4.setRows(9);
+		mat4.setCols(2);
+		mat4.setData(vec1);
+		Print(mat4, 4);
 
 		return 0;
 	} catch (...) {
 		std::cout << "Failed Matrix Test!" << std::endl;
 		return 1;
 	}
+}
+
+void Print(const Matrix& m, int matrixNumber) {
+	std::cout << "Matrix " << matrixNumber << ": " << m << std::endl;
 }
