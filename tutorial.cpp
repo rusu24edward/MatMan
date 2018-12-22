@@ -26,18 +26,10 @@ int TestMatrix() {
 
 		Matrix matFour = matOne;
 
-		std::cout << "Matrix 1: ";
-		matOne.Print();
-		std::cout << std::endl;
-		std::cout << "Matrix 2: ";
-		matTwo.Print();
-		std::cout << std::endl;
-		std::cout << "Matrix 3: ";
-		matThree.Print();
-		std::cout << std::endl;
-		std::cout << "Matrix 4: ";
-		matFour.Print();
-		std::cout << std::endl;
+		std::cout << "Matrix 1: " << matOne << std::endl;
+		std::cout << "Matrix 2: " << matTwo << std::endl;
+		std::cout << "Matrix 3: " << matThree << std::endl;
+		std::cout << "Matrix 4: " << matFour << std::endl;
 
 		return 0;
 	} catch (...) {

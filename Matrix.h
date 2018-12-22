@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 class Matrix {
 public:
 
@@ -53,9 +55,14 @@ public:
 
 
 	// print
-	void Print() {
-		std::cout << "\n\tRows: " << nRows << std::endl;
-		std::cout << "\tCols: " << nCols << std::endl;
+	void Print() const {
+		cout << "\n\tRows: " << nRows << endl;
+		cout << "\tCols: " << nCols << endl;
+	}
+
+	friend ostream & operator<<(ostream &streamer, const Matrix& mat) {
+		mat.Print();
+		return streamer;
 	}
 
 
