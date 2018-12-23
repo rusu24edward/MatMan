@@ -1,10 +1,10 @@
 all: tutorial.exe
 
-tutorial.exe: tutorial.o Matrix.h
-	g++ -o tutorial.exe tutorial.o Matrix.h
+tutorial.exe: tutorial.o
+	g++ -o tutorial.exe tutorial.o
 
-tutorial.o: tutorial.cpp
-	g++ -c tutorial.cpp
+tutorial.o: tutorial.cpp Matrix.h
+	g++ -c tutorial.cpp Matrix.h
 
 # Reader.o: Reader.cpp Reader.h
 # 	g++ -I /usr/include/boost/numeric -c Reader.cpp
@@ -13,5 +13,5 @@ tutorial.o: tutorial.cpp
 # 	g++ -c MainUtils.cpp Matrix.h
 
 clean:
-	rm -rf MainUtils.o tutorial.o tutorial.exe
+	rm -rf tutorial.o tutorial.exe
 
