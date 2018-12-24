@@ -71,6 +71,21 @@ int TestMatrix() {
 		mat9.setName("Matrix 9");
 		Print(mat9);
 
+		Matrix mat10(4,2);
+		mat10.setName("Matrix 10");
+		for (int i = 0; i < 4; ++i) {
+			mat10.insert(i,0,i);
+		}
+		for (int i = 0; i < 4; ++i) {
+			mat10.insert(i,1,10-i);
+		}
+		Print(mat10);
+
+		Matrix mat11(1,1);
+		mat11.setName("Matrix 11");
+		mat11.insert(0,0,mat10.extract(1,1));
+		Print(mat11);
+
 		return 0;
 	} catch (...) {
 		std::cout << "Failed Matrix Test!" << std::endl;
