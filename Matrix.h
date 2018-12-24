@@ -146,6 +146,7 @@ private:
 		nRows = mat.getRows();
 		nCols = mat.getCols();
 		data = mat.getData();
+		setIterators();
 		name = "NotNamed";
 	}
 
@@ -153,11 +154,13 @@ private:
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
 			if (d[i].size() != checkNumberOfColumns)
+				// Output a warning message
 				reset();
 		}
 		nRows = d.size();
 		nCols = checkNumberOfColumns;
 		data = d;
+		setIterators();
 		name = "NotNamed";
 	}
 
@@ -165,6 +168,7 @@ private:
 		nRows = 0;
 		nCols = 0;
 		data = vector<vector<double>>();
+		setIterators();
 		name = "NotNamed";
 	}
 
@@ -172,6 +176,7 @@ private:
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, 0.));
+		setIterators();
 		name = "NotNamed";
 	}
 
@@ -179,7 +184,22 @@ private:
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, value));
+		setIterators();
 		name = "NotNamed";
+	}
+
+	void setIterators() {
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+	}
+
+	void setIterators(int t, int b, int l, int r) {
+		topLimit = t;
+		bottomLimit = b;
+		leftLimit = l;
+		rightLimit = r;
 	}
 
 
@@ -187,9 +207,12 @@ private:
 	// --- Underlying Data --- //
 	int nRows;
 	int nCols;
-	string name;
 
 	vector<vector<double>> data;
+
+	int topLimit, bottomLimit, leftLimit, rightLimit;
+
+	string name;
 };
 
 #endif
