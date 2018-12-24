@@ -5,7 +5,7 @@
 #include "Matrix.h"
 
 int TestMatrix();
-void Print(const Matrix&, int);
+void Print(const Matrix&);
 
 
 
@@ -28,38 +28,48 @@ int main (int argc, char** argv) {
 int TestMatrix() {
 	try{
 		Matrix mat1;
-		Print(mat1, 1);
+		Print(mat1);
 
 		Matrix mat2(2,2);
-		Print(mat2, 2);
+		mat2.setName("Matrix 2");
+		Print(mat2);
 
 		Matrix mat3(mat1);
-		Print(mat3, 3);
+		mat3.setName("Matrix 3");
+		Print(mat3);
 
 		mat1.setCols(12);
 		mat1.setRows(3);
-		Print(mat1, 1);
+		mat1.setName("Matrix 1");
+		Print(mat1);
 
 		Matrix mat4 = mat1;
-		Print(mat4, 4);
+		Print(mat4);
 
 		Matrix mat5(2,2,1.);
-		Print(mat5, 5);
+		mat5.setName("Matrix 5");
+		Print(mat5);
 
 		Matrix mat6 = mat5;
-		Print(mat6, 6);
+		Print(mat6);
 
 		std::vector<std::vector<double>> vec1(9, vector<double>(2, -1.0));
 		Matrix mat7(vec1);
-		Print(mat7, 7);
+		mat7.setName("Matrix 7");
+		Print(mat7);
 
 		Matrix mat8 = vec1;
-		Print(mat8, 8);
+		mat8.setName("Matrix 8");
+		Print(mat8);
 
 		mat4.setRows(9);
 		mat4.setCols(2);
 		mat4.setData(vec1);
-		Print(mat4, 4);
+		Print(mat4);
+
+		Matrix mat9(mat3);
+		mat9.setName("Matrix 9");
+		Print(mat9);
 
 		Matrix mat10(4,2);
 		for (int i = 0; i < 4; ++i) {
@@ -81,6 +91,6 @@ int TestMatrix() {
 	}
 }
 
-void Print(const Matrix& m, int matrixNumber) {
-	std::cout << "Matrix " << matrixNumber << ": " << m << std::endl;
+void Print(const Matrix& m) {
+	std::cout << m.getName() << ": " << m << std::endl;
 }
