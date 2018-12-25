@@ -88,8 +88,7 @@ int TestMatrix() {
 		Matrix mat12(2,3,-1.);
 		mat12.setName("Matrix 12");
 		Print(mat12);
-		// mat12(0,1,0,0) = mat9;
-		mat12("right") = mat12("left");
+		mat12(0,1,0,0,"left") = mat10(1,2,1,1,"right");
 		Print(mat12);
 
 		return 0;

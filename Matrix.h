@@ -120,13 +120,27 @@ public:
 
 
 	// --- Opeartor tests --- //
-	Matrix& operator()(const string& call) {
+	Matrix& operator()(int t, int b, int l, int r, const string& call) {
 		cout << "Function operator: " << call << endl;
+		setIterators(t, b+1, l, r+1);
 		return *this;
 	}
 
+	// Very close to the above = operator. Here, I don't use a constant RHS, but I
+	// will want to in the final version, so the code must be the same.
+	// I modify the copy helper function to just copy the stuff captured
+	// between the iterators.
 	void operator=(Matrix& mat_in) {
 		cout << "Equals operator" << endl;
+		cout << mat_in << endl;
+		// loop over the iterators and copy the values into data.
+		for (int i = topLimit, ii = mat_in.topLimit; i < bottomLimit; ++i, ++ii) {
+			for (int j = leftLimit, jj = mat_in.leftLimit; j < rightLimit; ++j, ++jj) {
+				data[i][j] = mat_in.extract(ii, jj);
+			}
+		}
+		setIterators();
+		mat_in.setIterators();
 	}
 
 
@@ -145,6 +159,8 @@ public:
 			}
 			cout << "]" << endl;
 		}
+		cout << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
+			 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 
 	friend ostream & operator<<(ostream &streamer, const Matrix& mat) {
@@ -152,6 +168,27 @@ public:
 		return streamer;
 	}
 
+
+
+
+	// --- I want to make these private... --- //
+
+	void setIterators() {
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+	}
+
+	void setIterators(int t, int b, int l, int r) {
+		topLimit = t;
+		bottomLimit = b;
+		leftLimit = l;
+		rightLimit = r;
+	}
+
+
+	int topLimit, bottomLimit, leftLimit, rightLimit;
 
 private:
 
@@ -202,20 +239,6 @@ private:
 		name = "NotNamed";
 	}
 
-	void setIterators() {
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-	}
-
-	void setIterators(int t, int b, int l, int r) {
-		topLimit = t;
-		bottomLimit = b;
-		leftLimit = l;
-		rightLimit = r;
-	}
-
 
 
 	// --- Underlying Data --- //
@@ -224,7 +247,6 @@ private:
 
 	vector<vector<double>> data;
 
-	int topLimit, bottomLimit, leftLimit, rightLimit;
 
 	string name;
 };
