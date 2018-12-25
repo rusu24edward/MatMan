@@ -118,6 +118,20 @@ public:
 	// }
 
 
+
+	// --- Opeartor tests --- //
+	Matrix& operator()(const string& call) {
+		cout << "Function operator: " << call << endl;
+		return *this;
+	}
+
+	void operator=(Matrix& mat_in) {
+		cout << "Equals operator" << endl;
+	}
+
+
+
+
 	// print
 	void Print() const {
 		cout << "\n\tRows: " << nRows << endl;

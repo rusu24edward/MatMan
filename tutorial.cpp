@@ -15,7 +15,6 @@ int main (int argc, char** argv) {
 	std::cout << "Hello World!" << std::endl;
 
 	int status = TestMatrix();
-
 	return status;
 }
 
@@ -85,6 +84,13 @@ int TestMatrix() {
 		mat11.setName("Matrix 11");
 		mat11.insert(0,0,mat10.extract(1,1));
 		Print(mat11);
+
+		Matrix mat12(2,3,-1.);
+		mat12.setName("Matrix 12");
+		Print(mat12);
+		// mat12(0,1,0,0) = mat9;
+		mat12("right") = mat12("left");
+		Print(mat12);
 
 		return 0;
 	} catch (...) {
