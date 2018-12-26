@@ -66,7 +66,7 @@ int TestMatrix() {
 		mat4.setData(vec1);
 		Print(mat4);
 
-		Matrix mat9(mat3);
+		Matrix mat9(2,1);
 		mat9.setName("Matrix 9");
 		Print(mat9);
 
@@ -91,6 +91,26 @@ int TestMatrix() {
 		mat12(0,1,0,0,"left") = mat10(1,2,1,1,"right");
 		Print(mat12);
 
+		Matrix mat13(2,3,-2.);
+		mat13.setName("Matrix 13");
+		Print(mat13);
+		mat13(0,1,1,1,"left") = mat9;
+		Print(mat13);
+
+		Matrix mat14(2,3,-2.);
+		mat14.setName("Matrix 14");
+		Print(mat14);
+		mat14(0,0,1,1,"left") = mat11;
+		Print(mat14);
+
+		Matrix mat15(mat4(0,5,0,1,"right"));
+		mat15.setName("Matrix 15");
+		Print(mat15);
+
+		Matrix mat16 = mat4(0,5,0,1,"right");
+		mat16.setName("Matrix 16");
+		Print(mat16);
+
 		return 0;
 	} catch (...) {
 		std::cout << "Failed Matrix Test!" << std::endl;
@@ -99,5 +119,5 @@ int TestMatrix() {
 }
 
 void Print(const Matrix& m) {
-	std::cout << m.getName() << ": " << m << std::endl;
+	std::cout << m << std::endl;
 }

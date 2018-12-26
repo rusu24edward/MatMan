@@ -148,6 +148,7 @@ public:
 
 	// print
 	void Print() const {
+		cout << name << endl;
 		cout << "\n\tRows: " << nRows << endl;
 		cout << "\tCols: " << nCols << endl;
 		for (vector<vector<double>>::const_iterator
