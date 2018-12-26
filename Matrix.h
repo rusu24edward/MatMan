@@ -121,8 +121,7 @@ public:
 
 
 	// --- Opeartor tests --- //
-	Matrix& operator()(int t, int b, int l, int r, const string& call) {
-		cout << "Function operator: " << call << endl;
+	Matrix& operator()(int t, int b, int l, int r) {
 		setIterators(t, b+1, l, r+1);
 		return *this;
 	}
@@ -132,8 +131,6 @@ public:
 	// I modify the copy helper function to just copy the stuff captured
 	// between the iterators.
 	void operator=(Matrix& mat_in) {
-		cout << "Equals operator" << endl;
-		cout << mat_in << endl;
 		copyDataBetweenIterators(mat_in);
 		setIterators();
 		mat_in.setIterators();
