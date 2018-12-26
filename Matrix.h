@@ -165,7 +165,7 @@ public:
 
 
 
-	// --- I want to make these private... --- //
+	// TODO: make this private in MatMan-11
 
 	void setIterators() {
 		topLimit = 0;
@@ -219,7 +219,7 @@ private:
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
 			if (d[i].size() != checkNumberOfColumns)
-				// Output a warning message
+				// TODO: Output a warning message
 				reset();
 		}
 		nRows = d.size();
