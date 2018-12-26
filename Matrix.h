@@ -45,6 +45,7 @@ public:
 	}
 
 
+	// TODO: discontinue support for set columns and set rows
 	// nRows
 	const int getRows() const {
 		return nRows;
@@ -133,12 +134,7 @@ public:
 	void operator=(Matrix& mat_in) {
 		cout << "Equals operator" << endl;
 		cout << mat_in << endl;
-		// loop over the iterators and copy the values into data.
-		for (int i = topLimit, ii = mat_in.topLimit; i < bottomLimit; ++i, ++ii) {
-			for (int j = leftLimit, jj = mat_in.leftLimit; j < rightLimit; ++j, ++jj) {
-				data[i][j] = mat_in.extract(ii, jj);
-			}
-		}
+		copyDataBetweenIterators(mat_in);
 		setIterators();
 		mat_in.setIterators();
 	}
@@ -148,8 +144,8 @@ public:
 
 	// print
 	void Print() const {
-		cout << name << endl;
-		cout << "\n\tRows: " << nRows << endl;
+		cout << endl << name << endl;
+		cout << "\tRows: " << nRows << endl;
 		cout << "\tCols: " << nCols << endl;
 		for (vector<vector<double>>::const_iterator
 			 i = data.begin(); i != data.end(); ++i) {
@@ -194,13 +190,33 @@ public:
 private:
 
 	// helper functions
+	// void copy(const Matrix& mat) {
+	// 	nRows = mat.getRows();
+	// 	nCols = mat.getCols();
+	// 	data = mat.getData();
+	// 	setIterators();
+	// 	name = "NotNamed";
+	// }
+
 	void copy(const Matrix& mat) {
-		nRows = mat.getRows();
-		nCols = mat.getCols();
-		data = mat.getData();
+		name = mat.getName();
+		nRows = mat.bottomLimit - mat.topLimit;
+		nCols = mat.rightLimit - mat.leftLimit;
 		setIterators();
-		name = "NotNamed";
+		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
+		copyDataBetweenIterators(mat);
 	}
+
+	void copyDataBetweenIterators(const Matrix& mat_in) {
+		for (int i = topLimit, ii = mat_in.topLimit; i < bottomLimit; ++i, ++ii) {
+			for (int j = leftLimit, jj = mat_in.leftLimit; j < rightLimit; ++j, ++jj) {
+				data[i][j] = mat_in.extract(ii, jj);
+			}
+		}
+	}
+
+
+
 
 	void copy(const vector<vector<double>>& d) {
 		int checkNumberOfColumns = d[0].size();
