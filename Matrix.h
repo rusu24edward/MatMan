@@ -187,14 +187,6 @@ public:
 private:
 
 	// helper functions
-	// void copy(const Matrix& mat) {
-	// 	nRows = mat.getRows();
-	// 	nCols = mat.getCols();
-	// 	data = mat.getData();
-	// 	setIterators();
-	// 	name = "NotNamed";
-	// }
-
 	void copy(const Matrix& mat) {
 		name = mat.getName();
 		nRows = mat.bottomLimit - mat.topLimit;
