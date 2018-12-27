@@ -80,6 +80,17 @@ int TestMatrix() {
 		mat2 = vec1;
 		Print(mat2);
 
+		std::vector<std::vector<double>> vec2;
+		vec2.push_back(vector<double>(5));
+		vec2.push_back(vector<double>(3));
+		vec2.push_back(vector<double>(5));
+		try {
+			Matrix mat12(vec2);
+			mat12.setName("Matrix 12");
+		} catch (const char* msg) {
+			std::cout << msg << std::endl;
+		}
+
 		return 0;
 	} catch (...) {
 		std::cout << "Failed Matrix Test!" << std::endl;
