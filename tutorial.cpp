@@ -84,7 +84,7 @@ int TestMatrix() {
 		vec2.push_back(vector<double>(5));
 		vec2.push_back(vector<double>(3));
 		vec2.push_back(vector<double>(5));
-		std::cout << "Attempting to construct Matrix with inconsistent vector."
+		std::cout << "\nAttempting to construct Matrix with inconsistent vector."
 				  << std::endl;
 		try {
 			Matrix mat12(vec2);
@@ -93,7 +93,7 @@ int TestMatrix() {
 			std::cout << msg << std::endl;
 		}
 
-		std::cout << "Attempting to assign Matrix to inconsistent vector."
+		std::cout << "\nAttempting to assign Matrix to inconsistent vector."
 				  << std::endl;
 		try {
 			mat9 = vec2;
@@ -102,8 +102,23 @@ int TestMatrix() {
 		}
 		Print(mat9);
 
+		std::cout << "\nAttempting to access out of range elements." << std::endl;
 		Matrix mat13(3,1);
 		mat13.setName("Matrix 13");
+		try {
+			for (int i = 0; i < 3; ++i) {
+				mat13.insert(i,0,mat5.extract(i,1));
+			}
+		} catch (const char* msg) {
+			std::cout << msg << std::endl;
+		}
+		try {
+			for (int i = 0; i < 3; ++i) {
+				mat13.insert(i,0,mat5(i,1));
+			}
+		} catch (const char* msg) {
+			std::cout << msg << std::endl;
+		}
 		try {
 			for (int i = 0; i < 4; ++i) {
 				mat13.insert(i,0,mat5(0,1));

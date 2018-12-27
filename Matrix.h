@@ -88,7 +88,10 @@ public:
 
 				name = UNAMED;
 
-				throw "WARNING: Inconsistent number of columns in input argument.";
+				throw "ERROR:  "
+					  "Matrix::Matrix(const vector<vector<double>>&)\n"
+					  "\tInconsistent number of columns in input argument.";
+
 			}
 		}
 
@@ -132,7 +135,9 @@ public:
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
 			if (d[i].size() != checkNumberOfColumns) {
-				throw "ERROR: Inconsistent number of columns in input argument.";
+				throw "ERROR:  "
+					  "Matrix& Matrix::operator=(const vector<vector<double>>&)\n"
+					  "\tInconsistent number of columns in input argument.";
 			}
 		}
 		nRows = d.size();
@@ -151,19 +156,25 @@ public:
 	// element insertion/extraction
 	const double extract(int r, int c) const {
 		if (r >= bottomLimit || c >= rightLimit) {
-			throw "ERROR: Attempting to access elements outside the matrix range.";
+			throw "ERROR:  "
+				  "const double Matrix::extract(int, int) const\n"
+				  "\tAttempting to access elements outside the matrix range.";
 		}
 		return data[r][c];
 	}
 	const double operator()(int r, int c) const {
 		if (r >= bottomLimit || c >= rightLimit) {
-			throw "ERROR: Attempting to access elements outside the matrix range.";
+			throw "ERROR:  "
+				  "const double Matrix::operator()(int, int) const\n"
+				  "\tAttempting to access elements outside the matrix range.";
 		}
 		return data[r][c];
 	}
 	void insert(int r, int c, double value) {
 		if (r >= bottomLimit || c >= rightLimit) {
-			throw "ERROR: Attempting to access elements outside the matrix range.";
+			throw "ERROR:  "
+				  "void Matrix::insert()(int, int, double)\n"
+				  "\tAttempting to access elements outside the matrix range.";
 		}
 		data[r][c] = value;
 	}
