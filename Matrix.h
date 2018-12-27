@@ -22,7 +22,7 @@ public:
 		leftLimit = 0;
 		rightLimit = nCols;
 
-		name = "NotNamed";
+		name = UNAMED;
 	}
 
 	Matrix(int r, int c) {
@@ -35,7 +35,7 @@ public:
 		leftLimit = 0;
 		rightLimit = nCols;
 
-		name = "NotNamed";
+		name = UNAMED;
 	}
 
 	Matrix(int r, int c, double value) {
@@ -48,7 +48,7 @@ public:
 		leftLimit = 0;
 		rightLimit = nCols;
 
-		name = "NotNamed";
+		name = UNAMED;
 	}
 
 	Matrix(const vector<vector<double>>& d) {
@@ -68,7 +68,7 @@ public:
 		leftLimit = 0;
 		rightLimit = nCols;
 
-		name = "NotNamed";
+		name = UNAMED;
 	}
 
 	Matrix& operator=(const vector<vector<double>>& d) {
@@ -89,13 +89,13 @@ public:
 		leftLimit = 0;
 		rightLimit = nCols;
 
-		name = "NotNamed";
+		name = UNAMED;
 	}
 
 	// Needed for implicit construction
 	Matrix(const Matrix& mat) {
 // cout << "Using constant copy constructor" << endl;
-		name = "NotNamed";
+		name = UNAMED;
 		nRows = mat.bottomLimit - mat.topLimit;
 		nCols = mat.rightLimit - mat.leftLimit;
 
@@ -116,7 +116,7 @@ public:
 
 	Matrix(Matrix& mat) {
 // cout << "Using NON constant copy constructor" << endl;
-		name = "NotNamed";
+		name = UNAMED;
 		nRows = mat.bottomLimit - mat.topLimit;
 		nCols = mat.rightLimit - mat.leftLimit;
 
@@ -272,6 +272,9 @@ private:
 	int bottomLimit;
 	int leftLimit;
 	int rightLimit;
+
+	const string UNAMED = "UNAMED";
+
 };
 
 #endif
