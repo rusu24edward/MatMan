@@ -15,7 +15,6 @@ int main (int argc, char** argv) {
 	std::cout << "Hello World!" << std::endl;
 
 	int status = TestMatrix();
-
 	return status;
 }
 
@@ -44,6 +43,7 @@ int TestMatrix() {
 		Print(mat1);
 
 		Matrix mat4 = mat1;
+		mat4.setName("Matrix 4");
 		Print(mat4);
 
 		Matrix mat5(2,2,1.);
@@ -51,6 +51,7 @@ int TestMatrix() {
 		Print(mat5);
 
 		Matrix mat6 = mat5;
+		mat6.setName("Matrix 6");
 		Print(mat6);
 
 		std::vector<std::vector<double>> vec1(9, vector<double>(2, -1.0));
@@ -67,7 +68,7 @@ int TestMatrix() {
 		mat4.setData(vec1);
 		Print(mat4);
 
-		Matrix mat9(mat3);
+		Matrix mat9(2,1);
 		mat9.setName("Matrix 9");
 		Print(mat9);
 
@@ -86,6 +87,9 @@ int TestMatrix() {
 		mat11.insert(0,0,mat10.extract(1,1));
 		Print(mat11);
 
+		mat2 = vec1;
+		Print(mat2);
+
 		return 0;
 	} catch (...) {
 		std::cout << "Failed Matrix Test!" << std::endl;
@@ -94,5 +98,5 @@ int TestMatrix() {
 }
 
 void Print(const Matrix& m) {
-	std::cout << m.getName() << ": " << m << std::endl;
+	std::cout << m << std::endl;
 }
