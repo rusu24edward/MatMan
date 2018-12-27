@@ -140,12 +140,6 @@ public:
 	const vector<vector<double>>& getData() const {
 		return data;
 	}
-	vector<vector<double>>& getData() {
-		return data;
-	}
-	void setData(const vector<vector<double>>& d) {
-		data = d;
-	}
 
 	// name
 	const string& getName() const {
