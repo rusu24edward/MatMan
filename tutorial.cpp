@@ -84,12 +84,23 @@ int TestMatrix() {
 		vec2.push_back(vector<double>(5));
 		vec2.push_back(vector<double>(3));
 		vec2.push_back(vector<double>(5));
+		std::cout << "Attempting to construct Matrix with inconsistent vector."
+				  << std::endl;
 		try {
 			Matrix mat12(vec2);
 			mat12.setName("Matrix 12");
 		} catch (const char* msg) {
 			std::cout << msg << std::endl;
 		}
+
+		std::cout << "Attempting to assign Matrix to inconsistent vector."
+				  << std::endl;
+		try {
+			mat9 = vec2;
+		} catch (const char* msg) {
+			std::cout << msg << std::endl;
+		}
+		Print(mat9);
 
 		return 0;
 	} catch (...) {

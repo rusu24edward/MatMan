@@ -51,6 +51,26 @@ public:
 		name = UNAMED;
 	}
 
+	Matrix(const Matrix& mat) {
+// cout << "Using constant copy constructor" << endl;
+		name = UNAMED;
+		nRows = mat.bottomLimit - mat.topLimit;
+		nCols = mat.rightLimit - mat.leftLimit;
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
+		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
+
+		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
+			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
+				data[i][j] = mat.extract(ii, jj);
+			}
+		}
+	}
+
 	Matrix(const vector<vector<double>>& d) {
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
@@ -71,6 +91,7 @@ public:
 				throw "WARNING: Inconsistent number of columns in input argument.";
 			}
 		}
+
 		nRows = d.size();
 		nCols = checkNumberOfColumns;
 		data = d;
@@ -81,48 +102,6 @@ public:
 		rightLimit = nCols;
 
 		name = UNAMED;
-	}
-
-	Matrix& operator=(const vector<vector<double>>& d) {
-// cout << "Using constant vector assignment operator" << endl;
-		int checkNumberOfColumns = d[0].size();
-		// for (int i = 1; i < d.size(); ++i) {
-		// 	if (d[i].size() != checkNumberOfColumns) {
-		// 		// TODO: Output a warning message
-		// 		// reset();
-		// 	}
-		// }
-		nRows = d.size();
-		nCols = checkNumberOfColumns;
-		data = d;
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
-		return *this;
-	}
-
-	// Needed for implicit construction
-	Matrix(const Matrix& mat) {
-// cout << "Using constant copy constructor" << endl;
-		name = UNAMED;
-		nRows = mat.bottomLimit - mat.topLimit;
-		nCols = mat.rightLimit - mat.leftLimit;
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
-		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
-
-		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
-			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
-				data[i][j] = mat.extract(ii, jj);
-			}
-		}
 	}
 
 	~Matrix() {
@@ -147,6 +126,28 @@ public:
 	}
 
 
+
+	Matrix& operator=(const vector<vector<double>>& d) {
+// cout << "Using constant vector assignment operator" << endl;
+		int checkNumberOfColumns = d[0].size();
+		for (int i = 1; i < d.size(); ++i) {
+			if (d[i].size() != checkNumberOfColumns) {
+				throw "WARNING: Inconsistent number of columns in input argument.";
+			}
+		}
+		nRows = d.size();
+		nCols = checkNumberOfColumns;
+		data = d;
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
+		return *this;
+	}
+
+
 	// element insertion/extraction
 	const double extract(int r, int c) const {
 		return data[r][c];
@@ -167,6 +168,8 @@ public:
 	// void operator=(double value) {
 		// insert the value at the location of the iterators.
 	// }
+
+
 
 
 
