@@ -132,7 +132,7 @@ public:
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
 			if (d[i].size() != checkNumberOfColumns) {
-				throw "WARNING: Inconsistent number of columns in input argument.";
+				throw "ERROR: Inconsistent number of columns in input argument.";
 			}
 		}
 		nRows = d.size();
@@ -150,12 +150,21 @@ public:
 
 	// element insertion/extraction
 	const double extract(int r, int c) const {
+		if (r >= bottomLimit || c >= rightLimit) {
+			throw "ERROR: Attempting to access elements outside the matrix range.";
+		}
 		return data[r][c];
 	}
 	const double operator()(int r, int c) const {
+		if (r >= bottomLimit || c >= rightLimit) {
+			throw "ERROR: Attempting to access elements outside the matrix range.";
+		}
 		return data[r][c];
 	}
 	void insert(int r, int c, double value) {
+		if (r >= bottomLimit || c >= rightLimit) {
+			throw "ERROR: Attempting to access elements outside the matrix range.";
+		}
 		data[r][c] = value;
 	}
 	// In order to make this function happen, I need to setup iterators that point

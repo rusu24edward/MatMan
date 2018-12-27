@@ -102,6 +102,17 @@ int TestMatrix() {
 		}
 		Print(mat9);
 
+		Matrix mat13(3,1);
+		mat13.setName("Matrix 13");
+		try {
+			for (int i = 0; i < 4; ++i) {
+				mat13.insert(i,0,mat5(0,1));
+			}
+		} catch (const char* msg) {
+			std::cout << msg << std::endl;
+		}
+		Print(mat13);
+
 		return 0;
 	} catch (...) {
 		std::cout << "Failed Matrix Test!" << std::endl;
