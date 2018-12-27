@@ -114,23 +114,6 @@ int TestMatrix() {
 		// mat16.setName("Matrix 16");
 		// Print(mat16);
 
-		std::cout << "\nPrinting all" << std::endl;
-		Print(mat1);
-		Print(mat2);
-		Print(mat3);
-		Print(mat4);
-		Print(mat5);
-		Print(mat6);
-		Print(mat7);
-		Print(mat8);
-		Print(mat9);
-		Print(mat10);
-		Print(mat11);
-		// Print(mat12);
-		// Print(mat13);
-		// Print(mat14);
-		// Print(mat15);
-		// Print(mat16);
 
 		return 0;
 	} catch (...) {
