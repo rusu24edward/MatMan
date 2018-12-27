@@ -87,6 +87,9 @@ int TestMatrix() {
 		mat11.insert(0,0,mat10.extract(1,1));
 		Print(mat11);
 
+		mat2 = vec1;
+		Print(mat2);
+
 		// Not in scope yet
 		// Matrix mat12(2,3,-1.);
 		// mat12.setName("Matrix 12");

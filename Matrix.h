@@ -88,8 +88,6 @@ public:
 		bottomLimit = nRows;
 		leftLimit = 0;
 		rightLimit = nCols;
-
-		name = UNAMED;
 	}
 
 	// Needed for implicit construction
