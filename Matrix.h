@@ -127,14 +127,8 @@ public:
 
 	// TODO: discontinue support for set columns and set rows
 	// nRows
-	const int getRows() const {
-		return nRows;
-	}
 	int getRows() {
 		return nRows;
-	}
-	void setRows(int r) {
-		nRows = r;
 	}
 
 	// nCols

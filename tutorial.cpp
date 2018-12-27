@@ -37,11 +37,6 @@ int TestMatrix() {
 		mat3.setName("Matrix 3");
 		Print(mat3);
 
-		mat1.setCols(12);
-		mat1.setRows(3);
-		mat1.setName("Matrix 1");
-		Print(mat1);
-
 		Matrix mat4 = mat1;
 		mat4.setName("Matrix 4");
 		Print(mat4);
@@ -62,11 +57,6 @@ int TestMatrix() {
 		Matrix mat8 = vec1;
 		mat8.setName("Matrix 8");
 		Print(mat8);
-
-		mat4.setRows(9);
-		mat4.setCols(2);
-		mat4.setData(vec1);
-		Print(mat4);
 
 		Matrix mat9(2,1);
 		mat9.setName("Matrix 9");
