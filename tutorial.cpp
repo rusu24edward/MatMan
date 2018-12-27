@@ -113,6 +113,8 @@ int TestMatrix() {
 		mat16.setName("Matrix 16");
 		Print(mat16);
 
+		Print(mat4);
+
 		return 0;
 	} catch (...) {
 		std::cout << "Failed Matrix Test!" << std::endl;

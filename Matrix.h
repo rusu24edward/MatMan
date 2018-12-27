@@ -25,19 +25,36 @@ public:
 	}
 
 	Matrix(const vector<vector<double>>& d) {
+cout << "Using constant vector copy constructor" << endl;
 		copy(d);
 	}
 
 	Matrix& operator=(const vector<vector<double>>& d) {
+cout << "Using constant vector assignment operator" << endl;
 		copy(d);
 	}
 
+	// Needed for implicit construction
 	Matrix(const Matrix& mat) {
+cout << "Using constant copy constructor" << endl;
 		copy(mat);
 	}
 
-	Matrix& operator=(const Matrix& mat) {
+	Matrix(Matrix& mat) {
+cout << "Using NON constant copy constructor" << endl;
 		copy(mat);
+		mat.setIterators();
+	}
+
+	// Very close to the above = operator. Here, I don't use a constant RHS, but I
+	// will want to in the final version, so the code must be the same.
+	// I modify the copy helper function to just copy the stuff captured
+	// between the iterators.
+	void operator=(Matrix& mat_in) {
+cout << "Using NON constant assignment operator" << endl;
+		copyDataBetweenIterators(mat_in);
+		setIterators();
+		mat_in.setIterators();
 	}
 
 	~Matrix() {
@@ -126,15 +143,7 @@ public:
 		return *this;
 	}
 
-	// Very close to the above = operator. Here, I don't use a constant RHS, but I
-	// will want to in the final version, so the code must be the same.
-	// I modify the copy helper function to just copy the stuff captured
-	// between the iterators.
-	void operator=(Matrix& mat_in) {
-		copyDataBetweenIterators(mat_in);
-		setIterators();
-		mat_in.setIterators();
-	}
+
 
 
 
@@ -188,7 +197,7 @@ private:
 
 	// helper functions
 	void copy(const Matrix& mat) {
-		name = mat.getName();
+		name = "NotNamed";
 		nRows = mat.bottomLimit - mat.topLimit;
 		nCols = mat.rightLimit - mat.leftLimit;
 		setIterators();
