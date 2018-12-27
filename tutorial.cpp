@@ -87,31 +87,32 @@ int TestMatrix() {
 		mat11.insert(0,0,mat10.extract(1,1));
 		Print(mat11);
 
-		Matrix mat12(2,3,-1.);
-		mat12.setName("Matrix 12");
-		Print(mat12);
-		mat12(0,1,0,0) = mat10(1,2,1,1);
-		Print(mat12);
+		// Not in scope yet
+		// Matrix mat12(2,3,-1.);
+		// mat12.setName("Matrix 12");
+		// Print(mat12);
+		// mat12(0,1,0,0) = mat10(1,2,1,1);
+		// Print(mat12);
 
-		Matrix mat13(2,3,-2.);
-		mat13.setName("Matrix 13");
-		Print(mat13);
-		mat13(0,1,1,1) = mat9;
-		Print(mat13);
+		// Matrix mat13(2,3,-2.);
+		// mat13.setName("Matrix 13");
+		// Print(mat13);
+		// mat13(0,1,1,1) = mat9;
+		// Print(mat13);
 
-		Matrix mat14(2,3,-2.);
-		mat14.setName("Matrix 14");
-		Print(mat14);
-		mat14(0,0,1,1) = mat11;
-		Print(mat14);
+		// Matrix mat14(2,3,-2.);
+		// mat14.setName("Matrix 14");
+		// Print(mat14);
+		// mat14(0,0,1,1) = mat11;
+		// Print(mat14);
 
-		Matrix mat15(mat4(0,5,0,1));
-		mat15.setName("Matrix 15");
-		Print(mat15);
+		// Matrix mat15(mat4(0,5,0,1));
+		// mat15.setName("Matrix 15");
+		// Print(mat15);
 
-		Matrix mat16 = mat4(0,5,0,1);
-		mat16.setName("Matrix 16");
-		Print(mat16);
+		// Matrix mat16 = mat4(0,5,0,1);
+		// mat16.setName("Matrix 16");
+		// Print(mat16);
 
 		std::cout << "\nPrinting all" << std::endl;
 		Print(mat1);
@@ -125,11 +126,11 @@ int TestMatrix() {
 		Print(mat9);
 		Print(mat10);
 		Print(mat11);
-		Print(mat12);
-		Print(mat13);
-		Print(mat14);
-		Print(mat15);
-		Print(mat16);
+		// Print(mat12);
+		// Print(mat13);
+		// Print(mat14);
+		// Print(mat15);
+		// Print(mat16);
 
 		return 0;
 	} catch (...) {

@@ -50,12 +50,12 @@ public:
 	// will want to in the final version, so the code must be the same.
 	// I modify the copy helper function to just copy the stuff captured
 	// between the iterators.
-	void operator=(Matrix& mat_in) {
-// cout << "Using NON constant assignment operator" << endl;
-		copyDataBetweenIterators(mat_in);
-		setIterators();
-		mat_in.setIterators();
-	}
+// 	void operator=(Matrix& mat_in) {
+// // cout << "Using NON constant assignment operator" << endl;
+// 		copyDataBetweenIterators(mat_in);
+// 		setIterators();
+// 		mat_in.setIterators();
+// 	}
 
 	~Matrix() {
 		reset();
