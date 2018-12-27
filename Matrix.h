@@ -88,6 +88,8 @@ public:
 		bottomLimit = nRows;
 		leftLimit = 0;
 		rightLimit = nCols;
+
+		return *this;
 	}
 
 	// Needed for implicit construction
@@ -124,46 +126,8 @@ public:
 		name = "";
 	}
 
-
-	// TODO: discontinue support for set columns and set rows
-	// nRows
-	const int getRows() const {
-		return nRows;
-	}
-	int getRows() {
-		return nRows;
-	}
-	void setRows(int r) {
-		nRows = r;
-	}
-
-	// nCols
-	const int getCols() const {
-		return nCols;
-	}
-	int getCols() {
-		return nCols;
-	}
-	void setCols(int c) {
-		nCols = c;
-	}
-
-	// data
-	const vector<vector<double>>& getData() const {
-		return data;
-	}
-	vector<vector<double>>& getData() {
-		return data;
-	}
-	void setData(const vector<vector<double>>& d) {
-		data = d;
-	}
-
 	// name
 	const string& getName() const {
-		return name;
-	}
-	string& getName() {
 		return name;
 	}
 	void setName(const string& n) {
@@ -176,12 +140,6 @@ public:
 		return data[r][c];
 	}
 	const double operator()(int r, int c) const {
-		return data[r][c];
-	}
-	double extract(int r, int c) {
-		return data[r][c];
-	}
-	double operator()(int r, int c) {
 		return data[r][c];
 	}
 	void insert(int r, int c, double value) {
