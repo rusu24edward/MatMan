@@ -25,23 +25,23 @@ public:
 	}
 
 	Matrix(const vector<vector<double>>& d) {
-cout << "Using constant vector copy constructor" << endl;
+// cout << "Using constant vector copy constructor" << endl;
 		copy(d);
 	}
 
 	Matrix& operator=(const vector<vector<double>>& d) {
-cout << "Using constant vector assignment operator" << endl;
+// cout << "Using constant vector assignment operator" << endl;
 		copy(d);
 	}
 
 	// Needed for implicit construction
 	Matrix(const Matrix& mat) {
-cout << "Using constant copy constructor" << endl;
+// cout << "Using constant copy constructor" << endl;
 		copy(mat);
 	}
 
 	Matrix(Matrix& mat) {
-cout << "Using NON constant copy constructor" << endl;
+// cout << "Using NON constant copy constructor" << endl;
 		copy(mat);
 		mat.setIterators();
 	}
@@ -51,7 +51,7 @@ cout << "Using NON constant copy constructor" << endl;
 	// I modify the copy helper function to just copy the stuff captured
 	// between the iterators.
 	void operator=(Matrix& mat_in) {
-cout << "Using NON constant assignment operator" << endl;
+// cout << "Using NON constant assignment operator" << endl;
 		copyDataBetweenIterators(mat_in);
 		setIterators();
 		mat_in.setIterators();
