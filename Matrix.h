@@ -126,23 +126,6 @@ public:
 		name = "";
 	}
 
-
-	// TODO: discontinue support for set columns and set rows
-	// nRows
-	int getRows() {
-		return nRows;
-	}
-
-	// nCols
-	int getCols() {
-		return nCols;
-	}
-
-	// data
-	const vector<vector<double>>& getData() const {
-		return data;
-	}
-
 	// name
 	const string& getName() const {
 		return name;
