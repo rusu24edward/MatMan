@@ -132,14 +132,8 @@ public:
 	}
 
 	// nCols
-	const int getCols() const {
-		return nCols;
-	}
 	int getCols() {
 		return nCols;
-	}
-	void setCols(int c) {
-		nCols = c;
 	}
 
 	// data
