@@ -137,17 +137,6 @@ public:
 
 
 
-	// --- Opeartor tests --- //
-	Matrix& operator()(int t, int b, int l, int r) {
-		setIterators(t, b+1, l, r+1);
-		return *this;
-	}
-
-
-
-
-
-
 	// print
 	void Print() const {
 		cout << endl << name << endl;
