@@ -13,36 +13,91 @@ class Matrix {
 public:
 
 	Matrix() {
-		reset();
+		nRows = 0;
+		nCols = 0;
+		data = vector<vector<double>>();
+		setIterators();
+		name = "NotNamed";
 	}
 
 	Matrix(int r, int c) {
-		reset(r, c);
+		nRows = r;
+		nCols = c;
+		data = vector<vector<double>>(r, vector<double>(c, 0.));
+		setIterators();
+		name = "NotNamed";
 	}
 
 	Matrix(int r, int c, double value) {
-		reset(r, c, value);
+		nRows = r;
+		nCols = c;
+		data = vector<vector<double>>(r, vector<double>(c, value));
+		setIterators();
+		name = "NotNamed";
 	}
 
 	Matrix(const vector<vector<double>>& d) {
 // cout << "Using constant vector copy constructor" << endl;
-		copy(d);
+		int checkNumberOfColumns = d[0].size();
+		for (int i = 1; i < d.size(); ++i) {
+			if (d[i].size() != checkNumberOfColumns) {
+				// TODO: Output a warning message
+				// reset();
+			}
+		}
+		nRows = d.size();
+		nCols = checkNumberOfColumns;
+		data = d;
+		setIterators();
+		name = "NotNamed";
 	}
 
 	Matrix& operator=(const vector<vector<double>>& d) {
 // cout << "Using constant vector assignment operator" << endl;
-		copy(d);
+		int checkNumberOfColumns = d[0].size();
+		for (int i = 1; i < d.size(); ++i) {
+			if (d[i].size() != checkNumberOfColumns) {
+				// TODO: Output a warning message
+				// reset();
+			}
+		}
+		nRows = d.size();
+		nCols = checkNumberOfColumns;
+		data = d;
+		setIterators();
+		name = "NotNamed";
 	}
 
 	// Needed for implicit construction
 	Matrix(const Matrix& mat) {
 // cout << "Using constant copy constructor" << endl;
-		copy(mat);
+		name = "NotNamed";
+		nRows = mat.bottomLimit - mat.topLimit;
+		nCols = mat.rightLimit - mat.leftLimit;
+		setIterators();
+		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
+
+		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
+			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
+				data[i][j] = mat.extract(ii, jj);
+			}
+		}
+		// mat.setIterators();
 	}
 
 	Matrix(Matrix& mat) {
 // cout << "Using NON constant copy constructor" << endl;
-		copy(mat);
+		name = "NotNamed";
+		nRows = mat.bottomLimit - mat.topLimit;
+		nCols = mat.rightLimit - mat.leftLimit;
+		setIterators();
+		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
+
+		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
+			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
+				data[i][j] = mat.extract(ii, jj);
+			}
+		}
 		mat.setIterators();
 	}
 
@@ -58,7 +113,11 @@ public:
 // 	}
 
 	~Matrix() {
-		reset();
+		nRows = 0;
+		nCols = 0;
+		data = vector<vector<double>>();
+		setIterators();
+		name = "";
 	}
 
 
@@ -183,67 +242,6 @@ public:
 	int topLimit, bottomLimit, leftLimit, rightLimit;
 
 private:
-
-	// helper functions
-	void copy(const Matrix& mat) {
-		name = "NotNamed";
-		nRows = mat.bottomLimit - mat.topLimit;
-		nCols = mat.rightLimit - mat.leftLimit;
-		setIterators();
-		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
-		copyDataBetweenIterators(mat);
-	}
-
-	void copyDataBetweenIterators(const Matrix& mat_in) {
-		for (int i = topLimit, ii = mat_in.topLimit; i < bottomLimit; ++i, ++ii) {
-			for (int j = leftLimit, jj = mat_in.leftLimit; j < rightLimit; ++j, ++jj) {
-				data[i][j] = mat_in.extract(ii, jj);
-			}
-		}
-	}
-
-
-
-
-	void copy(const vector<vector<double>>& d) {
-		int checkNumberOfColumns = d[0].size();
-		for (int i = 1; i < d.size(); ++i) {
-			if (d[i].size() != checkNumberOfColumns)
-				// TODO: Output a warning message
-				reset();
-		}
-		nRows = d.size();
-		nCols = checkNumberOfColumns;
-		data = d;
-		setIterators();
-		name = "NotNamed";
-	}
-
-	void reset() {
-		nRows = 0;
-		nCols = 0;
-		data = vector<vector<double>>();
-		setIterators();
-		name = "NotNamed";
-	}
-
-	void reset(int r, int c) {
-		nRows = r;
-		nCols = c;
-		data = vector<vector<double>>(r, vector<double>(c, 0.));
-		setIterators();
-		name = "NotNamed";
-	}
-
-	void reset(int r, int c, double value) {
-		nRows = r;
-		nCols = c;
-		data = vector<vector<double>>(r, vector<double>(c, value));
-		setIterators();
-		name = "NotNamed";
-	}
-
-
 
 	// --- Underlying Data --- //
 	int nRows;
