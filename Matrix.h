@@ -145,9 +145,6 @@ public:
 	const string& getName() const {
 		return name;
 	}
-	string& getName() {
-		return name;
-	}
 	void setName(const string& n) {
 		name = n;
 	}
