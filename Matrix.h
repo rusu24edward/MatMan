@@ -157,12 +157,6 @@ public:
 	const double operator()(int r, int c) const {
 		return data[r][c];
 	}
-	double extract(int r, int c) {
-		return data[r][c];
-	}
-	double operator()(int r, int c) {
-		return data[r][c];
-	}
 	void insert(int r, int c, double value) {
 		data[r][c] = value;
 	}
