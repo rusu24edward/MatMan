@@ -88,6 +88,8 @@ public:
 		bottomLimit = nRows;
 		leftLimit = 0;
 		rightLimit = nCols;
+
+		return *this;
 	}
 
 	// Needed for implicit construction
