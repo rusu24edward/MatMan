@@ -16,7 +16,12 @@ public:
 		nRows = 0;
 		nCols = 0;
 		data = vector<vector<double>>();
-		setIterators();
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
 		name = "NotNamed";
 	}
 
@@ -24,7 +29,12 @@ public:
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, 0.));
-		setIterators();
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
 		name = "NotNamed";
 	}
 
@@ -32,39 +42,53 @@ public:
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, value));
-		setIterators();
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
 		name = "NotNamed";
 	}
 
 	Matrix(const vector<vector<double>>& d) {
-// cout << "Using constant vector copy constructor" << endl;
 		int checkNumberOfColumns = d[0].size();
-		for (int i = 1; i < d.size(); ++i) {
-			if (d[i].size() != checkNumberOfColumns) {
-				// TODO: Output a warning message
-				// reset();
-			}
-		}
+		// for (int i = 1; i < d.size(); ++i) {
+		// 	if (d[i].size() != checkNumberOfColumns) {
+		// 		// TODO: Output a warning message
+		// 		// reset();
+		// 	}
+		// }
 		nRows = d.size();
 		nCols = checkNumberOfColumns;
 		data = d;
-		setIterators();
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
 		name = "NotNamed";
 	}
 
 	Matrix& operator=(const vector<vector<double>>& d) {
 // cout << "Using constant vector assignment operator" << endl;
 		int checkNumberOfColumns = d[0].size();
-		for (int i = 1; i < d.size(); ++i) {
-			if (d[i].size() != checkNumberOfColumns) {
-				// TODO: Output a warning message
-				// reset();
-			}
-		}
+		// for (int i = 1; i < d.size(); ++i) {
+		// 	if (d[i].size() != checkNumberOfColumns) {
+		// 		// TODO: Output a warning message
+		// 		// reset();
+		// 	}
+		// }
 		nRows = d.size();
 		nCols = checkNumberOfColumns;
 		data = d;
-		setIterators();
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
 		name = "NotNamed";
 	}
 
@@ -74,7 +98,12 @@ public:
 		name = "NotNamed";
 		nRows = mat.bottomLimit - mat.topLimit;
 		nCols = mat.rightLimit - mat.leftLimit;
-		setIterators();
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
 		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
 
 		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
@@ -90,7 +119,12 @@ public:
 		name = "NotNamed";
 		nRows = mat.bottomLimit - mat.topLimit;
 		nCols = mat.rightLimit - mat.leftLimit;
-		setIterators();
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
 		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
 
 		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
@@ -98,7 +132,7 @@ public:
 				data[i][j] = mat.extract(ii, jj);
 			}
 		}
-		mat.setIterators();
+		// mat.setIterators();
 	}
 
 	// Very close to the above = operator. Here, I don't use a constant RHS, but I
@@ -116,7 +150,12 @@ public:
 		nRows = 0;
 		nCols = 0;
 		data = vector<vector<double>>();
-		setIterators();
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
 		name = "";
 	}
 
@@ -221,36 +260,18 @@ public:
 
 
 
-
-	// TODO: make this private in MatMan-11
-
-	void setIterators() {
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-	}
-
-	void setIterators(int t, int b, int l, int r) {
-		topLimit = t;
-		bottomLimit = b;
-		leftLimit = l;
-		rightLimit = r;
-	}
-
-
-	int topLimit, bottomLimit, leftLimit, rightLimit;
-
 private:
 
 	// --- Underlying Data --- //
 	int nRows;
 	int nCols;
-
 	vector<vector<double>> data;
-
-
 	string name;
+
+	int topLimit;
+	int bottomLimit;
+	int leftLimit;
+	int rightLimit;
 };
 
 #endif
