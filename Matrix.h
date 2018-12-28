@@ -75,19 +75,6 @@ public:
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
 			if (d[i].size() != checkNumberOfColumns) {
-
-				// Reset
-				nRows = 0;
-				nCols = 0;
-				data = vector<vector<double>>();
-
-				topLimit = 0;
-				bottomLimit = nRows;
-				leftLimit = 0;
-				rightLimit = nCols;
-
-				name = UNAMED;
-
 				throw "ERROR:  "
 					  "Matrix::Matrix(const vector<vector<double>>&)\n"
 					  "\tInconsistent number of columns in input argument.";
