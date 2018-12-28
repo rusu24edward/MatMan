@@ -51,48 +51,6 @@ public:
 		name = UNAMED;
 	}
 
-	Matrix(const vector<vector<double>>& d) {
-		int checkNumberOfColumns = d[0].size();
-		// for (int i = 1; i < d.size(); ++i) {
-		// 	if (d[i].size() != checkNumberOfColumns) {
-		// 		// TODO: Output a warning message
-		// 		// reset();
-		// 	}
-		// }
-		nRows = d.size();
-		nCols = checkNumberOfColumns;
-		data = d;
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
-		name = UNAMED;
-	}
-
-	Matrix& operator=(const vector<vector<double>>& d) {
-// cout << "Using constant vector assignment operator" << endl;
-		int checkNumberOfColumns = d[0].size();
-		// for (int i = 1; i < d.size(); ++i) {
-		// 	if (d[i].size() != checkNumberOfColumns) {
-		// 		// TODO: Output a warning message
-		// 		// reset();
-		// 	}
-		// }
-		nRows = d.size();
-		nCols = checkNumberOfColumns;
-		data = d;
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
-		return *this;
-	}
-
-	// Needed for implicit construction
 	Matrix(const Matrix& mat) {
 // cout << "Using constant copy constructor" << endl;
 		name = UNAMED;
@@ -111,6 +69,29 @@ public:
 				data[i][j] = mat.extract(ii, jj);
 			}
 		}
+	}
+
+	Matrix(const vector<vector<double>>& d) {
+		int checkNumberOfColumns = d[0].size();
+		for (int i = 1; i < d.size(); ++i) {
+			if (d[i].size() != checkNumberOfColumns) {
+				throw "ERROR:  "
+					  "Matrix::Matrix(const vector<vector<double>>&)\n"
+					  "\tInconsistent number of columns in input argument.";
+
+			}
+		}
+
+		nRows = d.size();
+		nCols = checkNumberOfColumns;
+		data = d;
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
+		name = UNAMED;
 	}
 
 	~Matrix() {
@@ -135,14 +116,53 @@ public:
 	}
 
 
+
+	Matrix& operator=(const vector<vector<double>>& d) {
+// cout << "Using constant vector assignment operator" << endl;
+		int checkNumberOfColumns = d[0].size();
+		for (int i = 1; i < d.size(); ++i) {
+			if (d[i].size() != checkNumberOfColumns) {
+				throw "ERROR:  "
+					  "Matrix& Matrix::operator=(const vector<vector<double>>&)\n"
+					  "\tInconsistent number of columns in input argument.";
+			}
+		}
+		nRows = d.size();
+		nCols = checkNumberOfColumns;
+		data = d;
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+
+		return *this;
+	}
+
+
 	// element insertion/extraction
 	const double extract(int r, int c) const {
+		if (r >= bottomLimit || c >= rightLimit) {
+			throw "ERROR:  "
+				  "const double Matrix::extract(int, int) const\n"
+				  "\tAttempting to access elements outside the matrix range.";
+		}
 		return data[r][c];
 	}
 	const double operator()(int r, int c) const {
+		if (r >= bottomLimit || c >= rightLimit) {
+			throw "ERROR:  "
+				  "const double Matrix::operator()(int, int) const\n"
+				  "\tAttempting to access elements outside the matrix range.";
+		}
 		return data[r][c];
 	}
 	void insert(int r, int c, double value) {
+		if (r >= bottomLimit || c >= rightLimit) {
+			throw "ERROR:  "
+				  "void Matrix::insert()(int, int, double)\n"
+				  "\tAttempting to access elements outside the matrix range.";
+		}
 		data[r][c] = value;
 	}
 	// In order to make this function happen, I need to setup iterators that point
@@ -155,6 +175,8 @@ public:
 	// void operator=(double value) {
 		// insert the value at the location of the iterators.
 	// }
+
+
 
 
 
