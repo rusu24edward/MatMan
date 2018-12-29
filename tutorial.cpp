@@ -2,8 +2,12 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <vector>
 
 #include "Matrix.h"
+
+std::vector<std::string> testFilesNames;
 
 int TestMatrix();
 void Print(const Matrix&, ofstream&);
@@ -14,6 +18,9 @@ void Print(const Matrix&, ofstream&);
 int main (int argc, char** argv) {
 
 	std::cout << "Hello World!" << std::endl;
+
+
+	testFilesNames.push_back("MatrixTest");
 
 	int status = TestMatrix();
 	return status;
@@ -29,8 +36,9 @@ int TestMatrix() {
 
 	int status = -1;
 
+	string testFileName = "current/" + testFilesNames[0] + ".out";
 	std::ofstream outFile;
-	outFile.open("current/MatrixTest.out");
+	outFile.open(testFileName);
 
 	try{
 

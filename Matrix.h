@@ -183,7 +183,7 @@ public:
 
 	// print
 	void Print(ostream& streamer) const {
-		// check if state of stream is good
+		// TODO: check if state of stream is good
 		streamer << endl << name << endl;
 		streamer << "\tRows: " << nRows << endl;
 		streamer << "\tCols: " << nCols << endl;
@@ -206,7 +206,7 @@ public:
 	}
 
 	void Print(fstream& fileOut) const {
-		// check if file is open
+		// TODO: check if file is open
 		fileOut << endl << name << endl;
 		fileOut << "\tRows: " << nRows << endl;
 		fileOut << "\tCols: " << nCols << endl;
