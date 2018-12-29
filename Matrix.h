@@ -183,7 +183,6 @@ public:
 
 	// print
 	void Print(ostream& streamer) const {
-		// TODO: check if state of stream is good
 		streamer << endl << name << endl;
 		streamer << "\tRows: " << nRows << endl;
 		streamer << "\tCols: " << nCols << endl;
@@ -205,8 +204,7 @@ public:
 		return streamer;
 	}
 
-	void Print(fstream& fileOut) const {
-		// TODO: check if file is open
+	void Print(ofstream& fileOut) const {
 		fileOut << endl << name << endl;
 		fileOut << "\tRows: " << nRows << endl;
 		fileOut << "\tCols: " << nCols << endl;
@@ -223,7 +221,7 @@ public:
 			 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 
-	friend fstream& operator<<(fstream& fileOut, const Matrix& mat) {
+	friend ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
 		mat.Print(fileOut);
 		return fileOut;
 	}

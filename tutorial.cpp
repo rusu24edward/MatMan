@@ -64,16 +64,14 @@ int CompareAgainstBaseline(const std::string& testName) {
 	std::string currentFileName = "current/" + testName + ".out";
 	std::ifstream currentFile(currentFileName);
 	if (!currentFile.is_open()) {
-		std::cout << "FAILURE: Cannot open current/" << testName << ".out!"
-				  << std::endl;
+		std::cout << "FAILURE: Cannot open " << currentFileName << "!" << std::endl;
 		return 1;
 	}
 
 	std::string baselineFileName = "baselines/" + testName + ".out";
 	std::ifstream baselineFile(baselineFileName);
 	if (!baselineFile.is_open()) {
-		std::cout << "FAILURE: Cannot open baseline/" << testName << ".out!"
-				  << std::endl;
+		std::cout << "FAILURE: Cannot open " << baselineFileName << "!" << std::endl;
 		return 1;
 	}
 
@@ -102,8 +100,11 @@ int TestMatrix(const std::string& testName) {
 	int status = -1;
 
 	std::string testFileName = "current/" + testName + ".out";
-	std::ofstream outFile;
-	outFile.open(testFileName);
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
 
 	std::vector<std::vector<double>> vec1(9, vector<double>(2, -1.0));
 	std::vector<std::vector<double>> vec2;
