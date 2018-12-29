@@ -7,6 +7,7 @@
 
 int TestMatrix();
 void Print(const Matrix&);
+void Print(const Matrix&, ofstream&);
 
 
 
@@ -148,4 +149,8 @@ int TestMatrix() {
 
 void Print(const Matrix& m) {
 	std::cout << m << std::endl;
+}
+
+void Print(const Matrix& m, ofstream& outFile) {
+	outFile << m << std::endl;
 }
