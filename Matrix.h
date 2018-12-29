@@ -183,6 +183,7 @@ public:
 
 	// print
 	void Print(ostream& streamer) const {
+		// check if state of stream is good
 		streamer << endl << name << endl;
 		streamer << "\tRows: " << nRows << endl;
 		streamer << "\tCols: " << nCols << endl;
@@ -202,6 +203,29 @@ public:
 	friend ostream& operator<<(ostream& streamer, const Matrix& mat) {
 		mat.Print(streamer);
 		return streamer;
+	}
+
+	void Print(fstream& fileOut) const {
+		// check if file is open
+		fileOut << endl << name << endl;
+		fileOut << "\tRows: " << nRows << endl;
+		fileOut << "\tCols: " << nCols << endl;
+		for (vector<vector<double>>::const_iterator
+			 i = data.begin(); i != data.end(); ++i) {
+			fileOut << "\t\t[ ";
+			for (vector<double>::const_iterator
+				 j = i->begin(); j != i->end(); ++j) {
+				fileOut << *j << " ";
+			}
+			fileOut << "]" << endl;
+		}
+		fileOut << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
+			 << leftLimit << ", " << rightLimit << ")" << endl;
+	}
+
+	friend fstream& operator<<(fstream& fileOut, const Matrix& mat) {
+		mat.Print(fileOut);
+		return fileOut;
 	}
 
 
