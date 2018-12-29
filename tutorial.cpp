@@ -9,9 +9,10 @@
 
 std::vector<std::string> testFileNames;
 
+int RunTests(const std::string&);
+int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 void Print(const Matrix&, ofstream&);
-int CompareAgainstBaseline(const std::string&);
 
 
 
@@ -21,8 +22,7 @@ int main (int argc, char** argv) {
 	std::cout << "Hello World!" << std::endl;
 
 
-	// TODO: Automate this testing part
-	// testFileNames.push_back("TestsTest"); // For testing the testing
+	// TODO: testFileNames.push_back("TestsTest"); // For testing the testing
 	testFileNames.push_back("MatrixTest");
 	// testFileNames.push_back("VectorTest");
 	// testFileNames.push_back("AdvancedMatrixTest");
@@ -31,10 +31,7 @@ int main (int argc, char** argv) {
 	int finalStatus = 0;
 	for (std::vector<std::string>::const_iterator iter = testFileNames.begin();
 		 iter != testFileNames.end(); ++iter) {
-		int status = 0;
-		if (*iter == "MatrixTest") {
-			status = TestMatrix();
-		}
+		int status = RunTests(*iter);
 		if (status == 0) { // If the test completed, test the output against the baseline
 			status = CompareAgainstBaseline(*iter);
 		}
@@ -46,6 +43,19 @@ int main (int argc, char** argv) {
 	}
 
 	return finalStatus;
+}
+
+
+
+
+int RunTests(const std::string& testName) {
+	int status = 0;
+	if (testName == "MatrixTest") {
+		status = TestMatrix();
+	} else {
+		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
+	}
+	return status;
 }
 
 int CompareAgainstBaseline(const std::string& testName) {
