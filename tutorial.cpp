@@ -105,6 +105,12 @@ int TestMatrix() {
 	std::ofstream outFile;
 	outFile.open(testFileName);
 
+	std::vector<std::vector<double>> vec1(9, vector<double>(2, -1.0));
+	std::vector<std::vector<double>> vec2;
+	vec2.push_back(vector<double>(5));
+	vec2.push_back(vector<double>(3));
+	vec2.push_back(vector<double>(5));
+
 	try{
 
 		Matrix mat1;
@@ -112,6 +118,9 @@ int TestMatrix() {
 
 		Matrix mat2(2,2);
 		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
+
+		mat2 = vec1;
 		Print(mat2, outFile);
 
 		Matrix mat3(mat1);
@@ -130,7 +139,6 @@ int TestMatrix() {
 		mat6.setName("Matrix 6");
 		Print(mat6, outFile);
 
-		std::vector<std::vector<double>> vec1(9, vector<double>(2, -1.0));
 		Matrix mat7(vec1);
 		mat7.setName("Matrix 7");
 		Print(mat7, outFile);
@@ -158,15 +166,8 @@ int TestMatrix() {
 		mat11.insert(0,0,mat10.extract(1,1));
 		Print(mat11, outFile);
 
-		mat2 = vec1;
-		Print(mat2, outFile);
-
-		std::vector<std::vector<double>> vec2;
-		vec2.push_back(vector<double>(5));
-		vec2.push_back(vector<double>(3));
-		vec2.push_back(vector<double>(5));
 		outFile << "\nAttempting to construct Matrix with inconsistent vector."
-				  << std::endl;
+				<< std::endl;
 		try {
 			Matrix mat12(vec2);
 			mat12.setName("Matrix 12");
@@ -176,38 +177,41 @@ int TestMatrix() {
 
 		outFile << "\nAttempting to assign Matrix to inconsistent vector."
 				  << std::endl;
+		Matrix mat13 = mat9;
+		mat13.setName("Matrix 13");
 		try {
-			mat9 = vec2;
+			mat13 = vec2;
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
-		Print(mat9, outFile);
+		Print(mat13, outFile);
 
 		outFile << "\nAttempting to access out of range elements." << std::endl;
-		Matrix mat13(3,1);
-		mat13.setName("Matrix 13");
+		Matrix mat14(3,1);
+		mat14.setName("Matrix 14");
+		Print(mat14, outFile);
 		try {
 			for (int i = 0; i < 3; ++i) {
-				mat13.insert(i,0,mat5.extract(i,1));
+				mat14.insert(i,0,mat5.extract(i,1));
 			}
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
 		try {
 			for (int i = 0; i < 3; ++i) {
-				mat13.insert(i,0,mat5(i,1));
+				mat14.insert(i,0,mat5(i,1));
 			}
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
 		try {
 			for (int i = 0; i < 4; ++i) {
-				mat13.insert(i,0,mat5(0,1));
+				mat14.insert(i,0,mat5(0,1));
 			}
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
-		Print(mat13, outFile);
+		Print(mat14, outFile);
 
 		status = 0;
 	} catch (...) {

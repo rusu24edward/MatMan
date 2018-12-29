@@ -13,6 +13,21 @@ Matrix 2
 	Iterators: (0, 2, 0, 2)
 
 
+Matrix 2
+	Rows: 9
+	Cols: 2
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+	Iterators: (0, 9, 0, 2)
+
+
 Matrix 3
 	Rows: 0
 	Cols: 0
@@ -96,21 +111,6 @@ Matrix 11
 	Iterators: (0, 1, 0, 1)
 
 
-Matrix 2
-	Rows: 9
-	Cols: 2
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-	Iterators: (0, 9, 0, 2)
-
-
 Attempting to construct Matrix with inconsistent vector.
 ERROR:  Matrix::Matrix(const vector<vector<double>>&)
 	Inconsistent number of columns in input argument.
@@ -119,7 +119,7 @@ Attempting to assign Matrix to inconsistent vector.
 ERROR:  Matrix& Matrix::operator=(const vector<vector<double>>&)
 	Inconsistent number of columns in input argument.
 
-Matrix 9
+Matrix 13
 	Rows: 2
 	Cols: 1
 		[ 0 ]
@@ -128,6 +128,15 @@ Matrix 9
 
 
 Attempting to access out of range elements.
+
+Matrix 14
+	Rows: 3
+	Cols: 1
+		[ 0 ]
+		[ 0 ]
+		[ 0 ]
+	Iterators: (0, 3, 0, 1)
+
 ERROR:  const double Matrix::extract(int, int) const
 	Attempting to access elements outside the matrix range.
 ERROR:  const double Matrix::operator()(int, int) const
@@ -135,7 +144,7 @@ ERROR:  const double Matrix::operator()(int, int) const
 ERROR:  void Matrix::insert()(int, int, double)
 	Attempting to access elements outside the matrix range.
 
-Matrix 13
+Matrix 14
 	Rows: 3
 	Cols: 1
 		[ 1 ]
