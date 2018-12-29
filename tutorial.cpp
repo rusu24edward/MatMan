@@ -7,11 +7,10 @@
 
 #include "Matrix.h"
 
-std::vector<std::string> testFileNames;
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
-int TestMatrix();
+int TestMatrix(const std::string&);
 void Print(const Matrix&, ofstream&);
 
 
@@ -22,15 +21,16 @@ int main (int argc, char** argv) {
 	std::cout << "Hello World!" << std::endl;
 
 
-	// TODO: testFileNames.push_back("TestsTest"); // For testing the testing
-	testFileNames.push_back("MatrixTest");
-	// testFileNames.push_back("VectorTest");
-	// testFileNames.push_back("AdvancedMatrixTest");
+	std::vector<std::string> testNames;
+	// TODO: testNames.push_back("TestsTest"); // For testing the testing
+	testNames.push_back("MatrixTest");
+	// testNames.push_back("VectorTest");
+	// testNames.push_back("AdvancedMatrixTest");
 
 	// Run all the tests
 	int finalStatus = 0;
-	for (std::vector<std::string>::const_iterator iter = testFileNames.begin();
-		 iter != testFileNames.end(); ++iter) {
+	for (std::vector<std::string>::const_iterator iter = testNames.begin();
+		 iter != testNames.end(); ++iter) {
 		int status = RunTests(*iter);
 		if (status == 0) { // If the test completed, test the output against the baseline
 			status = CompareAgainstBaseline(*iter);
@@ -51,7 +51,7 @@ int main (int argc, char** argv) {
 int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
-		status = TestMatrix();
+		status = TestMatrix(testName);
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 	}
@@ -97,11 +97,11 @@ int CompareAgainstBaseline(const std::string& testName) {
 
 
 
-int TestMatrix() {
+int TestMatrix(const std::string& testName) {
 
 	int status = -1;
 
-	std::string testFileName = "current/" + testFileNames[0] + ".out";
+	std::string testFileName = "current/" + testName + ".out";
 	std::ofstream outFile;
 	outFile.open(testFileName);
 
