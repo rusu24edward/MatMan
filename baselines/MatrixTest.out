@@ -1,0 +1,145 @@
+
+UNAMED
+	Rows: 0
+	Cols: 0
+	Iterators: (0, 0, 0, 0)
+
+
+Matrix 2
+	Rows: 2
+	Cols: 2
+		[ 0 0 ]
+		[ 0 0 ]
+	Iterators: (0, 2, 0, 2)
+
+
+Matrix 3
+	Rows: 0
+	Cols: 0
+	Iterators: (0, 0, 0, 0)
+
+
+Matrix 4
+	Rows: 0
+	Cols: 0
+	Iterators: (0, 0, 0, 0)
+
+
+Matrix 5
+	Rows: 2
+	Cols: 2
+		[ 1 1 ]
+		[ 1 1 ]
+	Iterators: (0, 2, 0, 2)
+
+
+Matrix 6
+	Rows: 2
+	Cols: 2
+		[ 1 1 ]
+		[ 1 1 ]
+	Iterators: (0, 2, 0, 2)
+
+
+Matrix 7
+	Rows: 9
+	Cols: 2
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+	Iterators: (0, 9, 0, 2)
+
+
+Matrix 8
+	Rows: 9
+	Cols: 2
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+	Iterators: (0, 9, 0, 2)
+
+
+Matrix 9
+	Rows: 2
+	Cols: 1
+		[ 0 ]
+		[ 0 ]
+	Iterators: (0, 2, 0, 1)
+
+
+Matrix 10
+	Rows: 4
+	Cols: 2
+		[ 0 10 ]
+		[ 1 9 ]
+		[ 2 8 ]
+		[ 3 7 ]
+	Iterators: (0, 4, 0, 2)
+
+
+Matrix 11
+	Rows: 1
+	Cols: 1
+		[ 9 ]
+	Iterators: (0, 1, 0, 1)
+
+
+Matrix 2
+	Rows: 9
+	Cols: 2
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+		[ -1 -1 ]
+	Iterators: (0, 9, 0, 2)
+
+
+Attempting to construct Matrix with inconsistent vector.
+ERROR:  Matrix::Matrix(const vector<vector<double>>&)
+	Inconsistent number of columns in input argument.
+
+Attempting to assign Matrix to inconsistent vector.
+ERROR:  Matrix& Matrix::operator=(const vector<vector<double>>&)
+	Inconsistent number of columns in input argument.
+
+Matrix 9
+	Rows: 2
+	Cols: 1
+		[ 0 ]
+		[ 0 ]
+	Iterators: (0, 2, 0, 1)
+
+
+Attempting to access out of range elements.
+ERROR:  const double Matrix::extract(int, int) const
+	Attempting to access elements outside the matrix range.
+ERROR:  const double Matrix::operator()(int, int) const
+	Attempting to access elements outside the matrix range.
+ERROR:  void Matrix::insert()(int, int, double)
+	Attempting to access elements outside the matrix range.
+
+Matrix 13
+	Rows: 3
+	Cols: 1
+		[ 1 ]
+		[ 1 ]
+		[ 1 ]
+	Iterators: (0, 3, 0, 1)
+

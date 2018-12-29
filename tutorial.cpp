@@ -7,10 +7,11 @@
 
 #include "Matrix.h"
 
-std::vector<std::string> testFilesNames;
+std::vector<std::string> testFileNames;
 
 int TestMatrix();
 void Print(const Matrix&, ofstream&);
+int CompareAgainstBaseline(const std::string&);
 
 
 
@@ -20,14 +21,68 @@ int main (int argc, char** argv) {
 	std::cout << "Hello World!" << std::endl;
 
 
-	testFilesNames.push_back("MatrixTest");
+	// TODO: Automate this testing part
+	// testFileNames.push_back("TestsTest"); // For testing the testing
+	testFileNames.push_back("MatrixTest");
+	// testFileNames.push_back("VectorTest");
+	// testFileNames.push_back("AdvancedMatrixTest");
 
-	int status = TestMatrix();
-	return status;
+	// Run all the tests
+	int finalStatus = 0;
+	for (std::vector<std::string>::const_iterator iter = testFileNames.begin();
+		 iter != testFileNames.end(); ++iter) {
+		int status = 0;
+		if (*iter == "MatrixTest") {
+			status = TestMatrix();
+		}
+		if (status == 0) { // If the test completed, test the output against the baseline
+			status = CompareAgainstBaseline(*iter);
+		}
+		finalStatus += status;
+	}
+
+	if (finalStatus != 0) {
+		std::cout << "Failed " << finalStatus << " test(s)!" << std::endl;
+	}
+
+	return finalStatus;
 }
 
+int CompareAgainstBaseline(const std::string& testName) {
+	int status = 0;
 
+	std::string currentFileName = "current/" + testName + ".out";
+	std::ifstream currentFile(currentFileName);
+	if (!currentFile.is_open()) {
+		std::cout << "FAILURE: Cannot open current/" << testName << ".out!"
+				  << std::endl;
+		return 1;
+	}
 
+	std::string baselineFileName = "baselines/" + testName + ".out";
+	std::ifstream baselineFile(baselineFileName);
+	if (!baselineFile.is_open()) {
+		std::cout << "FAILURE: Cannot open baseline/" << testName << ".out!"
+				  << std::endl;
+		return 1;
+	}
+
+	string currentString, baselineString;
+    do {
+    	currentFile >> currentString;
+    	baselineFile >> baselineString;
+		if (currentString != baselineString) {
+			status = 1;
+			std::cout << "FAILURE: " << testName << " did not pass!" << std::endl;
+			break;
+		}
+      } while (!currentFile.eof() || !baselineFile.eof());
+
+	currentFile.close();
+	baselineFile.close();
+
+	return status;
+}
 
 
 
@@ -36,7 +91,7 @@ int TestMatrix() {
 
 	int status = -1;
 
-	string testFileName = "current/" + testFilesNames[0] + ".out";
+	std::string testFileName = "current/" + testFileNames[0] + ".out";
 	std::ofstream outFile;
 	outFile.open(testFileName);
 
@@ -146,8 +201,8 @@ int TestMatrix() {
 
 		status = 0;
 	} catch (...) {
-		std::cout << "Failed Matrix Test!" << std::endl;
-		outFile << "Failed Matrix Test!" << std::endl;
+		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Test!" << std::endl;
 		status = 1;
 	}
 
