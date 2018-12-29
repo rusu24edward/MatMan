@@ -152,5 +152,6 @@ void Print(const Matrix& m) {
 }
 
 void Print(const Matrix& m, ofstream& outFile) {
+std::cout << "In outFile streamer function" << std::endl;
 	outFile << m << std::endl;
 }
