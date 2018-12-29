@@ -1,6 +1,7 @@
 
 
 #include <iostream>
+#include <fstream>
 
 #include "Matrix.h"
 
@@ -25,7 +26,14 @@ int main (int argc, char** argv) {
 
 
 int TestMatrix() {
+
+	int status = -1;
+
+	std::ofstream outFile;
+	outFile.open("current/MatrixTest.out");
+
 	try{
+
 		Matrix mat1;
 		Print(mat1);
 
@@ -128,11 +136,14 @@ int TestMatrix() {
 		}
 		Print(mat13);
 
-		return 0;
+		status = 0;
 	} catch (...) {
 		std::cout << "Failed Matrix Test!" << std::endl;
-		return 1;
+		status = 1;
 	}
+
+	outFile.close();
+	return status;
 }
 
 void Print(const Matrix& m) {
