@@ -89,6 +89,14 @@ int CompareAgainstBaseline(const std::string& testName) {
 	currentFile.close();
 	baselineFile.close();
 
+    if (status == 0) { // If passed the test, delete the currentFile
+		if(std::remove(currentFileName.c_str()) != 0) {
+			std::cout << "FAILURE: Cannot remove " << currentFileName << "!"
+					  << std::endl;
+			status = 1;
+		}
+    }
+
 	return status;
 }
 
