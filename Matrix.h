@@ -20,6 +20,7 @@ public:
 	// Default constructor sets the fields to their default states
 	Matrix() {
 		setFields();
+		name = UNAMED;
 	}
 
 	// Alternate constructor sets the number of rows and columns and builds a
@@ -28,6 +29,7 @@ public:
 	// @param int c - the number of columns
 	Matrix(int r, int c) {
 		setFields(r, c);
+		name = UNAMED;
 	}
 
 	// Alternate constructor sets the number of rows and columns and fills an
@@ -37,6 +39,7 @@ public:
 	// @param double value - set each element in the matrix to this value
 	Matrix(int r, int c, double value) {
 		setFields(r, c, value);
+		name = UNAMED;
 	}
 
 	// Alternate constructor converts the input vector of vectors of doubles to a
@@ -54,6 +57,7 @@ public:
 		}
 
 		setFields(d.size(), checkNumberOfColumns);
+		name = UNAMED;
 		data = d;
 	}
 
@@ -61,6 +65,7 @@ public:
 	// @param const Matrix& mat - Matrix from which to copy
 	Matrix(const Matrix& mat) {
 		setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
+		name = UNAMED;
 
 		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
 			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
@@ -94,11 +99,8 @@ public:
 	// @return Matrix& - this Matrix
 	Matrix& operator=(const Matrix& mat) {
 		if (this != &mat) {
-			// TODO: Think of a better way to handle the name field, which we want
 			// to keep the same even when the data changes.
-			string n = name; // Keep the same name
 			setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
-			name = n; // Keep the same name
 
 			// TODO: Functionalize the following because it is used multilple times
 			for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
@@ -124,10 +126,8 @@ public:
 			}
 		}
 
-		string n = name;
 		setFields(d.size(), checkNumberOfColumns);
 		data = d;
-		name = n;
 
 		return *this;
 	}
@@ -273,8 +273,6 @@ private:
 	// @param double value - set each element in the matrix to this value
 	void setFields(int r = 0, int c = 0, double value = 0.0) {
 		// write a check here for the parameters. e.g. r >= 0
-		name = UNAMED;
-
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, value));
@@ -285,7 +283,12 @@ private:
 		rightLimit = nCols;
 	}
 
+
+
+	// ----------------------- //
 	// --- Underlying Data --- //
+	// ----------------------- //
+
 	string name;
 	const string UNAMED = "UNAMED";
 
