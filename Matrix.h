@@ -3,6 +3,7 @@
 #define MATRIX_H
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 
@@ -181,26 +182,48 @@ public:
 
 
 	// print
-	void Print() const {
-		cout << endl << name << endl;
-		cout << "\tRows: " << nRows << endl;
-		cout << "\tCols: " << nCols << endl;
+	void Print(ostream& streamer) const {
+		streamer << endl << name << endl;
+		streamer << "\tRows: " << nRows << endl;
+		streamer << "\tCols: " << nCols << endl;
 		for (vector<vector<double>>::const_iterator
 			 i = data.begin(); i != data.end(); ++i) {
-			cout << "\t\t[ ";
+			streamer << "\t\t[ ";
 			for (vector<double>::const_iterator
 				 j = i->begin(); j != i->end(); ++j) {
-				cout << *j << " ";
+				streamer << *j << " ";
 			}
-			cout << "]" << endl;
+			streamer << "]" << endl;
 		}
-		cout << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
+		streamer << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
 			 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 
-	friend ostream & operator<<(ostream &streamer, const Matrix& mat) {
-		mat.Print();
+	friend ostream& operator<<(ostream& streamer, const Matrix& mat) {
+		mat.Print(streamer);
 		return streamer;
+	}
+
+	void Print(ofstream& fileOut) const {
+		fileOut << endl << name << endl;
+		fileOut << "\tRows: " << nRows << endl;
+		fileOut << "\tCols: " << nCols << endl;
+		for (vector<vector<double>>::const_iterator
+			 i = data.begin(); i != data.end(); ++i) {
+			fileOut << "\t\t[ ";
+			for (vector<double>::const_iterator
+				 j = i->begin(); j != i->end(); ++j) {
+				fileOut << *j << " ";
+			}
+			fileOut << "]" << endl;
+		}
+		fileOut << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
+			 << leftLimit << ", " << rightLimit << ")" << endl;
+	}
+
+	friend ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
+		mat.Print(fileOut);
+		return fileOut;
 	}
 
 
