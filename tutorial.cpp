@@ -40,6 +40,8 @@ int main (int argc, char** argv) {
 
 	if (finalStatus != 0) {
 		std::cout << "Failed " << finalStatus << " test(s)!" << std::endl;
+	} else {
+		std::cout << "Passed all tests!" << std::endl;
 	}
 
 	return finalStatus;
