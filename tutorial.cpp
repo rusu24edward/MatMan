@@ -216,6 +216,12 @@ int TestMatrix(const std::string& testName) {
 		}
 		Print(mat14, outFile);
 
+		mat14 = mat10;
+		Print(mat14, outFile);
+
+		mat14 = mat14;
+		Print(mat14, outFile);
+
 		status = 0;
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;

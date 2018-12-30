@@ -13,9 +13,9 @@ using namespace std;
 class Matrix {
 public:
 
-	// ------------------- //
-	// --- Constructor --- //
-	// ------------------- //
+	// -------------------- //
+	// --- Constructors --- //
+	// -------------------- //
 
 	// Default constructor sets the fields to their default states
 	Matrix() {
@@ -89,16 +89,42 @@ public:
 
 	// -- Matrix Name --- //
 
-
+	// Get the name of the Matrix
+	// @return const string& - the Matrix's name
 	const string& getName() const {
 		return name;
 	}
+
+	// Set the name of the Matrix
+	// @param const string& n - the Matrix's name
 	void setName(const string& n) {
 		name = n;
 	}
 
 
 
+	// ----------------- //
+	// --- Operators --- //
+	// ----------------- //
+
+	// --- Assignment oeprator --- //
+
+	Matrix& operator=(const Matrix& mat) {
+		if (this != &mat) {
+			string n = name; // Keep the same name
+			setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
+			name = n; // Keep the same name
+
+			for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
+				for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
+					data[i][j] = mat.extract(ii, jj);
+				}
+			}
+		}
+		return *this;
+	}
+
+	// Blow out this Matrix and replace it with the
 	Matrix& operator=(const vector<vector<double>>& d) {
 // cout << "Using constant vector assignment operator" << endl;
 		int checkNumberOfColumns = d[0].size();
