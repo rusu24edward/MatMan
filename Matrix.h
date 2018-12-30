@@ -205,9 +205,12 @@ public:
 
 
 
+	// ---------------- //
+	// --- Printing --- //
+	// ---------------- //
 
-
-	// print
+	// Print to an ostream
+	// @param ostream& streamer - print to this ostream
 	void Print(ostream& streamer) const {
 		streamer << endl << name << endl;
 		streamer << "\tRows: " << nRows << endl;
@@ -224,12 +227,13 @@ public:
 		streamer << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
 			 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
-
 	friend ostream& operator<<(ostream& streamer, const Matrix& mat) {
 		mat.Print(streamer);
 		return streamer;
 	}
 
+	// Print to an fstream
+	// @param ofstream& fileOut - print to this ofstream
 	void Print(ofstream& fileOut) const {
 		fileOut << endl << name << endl;
 		fileOut << "\tRows: " << nRows << endl;
@@ -246,11 +250,12 @@ public:
 		fileOut << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
 			 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
-
 	friend ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
 		mat.Print(fileOut);
 		return fileOut;
 	}
+
+
 
 
 
