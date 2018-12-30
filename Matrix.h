@@ -13,65 +13,31 @@ using namespace std;
 class Matrix {
 public:
 
+	// Default constructor sets the fields to their default states
 	Matrix() {
-		nRows = 0;
-		nCols = 0;
-		data = vector<vector<double>>();
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
-		name = UNAMED;
+		setFields();
 	}
 
+	// Alternate constructor sets the number of rows and columns and builds a
+	// matrix of appropriate size.
+	// @param int r - the number of rows
+	// @param int c - the number of columns
 	Matrix(int r, int c) {
-		nRows = r;
-		nCols = c;
-		data = vector<vector<double>>(r, vector<double>(c, 0.));
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
-		name = UNAMED;
+		setFields(r, c);
 	}
 
+	// Alternate constructor sets the number of rows and columns and fills an
+	// appropriately sized matrix with the specified value
+	// @param int r - the number of rows
+	// @param int c - the number of columns
+	// @param double value - set each element in the matrix to this value
 	Matrix(int r, int c, double value) {
-		nRows = r;
-		nCols = c;
-		data = vector<vector<double>>(r, vector<double>(c, value));
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
-		name = UNAMED;
+		setFields(r, c, value);
 	}
 
-	Matrix(const Matrix& mat) {
-// cout << "Using constant copy constructor" << endl;
-		name = UNAMED;
-		nRows = mat.bottomLimit - mat.topLimit;
-		nCols = mat.rightLimit - mat.leftLimit;
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
-		data = vector<vector<double>>(nRows, vector<double>(nCols, 0.));
-
-		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
-			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
-				data[i][j] = mat.extract(ii, jj);
-			}
-		}
-	}
-
+	// Alternate constructor converts the input vector of vectors of doubles to a
+	// Matrix.
+	// @param const vector<vector<double>>& d - this Matrix's data
 	Matrix(const vector<vector<double>>& d) {
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
@@ -83,16 +49,20 @@ public:
 			}
 		}
 
-		nRows = d.size();
-		nCols = checkNumberOfColumns;
+		setFields(d.size(), checkNumberOfColumns);
 		data = d;
+	}
 
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
+	// Copy constructor copies values between the input Matrix's limits
+	// @param const Matrix& mat - Matrix from which to copy
+	Matrix(const Matrix& mat) {
+		setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
 
-		name = UNAMED;
+		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
+			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
+				data[i][j] = mat.extract(ii, jj);
+			}
+		}
 	}
 
 	~Matrix() {
@@ -230,18 +200,42 @@ public:
 
 private:
 
+	// ------------------------ //
+	// --- Helper Functions --- //
+	// ------------------------ //
+
+	// --- Object Construction Helpers --- //
+
+	// Set the class fields
+	// @param int r - the number of rows
+	// @param int c - the number of columns
+	// @param double value - set each element in the matrix to this value
+	void setFields(int r = 0, int c = 0, double value = 0.0) {
+		// write a check here for the parameters. e.g. r >= 0
+		name = UNAMED;
+
+		nRows = r;
+		nCols = c;
+		data = vector<vector<double>>(r, vector<double>(c, value));
+
+		topLimit = 0;
+		bottomLimit = nRows;
+		leftLimit = 0;
+		rightLimit = nCols;
+	}
+
 	// --- Underlying Data --- //
+	string name;
+	const string UNAMED = "UNAMED";
+
 	int nRows;
 	int nCols;
 	vector<vector<double>> data;
-	string name;
 
 	int topLimit;
 	int bottomLimit;
 	int leftLimit;
 	int rightLimit;
-
-	const string UNAMED = "UNAMED";
 
 };
 
