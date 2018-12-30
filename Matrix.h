@@ -7,9 +7,14 @@
 #include <vector>
 #include <string>
 
-
 using namespace std;
 
+// Matrix class provides data storage and manipulation like a mathematical matrix.
+// Current support:
+//		- Basic class functionality (copying, assigning, printing, etc.).
+//  	- Generate matrices from vector<vector<double>>
+//		- Extract value from index
+//		- Insert value at index
 class Matrix {
 public:
 
