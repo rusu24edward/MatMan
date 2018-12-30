@@ -13,6 +13,10 @@ using namespace std;
 class Matrix {
 public:
 
+	// ------------------- //
+	// --- Constructor --- //
+	// ------------------- //
+
 	// Default constructor sets the fields to their default states
 	Matrix() {
 		setFields();
@@ -65,20 +69,27 @@ public:
 		}
 	}
 
+
+
+	// ------------------ //
+	// --- Destructor --- //
+	// ------------------ //
+
+	// Destructor sets all fields to their default states and removes the name
 	~Matrix() {
-		nRows = 0;
-		nCols = 0;
-		data = vector<vector<double>>();
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
-
+		setFields();
 		name = "";
 	}
 
-	// name
+
+
+	// ---------------------------- //
+	// --- Accessors & Mutators --- //
+	// ---------------------------- //
+
+	// -- Matrix Name --- //
+
+
 	const string& getName() const {
 		return name;
 	}
