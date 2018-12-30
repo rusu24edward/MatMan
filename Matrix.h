@@ -83,29 +83,9 @@ public:
 
 
 
-	// ---------------------------- //
-	// --- Accessors & Mutators --- //
-	// ---------------------------- //
-
-	// -- Matrix Name --- //
-
-	// Get the name of the Matrix
-	// @return const string& - the Matrix's name
-	const string& getName() const {
-		return name;
-	}
-
-	// Set the name of the Matrix
-	// @param const string& n - the Matrix's name
-	void setName(const string& n) {
-		name = n;
-	}
-
-
-
-	// ----------------- //
-	// --- Operators --- //
-	// ----------------- //
+	// -------------------------- //
+	// --- Blow Out Operators --- //
+	// -------------------------- //
 
 	// --- Assignment operator --- //
 
@@ -153,7 +133,36 @@ public:
 	}
 
 
-	// element insertion/extraction
+
+	// ---------------------------- //
+	// --- Accessors & Mutators --- //
+	// ---------------------------- //
+
+	// -- Matrix Name --- //
+
+	// Get the name of the Matrix
+	// @return const string& - the Matrix's name
+	const string& getName() const {
+		return name;
+	}
+
+	// Set the name of the Matrix
+	// @param const string& n - the Matrix's name
+	void setName(const string& n) {
+		name = n;
+	}
+
+
+	// ------------------------------- //
+	// --- Functions and Operators --- //
+	// ------------------------------- //
+
+	// --- Element insertion and extraction --- //
+
+	// Extract the value at the specified index
+	// @param int r - the row index
+	// @param int c - the column index
+	// @return const double - the value at this index
 	const double extract(int r, int c) const {
 		if (r >= bottomLimit || c >= rightLimit) {
 			throw "ERROR:  "
@@ -170,6 +179,11 @@ public:
 		}
 		return data[r][c];
 	}
+
+	// Insert specified value at specified index
+	// @param int r - the row index
+	// @param int c - the column index
+	// @param double value - the value to insert at the index
 	void insert(int r, int c, double value) {
 		if (r >= bottomLimit || c >= rightLimit) {
 			throw "ERROR:  "
