@@ -61,17 +61,12 @@ public:
 		data = d;
 	}
 
-	// Copy constructor copies values between the input Matrix's limits
+	// Copy constructor copies values between the input Matrix's limits.
 	// @param const Matrix& mat - Matrix from which to copy
 	Matrix(const Matrix& mat) {
 		setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
 		name = UNAMED;
-
-		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
-			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
-				data[i][j] = mat.extract(ii, jj);
-			}
-		}
+		copyBetweenLimits(mat);
 	}
 
 
@@ -99,15 +94,8 @@ public:
 	// @return Matrix& - this Matrix
 	Matrix& operator=(const Matrix& mat) {
 		if (this != &mat) {
-			// to keep the same even when the data changes.
 			setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
-
-			// TODO: Functionalize the following because it is used multilple times
-			for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
-				for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
-					data[i][j] = mat.extract(ii, jj);
-				}
-			}
+			copyBetweenLimits(mat);
 		}
 		return *this;
 	}
@@ -116,7 +104,6 @@ public:
 	// @param const vector<vector<double>>& d - copy the data
 	// @return Matrix& - this Matrix
 	Matrix& operator=(const vector<vector<double>>& d) {
-		// TODO: functionalize this check because it is used multiple times
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
 			if (d[i].size() != checkNumberOfColumns) {
@@ -281,6 +268,16 @@ private:
 		bottomLimit = nRows;
 		leftLimit = 0;
 		rightLimit = nCols;
+	}
+
+	// Copy values between input Matrix's limit
+	// @param const Matrix& mat - Matrix from which to copy
+	void copyBetweenLimits(const Matrix& mat) {
+		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
+			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
+				data[i][j] = mat.extract(ii, jj);
+			}
+		}
 	}
 
 
