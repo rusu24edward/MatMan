@@ -15,7 +15,10 @@ void Print(const Matrix&, ofstream&);
 
 
 
-
+// Run the program, which right now just runs a test suite. Inputs are not used.
+// @param int argc - the number of input arguments
+// @param char** argv - an array of "strings" which are the input arguments
+// @return int - the number of tests that fail.
 int main (int argc, char** argv) {
 
 	std::vector<std::string> testNames;
@@ -46,7 +49,9 @@ int main (int argc, char** argv) {
 
 
 
-
+// Run the specified test.
+// @param const std::string& testName - the name of the tests to run
+// @return int - 1 if test failed, 0 if test passed.
 int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
@@ -57,6 +62,9 @@ int RunTests(const std::string& testName) {
 	return status;
 }
 
+// Compare the "current" file against the "baseline" file.
+// @param const std::string& testName - the name of the test files to compare
+// @return int - 1 if the files are different, 0 if the files are the same
 int CompareAgainstBaseline(const std::string& testName) {
 	int status = 0;
 
@@ -93,9 +101,9 @@ int CompareAgainstBaseline(const std::string& testName) {
 	return status;
 }
 
-
-
-
+// The test for the Matrix class.
+// @param const std::string& testName - name of the file
+// @return int - 1 if failed, 0 if passed.
 int TestMatrix(const std::string& testName) {
 
 	int status = -1;
@@ -232,6 +240,9 @@ int TestMatrix(const std::string& testName) {
 	return status;
 }
 
+// Prinnt the specified Matrix to the specified file
+// @param const Matrix& m - the Matrix to print
+// @param ofstream& outFile - the file to print to.
 void Print(const Matrix& m, ofstream& outFile) {
 	outFile << m << std::endl;
 }
