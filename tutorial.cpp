@@ -18,9 +18,6 @@ void Print(const Matrix&, ofstream&);
 
 int main (int argc, char** argv) {
 
-	std::cout << "Hello World!" << std::endl;
-
-
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
@@ -87,6 +84,8 @@ int CompareAgainstBaseline(const std::string& testName) {
 			break;
 		}
       } while (!currentFile.eof() || !baselineFile.eof());
+
+    // TODO: if passed the test, then delete the currentFile.
 
 	currentFile.close();
 	baselineFile.close();
