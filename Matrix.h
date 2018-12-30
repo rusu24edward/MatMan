@@ -107,14 +107,20 @@ public:
 	// --- Operators --- //
 	// ----------------- //
 
-	// --- Assignment oeprator --- //
+	// --- Assignment operator --- //
 
+	// Assignemnt operator blows out the Matrix data and sets it to the RHS
+	// @param const Matrix& mat - Matrix to copy
+	// @return Matrix& - this Matrix
 	Matrix& operator=(const Matrix& mat) {
 		if (this != &mat) {
+			// TODO: Think of a better way to handle the name field, which we want
+			// to keep the same even when the data changes.
 			string n = name; // Keep the same name
 			setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
 			name = n; // Keep the same name
 
+			// TODO: Functionalize the following because it is used multilple times
 			for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
 				for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
 					data[i][j] = mat.extract(ii, jj);
@@ -124,9 +130,11 @@ public:
 		return *this;
 	}
 
-	// Blow out this Matrix and replace it with the
+	// Assignment operator blows out the Matrix and replace it with the input vector
+	// @param const vector<vector<double>>& d - copy the data
+	// @return Matrix& - this Matrix
 	Matrix& operator=(const vector<vector<double>>& d) {
-// cout << "Using constant vector assignment operator" << endl;
+		// TODO: functionalize this check because it is used multiple times
 		int checkNumberOfColumns = d[0].size();
 		for (int i = 1; i < d.size(); ++i) {
 			if (d[i].size() != checkNumberOfColumns) {
@@ -135,14 +143,11 @@ public:
 					  "\tInconsistent number of columns in input argument.";
 			}
 		}
-		nRows = d.size();
-		nCols = checkNumberOfColumns;
-		data = d;
 
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
+		string n = name;
+		setFields(d.size(), checkNumberOfColumns);
+		data = d;
+		name = n;
 
 		return *this;
 	}
