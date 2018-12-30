@@ -10,7 +10,7 @@
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
-int TestMatrix(const std::string&);
+int TestMatrix();
 void Print(const Matrix&, ofstream&);
 
 
@@ -55,7 +55,7 @@ int main (int argc, char** argv) {
 int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
-		status = TestMatrix(testName);
+		status = TestMatrix();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 	}
@@ -102,13 +102,12 @@ int CompareAgainstBaseline(const std::string& testName) {
 }
 
 // The test for the Matrix class.
-// @param const std::string& testName - name of the file
 // @return int - 1 if failed, 0 if passed.
-int TestMatrix(const std::string& testName) {
+int TestMatrix() {
 
 	int status = -1;
 
-	std::string testFileName = "current/" + testName + ".out";
+	std::string testFileName = "current/MatrixTest.out";
 	std::ofstream outFile(testFileName);
 	if (!outFile.is_open()) {
 		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
