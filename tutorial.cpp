@@ -1,5 +1,4 @@
 
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,16 +9,16 @@
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
-int TestMatrix(const std::string&);
+int TestMatrix();
 void Print(const Matrix&, ofstream&);
 
 
 
-
+// Run the program, which right now just runs a test suite. Inputs are not used.
+// @param int argc - the number of input arguments
+// @param char** argv - an array of "strings" which are the input arguments
+// @return int - the number of tests that fail.
 int main (int argc, char** argv) {
-
-	std::cout << "Hello World!" << std::endl;
-
 
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
@@ -40,6 +39,8 @@ int main (int argc, char** argv) {
 
 	if (finalStatus != 0) {
 		std::cout << "Failed " << finalStatus << " test(s)!" << std::endl;
+	} else {
+		std::cout << "Passed all tests!" << std::endl;
 	}
 
 	return finalStatus;
@@ -47,17 +48,22 @@ int main (int argc, char** argv) {
 
 
 
-
+// Run the specified test.
+// @param const std::string& testName - the name of the tests to run
+// @return int - 1 if test failed, 0 if test passed.
 int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
-		status = TestMatrix(testName);
+		status = TestMatrix();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 	}
 	return status;
 }
 
+// Compare the "current" file against the "baseline" file.
+// @param const std::string& testName - the name of the test files to compare
+// @return int - 1 if the files are different, 0 if the files are the same
 int CompareAgainstBaseline(const std::string& testName) {
 	int status = 0;
 
@@ -86,20 +92,21 @@ int CompareAgainstBaseline(const std::string& testName) {
 		}
       } while (!currentFile.eof() || !baselineFile.eof());
 
+    // TODO: if passed the test, then delete the currentFile.
+
 	currentFile.close();
 	baselineFile.close();
 
 	return status;
 }
 
-
-
-
-int TestMatrix(const std::string& testName) {
+// The test for the Matrix class.
+// @return int - 1 if failed, 0 if passed.
+int TestMatrix() {
 
 	int status = -1;
 
-	std::string testFileName = "current/" + testName + ".out";
+	std::string testFileName = "current/MatrixTest.out";
 	std::ofstream outFile(testFileName);
 	if (!outFile.is_open()) {
 		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
@@ -214,6 +221,12 @@ int TestMatrix(const std::string& testName) {
 		}
 		Print(mat14, outFile);
 
+		mat14 = mat10;
+		Print(mat14, outFile);
+
+		mat14 = mat14;
+		Print(mat14, outFile);
+
 		status = 0;
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;
@@ -225,6 +238,9 @@ int TestMatrix(const std::string& testName) {
 	return status;
 }
 
+// Prinnt the specified Matrix to the specified file
+// @param const Matrix& m - the Matrix to print
+// @param ofstream& outFile - the file to print to.
 void Print(const Matrix& m, ofstream& outFile) {
 	outFile << m << std::endl;
 }
