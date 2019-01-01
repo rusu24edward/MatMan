@@ -12,7 +12,7 @@ using namespace std;
 // Matrix class provides data storage and manipulation like a mathematical matrix.
 // Current support:
 //		- Basic class functionality (copying, assigning, printing, etc.).
-//  	- Generate matrices from vector<vector<double>>
+//		- Generate matrices from vector<vector<double>>
 //		- Extract value from index
 //		- Insert value at index
 class Matrix {
@@ -88,11 +88,9 @@ public:
 
 
 
-	// -------------------------- //
-	// --- Blow Out Operators --- //
-	// -------------------------- //
-
-	// --- Assignment operator --- //
+	// ---------------------------- //
+	// --- Assignment Operators --- //
+	// ---------------------------- //
 
 	// Assignemnt operator blows out the Matrix data and sets it to the RHS
 	// @param const Matrix& mat - Matrix to copy
