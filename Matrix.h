@@ -15,6 +15,7 @@ using namespace std;
 //		- Generate matrices from vector<vector<double>>
 //		- Extract value from index
 //		- Insert value at index
+//		- Set all elements to a number
 class Matrix {
 public:
 
