@@ -152,6 +152,23 @@ Matrix 14
 		[ 1 ]
 	Iterators: (0, 3, 0, 1)
 
+Matrix 14
+	Rows: 4
+	Cols: 2
+		[ 0 10 ]
+		[ 1 9 ]
+		[ 2 8 ]
+		[ 3 7 ]
+	Iterators: (0, 4, 0, 2)
+
+Matrix 14
+	Rows: 4
+	Cols: 2
+		[ 0 10 ]
+		[ 1 9 ]
+		[ 2 8 ]
+		[ 3 7 ]
+	Iterators: (0, 4, 0, 2)
 
 Matrix 15
 	Rows: 3
@@ -161,7 +178,6 @@ Matrix 15
 		[ 1 1 1 ]
 	Iterators: (0, 3, 0, 3)
 
-
 Matrix 15
 	Rows: 3
 	Cols: 3
@@ -169,7 +185,6 @@ Matrix 15
 		[ 0 0 0 ]
 		[ 0 0 0 ]
 	Iterators: (0, 3, 0, 3)
-
 
 Matrix 15
 	Rows: 3
