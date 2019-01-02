@@ -15,6 +15,7 @@ using namespace std;
 //		- Generate matrices from vector<vector<double>>
 //		- Extract value from index
 //		- Insert value at index
+//		- Set all elements to a number
 class Matrix {
 public:
 
@@ -182,16 +183,23 @@ public:
 		}
 		data[r][c] = value;
 	}
-	// In order to make this function happen, I need to setup iterators that point
-	// to a specific location or a range of locations (including the entire thing)
-	// that need to be updated.
-	// TODO: implement iterators
-	// void insert(double value) {
-		// insert the value at the location of the iterators.
-	//}
-	// void operator=(double value) {
-		// insert the value at the location of the iterators.
-	// }
+
+	// Insert a value to all elements between the Matrix limits
+	// @param double value - the value to insert
+	void insert(double value) {
+		for (int i = topLimit; i < bottomLimit; ++i) {
+			for (int j = leftLimit; j < rightLimit; ++j) {
+				data[i][j] = value;
+			}
+		}
+	}
+	void operator=(double value) {
+		for (int i = topLimit; i < bottomLimit; ++i) {
+			for (int j = leftLimit; j < rightLimit; ++j) {
+				data[i][j] = value;
+			}
+		}
+	}
 
 
 
