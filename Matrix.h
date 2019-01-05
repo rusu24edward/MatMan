@@ -294,6 +294,14 @@ private:
 		}
 	}
 
+	// Set the pointers in limits to the beginning and end of each row of data
+	void setLimitsToData() {
+		for (vector<vector<double>>::const_iterator
+				i = data.begin(); i != data.end(); ++i) {
+			limits.push_back(pair<vdc_iterator, vdc_iterator>(i->begin(), i->end()));
+		}
+	}
+
 
 
 	// ----------------------- //
