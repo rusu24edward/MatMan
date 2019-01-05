@@ -257,8 +257,7 @@ public:
 	}
 
 	// --- DEBUG FUNCTION --- //
-	void DEBUG_PrintFromLimits() {
-		setLimitsToData();
+	void DEBUG_PrintFromLimits() const {
 		cout << "PrintFromLimits" << endl;
 		for (vector<pair<vdc_iterator, vdc_iterator>>::const_iterator
 				i = limits.begin(); i != limits.end(); ++i) {
