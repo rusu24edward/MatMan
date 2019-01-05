@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <utility>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ using namespace std;
 //		- Set all elements to a number
 class Matrix {
 public:
+
+	typedef vector<double>::const_iterator vdc_iterator;
 
 	// -------------------- //
 	// --- Constructors --- //
@@ -303,6 +306,8 @@ private:
 	int nRows;
 	int nCols;
 	vector<vector<double>> data;
+
+	vector<pair<vdc_iterator,vdc_iterator>> limits;
 
 	int topLimit;
 	int bottomLimit;
