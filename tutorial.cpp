@@ -27,7 +27,18 @@ int main (int argc, char** argv) {
 		}
 	}
 	mat0.Print(std::cout);
+	std::cout << "Built each element" << std::endl;
 	mat0.DEBUG_PrintFromLimits();
+
+	Matrix mat00(mat0);
+	std::cout << "Built from copy constructor" << std::endl;
+	mat00.DEBUG_PrintFromLimits();
+
+	mat00 = mat0;
+	std::cout << "Built from assignment operator" << std::endl;
+	mat00.DEBUG_PrintFromLimits();
+
+
 
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
