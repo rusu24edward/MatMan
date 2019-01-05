@@ -225,8 +225,8 @@ public:
 			}
 			streamer << "]" << endl;
 		}
-		streamer << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
-			 << leftLimit << ", " << rightLimit << ")" << endl;
+		// streamer << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
+		// 	 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 	friend ostream& operator<<(ostream& streamer, const Matrix& mat) {
 		mat.Print(streamer);
@@ -248,8 +248,8 @@ public:
 			}
 			fileOut << "]" << endl;
 		}
-		fileOut << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
-			 << leftLimit << ", " << rightLimit << ")" << endl;
+		// fileOut << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
+		// 	 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 	friend ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
 		mat.Print(fileOut);
