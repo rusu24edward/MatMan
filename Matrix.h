@@ -256,6 +256,20 @@ public:
 		return fileOut;
 	}
 
+	// --- DEBUG FUNCTION --- //
+	void DEBUG_PrintFromLimits() {
+		setLimitsToData();
+		cout << "PrintFromLimits" << endl;
+		for (vector<pair<vdc_iterator, vdc_iterator>>::const_iterator
+				i = limits.begin(); i != limits.end(); ++i) {
+			cout << "\t\t[ ";
+			for (vdc_iterator j = i->first; j != i->second; ++j) {
+				cout << *j << " ";
+			}
+			cout << "]" << endl;
+		}
+	}
+
 
 
 
