@@ -70,7 +70,7 @@ public:
 		data = d;
 	}
 
-	// Copy constructor copies values between the input Matrix's limits.
+	// Copy constructor copies the input Matrix.
 	// @param const Matrix& mat - Matrix from which to copy
 	Matrix(const Matrix& mat) {
 		setFields(mat.nRows, mat.nCols);
@@ -187,7 +187,7 @@ public:
 		data[r][c] = value;
 	}
 
-	// Insert a value to all elements between the Matrix limits
+	// Insert a value to all elements of the Matrix
 	// @param double value - the value to insert
 	void insert(double value) {
 		for (int i = 0; i < nRows; ++i) {
@@ -225,8 +225,6 @@ public:
 			}
 			streamer << "]" << endl;
 		}
-		// streamer << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
-		// 	 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 	friend ostream& operator<<(ostream& streamer, const Matrix& mat) {
 		mat.Print(streamer);
@@ -248,8 +246,6 @@ public:
 			}
 			fileOut << "]" << endl;
 		}
-		// fileOut << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
-		// 	 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 	friend ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
 		mat.Print(fileOut);
@@ -291,22 +287,7 @@ private:
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, value));
 		setLimitsToData();
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
 	}
-
-	// Copy values between input Matrix's limit
-	// @param const Matrix& mat - Matrix from which to copy
-	// void copyBetweenLimits(const Matrix& mat) {
-	// 	for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
-	// 		for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
-	// 			data[i][j] = mat.extract(ii, jj);
-	// 		}
-	// 	}
-	// }
 
 	// Set the pointers in limits to the beginning and end of each row of data
 	void setLimitsToData() {
@@ -331,11 +312,6 @@ private:
 	vector<vector<double>> data;
 
 	vector<pair<vdc_iterator,vdc_iterator>> limits;
-
-	int topLimit;
-	int bottomLimit;
-	int leftLimit;
-	int rightLimit;
 
 };
 
