@@ -73,9 +73,9 @@ public:
 	// Copy constructor copies values between the input Matrix's limits.
 	// @param const Matrix& mat - Matrix from which to copy
 	Matrix(const Matrix& mat) {
-		setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
+		setFields(mat.nRows, mat.nCols);
 		name = UNAMED;
-		copyBetweenLimits(mat);
+		data = mat.data;
 	}
 
 
@@ -101,8 +101,8 @@ public:
 	// @return Matrix& - this Matrix
 	Matrix& operator=(const Matrix& mat) {
 		if (this != &mat) {
-			setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
-			copyBetweenLimits(mat);
+			setFields(mat.nRows, mat.nCols);
+			data = mat.data;
 		}
 		return *this;
 	}
@@ -158,7 +158,7 @@ public:
 	// @param int c - the column index
 	// @return const double - the value at this index
 	const double extract(int r, int c) const {
-		if (r >= bottomLimit || c >= rightLimit) {
+		if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 			throw "ERROR:  "
 				  "const double Matrix::extract(int, int) const\n"
 				  "\tAttempting to access elements outside the matrix range.";
@@ -166,7 +166,7 @@ public:
 		return data[r][c];
 	}
 	const double operator()(int r, int c) const {
-		if (r >= bottomLimit || c >= rightLimit) {
+		if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 			throw "ERROR:  "
 				  "const double Matrix::operator()(int, int) const\n"
 				  "\tAttempting to access elements outside the matrix range.";
@@ -179,7 +179,7 @@ public:
 	// @param int c - the column index
 	// @param double value - the value to insert at the index
 	void insert(int r, int c, double value) {
-		if (r >= bottomLimit || c >= rightLimit) {
+		if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 			throw "ERROR:  "
 				  "void Matrix::insert()(int, int, double)\n"
 				  "\tAttempting to access elements outside the matrix range.";
@@ -190,15 +190,15 @@ public:
 	// Insert a value to all elements between the Matrix limits
 	// @param double value - the value to insert
 	void insert(double value) {
-		for (int i = topLimit; i < bottomLimit; ++i) {
-			for (int j = leftLimit; j < rightLimit; ++j) {
+		for (int i = 0; i < nRows; ++i) {
+			for (int j = 0; j < nCols; ++j) {
 				data[i][j] = value;
 			}
 		}
 	}
 	void operator=(double value) {
-		for (int i = topLimit; i < bottomLimit; ++i) {
-			for (int j = leftLimit; j < rightLimit; ++j) {
+		for (int i = 0; i < nRows; ++i) {
+			for (int j = 0; j < nCols; ++j) {
 				data[i][j] = value;
 			}
 		}
@@ -300,13 +300,13 @@ private:
 
 	// Copy values between input Matrix's limit
 	// @param const Matrix& mat - Matrix from which to copy
-	void copyBetweenLimits(const Matrix& mat) {
-		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
-			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
-				data[i][j] = mat.extract(ii, jj);
-			}
-		}
-	}
+	// void copyBetweenLimits(const Matrix& mat) {
+	// 	for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
+	// 		for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
+	// 			data[i][j] = mat.extract(ii, jj);
+	// 		}
+	// 	}
+	// }
 
 	// Set the pointers in limits to the beginning and end of each row of data
 	void setLimitsToData() {
