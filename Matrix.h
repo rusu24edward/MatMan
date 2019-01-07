@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <utility>
 
 using namespace std;
 
@@ -18,6 +19,8 @@ using namespace std;
 //		- Set all elements to a number
 class Matrix {
 public:
+
+	typedef vector<double>::const_iterator vdc_iterator;
 
 	// -------------------- //
 	// --- Constructors --- //
@@ -67,12 +70,12 @@ public:
 		data = d;
 	}
 
-	// Copy constructor copies values between the input Matrix's limits.
+	// Copy constructor copies the input Matrix.
 	// @param const Matrix& mat - Matrix from which to copy
 	Matrix(const Matrix& mat) {
-		setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
+		setFields(mat.nRows, mat.nCols);
 		name = UNAMED;
-		copyBetweenLimits(mat);
+		data = mat.data;
 	}
 
 
@@ -98,8 +101,8 @@ public:
 	// @return Matrix& - this Matrix
 	Matrix& operator=(const Matrix& mat) {
 		if (this != &mat) {
-			setFields(mat.bottomLimit - mat.topLimit, mat.rightLimit - mat.leftLimit);
-			copyBetweenLimits(mat);
+			setFields(mat.nRows, mat.nCols);
+			data = mat.data;
 		}
 		return *this;
 	}
@@ -155,7 +158,7 @@ public:
 	// @param int c - the column index
 	// @return const double - the value at this index
 	const double extract(int r, int c) const {
-		if (r >= bottomLimit || c >= rightLimit) {
+		if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 			throw "ERROR:  "
 				  "const double Matrix::extract(int, int) const\n"
 				  "\tAttempting to access elements outside the matrix range.";
@@ -163,7 +166,7 @@ public:
 		return data[r][c];
 	}
 	const double operator()(int r, int c) const {
-		if (r >= bottomLimit || c >= rightLimit) {
+		if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 			throw "ERROR:  "
 				  "const double Matrix::operator()(int, int) const\n"
 				  "\tAttempting to access elements outside the matrix range.";
@@ -176,7 +179,7 @@ public:
 	// @param int c - the column index
 	// @param double value - the value to insert at the index
 	void insert(int r, int c, double value) {
-		if (r >= bottomLimit || c >= rightLimit) {
+		if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 			throw "ERROR:  "
 				  "void Matrix::insert()(int, int, double)\n"
 				  "\tAttempting to access elements outside the matrix range.";
@@ -184,18 +187,18 @@ public:
 		data[r][c] = value;
 	}
 
-	// Insert a value to all elements between the Matrix limits
+	// Insert a value to all elements of the Matrix
 	// @param double value - the value to insert
 	void insert(double value) {
-		for (int i = topLimit; i < bottomLimit; ++i) {
-			for (int j = leftLimit; j < rightLimit; ++j) {
+		for (int i = 0; i < nRows; ++i) {
+			for (int j = 0; j < nCols; ++j) {
 				data[i][j] = value;
 			}
 		}
 	}
 	void operator=(double value) {
-		for (int i = topLimit; i < bottomLimit; ++i) {
-			for (int j = leftLimit; j < rightLimit; ++j) {
+		for (int i = 0; i < nRows; ++i) {
+			for (int j = 0; j < nCols; ++j) {
 				data[i][j] = value;
 			}
 		}
@@ -222,8 +225,6 @@ public:
 			}
 			streamer << "]" << endl;
 		}
-		streamer << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
-			 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 	friend ostream& operator<<(ostream& streamer, const Matrix& mat) {
 		mat.Print(streamer);
@@ -245,12 +246,23 @@ public:
 			}
 			fileOut << "]" << endl;
 		}
-		fileOut << "\tIterators: (" << topLimit << ", " << bottomLimit << ", "
-			 << leftLimit << ", " << rightLimit << ")" << endl;
 	}
 	friend ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
 		mat.Print(fileOut);
 		return fileOut;
+	}
+
+	// --- DEBUG FUNCTION --- //
+	void DEBUG_PrintFromLimits() const {
+		cout << "PrintFromLimits" << endl;
+		for (vector<pair<vdc_iterator, vdc_iterator>>::const_iterator
+				i = limits.begin(); i != limits.end(); ++i) {
+			cout << "\t\t[ ";
+			for (vdc_iterator j = i->first; j != i->second; ++j) {
+				cout << *j << " ";
+			}
+			cout << "]" << endl;
+		}
 	}
 
 
@@ -274,20 +286,15 @@ private:
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, value));
-
-		topLimit = 0;
-		bottomLimit = nRows;
-		leftLimit = 0;
-		rightLimit = nCols;
+		setLimitsToData();
 	}
 
-	// Copy values between input Matrix's limit
-	// @param const Matrix& mat - Matrix from which to copy
-	void copyBetweenLimits(const Matrix& mat) {
-		for (int i = topLimit, ii = mat.topLimit; i < bottomLimit; ++i, ++ii) {
-			for (int j = leftLimit, jj = mat.leftLimit; j < rightLimit; ++j, ++jj) {
-				data[i][j] = mat.extract(ii, jj);
-			}
+	// Set the pointers in limits to the beginning and end of each row of data
+	void setLimitsToData() {
+		limits.clear();
+		for (vector<vector<double>>::const_iterator
+				i = data.begin(); i != data.end(); ++i) {
+			limits.push_back(pair<vdc_iterator, vdc_iterator>(i->begin(), i->end()));
 		}
 	}
 
@@ -304,10 +311,7 @@ private:
 	int nCols;
 	vector<vector<double>> data;
 
-	int topLimit;
-	int bottomLimit;
-	int leftLimit;
-	int rightLimit;
+	vector<pair<vdc_iterator,vdc_iterator>> limits;
 
 };
 

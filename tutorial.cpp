@@ -20,6 +20,26 @@ void Print(const Matrix&, ofstream&);
 // @return int - the number of tests that fail.
 int main (int argc, char** argv) {
 
+	Matrix mat0(4,6);
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 6; ++j) {
+			mat0.insert(i,j,(i+1)*(j+1));
+		}
+	}
+	mat0.Print(std::cout);
+	std::cout << "Built each element" << std::endl;
+	mat0.DEBUG_PrintFromLimits();
+
+	Matrix mat00(mat0);
+	std::cout << "Built from copy constructor" << std::endl;
+	mat00.DEBUG_PrintFromLimits();
+
+	mat00 = mat0;
+	std::cout << "Built from assignment operator" << std::endl;
+	mat00.DEBUG_PrintFromLimits();
+
+
+
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");

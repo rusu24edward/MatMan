@@ -2,7 +2,6 @@
 UNAMED
 	Rows: 0
 	Cols: 0
-	Iterators: (0, 0, 0, 0)
 
 
 Matrix 2
@@ -10,7 +9,6 @@ Matrix 2
 	Cols: 2
 		[ 0 0 ]
 		[ 0 0 ]
-	Iterators: (0, 2, 0, 2)
 
 
 Matrix 2
@@ -25,19 +23,16 @@ Matrix 2
 		[ -1 -1 ]
 		[ -1 -1 ]
 		[ -1 -1 ]
-	Iterators: (0, 9, 0, 2)
 
 
 Matrix 3
 	Rows: 0
 	Cols: 0
-	Iterators: (0, 0, 0, 0)
 
 
 Matrix 4
 	Rows: 0
 	Cols: 0
-	Iterators: (0, 0, 0, 0)
 
 
 Matrix 5
@@ -45,7 +40,6 @@ Matrix 5
 	Cols: 2
 		[ 1 1 ]
 		[ 1 1 ]
-	Iterators: (0, 2, 0, 2)
 
 
 Matrix 6
@@ -53,7 +47,6 @@ Matrix 6
 	Cols: 2
 		[ 1 1 ]
 		[ 1 1 ]
-	Iterators: (0, 2, 0, 2)
 
 
 Matrix 7
@@ -68,7 +61,6 @@ Matrix 7
 		[ -1 -1 ]
 		[ -1 -1 ]
 		[ -1 -1 ]
-	Iterators: (0, 9, 0, 2)
 
 
 Matrix 8
@@ -83,7 +75,6 @@ Matrix 8
 		[ -1 -1 ]
 		[ -1 -1 ]
 		[ -1 -1 ]
-	Iterators: (0, 9, 0, 2)
 
 
 Matrix 9
@@ -91,7 +82,6 @@ Matrix 9
 	Cols: 1
 		[ 0 ]
 		[ 0 ]
-	Iterators: (0, 2, 0, 1)
 
 
 Matrix 10
@@ -101,14 +91,12 @@ Matrix 10
 		[ 1 9 ]
 		[ 2 8 ]
 		[ 3 7 ]
-	Iterators: (0, 4, 0, 2)
 
 
 Matrix 11
 	Rows: 1
 	Cols: 1
 		[ 9 ]
-	Iterators: (0, 1, 0, 1)
 
 
 Attempting to construct Matrix with inconsistent vector.
@@ -124,7 +112,6 @@ Matrix 13
 	Cols: 1
 		[ 0 ]
 		[ 0 ]
-	Iterators: (0, 2, 0, 1)
 
 
 Attempting to access out of range elements.
@@ -135,7 +122,6 @@ Matrix 14
 		[ 0 ]
 		[ 0 ]
 		[ 0 ]
-	Iterators: (0, 3, 0, 1)
 
 ERROR:  const double Matrix::extract(int, int) const
 	Attempting to access elements outside the matrix range.
@@ -150,7 +136,7 @@ Matrix 14
 		[ 1 ]
 		[ 1 ]
 		[ 1 ]
-	Iterators: (0, 3, 0, 1)
+
 
 Matrix 14
 	Rows: 4
@@ -159,7 +145,7 @@ Matrix 14
 		[ 1 9 ]
 		[ 2 8 ]
 		[ 3 7 ]
-	Iterators: (0, 4, 0, 2)
+
 
 Matrix 14
 	Rows: 4
@@ -168,7 +154,7 @@ Matrix 14
 		[ 1 9 ]
 		[ 2 8 ]
 		[ 3 7 ]
-	Iterators: (0, 4, 0, 2)
+
 
 Matrix 15
 	Rows: 3
@@ -176,7 +162,7 @@ Matrix 15
 		[ 1 1 1 ]
 		[ 1 2 1 ]
 		[ 1 1 1 ]
-	Iterators: (0, 3, 0, 3)
+
 
 Matrix 15
 	Rows: 3
@@ -184,7 +170,7 @@ Matrix 15
 		[ 0 0 0 ]
 		[ 0 0 0 ]
 		[ 0 0 0 ]
-	Iterators: (0, 3, 0, 3)
+
 
 Matrix 15
 	Rows: 3
@@ -192,5 +178,4 @@ Matrix 15
 		[ 24 24 24 ]
 		[ 24 24 24 ]
 		[ 24 24 24 ]
-	Iterators: (0, 3, 0, 3)
 
