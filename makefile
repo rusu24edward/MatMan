@@ -3,8 +3,8 @@ all: tutorial.exe
 tutorial.exe: tutorial.o
 	g++ -o tutorial.exe tutorial.o
 
-tutorial.o: tutorial.cpp Matrix.h
-	g++ -c tutorial.cpp Matrix.h
+tutorial.o: tutorial.cpp SubMatrix.h Matrix.h
+	g++ -c tutorial.cpp SubMatrix.h Matrix.h
 
 # Reader.o: Reader.cpp Reader.h
 # 	g++ -I /usr/include/boost/numeric -c Reader.cpp

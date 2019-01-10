@@ -8,6 +8,8 @@
 #include <string>
 #include <utility>
 
+#include "SubMatrix.h"
+
 using namespace std;
 
 // Matrix class provides data storage and manipulation like a mathematical matrix.
@@ -20,7 +22,7 @@ using namespace std;
 class Matrix {
 public:
 
-	typedef vector<double>::const_iterator vdc_iterator;
+	// typedef vector<double>::const_iterator vdc_iterator;
 
 	// -------------------- //
 	// --- Constructors --- //
@@ -255,10 +257,10 @@ public:
 	// --- DEBUG FUNCTION --- //
 	void DEBUG_PrintFromLimits() const {
 		cout << "PrintFromLimits" << endl;
-		for (vector<pair<vdc_iterator, vdc_iterator>>::const_iterator
-				i = limits.begin(); i != limits.end(); ++i) {
+		for (vector<pair<SubMatrix::vdc_iter, SubMatrix::vdc_iter>>::const_iterator
+				i = s.limits.begin(); i != s.limits.end(); ++i) {
 			cout << "\t\t[ ";
-			for (vdc_iterator j = i->first; j != i->second; ++j) {
+			for (SubMatrix::vdc_iter j = i->first; j != i->second; ++j) {
 				cout << *j << " ";
 			}
 			cout << "]" << endl;
@@ -291,10 +293,10 @@ private:
 
 	// Set the pointers in limits to the beginning and end of each row of data
 	void setLimitsToData() {
-		limits.clear();
+		s.limits.clear();
 		for (vector<vector<double>>::const_iterator
 				i = data.begin(); i != data.end(); ++i) {
-			limits.push_back(pair<vdc_iterator, vdc_iterator>(i->begin(), i->end()));
+			s.limits.push_back(pair<SubMatrix::vdc_iter, SubMatrix::vdc_iter>(i->begin(), i->end()));
 		}
 	}
 
@@ -311,7 +313,7 @@ private:
 	int nCols;
 	vector<vector<double>> data;
 
-	vector<pair<vdc_iterator,vdc_iterator>> limits;
+	SubMatrix s;
 
 };
 
