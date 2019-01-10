@@ -13,6 +13,7 @@ int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 int TestSubMatrix();
 void Print(const Matrix&, ofstream&);
+void Print(const SubMatrix&, ofstream&);
 
 
 
@@ -128,23 +129,25 @@ int TestSubMatrix() {
 
 
 
-	Matrix smat1(4,6);
+	Matrix mat1(4,6);
+	mat1.setName("Matrix 1");
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 6; ++j) {
-			smat1.insert(i,j,(i+1)*(j+1));
+			mat1.insert(i,j,(i+1)*(j+1));
 		}
 	}
-	smat1.Print(std::cout);
-	std::cout << "Built each element" << std::endl;
-	smat1.DEBUG_PrintFromLimits();
+	outFile << "Built each element" << std::endl;
+	Print(mat1, outFile);
+	mat1.DEBUG_PrintFromLimits();
 
-	Matrix smat2(smat1);
-	std::cout << "Built from copy constructor" << std::endl;
-	smat2.DEBUG_PrintFromLimits();
+	Matrix mat2(mat1);
+	mat2.setName("Matrix 2");
+	outFile << "Built from copy constructor" << std::endl;
+	mat2.DEBUG_PrintFromLimits();
 
-	smat2 = smat1;
-	std::cout << "Built from assignment operator" << std::endl;
-	smat2.DEBUG_PrintFromLimits();
+	mat2 = mat1;
+	outFile << "Built from assignment operator" << std::endl;
+	mat2.DEBUG_PrintFromLimits();
 
 	// SubMatrix smat3 =
 
@@ -305,9 +308,16 @@ int TestMatrix() {
 	return status;
 }
 
-// Prinnt the specified Matrix to the specified file
+// Print the specified Matrix to the specified file
 // @param const Matrix& m - the Matrix to print
 // @param ofstream& outFile - the file to print to.
 void Print(const Matrix& m, ofstream& outFile) {
 	outFile << m << std::endl;
+}
+
+// Print the specified SubMatrix to the specified file
+// @param const SubMatrix& sm - the SubMatrix to print
+// @param ofstream& outFile - the file to print to.
+void Print(const SubMatrix& sm, ofstream& outFile) {
+	outFile << sm << std::endl;
 }

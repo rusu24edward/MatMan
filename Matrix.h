@@ -225,6 +225,7 @@ public:
 	}
 
 
+
 	// ---------------- //
 	// --- Printing --- //
 	// ---------------- //
@@ -250,7 +251,7 @@ public:
 		return streamer;
 	}
 
-	// Print to an fstream
+	// Print to an ofstream
 	// @param ofstream& fileOut - print to this ofstream
 	void Print(ofstream& fileOut) const {
 		fileOut << endl << name << endl;
