@@ -10,6 +10,7 @@
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
+int TestSubMatrix();
 void Print(const Matrix&, ofstream&);
 
 
@@ -20,29 +21,14 @@ void Print(const Matrix&, ofstream&);
 // @return int - the number of tests that fail.
 int main (int argc, char** argv) {
 
-	Matrix mat0(4,6);
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 6; ++j) {
-			mat0.insert(i,j,(i+1)*(j+1));
-		}
-	}
-	mat0.Print(std::cout);
-	std::cout << "Built each element" << std::endl;
-	mat0.DEBUG_PrintFromLimits();
 
-	Matrix mat00(mat0);
-	std::cout << "Built from copy constructor" << std::endl;
-	mat00.DEBUG_PrintFromLimits();
-
-	mat00 = mat0;
-	std::cout << "Built from assignment operator" << std::endl;
-	mat00.DEBUG_PrintFromLimits();
 
 
 
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
+	testNames.push_back("SubMatrixTest");
 	// testNames.push_back("VectorTest");
 	// testNames.push_back("AdvancedMatrixTest");
 
@@ -75,6 +61,8 @@ int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
 		status = TestMatrix();
+	} else if (testName == "SubMatrixTest") {
+		status = TestSubMatrix();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 	}
@@ -128,11 +116,49 @@ int CompareAgainstBaseline(const std::string& testName) {
 	return status;
 }
 
+// The test for the SubMatrix class.
+// @return int - 1 if failed, 0 if passed.
+int TestSubMatrix() {
+
+	int status = 1;
+
+	std::string testFileName = "current/SubMatrixTest.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	Matrix mat0(4,6);
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 6; ++j) {
+			mat0.insert(i,j,(i+1)*(j+1));
+		}
+	}
+	mat0.Print(std::cout);
+	std::cout << "Built each element" << std::endl;
+	mat0.DEBUG_PrintFromLimits();
+
+	Matrix mat00(mat0);
+	std::cout << "Built from copy constructor" << std::endl;
+	mat00.DEBUG_PrintFromLimits();
+
+	mat00 = mat0;
+	std::cout << "Built from assignment operator" << std::endl;
+	mat00.DEBUG_PrintFromLimits();
+
+	status = 0;
+
+
+	outFile.close();
+	return status;
+}
+
 // The test for the Matrix class.
 // @return int - 1 if failed, 0 if passed.
 int TestMatrix() {
 
-	int status = -1;
+	int status = 1;
 
 	std::string testFileName = "current/MatrixTest.out";
 	std::ofstream outFile(testFileName);
