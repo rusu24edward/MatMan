@@ -258,7 +258,7 @@ public:
 	void DEBUG_PrintFromLimits() const {
 		cout << "PrintFromLimits" << endl;
 		for (vector<pair<SubMatrix::vdc_iter, SubMatrix::vdc_iter>>::const_iterator
-				i = s.limits.begin(); i != s.limits.end(); ++i) {
+				i = submatrix.limits.begin(); i != submatrix.limits.end(); ++i) {
 			cout << "\t\t[ ";
 			for (SubMatrix::vdc_iter j = i->first; j != i->second; ++j) {
 				cout << *j << " ";
@@ -293,10 +293,10 @@ private:
 
 	// Set the pointers in limits to the beginning and end of each row of data
 	void setLimitsToData() {
-		s.limits.clear();
+		submatrix.limits.clear();
 		for (vector<vector<double>>::const_iterator
 				i = data.begin(); i != data.end(); ++i) {
-			s.limits.push_back(pair<SubMatrix::vdc_iter, SubMatrix::vdc_iter>(i->begin(), i->end()));
+			submatrix.limits.push_back(pair<SubMatrix::vdc_iter, SubMatrix::vdc_iter>(i->begin(), i->end()));
 		}
 	}
 
@@ -313,7 +313,7 @@ private:
 	int nCols;
 	vector<vector<double>> data;
 
-	SubMatrix s;
+	SubMatrix submatrix;
 
 };
 
