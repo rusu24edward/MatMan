@@ -127,7 +127,7 @@ ERROR:  const double Matrix::extract(int, int) const
 	Attempting to access elements outside the matrix range.
 ERROR:  const double Matrix::operator()(int, int) const
 	Attempting to access elements outside the matrix range.
-ERROR:  void Matrix::insert()(int, int, double)
+ERROR:  void Matrix::insert(int, int, double)
 	Attempting to access elements outside the matrix range.
 
 Matrix 14

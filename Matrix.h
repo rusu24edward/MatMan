@@ -183,7 +183,7 @@ public:
 	void insert(int r, int c, double value) {
 		if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 			throw "ERROR:  "
-				  "void Matrix::insert()(int, int, double)\n"
+				  "void Matrix::insert(int, int, double)\n"
 				  "\tAttempting to access elements outside the matrix range.";
 		}
 		data[r][c] = value;
@@ -206,6 +206,23 @@ public:
 		}
 	}
 
+	// --- Submatrix Insertion and Extraction --- //
+
+	SubMatrix& extract(int t, int b, int l, int r) {
+		if (t < 0 || b >= nRows || l < 0 || r >= nCols) {
+			throw "ERROR:  "
+				  "Submatrix& Matrix::extract(int, int, int, int)\n"
+				  "\tAttempting to access elements outside the matrix range.";
+		}
+		if (b < t || r < l) {
+			throw "ERROR:  "
+				  "SubMatrix& Matrix::extract(int, int, int, int)\n"
+				  "\tIndices are not ordered correctly.";
+		}
+		setSubMatrixToLimits(t, b, l, r);
+
+		return submatrix;
+	}
 
 
 	// ---------------- //
@@ -288,15 +305,24 @@ private:
 		nRows = r;
 		nCols = c;
 		data = vector<vector<double>>(r, vector<double>(c, value));
-		setLimitsToData();
+		setSubMatrixToData();
 	}
 
 	// Set the pointers in limits to the beginning and end of each row of data
-	void setLimitsToData() {
+	void setSubMatrixToData() {
 		submatrix.limits.clear();
 		for (vector<vector<double>>::const_iterator
 				i = data.begin(); i != data.end(); ++i) {
 			submatrix.limits.push_back(pair<SubMatrix::vdc_iter, SubMatrix::vdc_iter>(i->begin(), i->end()));
+		}
+	}
+
+
+	void setSubMatrixToLimits(int t, int b, int l, int r) {
+		submatrix.limits.clear();
+		for (vector<vector<double>>::const_iterator
+				i = data.begin() + t; i != data.end() + b; ++i) {
+			submatrix.limits.push_back(pair<SubMatrix::vdc_iter, SubMatrix::vdc_iter>(i->begin() + l, i->end() + r));
 		}
 	}
 

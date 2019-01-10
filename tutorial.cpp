@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Matrix.h"
+#include "SubMatrix.h"
 
 
 int RunTests(const std::string&);
@@ -20,10 +21,6 @@ void Print(const Matrix&, ofstream&);
 // @param char** argv - an array of "strings" which are the input arguments
 // @return int - the number of tests that fail.
 int main (int argc, char** argv) {
-
-
-
-
 
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
@@ -129,23 +126,30 @@ int TestSubMatrix() {
 		return 1;
 	}
 
-	Matrix mat0(4,6);
+
+
+	Matrix smat1(4,6);
 	for (int i = 0; i < 4; ++i) {
 		for (int j = 0; j < 6; ++j) {
-			mat0.insert(i,j,(i+1)*(j+1));
+			smat1.insert(i,j,(i+1)*(j+1));
 		}
 	}
-	mat0.Print(std::cout);
+	smat1.Print(std::cout);
 	std::cout << "Built each element" << std::endl;
-	mat0.DEBUG_PrintFromLimits();
+	smat1.DEBUG_PrintFromLimits();
 
-	Matrix mat00(mat0);
+	Matrix smat2(smat1);
 	std::cout << "Built from copy constructor" << std::endl;
-	mat00.DEBUG_PrintFromLimits();
+	smat2.DEBUG_PrintFromLimits();
 
-	mat00 = mat0;
+	smat2 = smat1;
 	std::cout << "Built from assignment operator" << std::endl;
-	mat00.DEBUG_PrintFromLimits();
+	smat2.DEBUG_PrintFromLimits();
+
+	// SubMatrix smat3 =
+
+
+
 
 	status = 0;
 
