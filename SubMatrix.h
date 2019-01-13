@@ -73,41 +73,10 @@ public:
 	// --- Printing --- //
 	// ---------------- //
 
-	// Print to an ostream
-	// @param ostream& streamer - print to this ostream
-	void Print(ostream& fileOut) const {
-		fileOut << endl << "SubMatrix" << endl;
-		for (vector<pair<vd_iter, vd_iter>>::const_iterator
-				i = limits.begin(); i != limits.end(); ++i) {
-			fileOut << "\t\t[ ";
-			for (vd_iter j = i->first; j != i->second; ++j) {
-				fileOut << *j << " ";
-			}
-			fileOut << "]" << endl;
-		}
-	}
-	friend ostream& operator<<(ostream& fileOut, const SubMatrix& sm) {
-		sm.Print(fileOut);
-		return fileOut;
-	}
-
-	// Print to an ofstream
-	// @param ofstream& streamer - print to this ofstream
-	void Print(ofstream& fileOut) const {
-		fileOut << endl << "SubMatrix" << endl;
-		for (vector<pair<vd_iter, vd_iter>>::const_iterator
-				i = limits.begin(); i != limits.end(); ++i) {
-			fileOut << "\t\t[ ";
-			for (vd_iter j = i->first; j != i->second; ++j) {
-				fileOut << *j << " ";
-			}
-			fileOut << "]" << endl;
-		}
-	}
-	friend ofstream& operator<<(ofstream& fileOut, const SubMatrix& sm) {
-		sm.Print(fileOut);
-		return fileOut;
-	}
+	void Print(ostream&) const;
+	friend ostream& operator<<(ostream&, const SubMatrix&);
+	void Print(ofstream&) const;
+	friend ofstream& operator<<(ofstream&, const SubMatrix&);
 
 private:
 	typedef vector<double>::iterator vd_iter;
