@@ -74,22 +74,8 @@ public:
 	void operator=(double);
 
 	// --- Submatrix Insertion and Extraction --- //
-
-	// SubMatrix& extract(int t, int b, int l, int r) {
-	// 	if (t < 0 || b >= nRows || l < 0 || r >= nCols) {
-	// 		throw "ERROR:  "
-	// 			  "Submatrix& Matrix::extract(int, int, int, int)\n"
-	// 			  "\tAttempting to access elements outside the matrix range.";
-	// 	}
-	// 	if (b < t || r < l) {
-	// 		throw "ERROR:  "
-	// 			  "SubMatrix& Matrix::extract(int, int, int, int)\n"
-	// 			  "\tIndices are not ordered correctly.";
-	// 	}
-	// 	setSubMatrixToLimits(t, b, l, r);
-
-	// 	return submatrix;
-	// }
+	Matrix* extract(int, int, int, int) const;
+	Matrix* operator()(int, int, int, int) const;
 
 
 

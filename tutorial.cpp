@@ -120,12 +120,12 @@ int TestSubMatrix() {
 
 	int status = 1;
 
-	// std::string testFileName = "current/SubMatrixTest.out";
-	// std::ofstream outFile(testFileName);
-	// if (!outFile.is_open()) {
-	// 	std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
-	// 	return 1;
-	// }
+	std::string testFileName = "current/SubMatrixTest.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
 
 
 
@@ -149,15 +149,41 @@ int TestSubMatrix() {
 	// outFile << "Built from assignment operator" << std::endl;
 	// mat2.DEBUG_PrintFromLimits();
 
-	// SubMatrix smat3 =
+	// Matrix mat1(4,4,2);
+	// Matrix mat2(4,4,-1);
+	// Matrix mat3(2,2,0);
+
+	// // submatrix = submatrix
+	// mat1(1,2,1,2) = mat2(1,2,1,2);
+	// // submatrix = matrix
+	// mat2(0,1,0,1) = mat3;
+	// // matrix constructed with submatrix
+	// Matrix mat4 = mat2(2,3,2,3);
+
+	Matrix mat1(4,4,2);
+	mat1.setName("Matrix 1");
+	Matrix mat2(4,4,-1);
+	mat2.setName("Matrix 2");
+	Matrix mat3(2,2,0);
+	mat3.setName("Matrix 3");
+
+	Matrix* mat4 = mat1.extract(0,1,0,1);
+	mat4->setName("Matrix 4 Pointer:");
+	mat4->Print(std::cout);
+
+	Matrix* mat5 = mat2(1, 2, 1, 2);
+	mat5->Print(std::cout);
+	delete mat4;
+	delete mat5;
+
+	Matrix mat6 = mat1(2,3,2,3);
+	mat6.setName("Matrix 6");
+	mat6.Print(std::cout);
 
 
 
-
+	outFile.close();
 	status = 0;
-
-
-	// outFile.close();
 	return status;
 }
 

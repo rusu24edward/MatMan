@@ -188,6 +188,56 @@ void Matrix::operator=(double value) {
 }
 
 
+// --- Submatrix Extraction --- //
+
+// Extract a submatrix specified by a range
+// @param t - the top lmiit
+// @param b - the bottom limit
+// @param l - the left limit
+// @param r - the right limit
+// @return Matrix* - the submatrix
+Matrix* Matrix::extract(int t, int b, int l, int r) const {
+	if (t < 0 || b >= nRows || l < 0 || r >= nCols) {
+		throw "ERROR:  "
+			  "Matrix* Matrix::extract(int, int, int, int)\n"
+			  "\tAttempting to access elements outside the matrix range.";
+	}
+	if (b < t || r < l) {
+		throw "ERROR:  "
+			  "Matrix* Matrix::extract(int, int, int, int)\n"
+			  "\tUnordered range.";
+	}
+
+	Matrix* mat_out = new Matrix(b-t+1, r-l+1);
+	for (int i = t, ii = 0; i < b+1; ++i, ++ii) {
+		for (int j = l, jj = 0; j < r+1; ++j, ++jj) {
+			mat_out->insert(ii,jj,data[i][j]);
+		}
+	}
+	return mat_out;
+}
+Matrix* Matrix::operator()(int t, int b, int l, int r) const {
+	if (t < 0 || b >= nRows || l < 0 || r >= nCols) {
+		throw "ERROR:  "
+			  "Matrix* Matrix::operator()(int, int, int, int)\n"
+			  "\tAttempting to access elements outside the matrix range.";
+	}
+	if (b < t || r < l) {
+		throw "ERROR:  "
+			  "Matrix* Matrix::operator()(int, int, int, int)\n"
+			  "\tUnordered range.";
+	}
+
+	Matrix* mat_out = new Matrix(b-t+1, r-l+1);
+	for (int i = t, ii = 0; i < b+1; ++i, ++ii) {
+		for (int j = l, jj = 0; j < r+1; ++j, ++jj) {
+			mat_out->insert(ii,jj,data[i][j]);
+		}
+	}
+	return mat_out;
+}
+
+
 
 // ---------------- //
 // --- Printing --- //
