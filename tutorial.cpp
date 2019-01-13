@@ -120,34 +120,34 @@ int TestSubMatrix() {
 
 	int status = 1;
 
-	std::string testFileName = "current/SubMatrixTest.out";
-	std::ofstream outFile(testFileName);
-	if (!outFile.is_open()) {
-		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
-		return 1;
-	}
+	// std::string testFileName = "current/SubMatrixTest.out";
+	// std::ofstream outFile(testFileName);
+	// if (!outFile.is_open()) {
+	// 	std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+	// 	return 1;
+	// }
 
 
 
-	Matrix mat1(4,6);
-	mat1.setName("Matrix 1");
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 6; ++j) {
-			mat1.insert(i,j,(i+1)*(j+1));
-		}
-	}
-	outFile << "Built each element" << std::endl;
-	Print(mat1, outFile);
-	mat1.DEBUG_PrintFromLimits();
+	// Matrix mat1(4,6);
+	// mat1.setName("Matrix 1");
+	// for (int i = 0; i < 4; ++i) {
+	// 	for (int j = 0; j < 6; ++j) {
+	// 		mat1.insert(i,j,(i+1)*(j+1));
+	// 	}
+	// }
+	// outFile << "Built each element" << std::endl;
+	// Print(mat1, outFile);
+	// mat1.DEBUG_PrintFromLimits();
 
-	Matrix mat2(mat1);
-	mat2.setName("Matrix 2");
-	outFile << "Built from copy constructor" << std::endl;
-	mat2.DEBUG_PrintFromLimits();
+	// Matrix mat2(mat1);
+	// mat2.setName("Matrix 2");
+	// outFile << "Built from copy constructor" << std::endl;
+	// mat2.DEBUG_PrintFromLimits();
 
-	mat2 = mat1;
-	outFile << "Built from assignment operator" << std::endl;
-	mat2.DEBUG_PrintFromLimits();
+	// mat2 = mat1;
+	// outFile << "Built from assignment operator" << std::endl;
+	// mat2.DEBUG_PrintFromLimits();
 
 	// SubMatrix smat3 =
 
@@ -157,7 +157,7 @@ int TestSubMatrix() {
 	status = 0;
 
 
-	outFile.close();
+	// outFile.close();
 	return status;
 }
 
