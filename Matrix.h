@@ -33,6 +33,7 @@ public:
 	Matrix(int, int, double);
 	Matrix(const vector<vector<double>>&);
 	Matrix(const Matrix&);
+	Matrix(Matrix*);
 
 
 
@@ -49,6 +50,7 @@ public:
 	// ---------------------------- //
 
 	Matrix& operator=(const Matrix&);
+	Matrix& operator=(Matrix*);
 	Matrix& operator=(const vector<vector<double>>&);
 
 

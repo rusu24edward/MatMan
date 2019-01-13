@@ -180,6 +180,9 @@ int TestSubMatrix() {
 	mat6.setName("Matrix 6");
 	mat6.Print(std::cout);
 
+	mat2 = mat1(1,2,0,3);
+	mat2.Print(std::cout);
+
 
 
 	outFile.close();

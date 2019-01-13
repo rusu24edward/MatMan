@@ -60,6 +60,15 @@ Matrix::Matrix(const Matrix& mat) {
 	data = mat.data;
 }
 
+// Copy constructor copies the input submatrix
+// @param Matrix* mat - the input submatrix to copy
+Matrix::Matrix(Matrix* mat) {
+	setFields(mat->nRows, mat->nCols);
+	name = UNAMED;
+	data = mat->data;
+	delete mat;
+}
+
 
 
 // ------------------ //
@@ -85,6 +94,17 @@ Matrix& Matrix::operator=(const Matrix& mat) {
 	if (this != &mat) {
 		setFields(mat.nRows, mat.nCols);
 		data = mat.data;
+	}
+	return *this;
+}
+
+// Assignment operator blows out Matrix and replaces it with the input submatrix
+// @param Matrix* mat - the input submatrix to copy
+Matrix& Matrix::operator=(Matrix* mat) {
+	if (this != mat) {
+		setFields(mat->nRows, mat->nCols);
+		data = mat->data;
+		delete mat;
 	}
 	return *this;
 }
