@@ -8,8 +8,6 @@
 #include <string>
 #include <utility>
 
-#include "SubMatrix.h"
-
 using namespace std;
 
 // Matrix class provides data storage and manipulation like a mathematical matrix.
