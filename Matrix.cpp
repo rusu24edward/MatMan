@@ -61,8 +61,8 @@ Matrix::Matrix(const Matrix& mat) {
 }
 
 // Copy constructor copies the input submatrix
-// @param Matrix* mat - the input submatrix to copy
-Matrix::Matrix(Matrix* mat) {
+// @param SubMatrix mat - the input submatrix to copy
+Matrix::Matrix(SubMatrix mat) {
 	setFields(mat->nRows, mat->nCols);
 	name = UNAMED;
 	data = mat->data;
@@ -99,8 +99,8 @@ Matrix& Matrix::operator=(const Matrix& mat) {
 }
 
 // Assignment operator blows out Matrix and replaces it with the input submatrix
-// @param Matrix* mat - the input submatrix to copy
-Matrix& Matrix::operator=(Matrix* mat) {
+// @param SubMatrix mat - the input submatrix to copy
+Matrix& Matrix::operator=(SubMatrix mat) {
 	if (this != mat) {
 		setFields(mat->nRows, mat->nCols);
 		data = mat->data;
@@ -215,20 +215,20 @@ void Matrix::operator=(double value) {
 // @param b - the bottom limit
 // @param l - the left limit
 // @param r - the right limit
-// @return Matrix* - the submatrix
-Matrix* Matrix::extract(int t, int b, int l, int r) const {
+// @return SubMatrix - the submatrix
+Matrix::SubMatrix Matrix::extract(int t, int b, int l, int r) const {
 	if (t < 0 || b >= nRows || l < 0 || r >= nCols) {
 		throw "ERROR:  "
-			  "Matrix* Matrix::extract(int, int, int, int)\n"
+			  "SubMatrix Matrix::extract(int, int, int, int)\n"
 			  "\tAttempting to access elements outside the matrix range.";
 	}
 	if (b < t || r < l) {
 		throw "ERROR:  "
-			  "Matrix* Matrix::extract(int, int, int, int)\n"
+			  "SubMatrix Matrix::extract(int, int, int, int)\n"
 			  "\tUnordered range.";
 	}
 
-	Matrix* mat_out = new Matrix(b-t+1, r-l+1);
+	SubMatrix mat_out = new Matrix(b-t+1, r-l+1);
 	for (int i = t, ii = 0; i < b+1; ++i, ++ii) {
 		for (int j = l, jj = 0; j < r+1; ++j, ++jj) {
 			mat_out->insert(ii,jj,data[i][j]);
@@ -236,19 +236,19 @@ Matrix* Matrix::extract(int t, int b, int l, int r) const {
 	}
 	return mat_out;
 }
-Matrix* Matrix::operator()(int t, int b, int l, int r) const {
+Matrix::SubMatrix Matrix::operator()(int t, int b, int l, int r) const {
 	if (t < 0 || b >= nRows || l < 0 || r >= nCols) {
 		throw "ERROR:  "
-			  "Matrix* Matrix::operator()(int, int, int, int)\n"
+			  "SubMatrix Matrix::operator()(int, int, int, int)\n"
 			  "\tAttempting to access elements outside the matrix range.";
 	}
 	if (b < t || r < l) {
 		throw "ERROR:  "
-			  "Matrix* Matrix::operator()(int, int, int, int)\n"
+			  "SubMatrix Matrix::operator()(int, int, int, int)\n"
 			  "\tUnordered range.";
 	}
 
-	Matrix* mat_out = new Matrix(b-t+1, r-l+1);
+	SubMatrix mat_out = new Matrix(b-t+1, r-l+1);
 	for (int i = t, ii = 0; i < b+1; ++i, ++ii) {
 		for (int j = l, jj = 0; j < r+1; ++j, ++jj) {
 			mat_out->insert(ii,jj,data[i][j]);
@@ -305,19 +305,6 @@ ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
 	return fileOut;
 }
 
-// --- DEBUG FUNCTION --- //
-// void Matrix::DEBUG_PrintFromLimits() const {
-// 	cout << "PrintFromLimits" << endl;
-// 	for (vector<pair<vdc_iterator, vdc_iterator>>::const_iterator
-// 			i = limits.begin(); i != limits.end(); ++i) {
-// 		cout << "\t\t[ ";
-// 		for (vdc_iterator j = i->first; j != i->second; ++j) {
-// 			cout << *j << " ";
-// 		}
-// 		cout << "]" << endl;
-// 	}
-// }
-
 
 
 // ------------------------ //
@@ -337,23 +324,4 @@ void Matrix::setFields(int r, int c, double value) {
 	data = vector<vector<double>>(r, vector<double>(c, value));
 	// setLimitsToData();
 }
-
-// Set the pointers in limits to the beginning and end of each row of data
-// void Matrix::setLimitsToData() {
-// 	limits.clear();
-// 	for (vector<vector<double>>::const_iterator
-// 			i = data.begin(); i != data.end(); ++i) {
-// 		limits.push_back(pair<vdc_iterator, vdc_iterator>(i->begin(), i->end()));
-// 	}
-// }
-
-
-
-
-
-
-
-
-
-
 
