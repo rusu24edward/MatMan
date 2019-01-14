@@ -179,3 +179,23 @@ Matrix 15
 		[ 24 24 24 ]
 		[ 24 24 24 ]
 
+
+Matrix 16
+	Rows: 3
+	Cols: 2
+		[ 0 10 ]
+		[ 1 9 ]
+		[ 2 8 ]
+
+
+Matrix 16
+	Rows: 1
+	Cols: 2
+		[ 3 7 ]
+
+
+Matrix 17
+	Rows: 1
+	Cols: 1
+		[ 24 ]
+

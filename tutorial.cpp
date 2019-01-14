@@ -5,15 +5,12 @@
 #include <vector>
 
 #include "Matrix.h"
-#include "SubMatrix.h"
 
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
-int TestSubMatrix();
 void Print(const Matrix&, ofstream&);
-void Print(const SubMatrix&, ofstream&);
 
 
 
@@ -26,7 +23,6 @@ int main (int argc, char** argv) {
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
-	testNames.push_back("SubMatrixTest");
 	// testNames.push_back("VectorTest");
 	// testNames.push_back("AdvancedMatrixTest");
 
@@ -59,8 +55,6 @@ int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
 		status = TestMatrix();
-	} else if (testName == "SubMatrixTest") {
-		status = TestSubMatrix();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 	}
@@ -111,82 +105,6 @@ int CompareAgainstBaseline(const std::string& testName) {
 		}
     }
 
-	return status;
-}
-
-// The test for the SubMatrix class.
-// @return int - 1 if failed, 0 if passed.
-int TestSubMatrix() {
-
-	int status = 1;
-
-	std::string testFileName = "current/SubMatrixTest.out";
-	std::ofstream outFile(testFileName);
-	if (!outFile.is_open()) {
-		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
-		return 1;
-	}
-
-
-
-	// Matrix mat1(4,6);
-	// mat1.setName("Matrix 1");
-	// for (int i = 0; i < 4; ++i) {
-	// 	for (int j = 0; j < 6; ++j) {
-	// 		mat1.insert(i,j,(i+1)*(j+1));
-	// 	}
-	// }
-	// outFile << "Built each element" << std::endl;
-	// Print(mat1, outFile);
-	// mat1.DEBUG_PrintFromLimits();
-
-	// Matrix mat2(mat1);
-	// mat2.setName("Matrix 2");
-	// outFile << "Built from copy constructor" << std::endl;
-	// mat2.DEBUG_PrintFromLimits();
-
-	// mat2 = mat1;
-	// outFile << "Built from assignment operator" << std::endl;
-	// mat2.DEBUG_PrintFromLimits();
-
-	// Matrix mat1(4,4,2);
-	// Matrix mat2(4,4,-1);
-	// Matrix mat3(2,2,0);
-
-	// // submatrix = submatrix
-	// mat1(1,2,1,2) = mat2(1,2,1,2);
-	// // submatrix = matrix
-	// mat2(0,1,0,1) = mat3;
-	// // matrix constructed with submatrix
-	// Matrix mat4 = mat2(2,3,2,3);
-
-	Matrix mat1(4,4,2);
-	mat1.setName("Matrix 1");
-	Matrix mat2(4,4,-1);
-	mat2.setName("Matrix 2");
-	Matrix mat3(2,2,0);
-	mat3.setName("Matrix 3");
-
-	Matrix* mat4 = mat1.extract(0,1,0,1);
-	mat4->setName("Matrix 4 Pointer:");
-	mat4->Print(std::cout);
-
-	Matrix* mat5 = mat2(1, 2, 1, 2);
-	mat5->Print(std::cout);
-	delete mat4;
-	delete mat5;
-
-	Matrix mat6 = mat1(2,3,2,3);
-	mat6.setName("Matrix 6");
-	mat6.Print(std::cout);
-
-	mat2 = mat1(1,2,0,3);
-	mat2.Print(std::cout);
-
-
-
-	outFile.close();
-	status = 0;
 	return status;
 }
 
@@ -326,6 +244,17 @@ int TestMatrix() {
 		mat15 = 24.;
 		Print(mat15, outFile);
 
+		Matrix mat16 = mat10(0,2,0,1);
+		mat16.setName("Matrix 16");
+		Print(mat16, outFile);
+
+		mat16 = mat10(3,3,0,1);
+		Print(mat16, outFile);
+
+		Matrix mat17(mat15(1,1,1,1));
+		mat17.setName("Matrix 17");
+		Print(mat17, outFile);
+
 		status = 0;
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;
@@ -342,11 +271,4 @@ int TestMatrix() {
 // @param ofstream& outFile - the file to print to.
 void Print(const Matrix& m, ofstream& outFile) {
 	outFile << m << std::endl;
-}
-
-// Print the specified SubMatrix to the specified file
-// @param const SubMatrix& sm - the SubMatrix to print
-// @param ofstream& outFile - the file to print to.
-void Print(const SubMatrix& sm, ofstream& outFile) {
-	outFile << sm << std::endl;
 }
