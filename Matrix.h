@@ -76,9 +76,14 @@ public:
 	void insert(double);
 	void operator=(double);
 
-	// --- Submatrix Insertion and Extraction --- //
+	// --- Submatrix Extraction --- //
 	SubMatrix extract(int, int, int, int) const;
 	SubMatrix operator()(int, int, int, int) const;
+
+	// --- Matrix Stucture --- //
+	vector<int> size();
+	int size(int);
+	int length();
 
 
 

@@ -78,10 +78,9 @@ Matrix 8
 
 
 Matrix 9
-	Rows: 2
-	Cols: 1
-		[ 0 ]
-		[ 0 ]
+	Rows: 1
+	Cols: 2
+		[ 0 0 ]
 
 
 Matrix 10
@@ -108,10 +107,9 @@ ERROR:  Matrix& Matrix::operator=(const vector<vector<double>>&)
 	Inconsistent number of columns in input argument.
 
 Matrix 13
-	Rows: 2
-	Cols: 1
-		[ 0 ]
-		[ 0 ]
+	Rows: 1
+	Cols: 2
+		[ 0 0 ]
 
 
 Attempting to access out of range elements.
@@ -199,3 +197,13 @@ Matrix 17
 	Cols: 1
 		[ 24 ]
 
+Size of Matrix 10: [ 4 2 ]
+Length of Matrix 14: 4
+Length of Matrix 9: 2
+Number of rows in Matrix 16: 1
+Number of columns in Matrix 16: 2
+Attempting to query bad dimension size.
+ERROR:  int Matrix::size(int)
+	N/A dimension. Dimension must be 1 for rows or 2 for cols.
+ERROR:  int Matrix::size(int)
+	N/A dimension. Dimension must be 1 for rows or 2 for cols.

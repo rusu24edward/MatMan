@@ -163,7 +163,7 @@ int TestMatrix() {
 		mat8.setName("Matrix 8");
 		Print(mat8, outFile);
 
-		Matrix mat9(2,1);
+		Matrix mat9(1,2);
 		mat9.setName("Matrix 9");
 		Print(mat9, outFile);
 
@@ -254,6 +254,31 @@ int TestMatrix() {
 		Matrix mat17(mat15(1,1,1,1));
 		mat17.setName("Matrix 17");
 		Print(mat17, outFile);
+
+		vector<int> tempSize = mat10.size();
+		outFile << "Size of " << mat10.getName() << ": " << "[ " << tempSize[0]
+				<< " " << tempSize[1] << " ]" << std::endl;
+		outFile << "Length of " << mat14.getName() << ": " << mat14.length()
+				<< std::endl;
+		outFile << "Length of " << mat9.getName() << ": " << mat9.length()
+				<< std::endl;
+		outFile << "Number of rows in " << mat16.getName() << ": "
+				<< mat16.size(1) << std::endl;
+		outFile << "Number of columns in " << mat16.getName() << ": "
+				<< mat16.size(2) << std::endl;
+
+		outFile << "Attempting to query bad dimension size." << std::endl;
+		try {
+			mat16.size(0);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat16.size(3);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
 
 		status = 0;
 	} catch (...) {

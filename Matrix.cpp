@@ -258,6 +258,35 @@ Matrix::SubMatrix Matrix::operator()(int t, int b, int l, int r) const {
 }
 
 
+// --- Matrix Stucture --- //
+
+// Query the size of the Matrix
+// @return vector<int> - a 2 element vector that is {nRows, nCols}
+vector<int> Matrix::size() {
+	return vector<int>{nRows, nCols};
+}
+
+// Query the length of the specified dimension
+// @param int d - The desired dimension. 1 for rows, 2 for cols.
+// @return int - the length of the matrix along the given dimension.
+int Matrix::size(int d) {
+	if (d <= 0 || d > 2) {
+		throw "ERROR:  "
+			  "int Matrix::size(int)\n"
+			  "\tN/A dimension. Dimension must be 1 for rows or 2 for cols.";
+	} else if (d == 1) {
+		return nRows;
+	} else if (d == 2) {
+		return nCols;
+	}
+}
+
+// Query the length of the longer dimension
+// @return int - the lenght of the longer dimension.
+int Matrix::length() {
+	return nCols > nRows ? nCols : nRows;
+}
+
 
 // ---------------- //
 // --- Printing --- //
