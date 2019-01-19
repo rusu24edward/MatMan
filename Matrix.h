@@ -19,6 +19,7 @@ using namespace std;
 //		- Set all elements to a number
 //		- Extract SubMatrices
 //		- Construct new Matrices from SubMatrices
+//		- Query the matrix size
 class Matrix {
 public:
 
