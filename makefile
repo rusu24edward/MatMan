@@ -1,7 +1,7 @@
 all: tutorial.exe
 
-tutorial.exe: tutorial.o Matrix.o SubMatrix.o
-	g++ -o tutorial.exe tutorial.o Matrix.o SubMatrix.o
+tutorial.exe: tutorial.o Matrix.o
+	g++ -o tutorial.exe tutorial.o Matrix.o
 
 tutorial.o: tutorial.cpp
 	g++ -c tutorial.cpp
@@ -11,9 +11,6 @@ tutorial.o: tutorial.cpp
 
 # MainUtils.o: MainUtils.cpp MainUtils.h Matrix.h
 # 	g++ -c MainUtils.cpp Matrix.h
-
-SubMatrix.o: SubMatrix.cpp SubMatrix.h
-	g++ -c SubMatrix.cpp
 
 Matrix.o: Matrix.cpp Matrix.h
 	g++ -c Matrix.cpp

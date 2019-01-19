@@ -17,10 +17,13 @@ using namespace std;
 //		- Extract value from index
 //		- Insert value at index
 //		- Set all elements to a number
+//		- Extract SubMatrices
+//		- Construct new Matrices from SubMatrices
+//		- Query the matrix size
 class Matrix {
 public:
 
-	typedef vector<double>::const_iterator vdc_iterator;
+	typedef Matrix* SubMatrix;
 
 	// -------------------- //
 	// --- Constructors --- //
@@ -31,6 +34,7 @@ public:
 	Matrix(int, int, double);
 	Matrix(const vector<vector<double>>&);
 	Matrix(const Matrix&);
+	Matrix(SubMatrix);
 
 
 
@@ -47,6 +51,7 @@ public:
 	// ---------------------------- //
 
 	Matrix& operator=(const Matrix&);
+	Matrix& operator=(SubMatrix);
 	Matrix& operator=(const vector<vector<double>>&);
 
 
@@ -60,6 +65,7 @@ public:
 	void setName(const string&);
 
 
+
 	// ------------------------------- //
 	// --- Functions and Operators --- //
 	// ------------------------------- //
@@ -70,6 +76,15 @@ public:
 	void insert(int, int, double);
 	void insert(double);
 	void operator=(double);
+
+	// --- Submatrix Extraction --- //
+	SubMatrix extract(int, int, int, int) const;
+	SubMatrix operator()(int, int, int, int) const;
+
+	// --- Matrix Stucture --- //
+	vector<int> size();
+	int size(int);
+	int length();
 
 
 
@@ -111,9 +126,6 @@ private:
 	int nRows;
 	int nCols;
 	vector<vector<double>> data;
-
-	vector<pair<vdc_iterator,vdc_iterator>> limits;
-
 };
 
 #endif

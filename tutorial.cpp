@@ -20,26 +20,6 @@ void Print(const Matrix&, ofstream&);
 // @return int - the number of tests that fail.
 int main (int argc, char** argv) {
 
-	Matrix mat0(4,6);
-	for (int i = 0; i < 4; ++i) {
-		for (int j = 0; j < 6; ++j) {
-			mat0.insert(i,j,(i+1)*(j+1));
-		}
-	}
-	mat0.Print(std::cout);
-	std::cout << "Built each element" << std::endl;
-	mat0.DEBUG_PrintFromLimits();
-
-	Matrix mat00(mat0);
-	std::cout << "Built from copy constructor" << std::endl;
-	mat00.DEBUG_PrintFromLimits();
-
-	mat00 = mat0;
-	std::cout << "Built from assignment operator" << std::endl;
-	mat00.DEBUG_PrintFromLimits();
-
-
-
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
@@ -132,7 +112,7 @@ int CompareAgainstBaseline(const std::string& testName) {
 // @return int - 1 if failed, 0 if passed.
 int TestMatrix() {
 
-	int status = -1;
+	int status = 1;
 
 	std::string testFileName = "current/MatrixTest.out";
 	std::ofstream outFile(testFileName);
@@ -183,7 +163,7 @@ int TestMatrix() {
 		mat8.setName("Matrix 8");
 		Print(mat8, outFile);
 
-		Matrix mat9(2,1);
+		Matrix mat9(1,2);
 		mat9.setName("Matrix 9");
 		Print(mat9, outFile);
 
@@ -264,6 +244,42 @@ int TestMatrix() {
 		mat15 = 24.;
 		Print(mat15, outFile);
 
+		Matrix mat16 = mat10(0,2,0,1);
+		mat16.setName("Matrix 16");
+		Print(mat16, outFile);
+
+		mat16 = mat10(3,3,0,1);
+		Print(mat16, outFile);
+
+		Matrix mat17(mat15(1,1,1,1));
+		mat17.setName("Matrix 17");
+		Print(mat17, outFile);
+
+		vector<int> tempSize = mat10.size();
+		outFile << "Size of " << mat10.getName() << ": " << "[ " << tempSize[0]
+				<< " " << tempSize[1] << " ]" << std::endl;
+		outFile << "Length of " << mat14.getName() << ": " << mat14.length()
+				<< std::endl;
+		outFile << "Length of " << mat9.getName() << ": " << mat9.length()
+				<< std::endl;
+		outFile << "Number of rows in " << mat16.getName() << ": "
+				<< mat16.size(1) << std::endl;
+		outFile << "Number of columns in " << mat16.getName() << ": "
+				<< mat16.size(2) << std::endl;
+
+		outFile << "Attempting to query bad dimension size." << std::endl;
+		try {
+			mat16.size(0);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat16.size(3);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+
 		status = 0;
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;
@@ -275,7 +291,7 @@ int TestMatrix() {
 	return status;
 }
 
-// Prinnt the specified Matrix to the specified file
+// Print the specified Matrix to the specified file
 // @param const Matrix& m - the Matrix to print
 // @param ofstream& outFile - the file to print to.
 void Print(const Matrix& m, ofstream& outFile) {
