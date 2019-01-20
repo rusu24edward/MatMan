@@ -80,13 +80,10 @@ public:
 	// --- Printing --- //
 	// ---------------- //
 
-	// void Print(ostream&) const;
-	// friend ostream& operator<<(ostream&, const MyVector&);
-	// void Print(ofstream&) const;
-	// friend ofstream& operator<<(ofstream&, const MyVector&);
-
-	// // --- DEBUG FUNCTION --- //
-	// void DEBUG_PrintFromLimits() const;
+	void Print(ostream&) const;
+	friend ostream& operator<<(ostream&, const MyVector&);
+	void Print(ofstream&) const;
+	friend ofstream& operator<<(ofstream&, const MyVector&);
 
 
 

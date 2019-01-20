@@ -202,47 +202,37 @@ void MyVector::setName(const string& n) {
 // --- Printing --- //
 // ---------------- //
 
-// // Print to an ostream
-// // @param ostream& streamer - print to this ostream
-// void MyVector::Print(ostream& streamer) const {
-// 	streamer << endl << name << endl;
-// 	streamer << "\tRows: " << nRows << endl;
-// 	streamer << "\tCols: " << nCols << endl;
-// 	for (vector<vector<double>>::const_iterator
-// 		 i = data.begin(); i != data.end(); ++i) {
-// 		streamer << "\t\t[ ";
-// 		for (vector<double>::const_iterator
-// 			 j = i->begin(); j != i->end(); ++j) {
-// 			streamer << *j << " ";
-// 		}
-// 		streamer << "]" << endl;
-// 	}
-// }
-// ostream& operator<<(ostream& streamer, const MyVector& mat) {
-// 	mat.Print(streamer);
-// 	return streamer;
-// }
+// Print to an ostream
+// @param ostream& streamer - print to this ostream
+void MyVector::Print(ostream& streamer) const {
+	streamer << endl << name << endl;
+	streamer << "\tElements: " << nElements << endl;
+	streamer << "\t\t[ ";
+	for (int i = 0; i < nElements; ++i) {
+		streamer << data[i] << " ";
+	}
+	streamer << "]" << endl;
+}
+ostream& operator<<(ostream& streamer, const MyVector& vec) {
+	vec.Print(streamer);
+	return streamer;
+}
 
-// // Print to an fstream
-// // @param ofstream& fileOut - print to this ofstream
-// void MyVector::Print(ofstream& fileOut) const {
-// 	fileOut << endl << name << endl;
-// 	fileOut << "\tRows: " << nRows << endl;
-// 	fileOut << "\tCols: " << nCols << endl;
-// 	for (vector<vector<double>>::const_iterator
-// 		 i = data.begin(); i != data.end(); ++i) {
-// 		fileOut << "\t\t[ ";
-// 		for (vector<double>::const_iterator
-// 			 j = i->begin(); j != i->end(); ++j) {
-// 			fileOut << *j << " ";
-// 		}
-// 		fileOut << "]" << endl;
-// 	}
-// }
-// ofstream& operator<<(ofstream& fileOut, const MyVector& mat) {
-// 	mat.Print(fileOut);
-// 	return fileOut;
-// }
+// Print to an fstream
+// @param ofstream& fileOut - print to this ofstream
+void MyVector::Print(ofstream& fileOut) const {
+	fileOut << endl << name << endl;
+	fileOut << "\tElements: " << nElements << endl;
+	fileOut << "\t\t[ ";
+	for (int i = 0; i < nElements; ++i) {
+		fileOut << data[i] << " ";
+	}
+	fileOut << "]" << endl;
+}
+ofstream& operator<<(ofstream& fileOut, const MyVector& vec) {
+	vec.Print(fileOut);
+	return fileOut;
+}
 
 
 

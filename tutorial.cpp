@@ -487,5 +487,5 @@ int TestVector() {
 }
 
 void Print(const MyVector& v, ofstream& outFile) {
-	// outFile << v << std::endl;
+	outFile << v << std::endl;
 }
