@@ -385,7 +385,17 @@ int TestVector() {
 		vec7 = 24;
 		Print(vec7, outFile);
 
-		MyVector vec8
+		MyVector vec8(7);
+		vec8.setName("Vector 8");
+		for (int i = 0; i < 7; ++i) {
+			vec8.insert(i, 10-i);
+		}
+
+		MyVector vec9(4);
+		vec9.setName("Vector 9");
+		for (int i = 0; i < 4; ++i) {
+			vec9.insert(i,2*i);
+		}
 
 
 		status = 0;
