@@ -94,7 +94,7 @@ MyVector& MyVector::operator=(const vector<double>& d) {
 // --- Accessors & Mutators --- //
 // ---------------------------- //
 
-// -- MyVector Name --- //
+// --- Name Access and Mutation --- //
 
 // Get the name of the MyVector
 // @return const string& - the MyVector's name
@@ -114,58 +114,52 @@ void MyVector::setName(const string& n) {
 // --- Functions and Operators --- //
 // ------------------------------- //
 
-// // --- Element insertion and extraction --- //
+// --- Element insertion and extraction --- //
 
-// // Extract the value at the specified index
-// // @param int r - the row index
-// // @param int c - the column index
-// // @return const double - the value at this index
-// const double MyVector::extract(int r, int c) const {
-// 	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
-// 		throw "ERROR:  "
-// 			  "const double MyVector::extract(int, int) const\n"
-// 			  "\tAttempting to access elements outside the MyVector range.";
-// 	}
-// 	return data[r][c];
-// }
-// const double MyVector::operator()(int r, int c) const {
-// 	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
-// 		throw "ERROR:  "
-// 			  "const double MyVector::operator()(int, int) const\n"
-// 			  "\tAttempting to access elements outside the MyVector range.";
-// 	}
-// 	return data[r][c];
-// }
+// Extract the value at the specified index
+// @param int n - the element index
+// @return const double - the value at this index
+const double MyVector::extract(int n) const {
+	if (n >= nElements || n < 0) {
+		throw "ERROR:  "
+			  "const double MyVector::extract(int) const\n"
+			  "\tAttempting to access elements outside the Vector range.";
+	}
+	return data[n];
+}
+const double MyVector::operator()(int n) const {
+	if (n >= nElements || n < 0) {
+		throw "ERROR:  "
+			  "const double MyVector::operator()(int) const\n"
+			  "\tAttempting to access elements outside the Vector range.";
+	}
+	return data[n];
+}
 
-// // Insert specified value at specified index
-// // @param int r - the row index
-// // @param int c - the column index
-// // @param double value - the value to insert at the index
-// void MyVector::insert(int r, int c, double value) {
-// 	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
-// 		throw "ERROR:  "
-// 			  "void MyVector::insert(int, int, double)\n"
-// 			  "\tAttempting to access elements outside the MyVector range.";
-// 	}
-// 	data[r][c] = value;
-// }
+// Insert specified value at specified index
+// @param int n - the row index
+// @param double value - the value to insert at the index
+void MyVector::insert(int i, double value) {
+	if (i >= nElements || i < 0) {
+		throw "ERROR:  "
+			  "void MyVector::insert(int, double)\n"
+			  "\tAttempting to access elements outside the Vector range.";
+	}
+	data[i] = value;
+}
 
-// // Insert a value to all elements of the MyVector
-// // @param double value - the value to insert
-// void MyVector::insert(double value) {
-// 	for (int i = 0; i < nRows; ++i) {
-// 		for (int j = 0; j < nCols; ++j) {
-// 			data[i][j] = value;
-// 		}
-// 	}
-// }
-// void MyVector::operator=(double value) {
-// 	for (int i = 0; i < nRows; ++i) {
-// 		for (int j = 0; j < nCols; ++j) {
-// 			data[i][j] = value;
-// 		}
-// 	}
-// }
+// Insert a value to all elements of the MyVector
+// @param double value - the value to insert
+void MyVector::insert(double value) {
+	for (int i = 0; i < nElements; ++i) {
+		data[i] = value;
+	}
+}
+void MyVector::operator=(double value) {
+	for (int i = 0; i < nElements; ++i) {
+		data[i] = value;
+	}
+}
 
 
 // // --- MyVector Stucture --- //

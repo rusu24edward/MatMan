@@ -33,3 +33,36 @@ Vector 5
 	Elements: 3
 		[ 6 6 6 ]
 
+
+Attempting to access out of range elements.
+
+Vector 6
+	Elements: 3
+		[ 0 0 0 ]
+
+ERROR:  const double MyVector::extract(int) const
+	Attempting to access elements outside the Vector range.
+ERROR:  const double MyVector::operator()(int) const
+	Attempting to access elements outside the Vector range.
+ERROR:  void MyVector::insert(int, double)
+	Attempting to access elements outside the Vector range.
+
+Vector 6
+	Elements: 3
+		[ 0 0 0 ]
+
+
+Vector 7
+	Elements: 5
+		[ -1 0 -1 -1 -1 ]
+
+
+Vector 7
+	Elements: 5
+		[ -2 -2 -2 -2 -2 ]
+
+
+Vector 7
+	Elements: 5
+		[ 24 24 24 24 24 ]
+

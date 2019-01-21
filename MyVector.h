@@ -48,7 +48,7 @@ public:
 	// --- Accessors & Mutators --- //
 	// ---------------------------- //
 
-	// -- MyVector Name --- //
+	// --- Name Access and Mutation --- //
 	const string& getName() const;
 	void setName(const string&);
 
@@ -59,11 +59,11 @@ public:
 	// ------------------------------- //
 
 	// --- Element insertion and extraction --- //
-	// const double extract(int, int) const;
-	// const double operator()(int, int) const;
-	// void insert(int, int, double);
-	// void insert(double);
-	// void operator=(double);
+	const double extract(int) const;
+	const double operator()(int) const;
+	void insert(int, double);
+	void insert(double);
+	void operator=(double);
 
 	// // --- SubMyVector Extraction --- //
 	// SubMyVector extract(int, int, int, int) const;

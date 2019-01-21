@@ -347,6 +347,42 @@ int TestVector() {
 		vec5 = helperVec1;
 		Print(vec5, outFile);
 
+		outFile << "\nAttempting to access out of range elements." << std::endl;
+		MyVector vec6(3);
+		vec6.setName("Vector 6");
+		Print(vec6, outFile);
+		try {
+			for (int i = 0; i < 3; i++) {
+				vec6.insert(i,vec2.extract(i));
+			}
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			for (int i = 0; i < 3; ++i) {
+				vec6.insert(i,vec2(i));
+			}
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			for (int i = 0; i < 4; ++i) {
+				vec6.insert(i,vec2(0));
+			}
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		Print(vec6, outFile);
+
+		MyVector vec7(5,-1.);
+		vec7.setName("Vector 7");
+		vec7.insert(1,0.);
+		Print(vec7, outFile);
+		vec7.insert(-2.0);
+		Print(vec7, outFile);
+		vec7 = 24;
+		Print(vec7, outFile);
+
 
 		status = 0;
 	} catch (...) {
