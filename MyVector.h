@@ -8,6 +8,7 @@
 #include <string>
 
 #include "SubVector.h"
+class SubVector;
 
 using namespace std;
 
@@ -19,6 +20,9 @@ using namespace std;
 //		- Insert value at index
 //		- Set all elements to a number
 class MyVector {
+
+friend class SubVector;
+
 public:
 
 	// -------------------- //
@@ -113,7 +117,7 @@ private:
 	double* data;
 	double* limit;
 
-	SubVector sv;
+	SubVector* sv;
 };
 
 #endif

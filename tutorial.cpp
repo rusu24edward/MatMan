@@ -5,7 +5,10 @@
 #include <vector>
 
 #include "Matrix.h"
+#include "SubVector.h"
 #include "MyVector.h"
+
+// Might need: class SubVector;
 
 
 int RunTests(const std::string&);
@@ -14,7 +17,6 @@ int TestMatrix();
 void Print(const Matrix&, ofstream&);
 void Print(const MyVector&, ofstream&);
 int TestVector();
-
 
 
 // Run the program, which right now just runs a test suite. Inputs are not used.

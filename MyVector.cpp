@@ -167,8 +167,8 @@ void MyVector::operator=(double value) {
 // --- SubVector support --- //
 SubVector& MyVector::operator()(int beginning, int end) {
 	// Test the limits
-	sv = SubVector(data + beginning, data + end);
-	return sv;
+	sv = new SubVector(data + beginning, data + end);
+	return *sv;
 }
 
 
