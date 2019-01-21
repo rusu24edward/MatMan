@@ -24,7 +24,7 @@ SubVector::~SubVector() {
 	data = limit = 0;
 }
 
-void SubVector::operator=(MyVector& vec) {
+void SubVector::operator=(const MyVector& vec) {
 	// Run a test that they are indeed the same size
 	double* leftIter = data;
 	double* leftEnd = limit;

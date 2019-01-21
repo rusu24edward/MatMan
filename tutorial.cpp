@@ -385,6 +385,8 @@ int TestVector() {
 		vec7 = 24;
 		Print(vec7, outFile);
 
+		MyVector vec8
+
 
 		status = 0;
 	} catch (...) {

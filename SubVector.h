@@ -17,7 +17,7 @@ public:
 	SubVector(double* d, double* l);
 	SubVector& operator=(const SubVector&);
 
-	void operator=(MyVector&);
+	void operator=(const MyVector&);
 	void operator=(SubVector&);
 
 	~SubVector();

@@ -34,6 +34,7 @@ public:
 	MyVector(int, double);
 	MyVector(const vector<double>&);
 	MyVector(const MyVector&);
+	MyVector(SubVector&);
 
 
 
@@ -49,8 +50,9 @@ public:
 	// --- Assignment Operators --- //
 	// ---------------------------- //
 
-	MyVector& operator=(const MyVector&);
 	MyVector& operator=(const vector<double>&);
+	MyVector& operator=(const MyVector&);
+	MyVector& operator=(SubVector&);
 
 
 
@@ -103,6 +105,7 @@ private:
 	void setFields(int n = 0, double value = 0);
 	void setFields(const vector<double>&);
 	void setFields(const MyVector&);
+	void setFields(const SubVector&);
 
 
 

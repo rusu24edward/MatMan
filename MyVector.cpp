@@ -7,7 +7,6 @@ using namespace std;
 // --- Constructors --- //
 // -------------------- //
 
-
 // Default constructor sets the fields to their default states
 MyVector::MyVector() {
 	setFields();
@@ -37,7 +36,6 @@ MyVector::MyVector(int n, double value) {
 MyVector::MyVector(const vector<double>& d) {
 	setFields(d);
 	name = UNAMED;
-	// TODO: More here
 }
 
 // Copy constructor copies the input MyVector.
@@ -45,7 +43,14 @@ MyVector::MyVector(const vector<double>& d) {
 MyVector::MyVector(const MyVector& vec) {
 	setFields(vec);
 	name = UNAMED;
-	// TODO: More here
+}
+
+// Copy constructor copies the input SubVector and then deletes it
+// @param SubVector& sv - the SubVector from which to copy
+MyVector::MyVector(SubVector& sv) {
+	setFields(sv);
+	name = UNAMED;
+	delete &sv;
 }
 
 
@@ -67,7 +72,19 @@ MyVector::~MyVector() {
 // --- Assignment Operators --- //
 // ---------------------------- //
 
-// Assignemnt operator blows out the MyVector data and sets it to the RHS
+// Assignment operator blows out the MyVector and replace it with the input vector.
+// @param const vector<double>& d - copy the data
+// @return MyVector& - this MyVector
+MyVector& MyVector::operator=(const vector<double>& d) {
+	// TODO: destroy the data!!!!!!
+	setFields(d);
+	// TODO: more here
+
+	return *this;
+}
+
+// Assignemnt operator blows out the MyVector data and sets it to the RHS. If the
+// RHS is the same object, then just return this.
 // @param const MyVector& vec - MyVector to copy
 // @return MyVector& - this MyVector
 MyVector& MyVector::operator=(const MyVector& vec) {
@@ -79,14 +96,16 @@ MyVector& MyVector::operator=(const MyVector& vec) {
 	return *this;
 }
 
-// Assignment operator blows out the MyVector and replace it with the input vector
-// @param const vector<double>& d - copy the data
-// @return MyVector& - this MyVector
-MyVector& MyVector::operator=(const vector<double>& d) {
-	// TODO: destroy the data!!!!!!
-	setFields(d);
-	// TODO: more here
-
+// Assignment operator blows out the MyVector data and sets it to the specified
+// SubVector. If the RHS points to the same beginning and end, then just return
+// this.
+// @param SubVector& sv - SubVector to copy
+// @return - this MyVector
+MyVector& MyVector::operator=(SubVector& sv) {
+	if (data != sv.data && limit != sv.limit) {
+		setFields(sv);
+		delete &sv;
+	}
 	return *this;
 }
 
@@ -251,3 +270,18 @@ void MyVector::setFields(const MyVector& vec) {
 		data[i] = vec.data[i];
 	}
 }
+
+// Set the class fields
+// @param const SubVector sv - SubVector from which to copy
+void MyVector::setFields(const SubVector& sv) {
+	double* leftIter = data;
+	double* leftEnd = limit;
+	const double* rightIter = sv.data;
+	const double* rightEnd = sv.limit;
+	while (leftIter != leftEnd && rightIter != rightEnd) {
+		*leftIter = *rightIter;
+		leftIter++;
+		rightIter++;
+	}
+}
+
