@@ -72,6 +72,7 @@ MyVector::~MyVector() {
 // @return MyVector& - this MyVector
 MyVector& MyVector::operator=(const MyVector& vec) {
 	if (this != &vec) {
+		// TODO: destroy the data!!!!!!
 		setFields(vec);
 		// TODO: more here
 	}
@@ -82,6 +83,7 @@ MyVector& MyVector::operator=(const MyVector& vec) {
 // @param const vector<double>& d - copy the data
 // @return MyVector& - this MyVector
 MyVector& MyVector::operator=(const vector<double>& d) {
+	// TODO: destroy the data!!!!!!
 	setFields(d);
 	// TODO: more here
 
@@ -162,34 +164,13 @@ void MyVector::operator=(double value) {
 }
 
 
-// // --- MyVector Stucture --- //
+// --- SubVector support --- //
+SubVector& MyVector::operator()(int beginning, int end) {
+	// Test the limits
+	sv = SubVector(data + beginning, data + end);
+	return sv;
+}
 
-// // Query the size of the MyVector
-// // @return vector<int> - a 2 element vector that is {nRows, nCols}
-// vector<int> MyVector::size() {
-// 	return vector<int>{nRows, nCols};
-// }
-
-// // Query the length of the specified dimension
-// // @param int d - The desired dimension. 1 for rows, 2 for cols.
-// // @return int - the length of the MyVector along the given dimension.
-// int MyVector::size(int d) {
-// 	if (d <= 0 || d > 2) {
-// 		throw "ERROR:  "
-// 			  "int MyVector::size(int)\n"
-// 			  "\tN/A dimension. Dimension must be 1 for rows or 2 for cols.";
-// 	} else if (d == 1) {
-// 		return nRows;
-// 	} else if (d == 2) {
-// 		return nCols;
-// 	}
-// }
-
-// // Query the length of the longer dimension
-// // @return int - the lenght of the longer dimension.
-// int MyVector::length() {
-// 	return nCols > nRows ? nCols : nRows;
-// }
 
 
 // ---------------- //
@@ -250,6 +231,7 @@ void MyVector::setFields(int n, double value) {
 }
 
 // Set the class fields
+// @param const vector<double>& d - vector from which to copy
 void MyVector::setFields(const vector<double>& d) {
 	nElements = d.size();
 	data = new double[nElements];
@@ -259,6 +241,8 @@ void MyVector::setFields(const vector<double>& d) {
 	}
 }
 
+// Set the class fields
+// @param const MyVector& vec - Vector from which to copy
 void MyVector::setFields(const MyVector& vec) {
 	nElements = vec.nElements;
 	data = new double[nElements];

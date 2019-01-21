@@ -1,7 +1,7 @@
 all: tutorial.exe
 
-tutorial.exe: tutorial.o Matrix.o MyVector.o
-	g++ -o tutorial.exe tutorial.o Matrix.o MyVector.o
+tutorial.exe: tutorial.o Matrix.o MyVector.o SubVector.o
+	g++ -o tutorial.exe tutorial.o Matrix.o MyVector.o SubVector.o
 
 tutorial.o: tutorial.cpp
 	g++ -c tutorial.cpp
@@ -18,6 +18,9 @@ Matrix.o: Matrix.cpp Matrix.h
 MyVector.o: MyVector.cpp MyVector.h
 	g++ -c MyVector.cpp
 
+SubVector.o: SubVector.cpp SubVector.h
+	g++ -c SubVector.cpp
+
 clean:
-	rm -rf MyVector.o Matrix.o tutorial.o tutorial.exe
+	rm -rf SubVector.o MyVector.o Matrix.o tutorial.o tutorial.exe
 

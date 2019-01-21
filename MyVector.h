@@ -7,11 +7,17 @@
 #include <vector>
 #include <string>
 
+#include "SubVector.h"
+
 using namespace std;
 
 // MyVector class provides data storage and manipulation like a mathematical
 // vector. Current support:
 //		- Basic class functionality (copying, assigning, printing, etc.).
+//		- Generate Vectors from vector<double>
+//		- Extract value from index
+//		- Insert value at index
+//		- Set all elements to a number
 class MyVector {
 public:
 
@@ -65,14 +71,8 @@ public:
 	void insert(double);
 	void operator=(double);
 
-	// // --- SubMyVector Extraction --- //
-	// SubMyVector extract(int, int, int, int) const;
-	// SubMyVector operator()(int, int, int, int) const;
-
-	// // --- MyVector Stucture --- //
-	// vector<int> size();
-	// int size(int);
-	// int length();
+	// --- SubVector support --- //
+	SubVector& operator()(int, int);
 
 
 
@@ -112,6 +112,8 @@ private:
 	int nElements;
 	double* data;
 	double* limit;
+
+	SubVector sv;
 };
 
 #endif
