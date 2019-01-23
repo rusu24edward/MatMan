@@ -107,6 +107,7 @@ private:
 	void setFields(const vector<double>&);
 	void setFields(const MyVector&);
 	void setFields(const SubVector&);
+	void deleteFields();
 
 
 

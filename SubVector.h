@@ -21,6 +21,8 @@ public:
 	void operator=(SubVector&);
 	void operator=(double);
 
+	// Add a printing function that deletes this upon returning.
+
 	~SubVector();
 
 private:

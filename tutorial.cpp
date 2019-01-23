@@ -373,6 +373,21 @@ int TestVector() {
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
+		try {
+			MyVector vec_t = vec6(3,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			MyVector vec_t = vec6(-1,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			MyVector vec_t = vec6(2,7);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 		Print(vec6, outFile);
 
 		MyVector vec7(5,-1.);

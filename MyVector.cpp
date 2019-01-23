@@ -48,24 +48,9 @@ MyVector::MyVector(const MyVector& vec) {
 // Copy constructor copies the input SubVector and then deletes it
 // @param SubVector& sv - the SubVector from which to copy
 MyVector::MyVector(SubVector& sv) {
-// cout << "MyVector copy constructor using SubVector" << endl;
-// for (const double* iter = sv.data; iter != sv.limit; iter++) {
-// 	cout << *iter << " ";
-// }
-// cout << endl;
 	setFields(sv);
 	name = UNAMED;
-// cout << "Fields have been set" << endl;
-// for (const double* iter = data; iter != limit; ++iter) {
-// 	cout << *iter << " ";
-// }
-// cout << endl;
 	delete &sv;
-// cout << "SubVector deleted" << endl;
-// for (const double* iter = data; iter != limit; ++iter) {
-// 	cout << *iter << " ";
-// }
-// cout << endl;
 }
 
 
@@ -76,9 +61,7 @@ MyVector::MyVector(SubVector& sv) {
 
 // Destructor sets all fields to their default states and removes the name
 MyVector::~MyVector() {
-	nElements = 0;
-	delete [] data;
-	data = limit = 0;
+	deleteFields();
 }
 
 
@@ -91,10 +74,8 @@ MyVector::~MyVector() {
 // @param const vector<double>& d - copy the data
 // @return MyVector& - this MyVector
 MyVector& MyVector::operator=(const vector<double>& d) {
-	// TODO: destroy the data!!!!!!
+	deleteFields();
 	setFields(d);
-	// TODO: more here
-
 	return *this;
 }
 
@@ -104,9 +85,8 @@ MyVector& MyVector::operator=(const vector<double>& d) {
 // @return MyVector& - this MyVector
 MyVector& MyVector::operator=(const MyVector& vec) {
 	if (this != &vec) {
-		// TODO: destroy the data!!!!!!
+		deleteFields();
 		setFields(vec);
-		// TODO: more here
 	}
 	return *this;
 }
@@ -118,6 +98,7 @@ MyVector& MyVector::operator=(const MyVector& vec) {
 // @return - this MyVector
 MyVector& MyVector::operator=(SubVector& sv) {
 	if (data != sv.data && limit != sv.limit) {
+		deleteFields();
 		setFields(sv);
 		delete &sv;
 	}
@@ -155,7 +136,6 @@ void MyVector::setName(const string& n) {
 // Extract the value at the specified index
 // @param int n - the element index
 // @return const double - the value at this index
-// const double& MyVector::extract(int n) const {
 const double& MyVector::extract(int n) const {
 	if (n >= nElements || n < 0) {
 		throw "ERROR:  "
@@ -164,7 +144,6 @@ const double& MyVector::extract(int n) const {
 	}
 	return data[n];
 }
-// const double& MyVector::operator()(int n) const {
 const double& MyVector::operator()(int n) const {
 	if (n >= nElements || n < 0) {
 		throw "ERROR:  "
@@ -211,24 +190,17 @@ void MyVector::operator=(double value) {
 // --- SubVector support --- //
 
 SubVector& MyVector::operator()(int beginning, int end) {
-
-// cout << name << " - beginning: " << beginning << " - end: " << end << endl;
-	// Test the limits
+	if (end < beginning) {
+		throw "ERROR:  "
+			  "SubVector& MyVector::operator()(int, int)\n"
+			  "\tUnordered Range.";
+	}
+	if (beginning < 0 || end >= nElements) {
+		throw "ERROR:  "
+			  "SubVector& MyVector::operator()(int, int)\n"
+			  "\tAttempting to access elements outside the Vector range.";
+	}
 	sv = new SubVector(data + beginning, data + end+1);
-
-// cout << "Back in MyVector::operator()(int,int):" << endl;
-// for (const double* iter = sv->data; iter!= sv->limit; ++iter) {
-// 	cout << *iter << " ";
-// }
-// cout << endl;
-
-// SubVector tmp = *sv;
-// cout << "tmp:" << endl;
-// for (const double* iter = tmp.data; iter!= tmp.limit; ++iter) {
-// 	cout << *iter << " ";
-// }
-// cout << endl;
-
 	return *sv;
 }
 
@@ -316,7 +288,6 @@ void MyVector::setFields(const MyVector& vec) {
 // Set the class fields
 // @param const SubVector sv - SubVector from which to copy
 void MyVector::setFields(const SubVector& sv) {
-// cout << "const subvector setting fields" << endl;
 	nElements = sv.limit - sv.data;
 	data = new double[nElements];
 	limit = data + nElements;
@@ -324,5 +295,13 @@ void MyVector::setFields(const SubVector& sv) {
 	for (int i = 0; i < nElements; ++i) {
 		data[i] = *(sv.data + i);
 	}
+}
+
+
+// Delete the class fields
+void MyVector::deleteFields() {
+	nElements = 0;
+	delete [] data;
+	data = limit = 0;
 }
 
