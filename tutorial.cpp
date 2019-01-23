@@ -377,7 +377,7 @@ int TestVector() {
 
 		MyVector vec7(5,-1.);
 		vec7.setName("Vector 7");
-		vec7.insert(1,0.);
+		vec7.insert(1,vec4(2));
 		Print(vec7, outFile);
 		vec7.insert(-2.0);
 		Print(vec7, outFile);
@@ -417,11 +417,13 @@ int TestVector() {
 		Print(vec10, outFile);
 		std::cout << vec10 << std::endl;
 
-		// vec10(3) = 6;
-		// Print(vec10, outFile);
+		vec10(3) = 11;
+		Print(vec10, outFile);
+		std::cout << vec10 << std::endl;
 
 		// vec10(0,1) = -1;
 		// Print(vec10, outFile);
+		// std::cout << vec10 <<std::endl;
 
 
 

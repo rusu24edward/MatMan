@@ -71,8 +71,9 @@ public:
 	// ------------------------------- //
 
 	// --- Element insertion and extraction --- //
-	const double extract(int) const;
-	const double operator()(int) const;
+	const double& extract(int) const;
+	const double& operator()(int) const;
+	double& operator()(int);
 	void insert(int, double);
 	void insert(double);
 	void operator=(double);

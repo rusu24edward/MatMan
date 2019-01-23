@@ -155,7 +155,8 @@ void MyVector::setName(const string& n) {
 // Extract the value at the specified index
 // @param int n - the element index
 // @return const double - the value at this index
-const double MyVector::extract(int n) const {
+// const double& MyVector::extract(int n) const {
+const double& MyVector::extract(int n) const {
 	if (n >= nElements || n < 0) {
 		throw "ERROR:  "
 			  "const double MyVector::extract(int) const\n"
@@ -163,10 +164,19 @@ const double MyVector::extract(int n) const {
 	}
 	return data[n];
 }
-const double MyVector::operator()(int n) const {
+// const double& MyVector::operator()(int n) const {
+const double& MyVector::operator()(int n) const {
 	if (n >= nElements || n < 0) {
 		throw "ERROR:  "
 			  "const double MyVector::operator()(int) const\n"
+			  "\tAttempting to access elements outside the Vector range.";
+	}
+	return data[n];
+}
+double& MyVector::operator()(int n) {
+	if (n >= nElements || n < 0) {
+		throw "ERROR:  "
+			  "double MyVector::operator()(int)\n"
 			  "\tAttempting to access elements outside the Vector range.";
 	}
 	return data[n];
