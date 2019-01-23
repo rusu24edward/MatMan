@@ -56,3 +56,10 @@ void SubVector::operator=(SubVector& sv) {
 	delete this;
 }
 
+void SubVector::operator=(double d) {
+	for (double* i = data; i != limit; ++i) {
+		*i = d;
+	}
+	delete this;
+}
+

@@ -421,9 +421,9 @@ int TestVector() {
 		Print(vec10, outFile);
 		std::cout << vec10 << std::endl;
 
-		// vec10(0,1) = -1;
-		// Print(vec10, outFile);
-		// std::cout << vec10 <<std::endl;
+		vec10(0,1) = -1;
+		Print(vec10, outFile);
+		std::cout << vec10 <<std::endl;
 
 
 

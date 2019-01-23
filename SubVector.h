@@ -19,6 +19,7 @@ public:
 
 	void operator=(const MyVector&);
 	void operator=(SubVector&);
+	void operator=(double);
 
 	~SubVector();
 
