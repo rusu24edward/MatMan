@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Matrix.h"
-#include "SubVector.h"
 #include "MyVector.h"
 
 // Might need: class SubVector;
@@ -385,17 +384,45 @@ int TestVector() {
 		vec7 = 24;
 		Print(vec7, outFile);
 
+
 		MyVector vec8(7);
 		vec8.setName("Vector 8");
 		for (int i = 0; i < 7; ++i) {
 			vec8.insert(i, 10-i);
 		}
+		Print(vec8, outFile);
 
 		MyVector vec9(4);
 		vec9.setName("Vector 9");
 		for (int i = 0; i < 4; ++i) {
 			vec9.insert(i,2*i);
 		}
+		Print(vec9, outFile);
+
+		std::cout << "Doing stuff with Vector 10" << std::endl;
+		MyVector vec10(vec8(2,4));
+		vec10.setName("Vector 10");
+		Print(vec10, outFile);
+		std::cout << vec10 << std::endl;
+
+		vec10 = vec9(0,3);
+		Print(vec10, outFile);
+		std::cout << vec10 << std::endl;
+
+		vec10(1,2) = vec2;
+		Print(vec10, outFile);
+		std::cout << vec10 << std::endl;
+
+		vec10(1,3) = vec8(4,6);
+		Print(vec10, outFile);
+		std::cout << vec10 << std::endl;
+
+		// vec10(3) = 6;
+		// Print(vec10, outFile);
+
+		// vec10(0,1) = -1;
+		// Print(vec10, outFile);
+
 
 
 		status = 0;

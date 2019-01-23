@@ -1,6 +1,8 @@
 
 #include "SubVector.h"
 
+#include <iostream>
+
 using namespace std;
 
 SubVector::SubVector() {
@@ -8,16 +10,15 @@ SubVector::SubVector() {
 }
 
 SubVector::SubVector(double* d, double* l) {
+// cout << "SubVector pointer copy constructor " << endl;
 	data = d;
 	limit = l;
-}
 
-SubVector& SubVector::operator=(const SubVector& sv) {
-	if (this != &sv) {
-		data = sv.data;
-		limit = sv.limit;
-	}
-	return *this;
+	// cout << "In SubVector::SubVector(double*, double*)" << endl;
+	// for (const double* iter = data; iter != limit; ++iter) {
+	// 	cout << *iter << " ";
+	// }
+	// cout << endl;
 }
 
 SubVector::~SubVector() {

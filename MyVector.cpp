@@ -48,9 +48,24 @@ MyVector::MyVector(const MyVector& vec) {
 // Copy constructor copies the input SubVector and then deletes it
 // @param SubVector& sv - the SubVector from which to copy
 MyVector::MyVector(SubVector& sv) {
+// cout << "MyVector copy constructor using SubVector" << endl;
+// for (const double* iter = sv.data; iter != sv.limit; iter++) {
+// 	cout << *iter << " ";
+// }
+// cout << endl;
 	setFields(sv);
 	name = UNAMED;
+// cout << "Fields have been set" << endl;
+// for (const double* iter = data; iter != limit; ++iter) {
+// 	cout << *iter << " ";
+// }
+// cout << endl;
 	delete &sv;
+// cout << "SubVector deleted" << endl;
+// for (const double* iter = data; iter != limit; ++iter) {
+// 	cout << *iter << " ";
+// }
+// cout << endl;
 }
 
 
@@ -184,9 +199,26 @@ void MyVector::operator=(double value) {
 
 
 // --- SubVector support --- //
+
 SubVector& MyVector::operator()(int beginning, int end) {
+
+// cout << name << " - beginning: " << beginning << " - end: " << end << endl;
 	// Test the limits
-	sv = new SubVector(data + beginning, data + end);
+	sv = new SubVector(data + beginning, data + end+1);
+
+// cout << "Back in MyVector::operator()(int,int):" << endl;
+// for (const double* iter = sv->data; iter!= sv->limit; ++iter) {
+// 	cout << *iter << " ";
+// }
+// cout << endl;
+
+// SubVector tmp = *sv;
+// cout << "tmp:" << endl;
+// for (const double* iter = tmp.data; iter!= tmp.limit; ++iter) {
+// 	cout << *iter << " ";
+// }
+// cout << endl;
+
 	return *sv;
 }
 
@@ -274,14 +306,13 @@ void MyVector::setFields(const MyVector& vec) {
 // Set the class fields
 // @param const SubVector sv - SubVector from which to copy
 void MyVector::setFields(const SubVector& sv) {
-	double* leftIter = data;
-	double* leftEnd = limit;
-	const double* rightIter = sv.data;
-	const double* rightEnd = sv.limit;
-	while (leftIter != leftEnd && rightIter != rightEnd) {
-		*leftIter = *rightIter;
-		leftIter++;
-		rightIter++;
+// cout << "const subvector setting fields" << endl;
+	nElements = sv.limit - sv.data;
+	data = new double[nElements];
+	limit = data + nElements;
+
+	for (int i = 0; i < nElements; ++i) {
+		data[i] = *(sv.data + i);
 	}
 }
 
