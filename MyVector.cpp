@@ -100,8 +100,8 @@ MyVector& MyVector::operator=(SubVector& sv) {
 	if (data != sv.data && limit != sv.limit) {
 		deleteFields();
 		setFields(sv);
-		delete &sv;
 	}
+	delete &sv;
 	return *this;
 }
 
@@ -200,8 +200,7 @@ SubVector& MyVector::operator()(int beginning, int end) {
 			  "SubVector& MyVector::operator()(int, int)\n"
 			  "\tAttempting to access elements outside the Vector range.";
 	}
-	sv = new SubVector(data + beginning, data + end+1);
-	return *sv;
+	return *(new SubVector(data + beginning, data + end+1));
 }
 
 
@@ -296,7 +295,6 @@ void MyVector::setFields(const SubVector& sv) {
 		data[i] = *(sv.data + i);
 	}
 }
-
 
 // Delete the class fields
 void MyVector::deleteFields() {

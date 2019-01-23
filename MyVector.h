@@ -122,7 +122,7 @@ private:
 	double* data;
 	double* limit;
 
-	SubVector* sv;
+	// SubVector* sv;
 };
 
 #endif
