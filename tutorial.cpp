@@ -414,31 +414,24 @@ int TestVector() {
 		}
 		Print(vec9, outFile);
 
-		std::cout << "Doing stuff with Vector 10" << std::endl;
 		MyVector vec10(vec8(2,4));
 		vec10.setName("Vector 10");
 		Print(vec10, outFile);
-		std::cout << vec10 << std::endl;
 
 		vec10 = vec9(0,3);
 		Print(vec10, outFile);
-		std::cout << vec10 << std::endl;
 
 		vec10(1,2) = vec2;
 		Print(vec10, outFile);
-		std::cout << vec10 << std::endl;
 
 		vec10(1,3) = vec8(4,6);
 		Print(vec10, outFile);
-		std::cout << vec10 << std::endl;
 
 		vec10(3) = 11;
 		Print(vec10, outFile);
-		std::cout << vec10 << std::endl;
 
 		vec10(0,1) = -1;
 		Print(vec10, outFile);
-		std::cout << vec10 <<std::endl;
 
 
 

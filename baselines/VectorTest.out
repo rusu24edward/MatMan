@@ -42,9 +42,15 @@ Vector 6
 
 ERROR:  const double MyVector::extract(int) const
 	Attempting to access elements outside the Vector range.
-ERROR:  const double MyVector::operator()(int) const
+ERROR:  double MyVector::operator()(int)
 	Attempting to access elements outside the Vector range.
 ERROR:  void MyVector::insert(int, double)
+	Attempting to access elements outside the Vector range.
+ERROR:  SubVector& MyVector::operator()(int, int)
+	Unordered Range.
+ERROR:  SubVector& MyVector::operator()(int, int)
+	Attempting to access elements outside the Vector range.
+ERROR:  SubVector& MyVector::operator()(int, int)
 	Attempting to access elements outside the Vector range.
 
 Vector 6
@@ -54,7 +60,7 @@ Vector 6
 
 Vector 7
 	Elements: 5
-		[ -1 0 -1 -1 -1 ]
+		[ -1 6 -1 -1 -1 ]
 
 
 Vector 7
@@ -65,4 +71,44 @@ Vector 7
 Vector 7
 	Elements: 5
 		[ 24 24 24 24 24 ]
+
+
+Vector 8
+	Elements: 7
+		[ 10 9 8 7 6 5 4 ]
+
+
+Vector 9
+	Elements: 4
+		[ 0 2 4 6 ]
+
+
+Vector 10
+	Elements: 3
+		[ 8 7 6 ]
+
+
+Vector 10
+	Elements: 4
+		[ 0 2 4 6 ]
+
+
+Vector 10
+	Elements: 4
+		[ 0 0 0 6 ]
+
+
+Vector 10
+	Elements: 4
+		[ 0 6 5 4 ]
+
+
+Vector 10
+	Elements: 4
+		[ 0 6 5 11 ]
+
+
+Vector 10
+	Elements: 4
+		[ -1 -1 5 11 ]
 

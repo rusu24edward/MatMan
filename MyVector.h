@@ -19,6 +19,7 @@ using namespace std;
 //		- Extract value from index
 //		- Insert value at index
 //		- Set all elements to a number
+//		- Generate SubVectors
 class MyVector {
 
 friend class SubVector;
