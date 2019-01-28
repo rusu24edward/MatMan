@@ -7,15 +7,16 @@ class MyVector;
 
 using namespace std;
 
+// SubVector class provides the capabilities to manipulate
 class SubVector {
-
 friend class MyVector;
+
 
 public:
 
-	SubVector();
-	SubVector(double* d, double* l);
-	SubVector& operator=(const SubVector&);
+	// SubVector();
+	// SubVector(double* d, double* l);
+	// SubVector& operator=(const SubVector&);
 
 	void operator=(const MyVector&);
 	void operator=(SubVector&);
@@ -23,9 +24,14 @@ public:
 
 	// Add a printing function that deletes this upon returning.
 
-	~SubVector();
 
 private:
+
+	SubVector();
+	SubVector(double* d, double* l);
+	SubVector& operator=(const SubVector&);
+
+	~SubVector();
 
 	double* data;
 	double* limit;

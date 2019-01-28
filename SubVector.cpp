@@ -10,15 +10,8 @@ SubVector::SubVector() {
 }
 
 SubVector::SubVector(double* d, double* l) {
-// cout << "SubVector pointer copy constructor " << endl;
 	data = d;
 	limit = l;
-
-	// cout << "In SubVector::SubVector(double*, double*)" << endl;
-	// for (const double* iter = data; iter != limit; ++iter) {
-	// 	cout << *iter << " ";
-	// }
-	// cout << endl;
 }
 
 SubVector::~SubVector() {
