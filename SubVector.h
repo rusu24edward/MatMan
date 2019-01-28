@@ -34,10 +34,10 @@ public:
 	// --- Printing --- //
 	// ---------------- //
 
-	void Print(ostream&) const;
-	friend ostream& operator<<(ostream&, const SubVector&);
-	void Print(fstream&) const;
-	friend ofstream& operator<<(ofstream7, const SubVector&);
+	// void Print(ostream&) const;
+	// friend ostream& operator<<(ostream&, const SubVector&);
+	// void Print(fstream&) const;
+	// friend ofstream& operator<<(ofstream&, const SubVector&);
 
 
 

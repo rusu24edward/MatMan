@@ -112,3 +112,9 @@ Vector 10
 	Elements: 4
 		[ -1 -1 5 11 ]
 
+
+Attempting to equate mismatched Vectors.
+ERROR:  void SubVector::operator=(const MyVector& vec)
+	Vectors are not the same size.
+ERROR:  void SubVector::operator=(const SubVector& sv)
+	Vectors are not the same size.

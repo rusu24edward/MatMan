@@ -433,6 +433,18 @@ int TestVector() {
 		vec10(0,1) = -1;
 		Print(vec10, outFile);
 
+		outFile << "\nAttempting to equate mismatched Vectors." << std::endl;
+		try {
+			vec9(0,1) = vec10;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			vec9(0,1) = vec9(0,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
 
 
 		status = 0;

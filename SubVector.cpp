@@ -40,7 +40,12 @@ SubVector::~SubVector() {
 // Set the values to the values from the input Vector
 // @param const MyVector& vec - the input vector from which to copy
 void SubVector::operator=(const MyVector& vec) {
-	// TODO: Check that they are indeed the same size
+	if ((vec.limit - vec.data) != (limit - data)) {
+		throw "ERROR:  "
+			  "void SubVector::operator=(const MyVector& vec)\n"
+			  "\tVectors are not the same size.";
+	}
+
 	double* leftIter = data;
 	double* leftEnd = limit;
 	const double* rightIter = vec.data;
@@ -57,7 +62,12 @@ void SubVector::operator=(const MyVector& vec) {
 // Set the values to the values from the input SubVector
 // @param - const SubVector& sv - the input SubVector from which to copy
 void SubVector::operator=(SubVector& sv) {
-	// TODO: Check that they are indeed the same size
+	if ((sv.limit - sv.data) != (limit - data)) {
+		throw "ERROR:  "
+			  "void SubVector::operator=(const SubVector& sv)\n"
+			  "\tVectors are not the same size.";
+	}
+
 	double* leftIter = data;
 	double* leftEnd = limit;
 	const double* rightIter = sv.data;
@@ -87,8 +97,8 @@ void SubVector::operator=(double d) {
 // --- Printing --- //
 // ---------------- //
 
-void Print(ostream&) const;
-friend ostream& operator<<(ostream&, const SubVector&);
-void Print(fstream&) const;
-friend ofstream& operator<<(ofstream7, const SubVector&);
+// void Print(ostream&) const;
+// friend ostream& operator<<(ostream&, const SubVector&);
+// void Print(fstream&) const;
+// friend ofstream& operator<<(ofstream&, const SubVector&);
 
