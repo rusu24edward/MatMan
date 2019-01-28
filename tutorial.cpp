@@ -15,6 +15,7 @@ int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 void Print(const Matrix&, ofstream&);
 void Print(const MyVector&, ofstream&);
+void Print(const SubVector&, ofstream&);
 int TestVector();
 
 
@@ -420,12 +421,18 @@ int TestVector() {
 
 		vec10 = vec9(0,3);
 		Print(vec10, outFile);
+		outFile << vec10.getName() << "(0,1):" << std::endl;
+		Print(vec10(0,1), outFile);
 
 		vec10(1,2) = vec2;
 		Print(vec10, outFile);
+		outFile << vec10.getName() << "(1,2):" << std::endl;
+		Print(vec10(1,2), outFile);
 
 		vec10(1,3) = vec8(4,6);
 		Print(vec10, outFile);
+		outFile << vec10.getName() << "(2,3):" << std::endl;
+		Print(vec10(2,3), outFile);
 
 		vec10(3) = 11;
 		Print(vec10, outFile);
@@ -460,4 +467,8 @@ int TestVector() {
 
 void Print(const MyVector& v, ofstream& outFile) {
 	outFile << v << std::endl;
+}
+
+void Print(const SubVector& sv, ofstream& outFile) {
+	outFile << sv << std::endl;
 }

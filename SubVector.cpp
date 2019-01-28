@@ -97,8 +97,35 @@ void SubVector::operator=(double d) {
 // --- Printing --- //
 // ---------------- //
 
-// void Print(ostream&) const;
-// friend ostream& operator<<(ostream&, const SubVector&);
-// void Print(fstream&) const;
-// friend ofstream& operator<<(ofstream&, const SubVector&);
+// Print to an ostream
+// @param ostream& streamer - print to this ostream
+void SubVector::Print(ostream& streamer) const {
+	streamer << "\t\t[ ";
+	for (const double* i = data; i != limit; ++i) {
+		streamer << *i << " ";
+	}
+	streamer << "]" << endl;
+
+	delete this;
+}
+ostream& operator<<(ostream& streamer, const SubVector& sv) {
+	sv.Print(streamer);
+	return streamer;
+}
+
+// Print to an fstream
+// @param ofstream& fileOut - print to this ofstream
+void SubVector::Print(fstream& outFile) const {
+	outFile << "\t\t[ ";
+	for (const double* i = data; i != limit; ++i) {
+		outFile << *i << " ";
+	}
+	outFile << "]" << endl;
+
+	delete this;
+}
+ofstream& operator<<(ofstream& outFile, const SubVector& sv) {
+	sv.Print(outFile);
+	return outFile;
+}
 
