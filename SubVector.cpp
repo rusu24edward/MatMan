@@ -38,11 +38,11 @@ SubVector::~SubVector() {
 // ------------------------------- //
 
 // Set the values to the values from the input Vector
-// @param const MyVector& vec - the input vector from which to copy
-void SubVector::operator=(const MyVector& vec) {
+// @param const Vector& vec - the input vector from which to copy
+void SubVector::operator=(const Vector& vec) {
 	if ((vec.limit - vec.data) != (limit - data)) {
 		throw "ERROR:  "
-			  "void SubVector::operator=(const MyVector& vec)\n"
+			  "void SubVector::operator=(const Vector& vec)\n"
 			  "\tVectors are not the same size.";
 	}
 

@@ -5,8 +5,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "MyVector.h"
-class MyVector;
+#include "Vector.h"
+class Vector;
 
 using namespace std;
 
@@ -16,7 +16,7 @@ using namespace std;
 //		- Equals operator for Vectors, SubVectors, and doubles.
 class SubVector {
 
-friend class MyVector;
+friend class Vector;
 
 public:
 
@@ -24,7 +24,7 @@ public:
 	// --- Functions and Operators --- //
 	// ------------------------------- //
 
-	void operator=(const MyVector&);
+	void operator=(const Vector&);
 	void operator=(SubVector&);
 	void operator=(double);
 

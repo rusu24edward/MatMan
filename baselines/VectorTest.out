@@ -40,17 +40,17 @@ Vector 6
 	Elements: 3
 		[ 0 0 0 ]
 
-ERROR:  const double MyVector::extract(int) const
+ERROR:  const double Vector::extract(int) const
 	Attempting to access elements outside the Vector range.
-ERROR:  double MyVector::operator()(int)
+ERROR:  double Vector::operator()(int)
 	Attempting to access elements outside the Vector range.
-ERROR:  void MyVector::insert(int, double)
+ERROR:  void Vector::insert(int, double)
 	Attempting to access elements outside the Vector range.
-ERROR:  SubVector& MyVector::operator()(int, int)
+ERROR:  SubVector& Vector::operator()(int, int)
 	Unordered Range.
-ERROR:  SubVector& MyVector::operator()(int, int)
+ERROR:  SubVector& Vector::operator()(int, int)
 	Attempting to access elements outside the Vector range.
-ERROR:  SubVector& MyVector::operator()(int, int)
+ERROR:  SubVector& Vector::operator()(int, int)
 	Attempting to access elements outside the Vector range.
 
 Vector 6
@@ -123,7 +123,7 @@ Vector 10
 
 
 Attempting to equate mismatched Vectors.
-ERROR:  void SubVector::operator=(const MyVector& vec)
+ERROR:  void SubVector::operator=(const Vector& vec)
 	Vectors are not the same size.
 ERROR:  void SubVector::operator=(const SubVector& sv)
 	Vectors are not the same size.

@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "Matrix.h"
-#include "MyVector.h"
+#include "Vector.h"
 
 // Might need: class SubVector;
 
@@ -14,7 +14,7 @@ int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 void Print(const Matrix&, ofstream&);
-void Print(const MyVector&, ofstream&);
+void Print(const Vector&, ofstream&);
 void Print(const SubVector&, ofstream&);
 int TestVector();
 
@@ -25,7 +25,7 @@ int TestVector();
 // @return int - the number of tests that fail.
 int main (int argc, char** argv) {
 
-	MyVector mv(10);
+	Vector mv(10);
 
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
@@ -324,22 +324,22 @@ int TestVector() {
 
 	try{
 
-		MyVector vec1;
+		Vector vec1;
 		Print(vec1, outFile);
 
-		MyVector vec2(2);
+		Vector vec2(2);
 		vec2.setName("Vector 2");
 		Print(vec2, outFile);
 
-		MyVector vec3(5,-2.);
+		Vector vec3(5,-2.);
 		vec3.setName("Vector 3");
 		Print(vec3, outFile);
 
-		MyVector vec4(helperVec1);
+		Vector vec4(helperVec1);
 		vec4.setName("Vector 4");
 		Print(vec4, outFile);
 
-		MyVector vec5(vec4);
+		Vector vec5(vec4);
 		vec5.setName("Vector 5");
 		Print(vec5, outFile);
 
@@ -350,7 +350,7 @@ int TestVector() {
 		Print(vec5, outFile);
 
 		outFile << "\nAttempting to access out of range elements." << std::endl;
-		MyVector vec6(3);
+		Vector vec6(3);
 		vec6.setName("Vector 6");
 		Print(vec6, outFile);
 		try {
@@ -375,23 +375,23 @@ int TestVector() {
 			outFile << msg << std::endl;
 		}
 		try {
-			MyVector vec_t = vec6(3,2);
+			Vector vec_t = vec6(3,2);
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
 		try {
-			MyVector vec_t = vec6(-1,2);
+			Vector vec_t = vec6(-1,2);
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
 		try {
-			MyVector vec_t = vec6(2,7);
+			Vector vec_t = vec6(2,7);
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
 		Print(vec6, outFile);
 
-		MyVector vec7(5,-1.);
+		Vector vec7(5,-1.);
 		vec7.setName("Vector 7");
 		vec7.insert(1,vec4(2));
 		Print(vec7, outFile);
@@ -401,21 +401,21 @@ int TestVector() {
 		Print(vec7, outFile);
 
 
-		MyVector vec8(7);
+		Vector vec8(7);
 		vec8.setName("Vector 8");
 		for (int i = 0; i < 7; ++i) {
 			vec8.insert(i, 10-i);
 		}
 		Print(vec8, outFile);
 
-		MyVector vec9(4);
+		Vector vec9(4);
 		vec9.setName("Vector 9");
 		for (int i = 0; i < 4; ++i) {
 			vec9.insert(i,2*i);
 		}
 		Print(vec9, outFile);
 
-		MyVector vec10(vec8(2,4));
+		Vector vec10(vec8(2,4));
 		vec10.setName("Vector 10");
 		Print(vec10, outFile);
 
@@ -465,7 +465,7 @@ int TestVector() {
 	return status;
 }
 
-void Print(const MyVector& v, ofstream& outFile) {
+void Print(const Vector& v, ofstream& outFile) {
 	outFile << v << std::endl;
 }
 
