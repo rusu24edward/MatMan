@@ -5,13 +5,16 @@
 #include <vector>
 
 #include "Matrix.h"
+#include "Vector.h"
 
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
+int TestVector();
 void Print(const Matrix&, ofstream&);
-
+void Print(const Vector&, ofstream&);
+void Print(const SubVector&, ofstream&);
 
 
 // Run the program, which right now just runs a test suite. Inputs are not used.
@@ -23,8 +26,8 @@ int main (int argc, char** argv) {
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
-	// testNames.push_back("VectorTest");
-	// testNames.push_back("AdvancedMatrixTest");
+	testNames.push_back("VectorTest");
+	testNames.push_back("AdvancedMatrixTest");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -55,8 +58,11 @@ int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
 		status = TestMatrix();
+	} else if (testName == "VectorTest") {
+		status = TestVector();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
+		status = 1;
 	}
 	return status;
 }
@@ -91,8 +97,6 @@ int CompareAgainstBaseline(const std::string& testName) {
 			break;
 		}
       } while (!currentFile.eof() || !baselineFile.eof());
-
-    // TODO: if passed the test, then delete the currentFile.
 
 	currentFile.close();
 	baselineFile.close();
@@ -296,4 +300,171 @@ int TestMatrix() {
 // @param ofstream& outFile - the file to print to.
 void Print(const Matrix& m, ofstream& outFile) {
 	outFile << m << std::endl;
+}
+
+
+
+// The test for the Vector class.
+// @return int - 1 if failed, 0 if passed.
+int TestVector() {
+	int status = 1;
+
+	std::string testFileName = "current/VectorTest.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	std::vector<double> helperVec1(3,6.);
+
+	try{
+
+		Vector vec1;
+		Print(vec1, outFile);
+
+		Vector vec2(2);
+		vec2.setName("Vector 2");
+		Print(vec2, outFile);
+
+		Vector vec3(5,-2.);
+		vec3.setName("Vector 3");
+		Print(vec3, outFile);
+
+		Vector vec4(helperVec1);
+		vec4.setName("Vector 4");
+		Print(vec4, outFile);
+
+		Vector vec5(vec4);
+		vec5.setName("Vector 5");
+		Print(vec5, outFile);
+
+		vec5 = vec3;
+		Print(vec5,outFile);
+
+		vec5 = helperVec1;
+		Print(vec5, outFile);
+
+		outFile << "\nAttempting to access out of range elements." << std::endl;
+		Vector vec6(3);
+		vec6.setName("Vector 6");
+		Print(vec6, outFile);
+		try {
+			for (int i = 0; i < 3; i++) {
+				vec6.insert(i,vec2.extract(i));
+			}
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			for (int i = 0; i < 3; ++i) {
+				vec6.insert(i,vec2(i));
+			}
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			for (int i = 0; i < 4; ++i) {
+				vec6.insert(i,vec2(0));
+			}
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			Vector vec_t = vec6(3,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			Vector vec_t = vec6(-1,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			Vector vec_t = vec6(2,7);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		Print(vec6, outFile);
+
+		Vector vec7(5,-1.);
+		vec7.setName("Vector 7");
+		vec7.insert(1,vec4(2));
+		Print(vec7, outFile);
+		vec7.insert(-2.0);
+		Print(vec7, outFile);
+		vec7 = 24;
+		Print(vec7, outFile);
+
+
+		Vector vec8(7);
+		vec8.setName("Vector 8");
+		for (int i = 0; i < 7; ++i) {
+			vec8.insert(i, 10-i);
+		}
+		Print(vec8, outFile);
+
+		Vector vec9(4);
+		vec9.setName("Vector 9");
+		for (int i = 0; i < 4; ++i) {
+			vec9.insert(i,2*i);
+		}
+		Print(vec9, outFile);
+
+		Vector vec10(vec8(2,4));
+		vec10.setName("Vector 10");
+		Print(vec10, outFile);
+
+		vec10 = vec9(0,3);
+		Print(vec10, outFile);
+		outFile << vec10.getName() << "(0,1):" << std::endl;
+		Print(vec10(0,1), outFile);
+
+		vec10(1,2) = vec2;
+		Print(vec10, outFile);
+		outFile << vec10.getName() << "(1,2):" << std::endl;
+		Print(vec10(1,2), outFile);
+
+		vec10(1,3) = vec8(4,6);
+		Print(vec10, outFile);
+		outFile << vec10.getName() << "(2,3):" << std::endl;
+		Print(vec10(2,3), outFile);
+
+		vec10(3) = 11;
+		Print(vec10, outFile);
+
+		vec10(0,1) = -1;
+		Print(vec10, outFile);
+
+		outFile << "\nAttempting to equate mismatched Vectors." << std::endl;
+		try {
+			vec9(0,1) = vec10;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			vec9(0,1) = vec9(0,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Vector Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Vector Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+}
+
+void Print(const Vector& v, ofstream& outFile) {
+	outFile << v << std::endl;
+}
+
+void Print(const SubVector& sv, ofstream& outFile) {
+	outFile << sv << std::endl;
 }
