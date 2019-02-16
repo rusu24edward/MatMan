@@ -42,7 +42,7 @@ SubVector::~SubVector() {
 void SubVector::operator=(const Vector& vec) {
 	if ((vec.limit - vec.data) != (limit - data)) {
 		throw "ERROR:  "
-			  "void SubVector::operator=(const Vector& vec)\n"
+			  "void SubVector::operator=(const Vector&)\n"
 			  "\tVectors are not the same size.";
 	}
 
@@ -64,7 +64,7 @@ void SubVector::operator=(const Vector& vec) {
 void SubVector::operator=(SubVector& sv) {
 	if ((sv.limit - sv.data) != (limit - data)) {
 		throw "ERROR:  "
-			  "void SubVector::operator=(const SubVector& sv)\n"
+			  "void SubVector::operator=(const SubVector&)\n"
 			  "\tVectors are not the same size.";
 	}
 

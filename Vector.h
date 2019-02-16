@@ -1,6 +1,6 @@
 
-#ifndef Vector_H
-#define Vector_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <iostream>
 #include <fstream>
@@ -109,6 +109,8 @@ private:
 	void setFields(const vector<double>&);
 	void setFields(const Vector&);
 	void setFields(const SubVector&);
+
+	// --- Object Destruction Helpers --- //
 	void deleteFields();
 
 

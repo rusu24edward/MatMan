@@ -31,8 +31,8 @@ Vector::Vector(int n, double value) {
 	name = UNAMED;
 }
 
-// Alternate constructor converts the input vectors of doubles to a Vector.
-// @param const vector<double> d - copy the values out of this vector
+// Alternate constructor converts the input vector of doubles to a Vector.
+// @param const vector<double>& d - copy the values out of this vector
 Vector::Vector(const vector<double>& d) {
 	setFields(d);
 	name = UNAMED;
@@ -62,6 +62,7 @@ Vector::Vector(SubVector& sv) {
 // Destructor sets all fields to their default states and removes the name
 Vector::~Vector() {
 	deleteFields();
+	name = "";
 }
 
 
@@ -135,11 +136,11 @@ void Vector::setName(const string& n) {
 
 // Extract the value at the specified index
 // @param int n - the element index
-// @return const double - the value at this index
+// @return const double& - the value at this index
 const double& Vector::extract(int n) const {
 	if (n >= nElements || n < 0) {
 		throw "ERROR:  "
-			  "const double Vector::extract(int) const\n"
+			  "const double& Vector::extract(int) const\n"
 			  "\tAttempting to access elements outside the Vector range.";
 	}
 	return data[n];
@@ -147,7 +148,7 @@ const double& Vector::extract(int n) const {
 const double& Vector::operator()(int n) const {
 	if (n >= nElements || n < 0) {
 		throw "ERROR:  "
-			  "const double Vector::operator()(int) const\n"
+			  "const double& Vector::operator()(int) const\n"
 			  "\tAttempting to access elements outside the Vector range.";
 	}
 	return data[n];
@@ -155,14 +156,14 @@ const double& Vector::operator()(int n) const {
 double& Vector::operator()(int n) {
 	if (n >= nElements || n < 0) {
 		throw "ERROR:  "
-			  "double Vector::operator()(int)\n"
+			  "double& Vector::operator()(int)\n"
 			  "\tAttempting to access elements outside the Vector range.";
 	}
 	return data[n];
 }
 
 // Insert specified value at specified index
-// @param int n - the row index
+// @param int n - the element index
 // @param double value - the value to insert at the index
 void Vector::insert(int i, double value) {
 	if (i >= nElements || i < 0) {
@@ -200,7 +201,7 @@ SubVector& Vector::operator()(int beginning, int end) {
 			  "SubVector& Vector::operator()(int, int)\n"
 			  "\tAttempting to access elements outside the Vector range.";
 	}
-	return *(new SubVector(data + beginning, data + end+1));
+	return *(new SubVector(data + beginning, data + end + 1));
 }
 
 
@@ -280,12 +281,12 @@ void Vector::setFields(const Vector& vec) {
 	data = new double[nElements];
 	limit = data + nElements;
 	for (int i = 0; i < nElements; ++i) {
-		data[i] = vec.data[i];
+		data[i] = vec(i);
 	}
 }
 
 // Set the class fields
-// @param const SubVector sv - SubVector from which to copy
+// @param const SubVector& sv - SubVector from which to copy
 void Vector::setFields(const SubVector& sv) {
 	nElements = sv.limit - sv.data;
 	data = new double[nElements];

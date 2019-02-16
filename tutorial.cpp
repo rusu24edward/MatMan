@@ -7,16 +7,14 @@
 #include "Matrix.h"
 #include "Vector.h"
 
-// Might need: class SubVector;
-
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
+int TestVector();
 void Print(const Matrix&, ofstream&);
 void Print(const Vector&, ofstream&);
 void Print(const SubVector&, ofstream&);
-int TestVector();
 
 
 // Run the program, which right now just runs a test suite. Inputs are not used.
@@ -24,8 +22,6 @@ int TestVector();
 // @param char** argv - an array of "strings" which are the input arguments
 // @return int - the number of tests that fail.
 int main (int argc, char** argv) {
-
-	Vector mv(10);
 
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
