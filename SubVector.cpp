@@ -7,12 +7,7 @@ using namespace std;
 // --- Constructors --- //
 // -------------------- //
 
-// Default constructor sets the pointers to 0
-SubVector::SubVector() {
-	data = limit = 0;
-}
-
-// Alternate constructor sets the pointers to the input
+// Constructor sets the pointers to the input
 // @param double* d - the beginning pointer
 // @param double* l - the end pointer
 SubVector::SubVector(double* d, double* l) {
@@ -40,7 +35,7 @@ SubVector::~SubVector() {
 // Set the values to the values from the input Vector
 // @param const Vector& vec - the input vector from which to copy
 void SubVector::operator=(const Vector& vec) {
-	if ((vec.limit - vec.data) != (limit - data)) {
+	if ((vec.end() - vec.begin()) != (limit - data)) {
 		throw "ERROR:  "
 			  "void SubVector::operator=(const Vector&)\n"
 			  "\tVectors are not the same size.";
@@ -48,8 +43,8 @@ void SubVector::operator=(const Vector& vec) {
 
 	double* leftIter = data;
 	double* leftEnd = limit;
-	const double* rightIter = vec.data;
-	const double* rightEnd = vec.limit;
+	const double* rightIter = vec.begin();
+	const double* rightEnd = vec.end();
 	while (leftIter != leftEnd && rightIter != rightEnd) {
 		*leftIter = *rightIter;
 		leftIter++;
@@ -85,8 +80,8 @@ void SubVector::operator=(SubVector& sv) {
 // Set the values to the specified double
 // @param double d - Set values to this double
 void SubVector::operator=(double d) {
-	for (double* i = data; i != limit; ++i) {
-		*i = d;
+	for (double* ptr = data; ptr != limit; ++ptr) {
+		*ptr = d;
 	}
 	delete this;
 }
@@ -101,8 +96,8 @@ void SubVector::operator=(double d) {
 // @param ostream& streamer - print to this ostream
 void SubVector::Print(ostream& streamer) const {
 	streamer << "\t\t[ ";
-	for (const double* i = data; i != limit; ++i) {
-		streamer << *i << " ";
+	for (const double* ptr = data; ptr != limit; ++ptr) {
+		streamer << *ptr << " ";
 	}
 	streamer << "]" << endl;
 
@@ -117,8 +112,8 @@ ostream& operator<<(ostream& streamer, const SubVector& sv) {
 // @param ofstream& fileOut - print to this ofstream
 void SubVector::Print(fstream& outFile) const {
 	outFile << "\t\t[ ";
-	for (const double* i = data; i != limit; ++i) {
-		outFile << *i << " ";
+	for (const double* ptr = data; ptr != limit; ++ptr) {
+		outFile << *ptr << " ";
 	}
 	outFile << "]" << endl;
 
