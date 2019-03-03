@@ -16,12 +16,17 @@ Vector 3
 
 Vector 4
 	Elements: 3
-		[ 6 6 6 ]
+		[ 7 7 7 ]
 
 
 Vector 5
 	Elements: 3
-		[ 6 6 6 ]
+		[ 7 7 7 ]
+
+
+Vector 5
+	Elements: 3
+		[ 1 1 1 ]
 
 
 Vector 5
@@ -30,100 +35,63 @@ Vector 5
 
 
 Vector 5
-	Elements: 3
-		[ 6 6 6 ]
+	Elements: 5
+		[ -100 -100 -100 -100 -100 ]
 
-
-Attempting to access out of range elements.
 
 Vector 6
+	Elements: 4
+		[ -6 -24 -6 -24 ]
+
+
+Vector 7
 	Elements: 3
-		[ 0 0 0 ]
-
-ERROR:  const double Vector::extract(int) const
-	Attempting to access elements outside the Vector range.
-ERROR:  double Vector::operator()(int)
-	Attempting to access elements outside the Vector range.
-ERROR:  void Vector::insert(int, double)
-	Attempting to access elements outside the Vector range.
-ERROR:  SubVector& Vector::operator()(int, int)
-	Unordered Range.
-ERROR:  SubVector& Vector::operator()(int, int)
-	Attempting to access elements outside the Vector range.
-ERROR:  SubVector& Vector::operator()(int, int)
-	Attempting to access elements outside the Vector range.
-
-Vector 6
-	Elements: 3
-		[ 0 0 0 ]
+		[ -24 -6 -24 ]
 
 
 Vector 7
-	Elements: 5
-		[ -1 6 -1 -1 -1 ]
-
-
-Vector 7
-	Elements: 5
-		[ -2 -2 -2 -2 -2 ]
-
-
-Vector 7
-	Elements: 5
-		[ 24 24 24 24 24 ]
+	Elements: 2
+		[ -6 -24 ]
 
 
 Vector 8
-	Elements: 7
-		[ 10 9 8 7 6 5 4 ]
+	Elements: 11
+		[ 12 12 12 12 12 12 12 12 12 12 12 ]
 
 
-Vector 9
-	Elements: 4
-		[ 0 2 4 6 ]
+Vector 8
+	Elements: 11
+		[ 12 -6 -24 -6 -24 12 12 12 12 12 12 ]
 
 
-Vector 10
-	Elements: 3
-		[ 8 7 6 ]
+Vector 8
+	Elements: 11
+		[ 12 -6 -24 -6 -24 12 12 12 -6 -24 -6 ]
 
 
-Vector 10
-	Elements: 4
-		[ 0 2 4 6 ]
-
-Vector 10(0,1):
-		[ 0 2 ]
+Vector 8
+	Elements: 11
+		[ 12 -6 -24 -6 -24 12 12 -6 -6 -24 -6 ]
 
 
-Vector 10
-	Elements: 4
-		[ 0 0 0 6 ]
+Vector 8
+	Elements: 11
+		[ 0 0 -24 -6 -24 12 12 -6 -6 -24 -6 ]
 
-Vector 10(1,2):
-		[ 0 0 ]
-
-
-Vector 10
-	Elements: 4
-		[ 0 6 5 4 ]
-
-Vector 10(2,3):
-		[ 5 4 ]
+		[ 0 0 -24 -6 ]
 
 
-Vector 10
-	Elements: 4
-		[ 0 6 5 11 ]
+Vector 8
+	Elements: 11
+		[ 0 0 -24 -6 -24 12 -4 -4 -4 -24 -6 ]
 
-
-Vector 10
-	Elements: 4
-		[ -1 -1 5 11 ]
-
-
-Attempting to equate mismatched Vectors.
-ERROR:  void SubVector::operator=(const Vector& vec)
+ERROR:  double& Vector::operator()(int)
+	Attempting to access elements outside the Vector range.
+ERROR:  SubVector& Vector::operator()(int, int)
+	Attempting to access elements outside the Vector range.
+ERROR:  SubVector& Vector::operator()(int, int)
+	Unordered Range.
+ERROR:  void SubVector::operator=(const SubVector&)
 	Vectors are not the same size.
-ERROR:  void SubVector::operator=(const SubVector& sv)
+ERROR:  void SubVector::operator=(const Vector&)
 	Vectors are not the same size.
