@@ -149,6 +149,14 @@ double& Vector::operator()(int n) {
 	}
 	return data[n];
 }
+const double& Vector::operator()(int n) const {
+	if (n >= length || n < 0) {
+		throw "ERROR:  "
+			  "const double& Vector::operator()(int) const\n"
+			  "\tAttempting to access elements outside the Vector range.";
+	}
+	return data[n];
+}
 
 // Set the entire vector equal to the input value
 // @param double value - the input value
@@ -178,6 +186,14 @@ SubVector& Vector::operator()(int first, int last) {
 			  "\tAttempting to access elements outside the Vector range.";
 	}
 	return *(new SubVector(this, first, last));
+}
+
+
+// --- Query support --- //
+
+// @return int - the length of the vector
+int Vector::size() const {
+	return length;
 }
 
 

@@ -78,8 +78,6 @@ Vector 8
 	Elements: 11
 		[ 0 0 -24 -6 -24 12 12 -6 -6 -24 -6 ]
 
-		[ 0 0 -24 -6 ]
-
 
 Vector 8
 	Elements: 11
@@ -91,7 +89,7 @@ ERROR:  SubVector& Vector::operator()(int, int)
 	Attempting to access elements outside the Vector range.
 ERROR:  SubVector& Vector::operator()(int, int)
 	Unordered Range.
-ERROR:  void SubVector::operator=(const SubVector&)
+ERROR:  void SubVector::operator=(SubVector&)
 	Vectors are not the same size.
 ERROR:  void SubVector::operator=(const Vector&)
 	Vectors are not the same size.

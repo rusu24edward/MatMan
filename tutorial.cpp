@@ -167,7 +167,6 @@ int TestVector() {
 		Print(vec6, outFile);
 
 		// SubVector access
-		Print(vec6(1,2), outFile);
 		Vector vec7(vec6(1,3));
 		vec7.setName("Vector 7");
 		Print(vec7, outFile);
@@ -175,26 +174,24 @@ int TestVector() {
 		vec7 = vec6(0,1);
 		Print(vec7, outFile);
 
-		// Vector vec8(11,12);
-		// vec8.setName("Vector 8");
-		// Print(vec8, outFile);
+		Vector vec8(11,12);
+		vec8.setName("Vector 8");
+		Print(vec8, outFile);
 
-		// vec8(1,4) = vec6;
-		// Print(vec8, outFile);
+		vec8(1,4) = vec6;
+		Print(vec8, outFile);
 
-		// vec8(8,10) = vec8(1,3);
-		// Print(vec8, outFile);
+		vec8(8,10) = vec8(1,3);
+		Print(vec8, outFile);
 
-		// vec8(6,7) = vec8(7,8);
-		// Print(vec8, outFile);
+		vec8(6,7) = vec8(7,8);
+		Print(vec8, outFile);
 
-		// vec8(0,1) = vec2;
-		// Print(vec8, outFile);
+		vec8(0,1) = vec2;
+		Print(vec8, outFile);
 
-		// Print(vec8(0,3), outFile);
-
-		// vec8(6,8) = -4;
-		// Print(vec8, outFile);
+		vec8(6,8) = -4;
+		Print(vec8, outFile);
 
 		// Test all the error catches
 		Vector vec9(3);
@@ -213,16 +210,16 @@ int TestVector() {
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
-		// try {
-		// 	vec9(0,1) = vec8(0,2);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
-		// try {
-		// 	vec9(0,2) = vec3;
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
+		try {
+			vec9(0,1) = vec8(0,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			vec9(0,2) = vec3;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
 		status = 0;
 	} catch (...) {

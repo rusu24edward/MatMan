@@ -48,8 +48,10 @@ public:
 
 	// --- Functions and Operators --- //
 	double& operator()(int);
+	const double& operator()(int) const;
 	void operator=(double);
 	SubVector& operator()(int, int);
+	int size() const;
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const Vector&);
 	void Print(ofstream&) const;
