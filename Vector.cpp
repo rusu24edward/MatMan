@@ -1,6 +1,8 @@
 
 #include "Vector.h"
 
+#include <algorithm>
+
 using namespace std;
 
 // -------------------- //
@@ -93,12 +95,12 @@ Vector& Vector::operator=(const Vector& vec) {
 }
 
 // Assignment operator blows out the Vector data and sets it to the specified
-// SubVector. If the RHS points to the same beginning and end, then just return
-// this.
+// SubVector. If the RHS holds the Vector data that is the same as this, then
+// just return this.
 // @param SubVector& sv - SubVector to copy
 // @return - this Vector
 Vector& Vector::operator=(SubVector& sv) {
-	if (data != sv.data || limit != sv.limit) {
+	if (this != sv.data) {
 		deleteFields();
 		setFields(sv);
 	}
@@ -112,15 +114,10 @@ Vector& Vector::operator=(SubVector& sv) {
 // --- Accessors & Mutators --- //
 // ---------------------------- //
 
-// Get a constant pointer to the beginning of the vector
-// @return const double* - the pointer
-const double* Vector::begin() const {
-	return data;
-}
-// Get a constant pointer to one past the end of the vector
-// @return const double* - the pointer
-const double* Vector::end() const {
-	return limit;
+// Get the length of the Vector
+// @return int - the length of the Vector
+int Vector::getLength() const {
+	return length;
 }
 
 // Get the name
@@ -145,18 +142,19 @@ void Vector::setName(const string& n) {
 // @param int n - the element index
 // @return double& - the value at this index
 double& Vector::operator()(int n) {
-	if (n >= (limit - data) || n < 0) {
+	if (n >= length || n < 0) {
 		throw "ERROR:  "
 			  "double& Vector::operator()(int)\n"
 			  "\tAttempting to access elements outside the Vector range.";
 	}
-	return *(data + n);
+	return data[n];
 }
 
 // Set the entire vector equal to the input value
 // @param double value - the input value
 void Vector::operator=(double value) {
-	for (double* ptr = data; ptr != limit; ++ptr) {
+	for (std::vector<double>::iterator ptr = data.begin();
+		 ptr != data.end(); ++ptr) {
 		*ptr = value;
 	}
 }
@@ -174,12 +172,12 @@ SubVector& Vector::operator()(int first, int last) {
 			  "SubVector& Vector::operator()(int, int)\n"
 			  "\tUnordered Range.";
 	}
-	if (first < 0 || last >= (limit - data)) {
+	if (first < 0 || last >= length) {
 		throw "ERROR:  "
 			  "SubVector& Vector::operator()(int, int)\n"
 			  "\tAttempting to access elements outside the Vector range.";
 	}
-	return *(new SubVector(data + first, data + last + 1));
+	return *(new SubVector(this, first, last));
 }
 
 
@@ -192,9 +190,10 @@ SubVector& Vector::operator()(int first, int last) {
 // @param ostream& streamer - print to this ostream
 void Vector::Print(ostream& streamer) const {
 	streamer << endl << name << endl;
-	streamer << "\tElements: " << limit - data << endl;
+	streamer << "\tElements: " << length << endl;
 	streamer << "\t\t[ ";
-	for (const double* ptr = data; ptr != limit; ++ptr) {
+	for (std::vector<double>::const_iterator ptr = data.begin();
+		 ptr != data.end(); ++ptr) {
 		streamer << *ptr << " ";
 	}
 	streamer << "]" << endl;
@@ -208,9 +207,10 @@ ostream& operator<<(ostream& streamer, const Vector& vec) {
 // @param ofstream& fileOut - print to this ofstream
 void Vector::Print(ofstream& fileOut) const {
 	fileOut << endl << name << endl;
-	fileOut << "\tElements: " << limit - data << endl;
+	fileOut << "\tElements: " << length << endl;
 	fileOut << "\t\t[ ";
-	for (const double* ptr = data; ptr != limit; ++ptr) {
+	for (std::vector<double>::const_iterator ptr = data.begin();
+		 ptr != data.end(); ++ptr) {
 		fileOut << *ptr << " ";
 	}
 	fileOut << "]" << endl;
@@ -233,61 +233,34 @@ ofstream& operator<<(ofstream& fileOut, const Vector& vec) {
 // @param double value - set each element in the Vector to this value.
 // Default is 0.
 void Vector::setFields(int n, double value) {
-	data = new double[n];
-	limit = data + n;
-	for (double* ptr = data; ptr != limit; ++ptr) {
-		*ptr = value;
-	}
+	data = vector<double>(n, value);
+	length = n;
 }
 
 // Set the class fields
 // @param const vector<double>& d - vector from which to copy
 void Vector::setFields(const vector<double>& d) {
-	int n = d.size();
-	data = new double[n];
-	limit = data + n;
-
-	int i = 0;
-	for (double* ptr = data; ptr != limit; ++ptr) {
-		*ptr = d[i++];
-	}
+	data = d;
+	length = data.size();
 }
 
 // Set the class fields
 // @param const Vector& vec - Vector from which to copy
 void Vector::setFields(const Vector& vec) {
-	int n = vec.limit - vec.data;
-	data = new double[n];
-	limit = data + n;
-
-	double* ptr1;
-	const double* ptr2;
-	for (ptr1 = data, ptr2 = vec.begin();
-		 ptr1 != limit && ptr2 != vec.limit;
-		 ++ptr1, ++ptr2) {
-		*ptr1 = *ptr2;
-	}
+	data = vec.data;
+	length = data.size();
 }
 
 // Set the class fields
 // @param const SubVector& sv - SubVector from which to copy
 void Vector::setFields(const SubVector& sv) {
-	int n = sv.limit - sv.data;
-	data = new double[n];
-	limit = data + n;
-
-	double* ptr1;
-	const double* ptr2;
-	for (ptr1 = data, ptr2 = sv.data;
-		 ptr1 != limit, ptr2 != sv.limit;
-		 ptr1++, ptr2++) {
-		*ptr1 = *ptr2;
-	}
+	length = sv.length;
+	copy(sv.data->data.begin() + sv.begin, sv.data->data.begin() + sv.end, back_inserter(data));
 }
 
 // Delete the class fields
 void Vector::deleteFields() {
-	delete [] data;
-	data = limit = 0;
+	data.clear();
+	length = 0;
 }
 

@@ -7,12 +7,15 @@ using namespace std;
 // --- Constructors --- //
 // -------------------- //
 
-// Constructor sets the pointers to the input
-// @param double* d - the beginning pointer
-// @param double* l - the end pointer
-SubVector::SubVector(double* d, double* l) {
-	data = d;
-	limit = l;
+// Constructor sets the data and the limits
+// @param Vector* vec - pointer to the Vector data
+// @param int first - first index
+// @param int last - last index
+SubVector::SubVector(Vector* vec, int first, int last) {
+	data = vec;
+	begin = first;
+	end = last + 1;
+	length = end - begin;
 }
 
 
@@ -23,68 +26,69 @@ SubVector::SubVector(double* d, double* l) {
 
 // Destructor sets the pointers to 0
 SubVector::~SubVector() {
-	data = limit = 0;
+	data = 0;
+	begin = end = 0;
 }
 
 
 
-// ------------------------------- //
-// --- Functions and Operators --- //
-// ------------------------------- //
+// // ------------------------------- //
+// // --- Functions and Operators --- //
+// // ------------------------------- //
 
-// Set the values to the values from the input Vector
-// @param const Vector& vec - the input vector from which to copy
-void SubVector::operator=(const Vector& vec) {
-	if ((vec.end() - vec.begin()) != (limit - data)) {
-		throw "ERROR:  "
-			  "void SubVector::operator=(const Vector&)\n"
-			  "\tVectors are not the same size.";
-	}
+// // Set the values to the values from the input Vector
+// // @param const Vector& vec - the input vector from which to copy
+// void SubVector::operator=(const Vector& vec) {
+// 	if ((vec.end() - vec.begin()) != (limit - data)) {
+// 		throw "ERROR:  "
+// 			  "void SubVector::operator=(const Vector&)\n"
+// 			  "\tVectors are not the same size.";
+// 	}
 
-	double* leftIter = data;
-	double* leftEnd = limit;
-	const double* rightIter = vec.begin();
-	const double* rightEnd = vec.end();
-	while (leftIter != leftEnd && rightIter != rightEnd) {
-		*leftIter = *rightIter;
-		leftIter++;
-		rightIter++;
-	}
+// 	double* leftIter = data;
+// 	double* leftEnd = limit;
+// 	const double* rightIter = vec.begin();
+// 	const double* rightEnd = vec.end();
+// 	while (leftIter != leftEnd && rightIter != rightEnd) {
+// 		*leftIter = *rightIter;
+// 		leftIter++;
+// 		rightIter++;
+// 	}
 
-	delete this;
-}
+// 	delete this;
+// }
 
-// Set the values to the values from the input SubVector
-// @param - const SubVector& sv - the input SubVector from which to copy
-void SubVector::operator=(SubVector& sv) {
-	if ((sv.limit - sv.data) != (limit - data)) {
-		throw "ERROR:  "
-			  "void SubVector::operator=(const SubVector&)\n"
-			  "\tVectors are not the same size.";
-	}
+// // Set the values to the values from the input SubVector
+// // @param - const SubVector& sv - the input SubVector from which to copy
+// void SubVector::operator=(SubVector& sv) {
+// 	if ((sv.limit - sv.data) != (limit - data)) {
+// 		throw "ERROR:  "
+// 			  "void SubVector::operator=(const SubVector&)\n"
+// 			  "\tVectors are not the same size.";
+// 	}
 
-	double* leftIter = data;
-	double* leftEnd = limit;
-	const double* rightIter = sv.data;
-	const double* rightEnd = sv.limit;
-	while (leftIter != leftEnd && rightIter != rightEnd) {
-		*leftIter = *rightIter;
-		leftIter++;
-		rightIter++;
-	}
+// 	double* leftIter = data;
+// 	double* leftEnd = limit;
+// 	const double* rightIter = sv.data;
+// 	const double* rightEnd = sv.limit;
+// 	while (leftIter != leftEnd && rightIter != rightEnd) {
+// 		*leftIter = *rightIter;
+// 		leftIter++;
+// 		rightIter++;
+// 	}
 
-	delete &sv;
-	delete this;
-}
+// 	delete &sv;
+// 	delete this;
+// }
 
-// Set the values to the specified double
-// @param double d - Set values to this double
-void SubVector::operator=(double d) {
-	for (double* ptr = data; ptr != limit; ++ptr) {
-		*ptr = d;
-	}
-	delete this;
-}
+// // Set the values to the specified double
+// // @param double d - Set values to this double
+// void SubVector::operator=(double d) {
+// 	for (double* ptr = data; ptr != limit; ++ptr) {
+// 		*ptr = d;
+// 	}
+// 	delete this;
+// }
 
 
 
@@ -96,8 +100,8 @@ void SubVector::operator=(double d) {
 // @param ostream& streamer - print to this ostream
 void SubVector::Print(ostream& streamer) const {
 	streamer << "\t\t[ ";
-	for (const double* ptr = data; ptr != limit; ++ptr) {
-		streamer << *ptr << " ";
+	for (int i = begin; i < end; ++i) {
+		streamer << data->operator()(i) << " ";
 	}
 	streamer << "]" << endl;
 
@@ -112,8 +116,8 @@ ostream& operator<<(ostream& streamer, const SubVector& sv) {
 // @param ofstream& fileOut - print to this ofstream
 void SubVector::Print(fstream& outFile) const {
 	outFile << "\t\t[ ";
-	for (const double* ptr = data; ptr != limit; ++ptr) {
-		outFile << *ptr << " ";
+	for (int i = begin; i < end; ++i) {
+		outFile << data->operator()(i) << " ";
 	}
 	outFile << "]" << endl;
 

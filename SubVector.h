@@ -20,10 +20,10 @@ friend class Vector;
 
 public:
 
-	// --- Functions and Operators --- //
-	void operator=(const Vector&);
-	void operator=(SubVector&);
-	void operator=(double);
+	// // --- Functions and Operators --- //
+	// void operator=(const Vector&);
+	// void operator=(SubVector&);
+	// void operator=(double);
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const SubVector&);
 	void Print(fstream&) const;
@@ -33,14 +33,15 @@ public:
 private:
 
 	// --- Constructors --- //
-	SubVector(double* d, double* l);
+	SubVector(Vector*, int, int);
 
 	// --- Destructor --- //
 	~SubVector();
 
 	// --- Underlying Data --- //
-	double* data;
-	double* limit;
+	Vector* data;
+	int begin, end;
+	int length;
 };
 
 #endif

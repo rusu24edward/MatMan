@@ -18,7 +18,6 @@ using namespace std;
 //		- Basic class functionality (copying, assigning, printing, etc.).
 //		- Generate Vectors from vector<double>
 //		- Extract value from index
-//		- Insert value at index
 //		- Set all elements to a number
 //		- Generate SubVectors
 //		- Generate Vectors from SubVectors
@@ -43,8 +42,7 @@ public:
 	Vector& operator=(SubVector&);
 
 	// --- Accessors & Mutators --- //
-	const double* begin() const;
-	const double* end() const;
+	int getLength() const;
 	const string& getName() const;
 	void setName(const string&);
 
@@ -68,8 +66,8 @@ private:
 	void deleteFields();
 
 	// --- Underlying Data --- //
-	double* data;
-	double* limit;
+	vector<double> data;
+	int length;
 };
 
 #endif
