@@ -16,6 +16,8 @@ using namespace std;
 //		- Equals operator for Vectors, SubVectors, and doubles.
 class SubVector {
 
+friend class Vector;
+
 public:
 
 	// // --- Functions and Operators --- //
