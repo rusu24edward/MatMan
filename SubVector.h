@@ -20,7 +20,7 @@ friend class Vector;
 
 public:
 
-	// // --- Functions and Operators --- //
+	// --- Functions and Operators --- //
 	void operator=(const Vector&);
 	void operator=(SubVector&);
 	void operator=(double);
