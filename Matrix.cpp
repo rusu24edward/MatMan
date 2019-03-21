@@ -7,7 +7,6 @@ using namespace std;
 // --- Constructors --- //
 // -------------------- //
 
-
 // Default constructor sets the fields to their default states
 Matrix::Matrix() {
 	setFields();
@@ -37,36 +36,20 @@ Matrix::Matrix(int r, int c, double value) {
 // Matrix.
 // @param const vector<vector<double>>& d - this Matrix's data
 Matrix::Matrix(const vector<vector<double>>& d) {
-	int checkNumberOfColumns = d[0].size();
-	for (int i = 1; i < d.size(); ++i) {
-		if (d[i].size() != checkNumberOfColumns) {
-			throw "ERROR:  "
-				  "Matrix::Matrix(const vector<vector<double>>&)\n"
-				  "\tInconsistent number of columns in input argument.";
-
-		}
+	if (!checkCols(d)) {
+		throw "ERROR:  "
+			  "Matrix::Matrix(const vector<vector<double>>&)\n"
+			  "\tInconsistent number of columns in input argument.";
 	}
-
-	setFields(d.size(), checkNumberOfColumns);
+	setFields(d);
 	name = UNAMED;
-	data = d;
 }
 
 // Copy constructor copies the input Matrix.
 // @param const Matrix& mat - Matrix from which to copy
 Matrix::Matrix(const Matrix& mat) {
-	setFields(mat.nRows, mat.nCols);
+	setFields(mat);
 	name = UNAMED;
-	data = mat.data;
-}
-
-// Copy constructor copies the input submatrix
-// @param SubMatrix mat - the input submatrix to copy
-Matrix::Matrix(SubMatrix mat) {
-	setFields(mat->nRows, mat->nCols);
-	name = UNAMED;
-	data = mat->data;
-	delete mat;
 }
 
 
@@ -77,7 +60,7 @@ Matrix::Matrix(SubMatrix mat) {
 
 // Destructor sets all fields to their default states and removes the name
 Matrix::~Matrix() {
-	setFields();
+	deleteFields();
 	name = "";
 }
 
@@ -87,44 +70,28 @@ Matrix::~Matrix() {
 // --- Assignment Operators --- //
 // ---------------------------- //
 
+// Assignment operator blows out the Matrix and replace it with the input vector
+// @param const vector<vector<double>>& d - copy the data
+// @return Matrix& - this Matrix
+Matrix& Matrix::operator=(const vector<vector<double>>& d) {
+	if (!checkCols(d)) {
+		throw "ERROR:  "
+			  "Matrix& Matrix::operator=(const vector<vector<double>>&)\n"
+			  "\tInconsistent number of columns in input argument.";
+	}
+	deleteFields();
+	setFields(d);
+	return *this;
+}
+
 // Assignemnt operator blows out the Matrix data and sets it to the RHS
 // @param const Matrix& mat - Matrix to copy
 // @return Matrix& - this Matrix
 Matrix& Matrix::operator=(const Matrix& mat) {
 	if (this != &mat) {
-		setFields(mat.nRows, mat.nCols);
-		data = mat.data;
+		deleteFields();
+		setFields(mat);
 	}
-	return *this;
-}
-
-// Assignment operator blows out Matrix and replaces it with the input submatrix
-// @param SubMatrix mat - the input submatrix to copy
-Matrix& Matrix::operator=(SubMatrix mat) {
-	if (this != mat) {
-		setFields(mat->nRows, mat->nCols);
-		data = mat->data;
-		delete mat;
-	}
-	return *this;
-}
-
-// Assignment operator blows out the Matrix and replace it with the input vector
-// @param const vector<vector<double>>& d - copy the data
-// @return Matrix& - this Matrix
-Matrix& Matrix::operator=(const vector<vector<double>>& d) {
-	int checkNumberOfColumns = d[0].size();
-	for (int i = 1; i < d.size(); ++i) {
-		if (d[i].size() != checkNumberOfColumns) {
-			throw "ERROR:  "
-				  "Matrix& Matrix::operator=(const vector<vector<double>>&)\n"
-				  "\tInconsistent number of columns in input argument.";
-		}
-	}
-
-	setFields(d.size(), checkNumberOfColumns);
-	data = d;
-
 	return *this;
 }
 
@@ -154,51 +121,31 @@ void Matrix::setName(const string& n) {
 // --- Functions and Operators --- //
 // ------------------------------- //
 
-// --- Element insertion and extraction --- //
+// --- Element support --- //
 
 // Extract the value at the specified index
 // @param int r - the row index
 // @param int c - the column index
-// @return const double - the value at this index
-const double Matrix::extract(int r, int c) const {
+// @return double& - the value at this index
+double& Matrix::operator()(int r, int c) {
 	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 		throw "ERROR:  "
-			  "const double Matrix::extract(int, int) const\n"
+			  "double& Matrix::operator()(int, int)\n"
 			  "\tAttempting to access elements outside the matrix range.";
 	}
 	return data[r][c];
 }
-const double Matrix::operator()(int r, int c) const {
+const double& Matrix::operator()(int r, int c) const {
 	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 		throw "ERROR:  "
-			  "const double Matrix::operator()(int, int) const\n"
+			  "double& Matrix::operator()(int, int)\n"
 			  "\tAttempting to access elements outside the matrix range.";
 	}
 	return data[r][c];
 }
 
-// Insert specified value at specified index
-// @param int r - the row index
-// @param int c - the column index
-// @param double value - the value to insert at the index
-void Matrix::insert(int r, int c, double value) {
-	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
-		throw "ERROR:  "
-			  "void Matrix::insert(int, int, double)\n"
-			  "\tAttempting to access elements outside the matrix range.";
-	}
-	data[r][c] = value;
-}
-
-// Insert a value to all elements of the Matrix
+// Set the entire Matrix equal to the input value
 // @param double value - the value to insert
-void Matrix::insert(double value) {
-	for (int i = 0; i < nRows; ++i) {
-		for (int j = 0; j < nCols; ++j) {
-			data[i][j] = value;
-		}
-	}
-}
 void Matrix::operator=(double value) {
 	for (int i = 0; i < nRows; ++i) {
 		for (int j = 0; j < nCols; ++j) {
@@ -208,84 +155,7 @@ void Matrix::operator=(double value) {
 }
 
 
-// --- Submatrix Extraction --- //
-
-// Extract a submatrix specified by a range
-// @param t - the top lmiit
-// @param b - the bottom limit
-// @param l - the left limit
-// @param r - the right limit
-// @return SubMatrix - the submatrix
-Matrix::SubMatrix Matrix::extract(int t, int b, int l, int r) const {
-	if (t < 0 || b >= nRows || l < 0 || r >= nCols) {
-		throw "ERROR:  "
-			  "SubMatrix Matrix::extract(int, int, int, int)\n"
-			  "\tAttempting to access elements outside the matrix range.";
-	}
-	if (b < t || r < l) {
-		throw "ERROR:  "
-			  "SubMatrix Matrix::extract(int, int, int, int)\n"
-			  "\tUnordered range.";
-	}
-
-	SubMatrix mat_out = new Matrix(b-t+1, r-l+1);
-	for (int i = t, ii = 0; i < b+1; ++i, ++ii) {
-		for (int j = l, jj = 0; j < r+1; ++j, ++jj) {
-			mat_out->insert(ii,jj,data[i][j]);
-		}
-	}
-	return mat_out;
-}
-Matrix::SubMatrix Matrix::operator()(int t, int b, int l, int r) const {
-	if (t < 0 || b >= nRows || l < 0 || r >= nCols) {
-		throw "ERROR:  "
-			  "SubMatrix Matrix::operator()(int, int, int, int)\n"
-			  "\tAttempting to access elements outside the matrix range.";
-	}
-	if (b < t || r < l) {
-		throw "ERROR:  "
-			  "SubMatrix Matrix::operator()(int, int, int, int)\n"
-			  "\tUnordered range.";
-	}
-
-	SubMatrix mat_out = new Matrix(b-t+1, r-l+1);
-	for (int i = t, ii = 0; i < b+1; ++i, ++ii) {
-		for (int j = l, jj = 0; j < r+1; ++j, ++jj) {
-			mat_out->insert(ii,jj,data[i][j]);
-		}
-	}
-	return mat_out;
-}
-
-
-// --- Matrix Stucture --- //
-
-// Query the size of the Matrix
-// @return vector<int> - a 2 element vector that is {nRows, nCols}
-vector<int> Matrix::size() {
-	return vector<int>{nRows, nCols};
-}
-
-// Query the length of the specified dimension
-// @param int d - The desired dimension. 1 for rows, 2 for cols.
-// @return int - the length of the matrix along the given dimension.
-int Matrix::size(int d) {
-	if (d <= 0 || d > 2) {
-		throw "ERROR:  "
-			  "int Matrix::size(int)\n"
-			  "\tN/A dimension. Dimension must be 1 for rows or 2 for cols.";
-	} else if (d == 1) {
-		return nRows;
-	} else if (d == 2) {
-		return nCols;
-	}
-}
-
-// Query the length of the longer dimension
-// @return int - the lenght of the longer dimension.
-int Matrix::length() {
-	return nCols > nRows ? nCols : nRows;
-}
+// --- SubMatrix Support --- //
 
 
 // ---------------- //
@@ -347,10 +217,43 @@ ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
 // @param int c - the number of columns
 // @param double value - set each element in the matrix to this value
 void Matrix::setFields(int r, int c, double value) {
-	// write a check here for the parameters. e.g. r >= 0
 	nRows = r;
 	nCols = c;
 	data = vector<vector<double>>(r, vector<double>(c, value));
-	// setLimitsToData();
+}
+
+// Set the class fields
+// @param const vector<vector<double>>& d - the input vector from which to copy
+void Matrix::setFields(const vector<vector<double>>& d) {
+	data = d;
+	nRows = data.size();
+	nCols = data[0].size();
+}
+
+// Set the class fields
+// @param const Matrix& mat - the input Matrix from which to copy
+void Matrix::setFields(const Matrix& mat) {
+	data = mat.data;
+	nRows = data.size();
+	nCols = data[0].size();
+}
+
+// Delete the class fields
+void Matrix::deleteFields() {
+	data.clear();
+	nRows = nCols = 0;
+}
+
+// Check that the number of elements in each vector is the same
+// @param const vector<vector<double>>& - input vector of vectors
+// @return bool - true if they're all the same, false otherwise.
+bool Matrix::checkCols(const vector<vector<double>>& d) {
+	int checkNumberOfColumns = d[0].size();
+	for (int i = 1; i < d.size(); ++i) {
+		if (d[i].size() != checkNumberOfColumns) {
+			return false;
+		}
+	}
+	return true;
 }
 
