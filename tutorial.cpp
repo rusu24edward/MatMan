@@ -6,13 +6,17 @@
 
 #include "Vector.h"
 #include "SubVector.h"
+#include "Matrix.h"
 
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestVector();
+int TestMatrix();
 void Print(const Vector&, ofstream&);
 void Print(const SubVector&, ofstream&);
+void Print(const Matrix&, ofstream&);
+// void Print(const SubMatrix&, ofstream&);
 
 
 // Run the program, which right now just runs a test suite. Inputs are not used.
@@ -24,6 +28,7 @@ int main (int argc, char** argv) {
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("VectorTest");
+	testNames.push_back("MatrixTest");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -52,10 +57,10 @@ int main (int argc, char** argv) {
 // @return int - 1 if test failed, 0 if test passed.
 int RunTests(const std::string& testName) {
 	int status = 0;
-	if (testName == "MatrixTest") {
-		// status = TestMatrix();
-	} else if (testName == "VectorTest") {
+	if (testName == "VectorTest") {
 		status = TestVector();
+	} else if (testName == "MatrixTest") {
+		status = TestMatrix();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -238,4 +243,91 @@ void Print(const Vector& v, ofstream& outFile) {
 
 void Print(const SubVector& sv, ofstream& outFile) {
 	outFile << sv << std::endl;
+}
+
+
+
+
+int TestMatrix() {
+	int status = 1;
+
+	std::string testFileName = "current/MatrixTest.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	std::vector<vector<double>> helperMat1(4, std::vector<double>(3, -2.4));
+	std::vector<vector<double>> helperMat2;
+	helperMat2.push_back(std::vector<double>(12));
+	helperMat2.push_back(std::vector<double>(12));
+	helperMat2.push_back(std::vector<double>(7));
+	helperMat2.push_back(std::vector<double>(12));
+
+	try{
+
+		Matrix mat1;
+		Print(mat1, outFile);
+
+		Matrix mat2(3,3);
+		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
+
+		Matrix mat3(6, 4, 11);
+		mat3.setName("Matrix 3");
+		Print(mat3, outFile);
+
+		Matrix mat4(helperMat1);
+		mat4.setName("Matrix 4");
+		Print(mat4, outFile);
+
+		try {
+			Matrix mat5(helperMat2);
+			mat5.setName("Matrix 5");
+			Print(mat5, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		Matrix mat6(mat3);
+		mat6.setName("Matrix 6");
+		Print(mat6, outFile);
+
+		mat6 = helperMat1;
+		Print(mat6, outFile);
+
+		mat6 = mat2;
+		Print(mat6, outFile);
+
+		mat6(1,1) = mat3(0,1);
+		Print(mat6, outFile);
+
+		try {
+			mat6(6,6) = 12;
+			Print(mat6, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat6(1,2) = mat4(10,0);
+			Print(mat6, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+
+}
+
+void Print(const Matrix& mat, ofstream& outFile) {
+	outFile << mat << std::endl;
 }
