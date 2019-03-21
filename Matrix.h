@@ -67,6 +67,7 @@ private:
 	void setFields(const Matrix&);
 	// void setFields(SubMatrix&);
 	void deleteFields();
+	bool checkCols(const vector<vector<double>>&);
 
 
 	// --- Underlying Data --- //
