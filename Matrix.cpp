@@ -158,6 +158,28 @@ void Matrix::operator=(double value) {
 // --- SubMatrix Support --- //
 
 
+// --- Query Support --- //
+
+// Return the length of the greater dimension
+int Matrix::length() const {
+	return nRows > nCols ? nRows : nCols;
+}
+
+// Return the size of the queried dimension.
+// @param int dim - if 1, then return nRows
+//				  - if 2, then return nCols
+//				  - else, return the larger length
+// @return int - the length
+int Matrix::size(int dim) const {
+	if (dim == 1) {
+		return nRows;
+	} else if (dim == 2) {
+		return nCols;
+	} else {
+		return length();
+	}
+}
+
 // ---------------- //
 // --- Printing --- //
 // ---------------- //

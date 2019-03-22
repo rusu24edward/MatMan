@@ -24,7 +24,7 @@ SubVector::SubVector(Vector* vec, int first, int last) {
 // --- Destructor --- //
 // ------------------ //
 
-// Destructor sets the pointers to 0
+// Destructor sets all to 0
 SubVector::~SubVector() {
 	data = 0;
 	begin = end = 0;
@@ -37,7 +37,7 @@ SubVector::~SubVector() {
 // ------------------------------- //
 
 // Set the values to the values from the input Vector
-// @param const Vector& vec - the input vector from which to copy
+// @param const Vector& vec - the input Vector from which to copy
 void SubVector::operator=(const Vector& vec) {
 	if (length != vec.size()) {
 		throw "ERROR:  "

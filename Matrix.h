@@ -52,7 +52,8 @@ public:
 	const double& operator()(int, int) const;
 	void operator=(double);
 	// SubMatrix& operator()(int, int, int, int);
-	// int length() const;
+	int length() const;
+	int size(int dim = 0) const;
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const Matrix&);
 	void Print(ofstream&) const;
