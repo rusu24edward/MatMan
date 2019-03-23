@@ -52,6 +52,13 @@ Matrix::Matrix(const Matrix& mat) {
 	name = UNAMED;
 }
 
+// Copy constructor copies the input SubMatrix
+Matrix::Matrix(SubMatrix& sm) {
+	setFields(sm);
+	name = UNAMED;
+	delete &sm;
+}
+
 
 
 // ------------------ //
@@ -94,6 +101,17 @@ Matrix& Matrix::operator=(const Matrix& mat) {
 	}
 	return *this;
 }
+
+// Assignemnt operator blows out the Matrix data and sets it to the RHS
+// @param SubMatrix& sm - SubMatrix to copy
+// @return Matrix& - this Matrix
+Matrix& Matrix::operator=(SubMatrix& sm) {
+	deleteFields();
+	setFields(sm);
+	delete &sm;
+	return *this;
+}
+
 
 
 
@@ -156,6 +174,26 @@ void Matrix::operator=(double value) {
 
 
 // --- SubMatrix Support --- //
+
+// Generate a SubMatrix from this Matrix using the indicies
+// @param int top - top index
+// @param int down - bottom index
+// @param int left - left index
+// @param int right - right index
+// @return SubMatrix& - the SubMatrix
+SubMatrix& Matrix::operator()(int top, int down, int left, int right) {
+	if (down < top || right < left) {
+		throw "ERROR:  "
+			  "SubMatrix& Matrix::operator()(int, int, int, int)\n"
+			  "\tUnordered Range.";
+	}
+	if (top < 0 || down >= nRows || left < 0 || right >= nCols) {
+		throw "ERROR:  "
+			  "SubMatrix& Matrix::operator()(int, int, int, int)\n"
+			  "\tAttempting to access elements outside the Matrix range.";
+	}
+	return *(new SubMatrix(this, top, down, left, right));
+}
 
 
 // --- Query Support --- //
@@ -258,6 +296,19 @@ void Matrix::setFields(const Matrix& mat) {
 	data = mat.data;
 	nRows = data.size();
 	nCols = data[0].size();
+}
+
+// Set the class fields
+// @param const SubMatrix& sm - the input SubMattrix from which to copy
+void Matrix::setFields(const SubMatrix& sm) {
+	nRows = sm.nRows;
+	nCols = sm.nCols;
+	data = vector<vector<double>>(sm.nRows, vector<double>(sm.nCols));
+	for (int i = 0; i < nRows; ++i) {
+		for (int j = 0; j < nCols; ++j) {
+			data[i][j] = sm.data->operator()(i + sm.top, j + sm.left);
+		}
+	}
 }
 
 // Delete the class fields

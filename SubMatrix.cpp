@@ -97,37 +97,37 @@ void SubMatrix::operator=(double d) {
 
 // Print to an ostream
 // @param ostream& streamer - print to this ostream
-void SubVector::Print(ostream& streamer) const {
+void SubMatrix::Print(ostream& streamer) const {
 	for (int i = top; i < down; ++i) {
 		streamer << "\t\t[ ";
 		for (int j = left; j < right; ++j) {
-			streamer << data->operator(i,j) << endl;
+			streamer << data->operator()(i,j) << endl;
 		}
 		streamer << "]" << endl;
 	}
 
 	delete this;
 }
-ostream& operator<<(ostream& streamer, const SubVector& sv) {
-	sv.Print(streamer);
+ostream& operator<<(ostream& streamer, const SubMatrix& sm) {
+	sm.Print(streamer);
 	return streamer;
 }
 
 // Print to an fstream
 // @param ofstream& fileOut - print to this ofstream
-void SubVector::Print(fstream& outFile) const {
+void SubMatrix::Print(fstream& outFile) const {
 	for (int i = top; i < down; ++i) {
 		outFile << "\t\t[ ";
 		for (int j = left; j < right; ++j) {
-			outFile << data->operator(i,j) << endl;
+			outFile << data->operator()(i,j) << endl;
 		}
 		outFile << "]" << endl;
 	}
 
 	delete this;
 }
-ofstream& operator<<(ofstream& outFile, const SubVector& sv) {
-	sv.Print(outFile);
+ofstream& operator<<(ofstream& outFile, const SubMatrix& sm) {
+	sm.Print(outFile);
 	return outFile;
 }
 

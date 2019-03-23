@@ -8,6 +8,8 @@
 #include <string>
 
 #include "NamedObject.h"
+#include "SubMatrix.h"
+class SubMatrix;
 
 using namespace std;
 
@@ -31,7 +33,7 @@ public:
 	Matrix(int, int, double);
 	Matrix(const vector<vector<double>>&);
 	Matrix(const Matrix&);
-	// Matrix(SubMatrix&);
+	Matrix(SubMatrix&);
 
 	// --- Destructor --- //
 	~Matrix();
@@ -39,7 +41,7 @@ public:
 	// --- Assignment Operators --- //
 	Matrix& operator=(const vector<vector<double>>&);
 	Matrix& operator=(const Matrix&);
-	// Matrix& operator=(SubMatrix&);
+	Matrix& operator=(SubMatrix&);
 
 
 	// --- Accessors & Mutators --- //
@@ -51,7 +53,7 @@ public:
 	double& operator()(int, int);
 	const double& operator()(int, int) const;
 	void operator=(double);
-	// SubMatrix& operator()(int, int, int, int);
+	SubMatrix& operator()(int, int, int, int);
 	int length() const;
 	int size(int dim = 0) const;
 	void Print(ostream&) const;
@@ -66,7 +68,7 @@ private:
 	void setFields(int r = 0, int c = 0, double value = 0);
 	void setFields(const vector<vector<double>>&);
 	void setFields(const Matrix&);
-	// void setFields(SubMatrix&);
+	void setFields(const SubMatrix&);
 	void deleteFields();
 	bool checkCols(const vector<vector<double>>&);
 
