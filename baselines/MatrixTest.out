@@ -5,164 +5,56 @@ UNAMED
 
 
 Matrix 2
-	Rows: 2
-	Cols: 2
-		[ 0 0 ]
-		[ 0 0 ]
-
-
-Matrix 2
-	Rows: 9
-	Cols: 2
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
+	Rows: 3
+	Cols: 3
+		[ 0 0 0 ]
+		[ 0 0 0 ]
+		[ 0 0 0 ]
 
 
 Matrix 3
-	Rows: 0
-	Cols: 0
+	Rows: 6
+	Cols: 4
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
 
 
 Matrix 4
-	Rows: 0
-	Cols: 0
-
-
-Matrix 5
-	Rows: 2
-	Cols: 2
-		[ 1 1 ]
-		[ 1 1 ]
-
-
-Matrix 6
-	Rows: 2
-	Cols: 2
-		[ 1 1 ]
-		[ 1 1 ]
-
-
-Matrix 7
-	Rows: 9
-	Cols: 2
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-
-
-Matrix 8
-	Rows: 9
-	Cols: 2
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-		[ -1 -1 ]
-
-
-Matrix 9
-	Rows: 1
-	Cols: 2
-		[ 0 0 ]
-
-
-Matrix 10
 	Rows: 4
-	Cols: 2
-		[ 0 10 ]
-		[ 1 9 ]
-		[ 2 8 ]
-		[ 3 7 ]
+	Cols: 3
+		[ -2.4 -2.4 -2.4 ]
+		[ -2.4 -2.4 -2.4 ]
+		[ -2.4 -2.4 -2.4 ]
+		[ -2.4 -2.4 -2.4 ]
 
-
-Matrix 11
-	Rows: 1
-	Cols: 1
-		[ 9 ]
-
-
-Attempting to construct Matrix with inconsistent vector.
 ERROR:  Matrix::Matrix(const vector<vector<double>>&)
 	Inconsistent number of columns in input argument.
 
-Attempting to assign Matrix to inconsistent vector.
-ERROR:  Matrix& Matrix::operator=(const vector<vector<double>>&)
-	Inconsistent number of columns in input argument.
-
-Matrix 13
-	Rows: 1
-	Cols: 2
-		[ 0 0 ]
-
-
-Attempting to access out of range elements.
-
-Matrix 14
-	Rows: 3
-	Cols: 1
-		[ 0 ]
-		[ 0 ]
-		[ 0 ]
-
-ERROR:  const double Matrix::extract(int, int) const
-	Attempting to access elements outside the matrix range.
-ERROR:  const double Matrix::operator()(int, int) const
-	Attempting to access elements outside the matrix range.
-ERROR:  void Matrix::insert(int, int, double)
-	Attempting to access elements outside the matrix range.
-
-Matrix 14
-	Rows: 3
-	Cols: 1
-		[ 1 ]
-		[ 1 ]
-		[ 1 ]
+Matrix 6
+	Rows: 6
+	Cols: 4
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
+		[ 11 11 11 11 ]
 
 
-Matrix 14
+Matrix 6
 	Rows: 4
-	Cols: 2
-		[ 0 10 ]
-		[ 1 9 ]
-		[ 2 8 ]
-		[ 3 7 ]
-
-
-Matrix 14
-	Rows: 4
-	Cols: 2
-		[ 0 10 ]
-		[ 1 9 ]
-		[ 2 8 ]
-		[ 3 7 ]
-
-
-Matrix 15
-	Rows: 3
 	Cols: 3
-		[ 1 1 1 ]
-		[ 1 2 1 ]
-		[ 1 1 1 ]
+		[ -2.4 -2.4 -2.4 ]
+		[ -2.4 -2.4 -2.4 ]
+		[ -2.4 -2.4 -2.4 ]
+		[ -2.4 -2.4 -2.4 ]
 
 
-Matrix 15
+Matrix 6
 	Rows: 3
 	Cols: 3
 		[ 0 0 0 ]
@@ -170,40 +62,98 @@ Matrix 15
 		[ 0 0 0 ]
 
 
-Matrix 15
+Matrix 6
 	Rows: 3
 	Cols: 3
-		[ 24 24 24 ]
-		[ 24 24 24 ]
-		[ 24 24 24 ]
+		[ 0 0 0 ]
+		[ 0 11 0 ]
+		[ 0 0 0 ]
+
+ERROR:  double& Matrix::operator()(int, int)
+	Attempting to access elements outside the matrix range.
+ERROR:  double& Matrix::operator()(int, int)
+	Attempting to access elements outside the matrix range.
+
+Matrix 7
+	Rows: 10
+	Cols: 10
+		[ 0 1 2 3 4 5 6 7 8 9 ]
+		[ 0 2 4 6 8 10 12 14 16 18 ]
+		[ 0 3 6 9 12 15 18 21 24 27 ]
+		[ 0 4 8 12 16 20 24 28 32 36 ]
+		[ 0 5 10 15 20 25 30 35 40 45 ]
+		[ 0 6 12 18 24 30 36 42 48 54 ]
+		[ 0 7 14 21 28 35 42 49 56 63 ]
+		[ 0 8 16 24 32 40 48 56 64 72 ]
+		[ 0 9 18 27 36 45 54 63 72 81 ]
+		[ 0 10 20 30 40 50 60 70 80 90 ]
+
+ERROR:  SubMatrix& Matrix::operator()(int, int, int, int)
+	Unordered Range.
+ERROR:  SubMatrix& Matrix::operator()(int, int, int, int)
+	Unordered Range.
+ERROR:  SubMatrix& Matrix::operator()(int, int, int, int)
+	Attempting to access elements outside the Matrix range.
+ERROR:  SubMatrix& Matrix::operator()(int, int, int, int)
+	Attempting to access elements outside the Matrix range.
+
+Matrix 8
+	Rows: 2
+	Cols: 6
+		[ 8 12 16 20 24 28 ]
+		[ 10 15 20 25 30 35 ]
 
 
-Matrix 16
-	Rows: 3
+Matrix 8
+	Rows: 5
 	Cols: 2
-		[ 0 10 ]
-		[ 1 9 ]
-		[ 2 8 ]
+		[ 6 12 ]
+		[ 7 14 ]
+		[ 8 16 ]
+		[ 9 18 ]
+		[ 10 20 ]
 
 
-Matrix 16
-	Rows: 1
+Matrix 7
+	Rows: 10
+	Cols: 10
+		[ 0 1 2 3 4 5 6 7 8 9 ]
+		[ 0 0 0 0 8 10 12 14 16 18 ]
+		[ 0 0 0 0 12 15 18 21 24 27 ]
+		[ 0 0 0 0 16 20 24 28 32 36 ]
+		[ 0 5 10 15 20 25 30 35 40 45 ]
+		[ 0 6 12 18 24 30 36 42 48 54 ]
+		[ 0 7 14 21 28 35 42 49 56 63 ]
+		[ 0 8 16 24 32 40 48 56 64 72 ]
+		[ 0 9 18 27 36 45 54 63 72 81 ]
+		[ 0 10 20 30 40 50 60 70 80 90 ]
+
+ERROR:  void SubMatrix::operator=(const Matrix&)
+	Matrices are not the same size.
+
+Matrix 7
+	Rows: 10
+	Cols: 10
+		[ 0 1 2 3 4 5 6 7 8 9 ]
+		[ 0 0 0 0 8 10 12 14 16 18 ]
+		[ 0 0 0 0 12 15 18 21 24 27 ]
+		[ 0 0 0 0 16 20 24 28 32 36 ]
+		[ 0 5 10 15 20 25 30 35 40 45 ]
+		[ 0 6 12 18 24 30 7 8 9 54 ]
+		[ 0 7 14 21 28 35 14 16 18 63 ]
+		[ 0 8 16 24 32 40 21 24 27 72 ]
+		[ 0 9 18 27 36 45 54 63 72 81 ]
+		[ 0 10 20 30 40 50 60 70 80 90 ]
+
+ERROR:  void SubMatrix::operator=(SubMatrix&)
+	Matrices are not the same size.
+
+Matrix 8
+	Rows: 5
 	Cols: 2
-		[ 3 7 ]
+		[ -2 -2 ]
+		[ -2 -2 ]
+		[ 8 16 ]
+		[ 9 18 ]
+		[ 10 20 ]
 
-
-Matrix 17
-	Rows: 1
-	Cols: 1
-		[ 24 ]
-
-Size of Matrix 10: [ 4 2 ]
-Length of Matrix 14: 4
-Length of Matrix 9: 2
-Number of rows in Matrix 16: 1
-Number of columns in Matrix 16: 2
-Attempting to query bad dimension size.
-ERROR:  int Matrix::size(int)
-	N/A dimension. Dimension must be 1 for rows or 2 for cols.
-ERROR:  int Matrix::size(int)
-	N/A dimension. Dimension must be 1 for rows or 2 for cols.

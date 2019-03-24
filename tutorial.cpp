@@ -7,6 +7,7 @@
 #include "Vector.h"
 #include "SubVector.h"
 #include "Matrix.h"
+#include "SubMatrix.h"
 
 
 int RunTests(const std::string&);
@@ -16,7 +17,7 @@ int TestMatrix();
 void Print(const Vector&, ofstream&);
 void Print(const SubVector&, ofstream&);
 void Print(const Matrix&, ofstream&);
-// void Print(const SubMatrix&, ofstream&);
+void Print(const SubMatrix&, ofstream&);
 
 
 // Run the program, which right now just runs a test suite. Inputs are not used.
@@ -316,6 +317,66 @@ int TestMatrix() {
 			outFile << msg << std::endl;
 		}
 
+		Matrix mat7(10,10);
+		mat7.setName("Matrix 7");
+		for (int i = 0; i < 10; ++i) {
+			for (int j = 0; j < 10; ++j) {
+				mat7(i,j) = (i+1)*j;
+			}
+		}
+		Print(mat7, outFile);
+
+		try {
+			mat7(4,3,1,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat7(3,4,6,4);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat7(4,11,1,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat7(3,4,-1,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		Matrix mat8(mat7(3,4,2,7));
+		mat8.setName("Matrix 8");
+		Print(mat8, outFile);
+
+		mat8 = mat7(5,9,1,2);
+		Print(mat8, outFile);
+
+		mat7(1,3,1,3) = mat2;
+		Print(mat7, outFile);
+
+		try {
+			mat8(1,1,0,1) = mat6;
+			Print(mat8, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		mat7(5,7,6,8) = mat7(0,2,7,9);
+		Print(mat7, outFile);
+
+		try {
+			mat7(1,2,3,4) = mat4(1,1,1,2);
+			Print(mat7, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		mat8(0,1,0,1) = -2;
+		Print(mat8, outFile);
+
 		status = 0;
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;
@@ -330,4 +391,8 @@ int TestMatrix() {
 
 void Print(const Matrix& mat, ofstream& outFile) {
 	outFile << mat << std::endl;
+}
+
+void Print(const SubMatrix& sm, ofstream& outFile) {
+	outFile << sm << std::endl;
 }

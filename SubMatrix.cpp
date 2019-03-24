@@ -16,9 +16,9 @@ using namespace std;
 SubMatrix::SubMatrix(Matrix* mat, int _top, int _down, int _left, int _right) {
 	data = mat;
 	top = _top;
-	down = _down;
+	down = _down+1;
 	left = _left;
-	right = _right;
+	right = _right+1;
 	nRows = down - top;
 	nCols = right - left;
 }
