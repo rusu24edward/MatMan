@@ -8,12 +8,14 @@
 #include "SubVector.h"
 #include "Matrix.h"
 #include "SubMatrix.h"
+#include "Reader.h"
 
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestVector();
 int TestMatrix();
+int TestReader();
 void Print(const Vector&, ofstream&);
 void Print(const SubVector&, ofstream&);
 void Print(const Matrix&, ofstream&);
@@ -30,6 +32,7 @@ int main (int argc, char** argv) {
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("VectorTest");
 	testNames.push_back("MatrixTest");
+	testNames.push_back("ReaderTest");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -62,6 +65,8 @@ int RunTests(const std::string& testName) {
 		status = TestVector();
 	} else if (testName == "MatrixTest") {
 		status = TestMatrix();
+	} else if (testName == "ReaderTest") {
+		status = TestReader();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -395,4 +400,33 @@ void Print(const Matrix& mat, ofstream& outFile) {
 
 void Print(const SubMatrix& sm, ofstream& outFile) {
 	outFile << sm << std::endl;
+}
+
+
+
+// The test for the Reader class.
+// @return int - 1 if failed, 0 if passed.
+int TestReader() {
+	int status = 1;
+
+	std::string testFileName = "current/ReaderTest.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+		Matrix mat = Reader::Read("ex1data1.txt");
+		Print(mat,outFile);
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
 }
