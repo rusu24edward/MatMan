@@ -16,6 +16,7 @@ int CompareAgainstBaseline(const std::string&);
 int TestVector();
 int TestMatrix();
 int TestReader();
+int Example1();
 void Print(const Vector&, ofstream&);
 void Print(const SubVector&, ofstream&);
 void Print(const Matrix&, ofstream&);
@@ -33,6 +34,7 @@ int main (int argc, char** argv) {
 	testNames.push_back("VectorTest");
 	testNames.push_back("MatrixTest");
 	testNames.push_back("ReaderTest");
+	testNames.push_back("Example1");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -67,6 +69,8 @@ int RunTests(const std::string& testName) {
 		status = TestMatrix();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
+	} else if (testName = "Example1") {
+		status = Example1();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -424,6 +428,37 @@ int TestReader() {
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Reader Test!" << std::endl;
 		outFile << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+}
+
+
+
+// Test a combination of class. This is not a smoke test. It should be on a higher testing-level
+// than the others here.
+// @return int - 1 if failed, 0 if passed
+int Example1() {
+	int status = 1;
+
+	std::string testFileName = "current/Example1.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try {
+
+		Matrix data = Reader::Read("ex1data1.txt");
+
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Example1 Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Example1 Test!" << std::endl;
 		status = 1;
 	}
 
