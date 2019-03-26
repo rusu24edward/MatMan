@@ -69,7 +69,7 @@ int RunTests(const std::string& testName) {
 		status = TestMatrix();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
-	} else if (testName = "Example1") {
+	} else if (testName == "Example1") {
 		status = Example1();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
@@ -453,7 +453,17 @@ int Example1() {
 	try {
 
 		Matrix data = Reader::Read("ex1data1.txt");
+		data.setName("Data");
+		Print(data, outFile);
 
+		int numberOfSamples = data.size(1);
+		Matrix features = data(0, numberOfSamples-1, 0, 0);
+		features.setName("Features");
+		Print(features, outFile);
+
+		Matrix response = data(0, numberOfSamples-1, 1, 1);
+		response.setName("Response");
+		Print(response, outFile);
 
 		status = 0;
 	} catch (...) {
