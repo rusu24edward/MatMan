@@ -1,6 +1,6 @@
 all: tutorial.exe
 
-tutorial.exe: tutorial.o NamedObject.o Vector.o SubVector.o Matrix.o SubMatrix.o
+tutorial.exe: clean tutorial.o NamedObject.o Vector.o SubVector.o Matrix.o SubMatrix.o
 	g++ -o tutorial.exe tutorial.o NamedObject.o Vector.o SubVector.o Matrix.o SubMatrix.o
 
 tutorial.o: tutorial.cpp
