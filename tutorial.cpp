@@ -452,18 +452,41 @@ int Example1() {
 
 	try {
 
+		outFile << "Reading data..." << std::endl;
 		Matrix data = Reader::Read("ex1data1.txt");
 		data.setName("Data");
 		Print(data, outFile);
 
+		outFile << "Extracting features..." << std::endl;
 		int numberOfSamples = data.size(1);
 		Matrix features = data(0, numberOfSamples-1, 0, 0);
 		features.setName("Features");
 		Print(features, outFile);
 
+		outFile << "Extracting response" << std::endl;
 		Matrix response = data(0, numberOfSamples-1, 1, 1);
 		response.setName("Response");
 		Print(response, outFile);
+
+		outFile << "Adding a vector of ones to the features..." << std::endl;
+		// (1) Add vector of ones to the features
+
+		outFile << "Creating theta..." << std::endl;
+		Matrix theta(2,1);
+		theta.setName("theta");
+
+		outFile << "Computing cost..." << std::endl;
+		// (2) Compute cost
+		// (2a) Matrix multiplication
+		// (2b) Matrix/Vector norms
+
+		outFile << "Gradient descent..." << std::endl;
+		// (3) Gradient descent
+		// (3a) Matrix multiplication and subtraction
+		// (3b) Matrix Sum
+
+
+
 
 		status = 0;
 	} catch (...) {
