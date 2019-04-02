@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-#include "Vector.h"
-#include "SubVector.h"
 #include "Matrix.h"
 #include "SubMatrix.h"
 #include "Reader.h"
@@ -13,12 +11,9 @@
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
-int TestVector();
 int TestMatrix();
 int TestReader();
-int Example1();
-void Print(const Vector&, ofstream&);
-void Print(const SubVector&, ofstream&);
+// int Example1();
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
 
@@ -31,7 +26,6 @@ int main (int argc, char** argv) {
 
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
-	testNames.push_back("VectorTest");
 	testNames.push_back("MatrixTest");
 	testNames.push_back("ReaderTest");
 	testNames.push_back("Example1");
@@ -63,14 +57,12 @@ int main (int argc, char** argv) {
 // @return int - 1 if test failed, 0 if test passed.
 int RunTests(const std::string& testName) {
 	int status = 0;
-	if (testName == "VectorTest") {
-		status = TestVector();
-	} else if (testName == "MatrixTest") {
+	if (testName == "MatrixTest") {
 		status = TestMatrix();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
-	} else if (testName == "Example1") {
-		status = Example1();
+	// } else if (testName == "Example1") {
+	// 	status = Example1();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -122,141 +114,6 @@ int CompareAgainstBaseline(const std::string& testName) {
 
 	return status;
 }
-
-
-
-// The test for the Vector class.
-// @return int - 1 if failed, 0 if passed.
-int TestVector() {
-	int status = 1;
-
-	std::string testFileName = "current/VectorTest.out";
-	std::ofstream outFile(testFileName);
-	if (!outFile.is_open()) {
-		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
-		return 1;
-	}
-
-	std::vector<double> helperVec1(3,7.);
-	std::vector<double> helperVec2(3,1.);
-
-	try{
-
-		// Vector construction and assignment
-		Vector vec1;
-		Print(vec1, outFile);
-
-		Vector vec2(2);
-		vec2.setName("Vector 2");
-		Print(vec2, outFile);
-
-		Vector vec3(5,-2.);
-		vec3.setName("Vector 3");
-		Print(vec3, outFile);
-
-		Vector vec4(helperVec1);
-		vec4.setName("Vector 4");
-		Print(vec4, outFile);
-
-		Vector vec5(vec4);
-		vec5.setName("Vector 5");
-		Print(vec5, outFile);
-
-		vec5 = helperVec2;
-		Print(vec5, outFile);
-
-		vec5 = vec3;
-		Print(vec5, outFile);
-
-		vec5 = -100;
-		Print(vec5, outFile);
-
-		// Element access
-		Vector vec6(4);
-		vec6.setName("Vector 6");
-		for (int i = 0; i < 4; ++i) {
-			vec6(i) = -(i+1)*6;
-		}
-		vec6(2) = vec6(0);
-		vec6(1) = vec6(3);
-		Print(vec6, outFile);
-
-		// SubVector access
-		Vector vec7(vec6(1,3));
-		vec7.setName("Vector 7");
-		Print(vec7, outFile);
-
-		vec7 = vec6(0,1);
-		Print(vec7, outFile);
-
-		Vector vec8(11,12);
-		vec8.setName("Vector 8");
-		Print(vec8, outFile);
-
-		vec8(1,4) = vec6;
-		Print(vec8, outFile);
-
-		vec8(8,10) = vec8(1,3);
-		Print(vec8, outFile);
-
-		vec8(6,7) = vec8(7,8);
-		Print(vec8, outFile);
-
-		vec8(0,1) = vec2;
-		Print(vec8, outFile);
-
-		vec8(6,8) = -4;
-		Print(vec8, outFile);
-
-		// Test all the error catches
-		Vector vec9(3);
-		try {
-			vec9(4) = 5;
-		} catch (const char* msg) {
-			outFile << msg << std::endl;
-		}
-		try {
-			Print(vec9(1,6), outFile);
-		} catch (const char* msg) {
-			outFile << msg << std::endl;
-		}
-		try {
-			Print(vec9(1,0), outFile);
-		} catch (const char* msg) {
-			outFile << msg << std::endl;
-		}
-		try {
-			vec9(0,1) = vec8(0,2);
-		} catch (const char* msg) {
-			outFile << msg << std::endl;
-		}
-		try {
-			vec9(0,2) = vec3;
-		} catch (const char* msg) {
-			outFile << msg << std::endl;
-		}
-
-		status = 0;
-	} catch (...) {
-		std::cout << "FAILURE: Cannot complete Vector Test!" << std::endl;
-		outFile << "FAILURE: Cannot complete Vector Test!" << std::endl;
-		status = 1;
-	}
-
-	outFile.close();
-	return status;
-}
-
-void Print(const Vector& v, ofstream& outFile) {
-	outFile << v << std::endl;
-}
-
-void Print(const SubVector& sv, ofstream& outFile) {
-	outFile << sv << std::endl;
-}
-
-
-
 
 int TestMatrix() {
 	int status = 1;
@@ -437,64 +294,28 @@ int TestReader() {
 
 
 
-// Test a combination of class. This is not a smoke test. It should be on a higher testing-level
-// than the others here.
-// @return int - 1 if failed, 0 if passed
-int Example1() {
-	int status = 1;
+// // Test a combination of class. This is not a smoke test. It should be on a higher testing-level
+// // than the others here.
+// // @return int - 1 if failed, 0 if passed
+// int Example1() {
+// 	int status = 1;
 
-	std::string testFileName = "current/Example1.out";
-	std::ofstream outFile(testFileName);
-	if (!outFile.is_open()) {
-		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
-		return 1;
-	}
+// 	std::string testFileName = "current/Example1.out";
+// 	std::ofstream outFile(testFileName);
+// 	if (!outFile.is_open()) {
+// 		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+// 		return 1;
+// 	}
 
-	try {
+// 	try {
 
-		outFile << "Reading data..." << std::endl;
-		Matrix data = Reader::Read("ex1data1.txt");
-		data.setName("Data");
-		Print(data, outFile);
+// 		status = 0;
+// 	} catch (...) {
+// 		std::cout << "FAILURE: Cannot complete Example1 Test!" << std::endl;
+// 		outFile << "FAILURE: Cannot complete Example1 Test!" << std::endl;
+// 		status = 1;
+// 	}
 
-		outFile << "Extracting features..." << std::endl;
-		int numberOfSamples = data.size(1);
-		Matrix features = data(0, numberOfSamples-1, 0, 0);
-		features.setName("Features");
-		Print(features, outFile);
-
-		outFile << "Extracting response" << std::endl;
-		Matrix response = data(0, numberOfSamples-1, 1, 1);
-		response.setName("Response");
-		Print(response, outFile);
-
-		outFile << "Adding a vector of ones to the features..." << std::endl;
-		// (1) Add vector of ones to the features
-
-		outFile << "Creating theta..." << std::endl;
-		Matrix theta(2,1);
-		theta.setName("theta");
-
-		outFile << "Computing cost..." << std::endl;
-		// (2) Compute cost
-		// (2a) Matrix multiplication
-		// (2b) Matrix/Vector norms
-
-		outFile << "Gradient descent..." << std::endl;
-		// (3) Gradient descent
-		// (3a) Matrix multiplication and subtraction
-		// (3b) Matrix Sum
-
-
-
-
-		status = 0;
-	} catch (...) {
-		std::cout << "FAILURE: Cannot complete Example1 Test!" << std::endl;
-		outFile << "FAILURE: Cannot complete Example1 Test!" << std::endl;
-		status = 1;
-	}
-
-	outFile.close();
-	return status;
-}
+// 	outFile.close();
+// 	return status;
+// }

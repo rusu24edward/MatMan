@@ -33,6 +33,9 @@ private:
 	// --- Destructor --- //
 	~SubMatrix();
 
+	// --- Functions and Operators --- //
+	double& operator()(int, int);
+
 	// --- Underlying Data --- //
 	Matrix* data;
 	int left, right, top, down;
