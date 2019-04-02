@@ -53,6 +53,7 @@ Matrix::Matrix(const Matrix& mat) {
 }
 
 // Copy constructor copies the input SubMatrix
+// @param SubMatrix& sm - input SubMatrix from which to copy
 Matrix::Matrix(SubMatrix& sm) {
 	setFields(sm);
 	name = UNAMED;
@@ -78,7 +79,7 @@ Matrix::~Matrix() {
 // ---------------------------- //
 
 // Assignment operator blows out the Matrix and replace it with the input vector
-// @param const vector<vector<double>>& d - copy the data
+// @param const vector<vector<double>>& d - vector from which to copy
 // @return Matrix& - this Matrix
 Matrix& Matrix::operator=(const vector<vector<double>>& d) {
 	if (!checkCols(d)) {
@@ -91,8 +92,8 @@ Matrix& Matrix::operator=(const vector<vector<double>>& d) {
 	return *this;
 }
 
-// Assignemnt operator blows out the Matrix data and sets it to the RHS
-// @param const Matrix& mat - Matrix to copy
+// Assignemnt operator blows out the Matrix and sets it to the RHS
+// @param const Matrix& mat - Matrix from which to copy
 // @return Matrix& - this Matrix
 Matrix& Matrix::operator=(const Matrix& mat) {
 	if (this != &mat) {
@@ -102,8 +103,8 @@ Matrix& Matrix::operator=(const Matrix& mat) {
 	return *this;
 }
 
-// Assignemnt operator blows out the Matrix data and sets it to the RHS
-// @param SubMatrix& sm - SubMatrix to copy
+// Assignemnt operator blows out the Matrix and sets it to the RHS
+// @param SubMatrix& sm - SubMatrix frrom which to copy
 // @return Matrix& - this Matrix
 Matrix& Matrix::operator=(SubMatrix& sm) {
 	deleteFields();
@@ -203,7 +204,7 @@ int Matrix::length() const {
 	return nRows > nCols ? nRows : nCols;
 }
 
-// Return the size of the queried dimension.
+// Return the size of the specified dimension.
 // @param int dim - if 1, then return nRows
 //				  - if 2, then return nCols
 //				  - else, return the larger length
@@ -299,14 +300,14 @@ void Matrix::setFields(const Matrix& mat) {
 }
 
 // Set the class fields
-// @param const SubMatrix& sm - the input SubMattrix from which to copy
-void Matrix::setFields(const SubMatrix& sm) {
+// @param const SubMatrix& sm - the input SubMatrix from which to copy
+void Matrix::setFields(SubMatrix& sm) {
 	nRows = sm.nRows;
 	nCols = sm.nCols;
 	data = vector<vector<double>>(sm.nRows, vector<double>(sm.nCols));
 	for (int i = 0; i < nRows; ++i) {
 		for (int j = 0; j < nCols; ++j) {
-			data[i][j] = sm.data->operator()(i + sm.top, j + sm.left);
+			data[i][j] = sm(i, j);
 		}
 	}
 }

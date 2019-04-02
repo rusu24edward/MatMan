@@ -1,7 +1,7 @@
 all: tutorial.exe
 
-tutorial.exe: tutorial.o NamedObject.o Vector.o SubVector.o Matrix.o SubMatrix.o Reader.o
-	g++ -o tutorial.exe tutorial.o NamedObject.o Vector.o SubVector.o Matrix.o SubMatrix.o Reader.o
+tutorial.exe: clean tutorial.o NamedObject.o Matrix.o SubMatrix.o Reader.o
+	g++ -o tutorial.exe tutorial.o NamedObject.o Matrix.o SubMatrix.o Reader.o
 
 tutorial.o: tutorial.cpp
 	g++ -c tutorial.cpp
@@ -21,15 +21,9 @@ SubMatrix.o: SubMatrix.cpp SubMatrix.h
 Matrix.o: Matrix.cpp Matrix.h
 	g++ -c Matrix.cpp
 
-SubVector.o: SubVector.cpp SubVector.h
-	g++ -c SubVector.cpp
-
-Vector.o: Vector.cpp Vector.h NamedObject.h
-	g++ -c Vector.cpp
-
 NamedObject.o: NamedObject.cpp NamedObject.h
 	g++ -c NamedObject.cpp
 
 clean:
-	rm -rf NamedObject.o Vector.o SubVector.o Matrix.o SubMatrix.o Reader.o tutorial.o tutorial.exe
+	rm -rf NamedObject.o Matrix.o SubMatrix.o Reader.o tutorial.o tutorial.exe
 

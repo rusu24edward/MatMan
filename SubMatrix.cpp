@@ -52,7 +52,7 @@ void SubMatrix::operator=(const Matrix& mat) {
 
 	for (int i = 0; i < nRows; ++i) {
 		for (int j = 0; j < nCols; ++j) {
-			data->operator()(i+top, j+left) = mat(i,j);
+			this->operator()(i, j) = mat(i, j);
 		}
 	}
 
@@ -70,7 +70,7 @@ void SubMatrix::operator=(SubMatrix& sm) {
 
 	for (int i = 0; i < nRows; ++i) {
 		for (int j = 0; j < nCols; ++j) {
-			data->operator()(i+top, j+left) = sm.data->operator()(i+sm.top,j+sm.left);
+			this->operator()(i, j) = sm(i, j);
 		}
 	}
 
@@ -82,11 +82,19 @@ void SubMatrix::operator=(SubMatrix& sm) {
 void SubMatrix::operator=(double d) {
 	for (int i = 0; i < nRows; ++i) {
 		for (int j = 0; j < nCols; ++j) {
-			data->operator()(i+top, j+left) = d;
+			this->operator()(i, j) = d;
 		}
 	}
 
 	delete this;
+}
+
+// Extract the value at the specified index of the SubMatrix.
+// @param int i - the ith row
+// @param int j - the jth row
+// @return double& - reference to the double at the (i,j)th position of the SubMatrix.
+double& SubMatrix::operator()(int i, int j) {
+	return data->operator()(i + top, j + left);
 }
 
 
@@ -130,18 +138,5 @@ ofstream& operator<<(ofstream& outFile, const SubMatrix& sm) {
 	sm.Print(outFile);
 	return outFile;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

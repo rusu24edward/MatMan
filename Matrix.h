@@ -68,7 +68,7 @@ private:
 	void setFields(int r = 0, int c = 0, double value = 0);
 	void setFields(const vector<vector<double>>&);
 	void setFields(const Matrix&);
-	void setFields(const SubMatrix&);
+	void setFields(SubMatrix&);
 	void deleteFields();
 	bool checkCols(const vector<vector<double>>&);
 
