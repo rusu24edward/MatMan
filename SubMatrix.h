@@ -20,6 +20,7 @@ public:
 	void operator=(const Matrix&);
 	void operator=(SubMatrix&);
 	void operator=(double);
+	double& operator()(int, int);
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const SubMatrix&);
 	void Print(fstream&) const;
@@ -32,9 +33,6 @@ private:
 
 	// --- Destructor --- //
 	~SubMatrix();
-
-	// --- Functions and Operators --- //
-	double& operator()(int, int);
 
 	// --- Underlying Data --- //
 	Matrix* data;
