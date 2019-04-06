@@ -16,8 +16,8 @@ public:
 		const Matrix&, const Matrix&, MatrixCombinationType);
 	static Matrix BuildMatrixFromCombination(
 		const Matrix&, SubMatrix&, MatrixCombinationType);
-	// static Matrix BuildMatrixFromCombination(
-	// 	const SubMatrix&, const Matrix&, MatrixCombinationType);
+	static Matrix BuildMatrixFromCombination(
+		SubMatrix&, const Matrix&, MatrixCombinationType);
 	// static Matrix BuildMatrixFromCombination(
 	// 	const SubMatrix&, const SubMatrix&, MatrixCombinationType);
 };

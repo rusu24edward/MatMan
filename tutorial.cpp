@@ -301,6 +301,14 @@ int TestMatrixBuilder() {
 		combinedMatrix6.setName("Combined Matrix 6");
 		Print(combinedMatrix6, outFile);
 
+		Matrix combinedMatrix7 = MatrixBuilder::BuildMatrixFromCombination(mat1(1,3,0,5), mat3, MatrixCombinationType::LeftRight);
+		combinedMatrix7.setName("Combined Matrix 7");
+		Print(combinedMatrix7, outFile);
+
+		Matrix combinedMatrix8 = MatrixBuilder::BuildMatrixFromCombination(mat3(0,2,2,3), mat2, MatrixCombinationType::TopDown);
+		combinedMatrix8.setName("Combined Matrix 8");
+		Print(combinedMatrix8, outFile);
+
 
 
 		status = 0;
