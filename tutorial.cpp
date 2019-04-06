@@ -293,6 +293,16 @@ int TestMatrixBuilder() {
 		combinedMatrix4.setName("Combined Matrix 4");
 		Print(combinedMatrix4, outFile);
 
+		Matrix combinedMatrix5 = MatrixBuilder::BuildMatrixFromCombination(mat2, mat1(0,3,3,4), MatrixCombinationType::TopDown);
+		combinedMatrix5.setName("Combined Matrix 5");
+		Print(combinedMatrix5, outFile);
+
+		Matrix combinedMatrix6 = MatrixBuilder::BuildMatrixFromCombination(mat3, mat2(0,2,1,1), MatrixCombinationType::LeftRight);
+		combinedMatrix6.setName("Combined Matrix 6");
+		Print(combinedMatrix6, outFile);
+
+
+
 		status = 0;
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;
