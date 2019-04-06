@@ -13,7 +13,6 @@ int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 int TestReader();
-// int Example1();
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
 
@@ -28,7 +27,6 @@ int main (int argc, char** argv) {
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
 	testNames.push_back("ReaderTest");
-	testNames.push_back("Example1");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -61,8 +59,6 @@ int RunTests(const std::string& testName) {
 		status = TestMatrix();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
-	// } else if (testName == "Example1") {
-	// 	status = Example1();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -278,8 +274,25 @@ int TestReader() {
 	}
 
 	try{
-		Matrix mat = Reader::Read("ex1data1.txt");
-		Print(mat,outFile);
+		Matrix mat1 = Reader::Read("ex1data1.txt", ',');
+		mat1.setName("Matrix 1");
+		Print(mat1,outFile);
+
+		try {
+			Matrix mat2 = Reader::Read("ex1data2.txt", ',');
+			mat2.setName("Matrix 2");
+			Print(mat2, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		try {
+			Matrix mat3 = Reader::Read("ex1data3.txt", ',');
+			mat3.setName("Matrix 3");
+			Print(mat3, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
 		status = 0;
 	} catch (...) {
@@ -294,28 +307,3 @@ int TestReader() {
 
 
 
-// // Test a combination of class. This is not a smoke test. It should be on a higher testing-level
-// // than the others here.
-// // @return int - 1 if failed, 0 if passed
-// int Example1() {
-// 	int status = 1;
-
-// 	std::string testFileName = "current/Example1.out";
-// 	std::ofstream outFile(testFileName);
-// 	if (!outFile.is_open()) {
-// 		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
-// 		return 1;
-// 	}
-
-// 	try {
-
-// 		status = 0;
-// 	} catch (...) {
-// 		std::cout << "FAILURE: Cannot complete Example1 Test!" << std::endl;
-// 		outFile << "FAILURE: Cannot complete Example1 Test!" << std::endl;
-// 		status = 1;
-// 	}
-
-// 	outFile.close();
-// 	return status;
-// }
