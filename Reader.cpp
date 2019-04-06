@@ -25,6 +25,7 @@ Matrix Reader::Read(const string& fileName, char delimiter) {
 		vector<double> rowIn;
 		double inputDouble;
 		while(iss >> inputDouble) { // Loop over each item in the line
+			std::cout << inputDouble << std::endl;
 			rowIn.push_back(inputDouble);
 	        if (iss.peek() == delimiter) {
 	            iss.ignore();

@@ -1,5 +1,5 @@
 
-UNAMED
+Matrix 1
 	Rows: 97
 	Cols: 2
 		[ 6.1101 17.592 ]
@@ -100,3 +100,7 @@ UNAMED
 		[ 13.394 9.0551 ]
 		[ 5.4369 0.61705 ]
 
+ERROR:  Matrix::Matrix(const vector<vector<double>>&)
+	Inconsistent number of columns in input argument.
+ERROR:  Matrix::Matrix(const vector<vector<double>>&)
+	Inconsistent number of columns in input argument.

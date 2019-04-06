@@ -274,8 +274,25 @@ int TestReader() {
 	}
 
 	try{
-		Matrix mat = Reader::Read("ex1data1.txt", ',');
-		Print(mat,outFile);
+		Matrix mat1 = Reader::Read("ex1data1.txt", ',');
+		mat1.setName("Matrix 1");
+		Print(mat1,outFile);
+
+		try {
+			Matrix mat2 = Reader::Read("ex1data2.txt", ',');
+			mat2.setName("Matrix 2");
+			Print(mat2, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		try {
+			Matrix mat3 = Reader::Read("ex1data3.txt", ',');
+			mat3.setName("Matrix 3");
+			Print(mat3, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
 		status = 0;
 	} catch (...) {
