@@ -14,11 +14,11 @@ class MatrixBuilder {
 public:
 	static Matrix BuildMatrixFromCombination(
 		const Matrix&, const Matrix&, MatrixCombinationType);
-	// Matrix MatrixBuilder::BuildMatrixFromCombination(
-	// 	const Matrix&, const SubMatrix&, MatrixCombinationType);
-	// Matrix MatrixBuilder::BuildMatrixFromCombination(
+	static Matrix BuildMatrixFromCombination(
+		const Matrix&, SubMatrix&, MatrixCombinationType);
+	// static Matrix BuildMatrixFromCombination(
 	// 	const SubMatrix&, const Matrix&, MatrixCombinationType);
-	// Matrix MatrixBuilder::BuildMatrixFromCombination(
+	// static Matrix BuildMatrixFromCombination(
 	// 	const SubMatrix&, const SubMatrix&, MatrixCombinationType);
 };
 
