@@ -21,6 +21,7 @@ public:
 	void operator=(SubMatrix&);
 	void operator=(double);
 	double& operator()(int, int);
+	int size(int dim = 0) const;
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const SubMatrix&);
 	void Print(fstream&) const;
