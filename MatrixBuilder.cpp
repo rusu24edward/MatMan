@@ -76,6 +76,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 	switch (rule) {
 		case LeftRight:
 			if (first.size(1) != last.size(1)) {
+				delete &last;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)\n"
 				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
@@ -92,11 +93,13 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 						helper[i][j + nColsLeft] = last(i, j);
 					}
 				}
+				delete &last;
 				return *(new Matrix(helper));
 			}
 			break;
 		case TopDown:
 			if (first.size(2) != last.size(2)) {
+				delete &last;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)\n"
 				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
@@ -115,10 +118,12 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 						helper[i + nRowsTop][j] = last(i, j);
 					}
 				}
+				delete &last;
 				return *(new Matrix(helper));
 			}
 			break;
 		default:
+			delete &last;
 			throw "ERROR:  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)\n"
 				  "\tUnsupported MatrixCombinationType";
