@@ -3,11 +3,13 @@
 
 #include <vector>
 #include <sstream>
+#include <string>
 
-// Read a comma delimitted file into a Matrix
+// Read a file into a Matrix.
 // @param const string& fileName - the name of the file
+// @param const char* delimiter - single character that separates columns
 // @return Matrix - the resulting Matrix
-Matrix Reader::Read(const string& fileName) {
+Matrix Reader::Read(const string& fileName, char delimiter) {
 
 	ifstream inFile(fileName);
 	if (!inFile.is_open()) {
@@ -24,7 +26,7 @@ Matrix Reader::Read(const string& fileName) {
 		double inputDouble;
 		while(iss >> inputDouble) { // Loop over each item in the line
 			rowIn.push_back(inputDouble);
-	        if (iss.peek() == ',') {
+	        if (iss.peek() == delimiter) {
 	            iss.ignore();
 	        }
 		}

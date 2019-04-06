@@ -274,7 +274,7 @@ int TestReader() {
 	}
 
 	try{
-		Matrix mat = Reader::Read("ex1data1.txt");
+		Matrix mat = Reader::Read("ex1data1.txt", ',');
 		Print(mat,outFile);
 
 		status = 0;
