@@ -6,11 +6,15 @@
 
 #include "Matrix.h"
 #include "SubMatrix.h"
+#include "MatrixBuilder.h"
+
+#include "Enums.h"
 
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
+int TestMatrixBuilder();
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
 
@@ -24,6 +28,7 @@ int main (int argc, char** argv) {
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
+	testNames.push_back("TestMatrixBuilder");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -54,6 +59,8 @@ int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
 		status = TestMatrix();
+	} else if (testName == "TestMatrixBuilder") {
+		status = TestMatrixBuilder();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -243,6 +250,59 @@ int TestMatrix() {
 
 	outFile.close();
 	return status;
+
+}
+
+int TestMatrixBuilder() {
+	int status = 1;
+
+	std::string testFileName = "current/TestMatrixBuilder.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+
+		Matrix mat1(4, 6, 1.);
+		mat1.setName("Matrix 1");
+		Print(mat1, outFile);
+
+		Matrix mat2(4, 2, 2.);
+		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
+
+		Matrix mat3(3, 6, 3.);
+		mat3.setName("Matrix 3");
+		Print(mat3, outFile);
+
+		Matrix combinedMatrix1 = MatrixBuilder::BuildMatrixFromCombination(mat1, mat2, MatrixCombinationType::LeftRight);
+		combinedMatrix1.setName("Combined Matrix 1");
+		Print(combinedMatrix1, outFile);
+
+		Matrix combinedMatrix2 = MatrixBuilder::BuildMatrixFromCombination(mat2, mat1, MatrixCombinationType::LeftRight);
+		combinedMatrix2.setName("Combined Matrix 2");
+		Print(combinedMatrix2, outFile);
+
+		Matrix combinedMatrix3 = MatrixBuilder::BuildMatrixFromCombination(mat1, mat3, MatrixCombinationType::TopDown);
+		combinedMatrix3.setName("Combined Matrix 3");
+		Print(combinedMatrix3, outFile);
+
+		Matrix combinedMatrix4 = MatrixBuilder::BuildMatrixFromCombination(mat3, mat1, MatrixCombinationType::TopDown);
+		combinedMatrix4.setName("Combined Matrix 4");
+		Print(combinedMatrix4, outFile);
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Matrix Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+
 
 }
 

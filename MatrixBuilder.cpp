@@ -5,7 +5,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 		const Matrix& first, const Matrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
-			if (first.size(1) != last.size()) {
+			if (first.size(1) != last.size(1)) {
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)\n"
 				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
