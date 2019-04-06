@@ -1,6 +1,13 @@
 
 #include "MatrixBuilder.h"
 
+// Build a new Matrix by combining two others according to specification.
+// @param const Matrix& first - the first Matrix involved in the combination
+// @param const Matrix& last - the second Matrix involved in the combination
+// @param MatrixCombinatoinType rule - specify how the Matrices will be combined:
+//									   (1) LeftRight
+//									   (2) TopDown
+// @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
 Matrix MatrixBuilder::BuildMatrixFromCombination(
 		const Matrix& first, const Matrix& last, MatrixCombinationType rule) {
 	switch (rule) {
