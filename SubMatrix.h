@@ -16,6 +16,9 @@ friend class Matrix;
 
 public:
 
+	// --- Destructor --- //
+	~SubMatrix();
+
 	// --- Functions and Operators --- //
 	void operator=(const Matrix&);
 	void operator=(SubMatrix&);
@@ -31,9 +34,6 @@ private:
 
 	// --- Constructors --- //
 	SubMatrix(Matrix*, int, int, int, int);
-
-	// --- Destructor --- //
-	~SubMatrix();
 
 	// --- Underlying Data --- //
 	Matrix* data;

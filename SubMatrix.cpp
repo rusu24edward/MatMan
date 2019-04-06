@@ -74,6 +74,7 @@ void SubMatrix::operator=(SubMatrix& sm) {
 		}
 	}
 
+	delete &sm;
 	delete this;
 }
 
