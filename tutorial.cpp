@@ -317,7 +317,13 @@ int TestMatrixBuilder() {
 		combinedMatrix10.setName("Combined Matrix 10");
 		Print(combinedMatrix10, outFile);
 
+		Matrix combinedMatrix11 = MatrixBuilder::BuildMatrixFromCombination(mat2, mat2, MatrixCombinationType::LeftRight);
+		combinedMatrix11.setName("Combined Matrix 11");
+		Print(combinedMatrix11, outFile);
 
+		Matrix combinedMatrix12 = MatrixBuilder::BuildMatrixFromCombination(mat2, mat2, MatrixCombinationType::TopDown);
+		combinedMatrix12.setName("Combined Matrix 12");
+		Print(combinedMatrix12, outFile);
 
 		status = 0;
 	} catch (...) {
