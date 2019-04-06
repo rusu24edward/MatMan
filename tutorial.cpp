@@ -6,11 +6,13 @@
 
 #include "Matrix.h"
 #include "SubMatrix.h"
+#include "Reader.h"
 
 
 int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
+int TestReader();
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
 
@@ -24,6 +26,7 @@ int main (int argc, char** argv) {
 	std::vector<std::string> testNames;
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
+	testNames.push_back("ReaderTest");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -54,6 +57,8 @@ int RunTests(const std::string& testName) {
 	int status = 0;
 	if (testName == "MatrixTest") {
 		status = TestMatrix();
+	} else if (testName == "ReaderTest") {
+		status = TestReader();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -252,4 +257,50 @@ void Print(const Matrix& mat, ofstream& outFile) {
 
 void Print(const SubMatrix& sm, ofstream& outFile) {
 	outFile << sm << std::endl;
+}
+
+
+
+// The test for the Reader class.
+// @return int - 1 if failed, 0 if passed.
+int TestReader() {
+	int status = 1;
+
+	std::string testFileName = "current/ReaderTest.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+		Matrix mat1 = Reader::Read("ex1data1.txt", ',');
+		mat1.setName("Matrix 1");
+		Print(mat1,outFile);
+
+		try {
+			Matrix mat2 = Reader::Read("ex1data2.txt", ',');
+			mat2.setName("Matrix 2");
+			Print(mat2, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		try {
+			Matrix mat3 = Reader::Read("ex1data3.txt", ',');
+			mat3.setName("Matrix 3");
+			Print(mat3, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
 }
