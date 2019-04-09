@@ -1,5 +1,6 @@
 
 #include "Matrix.h"
+#include "MatrixBuilder.h"
 
 using namespace std;
 
@@ -218,6 +219,15 @@ int Matrix::size(int dim) const {
 		return length();
 	}
 }
+
+
+// --- Mathematical Operations Support --- //
+
+Matrix& Matrix::operator*(const Matrix& RHS) const {
+	return MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
+}
+
+
 
 // ---------------- //
 // --- Printing --- //

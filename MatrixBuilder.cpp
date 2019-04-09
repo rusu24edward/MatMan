@@ -291,3 +291,10 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 
 
 
+Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& mat1, const Matrix& mat2) {
+	return *(new Matrix());
+	// return new Matrix();
+}
+
+
+

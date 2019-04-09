@@ -16,6 +16,7 @@ int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 int TestMatrixBuilder();
+int TestMatrixMultiplication();
 int TestReader();
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
@@ -31,6 +32,7 @@ int main (int argc, char** argv) {
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
 	testNames.push_back("TestMatrixBuilder");
+	testNames.push_back("TestMatrixMultiplication");
 	testNames.push_back("ReaderTest");
 
 	// Run all the tests
@@ -64,6 +66,8 @@ int RunTests(const std::string& testName) {
 		status = TestMatrix();
 	} else if (testName == "TestMatrixBuilder") {
 		status = TestMatrixBuilder();
+	} else if (testName == "TestMatrixMultiplication") {
+		status = TestMatrixMultiplication();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
 	} else {
@@ -339,16 +343,40 @@ int TestMatrixBuilder() {
 
 	outFile.close();
 	return status;
-
-
 }
 
-void Print(const Matrix& mat, ofstream& outFile) {
-	outFile << mat << std::endl;
-}
 
-void Print(const SubMatrix& sm, ofstream& outFile) {
-	outFile << sm << std::endl;
+
+int TestMatrixMultiplication() {
+	int status = 1;
+
+	std::string testFileName = "current/TestMatrixMultiplication.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+		Matrix mat1(2,2,1.0);
+		mat1.setName("Matrix 1");
+		Print(mat1, outFile);
+
+		Matrix mat2(2,4,1.0);
+		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
+
+		mat1 * mat2;
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
 }
 
 
@@ -396,3 +424,14 @@ int TestReader() {
 	outFile.close();
 	return status;
 }
+
+
+
+void Print(const Matrix& mat, ofstream& outFile) {
+	outFile << mat << std::endl;
+}
+
+void Print(const SubMatrix& sm, ofstream& outFile) {
+	outFile << sm << std::endl;
+}
+

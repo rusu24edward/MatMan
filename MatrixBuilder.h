@@ -20,6 +20,7 @@ public:
 		SubMatrix&, const Matrix&, MatrixCombinationType);
 	static Matrix BuildMatrixFromCombination(
 		SubMatrix&, SubMatrix&, MatrixCombinationType);
+	static Matrix& BuildMatrixFromMultiplication(const Matrix&, const Matrix&);
 };
 
 #endif
