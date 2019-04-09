@@ -358,20 +358,32 @@ int TestMatrixMultiplication() {
 	}
 
 	try{
-		Matrix mat1(2,2,1.0);
+		Matrix mat1(4,6);
+		for (int i = 0; i < 4; ++i) {
+			for (int j = 0; j < 6; ++j) {
+				mat1(i,j) = (i+2)*(j-2);
+			}
+		}
 		mat1.setName("Matrix 1");
 		Print(mat1, outFile);
 
-		Matrix mat2(2,4,1.0);
+		Matrix mat2(6,2);
+		for (int i = 0; i < 6; ++i) {
+			for (int j = 0; j < 2; ++j) {
+				mat2(i,j) = 3+i*(j+1);
+			}
+		}
 		mat2.setName("Matrix 2");
 		Print(mat2, outFile);
 
-		mat1 * mat2;
+		Matrix mat3 = mat1 * mat2;
+		mat3.setName("Matrix 3");
+		Print(mat3, outFile);
 
 		status = 0;
 	} catch (...) {
-		std::cout << "FAILURE: Cannot complete Reader Test!" << std::endl;
-		outFile << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		std::cout << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
 		status = 1;
 	}
 

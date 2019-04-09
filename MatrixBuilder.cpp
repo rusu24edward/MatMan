@@ -292,8 +292,23 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 
 
 Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& mat1, const Matrix& mat2) {
-	return *(new Matrix());
-	// return new Matrix();
+	if (mat1.size(2) != mat2.size(1)) {
+		throw "ERROR:  "
+			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, const Matrix&)\n"
+			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
+	} else {
+		Matrix& outMatrix = *(new Matrix(mat1.size(1), mat2.size(2)));
+		for (int i = 0; i < mat1.size(1); ++i) {
+			for (int j = 0; j < mat2.size(2); ++j) {
+				double addingValue = 0.0;
+				for (int k = 0; k < mat1.size(2); ++k) {
+					addingValue += mat1(i, k) * mat2(k, j);
+				}
+				outMatrix(i, j) = addingValue;
+			}
+		}
+		return outMatrix;
+	}
 }
 
 
