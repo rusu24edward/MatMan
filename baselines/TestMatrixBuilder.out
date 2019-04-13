@@ -143,3 +143,19 @@ Combined Matrix 12
 		[ 7 14 ]
 		[ 9 16 ]
 
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)
+	Input Matrices must have the same number of rows for LeftRight Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)
+	Input Matrices must have the same number of columns for TopDown Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)
+	Input Matrices must have the same number of rows for LeftRight Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)
+	Input Matrices must have the same number of columns for TopDown Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, const Matrix&, MatrixCombinationType)
+	Input Matrices must have the same number of rows for LeftRight Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, const Matrix&, MatrixCombinationType)
+	Input Matrices must have the same number of columns for TopDown Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, SubMatrix&, MatrixCombinationType)
+	Input Matrices must have the same number of rows for LeftRight Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, SubMatrix&, MatrixCombinationType)
+	Input Matrices must have the same number of columns for TopDown Matrix Combination
