@@ -12,13 +12,13 @@
 class MatrixBuilder {
 
 public:
-	static Matrix BuildMatrixFromCombination(
+	static Matrix& BuildMatrixFromCombination(
 		const Matrix&, const Matrix&, MatrixCombinationType);
-	static Matrix BuildMatrixFromCombination(
+	static Matrix& BuildMatrixFromCombination(
 		const Matrix&, SubMatrix&, MatrixCombinationType);
-	static Matrix BuildMatrixFromCombination(
+	static Matrix& BuildMatrixFromCombination(
 		SubMatrix&, const Matrix&, MatrixCombinationType);
-	static Matrix BuildMatrixFromCombination(
+	static Matrix& BuildMatrixFromCombination(
 		SubMatrix&, SubMatrix&, MatrixCombinationType);
 };
 

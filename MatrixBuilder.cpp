@@ -9,7 +9,7 @@
 //									   (2) TopDown
 // @return - a new Matrix combined from the other two
 // @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
-Matrix MatrixBuilder::BuildMatrixFromCombination(
+Matrix& MatrixBuilder::BuildMatrixFromCombination(
 		const Matrix& first, const Matrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
@@ -71,7 +71,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 //									   (2) TopDown
 // @return - a new Matrix combined from the other two
 // @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
-Matrix MatrixBuilder::BuildMatrixFromCombination(
+Matrix& MatrixBuilder::BuildMatrixFromCombination(
 		const Matrix& first, SubMatrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
@@ -138,7 +138,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 //									   (2) TopDown
 // @return - a new Matrix combined from the other two
 // @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
-Matrix MatrixBuilder::BuildMatrixFromCombination(
+Matrix& MatrixBuilder::BuildMatrixFromCombination(
 		SubMatrix& first, const Matrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
@@ -205,7 +205,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 //									   (2) TopDown
 // @return - a new Matrix combined from the other two
 // @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
-Matrix MatrixBuilder::BuildMatrixFromCombination(
+Matrix& MatrixBuilder::BuildMatrixFromCombination(
 		SubMatrix& first, SubMatrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
