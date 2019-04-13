@@ -16,7 +16,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 			if (first.size(1) != last.size(1)) {
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
+				  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination";
 			} else {
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
@@ -37,7 +37,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 			if (first.size(2) != last.size(2)) {
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
 			} else {
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
@@ -79,7 +79,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				delete &last;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
+				  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination";
 			} else {
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
@@ -102,7 +102,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				delete &last;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
 			} else {
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
@@ -146,7 +146,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				delete &first;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, const Matrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
+				  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination";
 			} else {
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
@@ -169,7 +169,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				delete &first;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, const Matrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
 			} else {
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
@@ -218,7 +218,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				}
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, SubMatrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
+				  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination";
 			} else {
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
@@ -251,7 +251,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				}
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, SubMatrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
 			} else {
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
