@@ -270,15 +270,30 @@ int TestMatrixBuilder() {
 
 	try{
 
-		Matrix mat1(4, 6, 1.);
+		Matrix mat1(4, 6);
+		for (int i = 0; i < 4; ++i) {
+			for (int j = 0; j < 6; ++j) {
+				mat1(i,j) = (-i+1) * 2*j;
+			}
+		}
 		mat1.setName("Matrix 1");
 		Print(mat1, outFile);
 
-		Matrix mat2(4, 2, 2.);
+		Matrix mat2(4, 2);
+		for (int i = 0; i < 4; ++i) {
+			for (int j = 0; j < 2; ++j) {
+				mat2(i,j) = 3+2*i + 7*j;
+			}
+		}
 		mat2.setName("Matrix 2");
 		Print(mat2, outFile);
 
 		Matrix mat3(3, 6, 3.);
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 6; ++j) {
+				mat3(i,j) = (i+1)+(j-1);
+			}
+		}
 		mat3.setName("Matrix 3");
 		Print(mat3, outFile);
 
