@@ -289,20 +289,23 @@ Matrix& MatrixBuilder::BuildMatrixFromCombination(
 	}
 }
 
-
-
-Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& mat1, const Matrix& mat2) {
-	if (mat1.size(2) != mat2.size(1)) {
+// Build a new Matrix by multiplying two matrices together.
+// @param Matrix& left - the left Matrix in the multiplication
+// @param Matrix& right - the right Matrix in the multiplication
+// @return - a new Matrix from the multiplication of the other two
+// @throws exceptions for mismatched dimensions.
+Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& left, const Matrix& right) {
+	if (left.size(2) != right.size(1)) {
 		throw "ERROR:  "
 			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, const Matrix&)\n"
 			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
 	} else {
-		Matrix& outMatrix = *(new Matrix(mat1.size(1), mat2.size(2)));
-		for (int i = 0; i < mat1.size(1); ++i) {
-			for (int j = 0; j < mat2.size(2); ++j) {
+		Matrix& outMatrix = *(new Matrix(left.size(1), right.size(2)));
+		for (int i = 0; i < left.size(1); ++i) {
+			for (int j = 0; j < right.size(2); ++j) {
 				double addingValue = 0.0;
-				for (int k = 0; k < mat1.size(2); ++k) {
-					addingValue += mat1(i, k) * mat2(k, j);
+				for (int k = 0; k < left.size(2); ++k) {
+					addingValue += left(i, k) * right(k, j);
 				}
 				outMatrix(i, j) = addingValue;
 			}
