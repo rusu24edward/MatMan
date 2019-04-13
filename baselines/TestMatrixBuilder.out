@@ -2,144 +2,160 @@
 Matrix 1
 	Rows: 4
 	Cols: 6
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
+		[ 0 2 4 6 8 10 ]
+		[ 0 0 0 0 0 0 ]
+		[ 0 -2 -4 -6 -8 -10 ]
+		[ 0 -4 -8 -12 -16 -20 ]
 
 
 Matrix 2
 	Rows: 4
 	Cols: 2
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
+		[ 3 10 ]
+		[ 5 12 ]
+		[ 7 14 ]
+		[ 9 16 ]
 
 
 Matrix 3
 	Rows: 3
 	Cols: 6
-		[ 3 3 3 3 3 3 ]
-		[ 3 3 3 3 3 3 ]
-		[ 3 3 3 3 3 3 ]
+		[ 0 1 2 3 4 5 ]
+		[ 1 2 3 4 5 6 ]
+		[ 2 3 4 5 6 7 ]
 
 
 Combined Matrix 1
 	Rows: 4
 	Cols: 8
-		[ 1 1 1 1 1 1 2 2 ]
-		[ 1 1 1 1 1 1 2 2 ]
-		[ 1 1 1 1 1 1 2 2 ]
-		[ 1 1 1 1 1 1 2 2 ]
+		[ 0 2 4 6 8 10 3 10 ]
+		[ 0 0 0 0 0 0 5 12 ]
+		[ 0 -2 -4 -6 -8 -10 7 14 ]
+		[ 0 -4 -8 -12 -16 -20 9 16 ]
 
 
 Combined Matrix 2
 	Rows: 4
 	Cols: 8
-		[ 2 2 1 1 1 1 1 1 ]
-		[ 2 2 1 1 1 1 1 1 ]
-		[ 2 2 1 1 1 1 1 1 ]
-		[ 2 2 1 1 1 1 1 1 ]
+		[ 3 10 0 2 4 6 8 10 ]
+		[ 5 12 0 0 0 0 0 0 ]
+		[ 7 14 0 -2 -4 -6 -8 -10 ]
+		[ 9 16 0 -4 -8 -12 -16 -20 ]
 
 
 Combined Matrix 3
 	Rows: 7
 	Cols: 6
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
-		[ 3 3 3 3 3 3 ]
-		[ 3 3 3 3 3 3 ]
-		[ 3 3 3 3 3 3 ]
+		[ 0 2 4 6 8 10 ]
+		[ 0 0 0 0 0 0 ]
+		[ 0 -2 -4 -6 -8 -10 ]
+		[ 0 -4 -8 -12 -16 -20 ]
+		[ 0 1 2 3 4 5 ]
+		[ 1 2 3 4 5 6 ]
+		[ 2 3 4 5 6 7 ]
 
 
 Combined Matrix 4
 	Rows: 7
 	Cols: 6
-		[ 3 3 3 3 3 3 ]
-		[ 3 3 3 3 3 3 ]
-		[ 3 3 3 3 3 3 ]
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
-		[ 1 1 1 1 1 1 ]
+		[ 0 1 2 3 4 5 ]
+		[ 1 2 3 4 5 6 ]
+		[ 2 3 4 5 6 7 ]
+		[ 0 2 4 6 8 10 ]
+		[ 0 0 0 0 0 0 ]
+		[ 0 -2 -4 -6 -8 -10 ]
+		[ 0 -4 -8 -12 -16 -20 ]
 
 
 Combined Matrix 5
 	Rows: 8
 	Cols: 2
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 1 1 ]
-		[ 1 1 ]
-		[ 1 1 ]
-		[ 1 1 ]
+		[ 3 10 ]
+		[ 5 12 ]
+		[ 7 14 ]
+		[ 9 16 ]
+		[ 6 8 ]
+		[ 0 0 ]
+		[ -6 -8 ]
+		[ -12 -16 ]
 
 
 Combined Matrix 6
 	Rows: 3
 	Cols: 7
-		[ 3 3 3 3 3 3 2 ]
-		[ 3 3 3 3 3 3 2 ]
-		[ 3 3 3 3 3 3 2 ]
+		[ 0 1 2 3 4 5 10 ]
+		[ 1 2 3 4 5 6 12 ]
+		[ 2 3 4 5 6 7 14 ]
 
 
 Combined Matrix 7
 	Rows: 3
 	Cols: 12
-		[ 1 1 1 1 1 1 3 3 3 3 3 3 ]
-		[ 1 1 1 1 1 1 3 3 3 3 3 3 ]
-		[ 1 1 1 1 1 1 3 3 3 3 3 3 ]
+		[ 0 0 0 0 0 0 0 1 2 3 4 5 ]
+		[ 0 -2 -4 -6 -8 -10 1 2 3 4 5 6 ]
+		[ 0 -4 -8 -12 -16 -20 2 3 4 5 6 7 ]
 
 
 Combined Matrix 8
 	Rows: 7
 	Cols: 2
-		[ 3 3 ]
-		[ 3 3 ]
-		[ 3 3 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
+		[ 2 3 ]
+		[ 3 4 ]
+		[ 4 5 ]
+		[ 3 10 ]
+		[ 5 12 ]
+		[ 7 14 ]
+		[ 9 16 ]
 
 
 Combined Matrix 9
 	Rows: 2
 	Cols: 12
-		[ 3 3 3 3 3 3 1 1 1 1 1 1 ]
-		[ 3 3 3 3 3 3 1 1 1 1 1 1 ]
+		[ 0 1 2 3 4 5 0 -2 -4 -6 -8 -10 ]
+		[ 1 2 3 4 5 6 0 -4 -8 -12 -16 -20 ]
 
 
 Combined Matrix 10
 	Rows: 2
 	Cols: 1
-		[ 1 ]
-		[ 2 ]
+		[ -4 ]
+		[ 7 ]
 
 
 Combined Matrix 11
 	Rows: 4
 	Cols: 4
-		[ 2 2 2 2 ]
-		[ 2 2 2 2 ]
-		[ 2 2 2 2 ]
-		[ 2 2 2 2 ]
+		[ 3 10 3 10 ]
+		[ 5 12 5 12 ]
+		[ 7 14 7 14 ]
+		[ 9 16 9 16 ]
 
 
 Combined Matrix 12
 	Rows: 8
 	Cols: 2
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
-		[ 2 2 ]
+		[ 3 10 ]
+		[ 5 12 ]
+		[ 7 14 ]
+		[ 9 16 ]
+		[ 3 10 ]
+		[ 5 12 ]
+		[ 7 14 ]
+		[ 9 16 ]
 
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)
+	Input Matrices must have the same number of rows for LeftRight Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)
+	Input Matrices must have the same number of columns for TopDown Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)
+	Input Matrices must have the same number of rows for LeftRight Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)
+	Input Matrices must have the same number of columns for TopDown Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, const Matrix&, MatrixCombinationType)
+	Input Matrices must have the same number of rows for LeftRight Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, const Matrix&, MatrixCombinationType)
+	Input Matrices must have the same number of columns for TopDown Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, SubMatrix&, MatrixCombinationType)
+	Input Matrices must have the same number of rows for LeftRight Matrix Combination
+ERROR  Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, SubMatrix&, MatrixCombinationType)
+	Input Matrices must have the same number of columns for TopDown Matrix Combination

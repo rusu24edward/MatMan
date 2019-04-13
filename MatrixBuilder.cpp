@@ -9,51 +9,51 @@
 //									   (2) TopDown
 // @return - a new Matrix combined from the other two
 // @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
-Matrix MatrixBuilder::BuildMatrixFromCombination(
+Matrix& MatrixBuilder::BuildMatrixFromCombination(
 		const Matrix& first, const Matrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
 			if (first.size(1) != last.size(1)) {
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
+				  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination";
 			} else {
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
 				int nColsRight = last.size(2);
-				vector<vector<double>> helper(nRows, vector<double>(nColsLeft + nColsRight));
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
 				for (int i = 0; i < nRows; ++i) {
 					for (int j = 0; j < nColsLeft; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 					for (int j = 0; j < nColsRight; ++j) {
-						helper[i][j + nColsLeft] = last(i, j);
+						outMatrix(i,j+nColsLeft) = last(i,j);
 					}
 				}
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		case TopDown:
 			if (first.size(2) != last.size(2)) {
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, const Matrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
 			} else {
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
 				int nRowsDown = last.size(1);
-				vector<vector<double>> helper(nRowsTop + nRowsDown, vector<double>(nCols));
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
 				for (int i = 0; i < nRowsTop; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 				}
 				for (int i = 0; i < nRowsDown; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i + nRowsTop][j] = last(i, j);
+						outMatrix(i+nRowsTop,j) = last(i,j);
 					}
 				}
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		default:
@@ -71,7 +71,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 //									   (2) TopDown
 // @return - a new Matrix combined from the other two
 // @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
-Matrix MatrixBuilder::BuildMatrixFromCombination(
+Matrix& MatrixBuilder::BuildMatrixFromCombination(
 		const Matrix& first, SubMatrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
@@ -79,22 +79,22 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				delete &last;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
+				  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination";
 			} else {
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
 				int nColsRight = last.size(2);
-				vector<vector<double>> helper(nRows, vector<double>(nColsLeft + nColsRight));
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
 				for (int i = 0; i < nRows; ++i) {
 					for (int j = 0; j < nColsLeft; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 					for (int j = 0; j < nColsRight; ++j) {
-						helper[i][j + nColsLeft] = last(i, j);
+						outMatrix(i,j+nColsLeft) = last(i,j);
 					}
 				}
 				delete &last;
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		case TopDown:
@@ -102,24 +102,24 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				delete &last;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(const Matrix&, SubMatrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
 			} else {
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
 				int nRowsDown = last.size(1);
-				vector<vector<double>> helper(nRowsTop + nRowsDown, vector<double>(nCols));
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
 				for (int i = 0; i < nRowsTop; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 				}
 				for (int i = 0; i < nRowsDown; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i + nRowsTop][j] = last(i, j);
+						outMatrix(i+nRowsTop,j) = last(i,j);
 					}
 				}
 				delete &last;
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		default:
@@ -138,7 +138,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 //									   (2) TopDown
 // @return - a new Matrix combined from the other two
 // @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
-Matrix MatrixBuilder::BuildMatrixFromCombination(
+Matrix& MatrixBuilder::BuildMatrixFromCombination(
 		SubMatrix& first, const Matrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
@@ -146,22 +146,22 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				delete &first;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, const Matrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
+				  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination";
 			} else {
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
 				int nColsRight = last.size(2);
-				vector<vector<double>> helper(nRows, vector<double>(nColsLeft + nColsRight));
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
 				for (int i = 0; i < nRows; ++i) {
 					for (int j = 0; j < nColsLeft; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 					for (int j = 0; j < nColsRight; ++j) {
-						helper[i][j + nColsLeft] = last(i, j);
+						outMatrix(i,j+nColsLeft) = last(i,j);
 					}
 				}
 				delete &first;
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		case TopDown:
@@ -169,24 +169,24 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				delete &first;
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, const Matrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
 			} else {
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
 				int nRowsDown = last.size(1);
-				vector<vector<double>> helper(nRowsTop + nRowsDown, vector<double>(nCols));
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
 				for (int i = 0; i < nRowsTop; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 				}
 				for (int i = 0; i < nRowsDown; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i + nRowsTop][j] = last(i, j);
+						outMatrix(i+nRowsTop,j) = last(i,j);
 					}
 				}
 				delete &first;
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		default:
@@ -205,7 +205,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 //									   (2) TopDown
 // @return - a new Matrix combined from the other two
 // @throws exceptions for unsupported MatrixCombinationType and mismatched dimensions.
-Matrix MatrixBuilder::BuildMatrixFromCombination(
+Matrix& MatrixBuilder::BuildMatrixFromCombination(
 		SubMatrix& first, SubMatrix& last, MatrixCombinationType rule) {
 	switch (rule) {
 		case LeftRight:
@@ -218,18 +218,18 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				}
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, SubMatrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of rows for LeftRight Matrix Combination";
+				  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination";
 			} else {
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
 				int nColsRight = last.size(2);
-				vector<vector<double>> helper(nRows, vector<double>(nColsLeft + nColsRight));
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
 				for (int i = 0; i < nRows; ++i) {
 					for (int j = 0; j < nColsLeft; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 					for (int j = 0; j < nColsRight; ++j) {
-						helper[i][j + nColsLeft] = last(i, j);
+						outMatrix(i,j+nColsLeft) = last(i,j);
 					}
 				}
 				if (&first == &last) {
@@ -238,7 +238,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 					delete &first;
 					delete &last;
 				}
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		case TopDown:
@@ -251,20 +251,20 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				}
 				throw "ERROR  "
 				  "Matrix MatrixBuilder::BuildMatrixFromCombination(SubMatrix&, SubMatrix&, MatrixCombinationType)\n"
-				  "\tInpt Matrices must have the same number of columns for TopDown Matrix Combination";
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
 			} else {
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
 				int nRowsDown = last.size(1);
-				vector<vector<double>> helper(nRowsTop + nRowsDown, vector<double>(nCols));
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
 				for (int i = 0; i < nRowsTop; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 				}
 				for (int i = 0; i < nRowsDown; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i + nRowsTop][j] = last(i, j);
+						outMatrix(i+nRowsTop,j) = last(i,j);
 					}
 				}
 				if (&first == &last) {
@@ -273,7 +273,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 					delete &first;
 					delete &last;
 				}
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		default:
