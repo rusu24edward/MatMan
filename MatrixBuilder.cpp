@@ -21,16 +21,16 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
 				int nColsRight = last.size(2);
-				vector<vector<double>> helper(nRows, vector<double>(nColsLeft + nColsRight));
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
 				for (int i = 0; i < nRows; ++i) {
 					for (int j = 0; j < nColsLeft; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 					for (int j = 0; j < nColsRight; ++j) {
-						helper[i][j + nColsLeft] = last(i, j);
+						outMatrix(i,j+nColsLeft) = last(i,j);
 					}
 				}
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		case TopDown:
@@ -42,18 +42,18 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
 				int nRowsDown = last.size(1);
-				vector<vector<double>> helper(nRowsTop + nRowsDown, vector<double>(nCols));
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
 				for (int i = 0; i < nRowsTop; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 				}
 				for (int i = 0; i < nRowsDown; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i + nRowsTop][j] = last(i, j);
+						outMatrix(i+nRowsTop,j) = last(i,j);
 					}
 				}
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		default:
@@ -84,17 +84,17 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
 				int nColsRight = last.size(2);
-				vector<vector<double>> helper(nRows, vector<double>(nColsLeft + nColsRight));
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
 				for (int i = 0; i < nRows; ++i) {
 					for (int j = 0; j < nColsLeft; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 					for (int j = 0; j < nColsRight; ++j) {
-						helper[i][j + nColsLeft] = last(i, j);
+						outMatrix(i,j+nColsLeft) = last(i,j);
 					}
 				}
 				delete &last;
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		case TopDown:
@@ -107,19 +107,19 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
 				int nRowsDown = last.size(1);
-				vector<vector<double>> helper(nRowsTop + nRowsDown, vector<double>(nCols));
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
 				for (int i = 0; i < nRowsTop; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 				}
 				for (int i = 0; i < nRowsDown; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i + nRowsTop][j] = last(i, j);
+						outMatrix(i+nRowsTop,j) = last(i,j);
 					}
 				}
 				delete &last;
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		default:
@@ -151,17 +151,17 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
 				int nColsRight = last.size(2);
-				vector<vector<double>> helper(nRows, vector<double>(nColsLeft + nColsRight));
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
 				for (int i = 0; i < nRows; ++i) {
 					for (int j = 0; j < nColsLeft; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 					for (int j = 0; j < nColsRight; ++j) {
-						helper[i][j + nColsLeft] = last(i, j);
+						outMatrix(i,j+nColsLeft) = last(i,j);
 					}
 				}
 				delete &first;
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		case TopDown:
@@ -174,19 +174,19 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
 				int nRowsDown = last.size(1);
-				vector<vector<double>> helper(nRowsTop + nRowsDown, vector<double>(nCols));
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
 				for (int i = 0; i < nRowsTop; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 				}
 				for (int i = 0; i < nRowsDown; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i + nRowsTop][j] = last(i, j);
+						outMatrix(i+nRowsTop,j) = last(i,j);
 					}
 				}
 				delete &first;
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		default:
@@ -223,13 +223,13 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				int nRows = first.size(1);
 				int nColsLeft = first.size(2);
 				int nColsRight = last.size(2);
-				vector<vector<double>> helper(nRows, vector<double>(nColsLeft + nColsRight));
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
 				for (int i = 0; i < nRows; ++i) {
 					for (int j = 0; j < nColsLeft; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 					for (int j = 0; j < nColsRight; ++j) {
-						helper[i][j + nColsLeft] = last(i, j);
+						outMatrix(i,j+nColsLeft) = last(i,j);
 					}
 				}
 				if (&first == &last) {
@@ -238,7 +238,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 					delete &first;
 					delete &last;
 				}
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		case TopDown:
@@ -256,15 +256,15 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 				int nCols = first.size(2);
 				int nRowsTop = first.size(1);
 				int nRowsDown = last.size(1);
-				vector<vector<double>> helper(nRowsTop + nRowsDown, vector<double>(nCols));
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
 				for (int i = 0; i < nRowsTop; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i][j] = first(i, j);
+						outMatrix(i,j) = first(i,j);
 					}
 				}
 				for (int i = 0; i < nRowsDown; ++i) {
 					for (int j = 0; j < nCols; ++j) {
-						helper[i + nRowsTop][j] = last(i, j);
+						outMatrix(i+nRowsTop,j) = last(i,j);
 					}
 				}
 				if (&first == &last) {
@@ -273,7 +273,7 @@ Matrix MatrixBuilder::BuildMatrixFromCombination(
 					delete &first;
 					delete &last;
 				}
-				return *(new Matrix(helper));
+				return outMatrix;
 			}
 			break;
 		default:
