@@ -1,0 +1,58 @@
+
+Matrix 1
+	Rows: 4
+	Cols: 6
+		[ -4 -2 0 2 4 6 ]
+		[ -6 -3 0 3 6 9 ]
+		[ -8 -4 0 4 8 12 ]
+		[ -10 -5 0 5 10 15 ]
+
+
+Matrix 2
+	Rows: 6
+	Cols: 2
+		[ 3 3 ]
+		[ 4 5 ]
+		[ 5 7 ]
+		[ 6 9 ]
+		[ 7 11 ]
+		[ 8 13 ]
+
+
+Matrix 3
+	Rows: 4
+	Cols: 2
+		[ 68 118 ]
+		[ 102 177 ]
+		[ 136 236 ]
+		[ 170 295 ]
+
+ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, const Matrix&)
+	Input Matrices must have compatible dimensions for Matrix Multiplication.
+
+Matrix 4
+	Rows: 4
+	Cols: 2
+		[ 862 1166 ]
+		[ 1293 1749 ]
+		[ 1724 2332 ]
+		[ 2155 2915 ]
+
+ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&)
+	Input Matrices must have compatible dimensions for Matrix Multiplication.
+
+Matrix 5
+	Rows: 1
+	Cols: 2
+		[ 1768 3068 ]
+
+ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&)
+	Input Matrices must have compatible dimensions for Matrix Multiplication.
+
+Matrix 6
+	Rows: 1
+	Cols: 1
+		[ 63 ]
+
+ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&)
+	Input Matrices must have compatible dimensions for Matrix Multiplication.
