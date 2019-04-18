@@ -21,7 +21,9 @@ public:
 	static Matrix& BuildMatrixFromCombination(
 		SubMatrix&, SubMatrix&, MatrixCombinationType);
 	static Matrix& BuildMatrixFromMultiplication(const Matrix&, const Matrix&);
-	static Matrix& BuildMatrixFromMultiplication(const Matrix&, SubMatrix&);
+	static Matrix& BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&);
+	static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&);
+	static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&);
 };
 
 #endif

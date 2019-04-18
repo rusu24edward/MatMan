@@ -290,8 +290,8 @@ Matrix& MatrixBuilder::BuildMatrixFromCombination(
 }
 
 // Build a new Matrix by multiplying two matrices together.
-// @param Matrix& left - the left Matrix in the multiplication
-// @param Matrix& right - the right Matrix in the multiplication
+// @param const Matrix& left - the left Matrix in the multiplication
+// @param const Matrix& right - the right Matrix in the multiplication
 // @return - a new Matrix from the multiplication of the other two
 // @throws exceptions for mismatched dimensions.
 Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& left, const Matrix& right) {
@@ -315,14 +315,14 @@ Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& left, const M
 }
 
 // Build a new Matrix by multiplying a matrix with a submatrix
-// @param Matrix& left - the left Matrix in the multiplication
-// @param SubMatrix& right - the right SubMatrix in the multiplication
+// @param const Matrix& left - the left Matrix in the multiplication
+// @param const SubMatrix& right - the right SubMatrix in the multiplication
 // @return - a new Matrix from the multiplication of the other two
 // @throws exceptions for mismatched dimensions.
-Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& left, SubMatrix& right) {
+Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& left, const SubMatrix& right) {
 	if (left.size(2) != right.size(1)) {
 		throw "ERROR:  "
-			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, SubMatrix&)\n"
+			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&)\n"
 			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
 	} else {
 		Matrix& outMatrix = *(new Matrix(left.size(1), right.size(2)));
@@ -335,7 +335,56 @@ Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& left, SubMatr
 				outMatrix(i, j) = addingValue;
 			}
 		}
-		delete &right;
+		return outMatrix;
+	}
+}
+
+// Build a new Matrix by multiplying a submatrix with a matrix.
+// @param const Matrix& left - the left SubMatrix in the multiplication
+// @param const Matrix& right - the right Matrix in the multiplication
+// @return - a new Matrix from the multiplication of the other two
+// @throws exceptions for mismatched dimensions.
+Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix& left, const Matrix& right) {
+	if (left.size(2) != right.size(1)) {
+		throw "ERROR:  "
+			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&)\n"
+			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
+	} else {
+		Matrix& outMatrix = *(new Matrix(left.size(1), right.size(2)));
+		for (int i = 0; i < left.size(1); ++i) {
+			for (int j = 0; j < right.size(2); ++j) {
+				double addingValue = 0.0;
+				for (int k = 0; k < left.size(2); ++k) {
+					addingValue += left(i, k) * right(k, j);
+				}
+				outMatrix(i, j) = addingValue;
+			}
+		}
+		return outMatrix;
+	}
+}
+
+// Build a new Matrix by multiplying two submatrices together
+// @param const SubMatrix& left - the left SubMatrix in the multiplication
+// @param const SubMatrix& right - the right SubMatrix in the multiplication
+// @return - a new Matrix from the multiplication of the other two
+// @throws exceptions for mismatched dimensions.
+Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix& left, const SubMatrix& right) {
+	if (left.size(2) != right.size(1)) {
+		throw "ERROR:  "
+			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&)\n"
+			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
+	} else {
+		Matrix& outMatrix = *(new Matrix(left.size(1), right.size(2)));
+		for (int i = 0; i < left.size(1); ++i) {
+			for (int j = 0; j < right.size(2); ++j) {
+				double addingValue = 0.0;
+				for (int k = 0; k < left.size(2); ++k) {
+					addingValue += left(i, k) * right(k, j);
+				}
+				outMatrix(i, j) = addingValue;
+			}
+		}
 		return outMatrix;
 	}
 }

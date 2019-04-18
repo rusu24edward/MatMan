@@ -475,6 +475,26 @@ int TestMatrixMultiplication() {
 			outFile << msg << std::endl;
 		}
 
+		Matrix mat5 = mat1(0, 0, 2, 5) * mat3;
+		mat5.setName("Matrix 5");
+		Print(mat5, outFile);
+
+		try {
+			Matrix mat0 = mat1(2,3,2,4) * mat4;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		Matrix mat6 = mat2(3,3,0,1) * mat2(0,1,1,1);
+		mat6.setName("Matrix 6");
+		Print(mat6, outFile);
+
+		try {
+			Matrix mat0 = mat1(0,1,0,1) * mat5(0,0,0,0);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
 		status = 0;
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;

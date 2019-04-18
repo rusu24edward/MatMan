@@ -228,7 +228,9 @@ Matrix& Matrix::operator*(const Matrix& RHS) const {
 }
 
 Matrix& Matrix::operator*(SubMatrix& RHS) const {
-	return MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
+	Matrix& outMatrix = MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
+	delete &RHS;
+	return outMatrix;
 }
 
 
