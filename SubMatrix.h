@@ -16,10 +16,15 @@ friend class Matrix;
 
 public:
 
+	// --- Destructor --- //
+	~SubMatrix();
+
 	// --- Functions and Operators --- //
 	void operator=(const Matrix&);
 	void operator=(SubMatrix&);
 	void operator=(double);
+	double& operator()(int, int);
+	int size(int dim = 0) const;
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const SubMatrix&);
 	void Print(fstream&) const;
@@ -29,12 +34,6 @@ private:
 
 	// --- Constructors --- //
 	SubMatrix(Matrix*, int, int, int, int);
-
-	// --- Destructor --- //
-	~SubMatrix();
-
-	// --- Functions and Operators --- //
-	double& operator()(int, int);
 
 	// --- Underlying Data --- //
 	Matrix* data;
