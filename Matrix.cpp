@@ -227,6 +227,10 @@ Matrix& Matrix::operator*(const Matrix& RHS) const {
 	return MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
 }
 
+Matrix& Matrix::operator*(SubMatrix& RHS) const {
+	return MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
+}
+
 
 
 // ---------------- //

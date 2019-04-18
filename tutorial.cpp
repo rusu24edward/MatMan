@@ -461,8 +461,16 @@ int TestMatrixMultiplication() {
 
 		try {
 			Matrix mat100 = mat2 * mat1;
-			mat100.setName("Matrix 100");
-			Print(mat100, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		Matrix mat4 = mat3 * mat2(1,2,0,1);
+		mat4.setName("Matrix 4");
+		Print(mat4, outFile);
+
+		try {
+			Matrix mat0 = mat3 * mat1(0,2,0,0);
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
