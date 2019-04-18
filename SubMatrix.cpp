@@ -120,12 +120,20 @@ int SubMatrix::size(int dim) const {
 
 // --- Mathematical Operations Support --- //
 
+// Construct a Matix by multipliying this SubMatrix with a Matrix. This lives here in order to
+// overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
+// @param const Matrix& RHS - the RHS Matix involved in the operation
+// @return Matrix& - new Matrix formed from multiplying these two.
 Matrix& SubMatrix::operator*(const Matrix& RHS) {
 	Matrix& outMatrix = MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
 	delete this;
 	return outMatrix;
 }
 
+// Construct a Matix by multipliying this SubMatrix with another. This lives here in order to
+// overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
+// @param SubMatrix& RHS - the RHS SubMatix involved in the operation
+// @return Matrix& - new Matrix formed from multiplying these two.
 Matrix& SubMatrix::operator*(SubMatrix& RHS) {
 	Matrix& outMatrix = MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
 	delete &RHS;
