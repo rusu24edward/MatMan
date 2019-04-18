@@ -1,7 +1,7 @@
 all: tutorial.exe Example1.exe
 
-Example1.exe: clean Example1.o NamedObject.o Matrix.o SubMatrix.o Reader.o
-	g++ -o Example1.exe Example1.o NamedObject.o Matrix.o SubMatrix.o Reader.o
+Example1.exe: Example1.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
+	g++ -o Example1.exe Example1.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
 
 Example1.o: Example1.cpp
 	g++ -c Example1.cpp
