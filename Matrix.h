@@ -56,6 +56,9 @@ public:
 	SubMatrix& operator()(int, int, int, int);
 	int length() const;
 	int size(int dim = 0) const;
+	double norm() const;
+
+	// --- Printing --- //
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const Matrix&);
 	void Print(ofstream&) const;

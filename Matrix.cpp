@@ -1,5 +1,6 @@
 
 #include "Matrix.h"
+#include <math.h>
 
 using namespace std;
 
@@ -216,6 +217,34 @@ int Matrix::size(int dim) const {
 		return nCols;
 	} else {
 		return length();
+	}
+}
+
+
+// --- Mathematical operation support --- //
+
+// Calculate the vector 2-norm of this Matrix.
+// @return double - the vector 2-norm of this Matrix.
+// throws an error if the Matrix is not a vector
+double Matrix::norm() const {
+	if (nRows != 1 && nCols != 1) {
+		throw "ERROR:  "
+			  "double Matrix::norm() const\n"
+			  "You are asking for the norm of a matrix, but we only support the 2-norm of a vector.";
+	} else if (nRows == 1 && nCols == 1) {
+		return data[0][0];
+	} else if (nRows == 1 && nCols != 1) {
+		double norm2 = 0.0;
+		for (int n = 0; n < nCols; ++n) {
+			norm2 += pow(data[0][n], 2);
+		}
+		return sqrt(norm2);
+	} else { // nRows != 1 && nCols == 1
+		double norm2 = 0.0;
+		for (int n = 0; n < nRows; ++n) {
+			norm2 += pow(data[n][0], 2);
+		}
+		return sqrt(norm2);
 	}
 }
 

@@ -1,0 +1,34 @@
+
+Matrix 1
+	Rows: 1
+	Cols: 1
+		[ 14 ]
+
+Vector 2 norm is 14
+
+Matrix 2
+	Rows: 4
+	Cols: 1
+		[ 0 ]
+		[ 1 ]
+		[ 2 ]
+		[ 3 ]
+
+Vector 2 norm is 3.74166
+
+Matrix 3
+	Rows: 1
+	Cols: 3
+		[ 0 2.6 5.2 ]
+
+Vector 2 norm is 5.81378
+
+Matrix 4
+	Rows: 3
+	Cols: 5
+		[ 2 2 2 2 2 ]
+		[ 2 2 2 2 2 ]
+		[ 2 2 2 2 2 ]
+
+Vector 2 norm is ERROR:  double Matrix::norm() const
+You are asking for the norm of a matrix, but we only support the 2-norm of a vector.
