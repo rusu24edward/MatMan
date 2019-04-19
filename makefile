@@ -1,6 +1,6 @@
 all: tutorial.exe
 
-tutorial.exe: clean tutorial.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
+tutorial.exe: tutorial.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
 	g++ -o tutorial.exe tutorial.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
 
 tutorial.o: tutorial.cpp

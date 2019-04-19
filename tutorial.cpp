@@ -16,6 +16,7 @@ int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 int TestMatrixBuilder();
+int TestMatrixMultiplication();
 int TestReader();
 int TestMatrixNorms();
 void Print(const Matrix&, ofstream&);
@@ -32,6 +33,7 @@ int main (int argc, char** argv) {
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
 	testNames.push_back("TestMatrixBuilder");
+	testNames.push_back("TestMatrixMultiplication");
 	testNames.push_back("ReaderTest");
 	testNames.push_back("TestMatrixNorms");
 
@@ -66,6 +68,8 @@ int RunTests(const std::string& testName) {
 		status = TestMatrix();
 	} else if (testName == "TestMatrixBuilder") {
 		status = TestMatrixBuilder();
+	} else if (testName == "TestMatrixMultiplication") {
+		status = TestMatrixMultiplication();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
 	} else if (testName == "TestMatrixNorms") {
@@ -422,16 +426,88 @@ int TestMatrixBuilder() {
 
 	outFile.close();
 	return status;
-
-
 }
 
-void Print(const Matrix& mat, ofstream& outFile) {
-	outFile << mat << std::endl;
-}
 
-void Print(const SubMatrix& sm, ofstream& outFile) {
-	outFile << sm << std::endl;
+
+int TestMatrixMultiplication() {
+	int status = 1;
+
+	std::string testFileName = "current/TestMatrixMultiplication.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+		Matrix mat1(4,6);
+		for (int i = 0; i < 4; ++i) {
+			for (int j = 0; j < 6; ++j) {
+				mat1(i,j) = (i+2)*(j-2);
+			}
+		}
+		mat1.setName("Matrix 1");
+		Print(mat1, outFile);
+
+		Matrix mat2(6,2);
+		for (int i = 0; i < 6; ++i) {
+			for (int j = 0; j < 2; ++j) {
+				mat2(i,j) = 3+i*(j+1);
+			}
+		}
+		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
+
+		Matrix mat3 = mat1 * mat2;
+		mat3.setName("Matrix 3");
+		Print(mat3, outFile);
+
+		try {
+			Matrix mat100 = mat2 * mat1;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		Matrix mat4 = mat3 * mat2(1,2,0,1);
+		mat4.setName("Matrix 4");
+		Print(mat4, outFile);
+
+		try {
+			Matrix mat0 = mat3 * mat1(0,2,0,0);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		Matrix mat5 = mat1(0, 0, 2, 5) * mat3;
+		mat5.setName("Matrix 5");
+		Print(mat5, outFile);
+
+		try {
+			Matrix mat0 = mat1(2,3,2,4) * mat4;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		Matrix mat6 = mat2(3,3,0,1) * mat2(0,1,1,1);
+		mat6.setName("Matrix 6");
+		Print(mat6, outFile);
+
+		try {
+			Matrix mat0 = mat1(0,1,0,1) * mat5(0,0,0,0);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
 }
 
 
@@ -537,3 +613,14 @@ int TestMatrixNorms() {
 	outFile.close();
 	return status;
 }
+
+
+
+void Print(const Matrix& mat, ofstream& outFile) {
+	outFile << mat << std::endl;
+}
+
+void Print(const SubMatrix& sm, ofstream& outFile) {
+	outFile << sm << std::endl;
+}
+
