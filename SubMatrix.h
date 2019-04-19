@@ -24,7 +24,12 @@ public:
 	void operator=(SubMatrix&);
 	void operator=(double);
 	double& operator()(int, int);
+	const double& operator()(int, int) const;
 	int size(int dim = 0) const;
+	Matrix& operator*(const Matrix&);
+	Matrix& operator*(SubMatrix&);
+
+	// --- Printing --- //
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const SubMatrix&);
 	void Print(fstream&) const;

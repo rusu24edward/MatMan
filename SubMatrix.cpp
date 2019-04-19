@@ -1,5 +1,6 @@
 
 #include "SubMatrix.h"
+#include "MatrixBuilder.h"
 
 using namespace std;
 
@@ -97,6 +98,9 @@ void SubMatrix::operator=(double d) {
 double& SubMatrix::operator()(int i, int j) {
 	return data->operator()(i + top, j + left);
 }
+const double& SubMatrix::operator()(int i, int j) const {
+	return data->operator()(i + top, j + left);
+}
 
 // Return the size of the specified dimension.
 // @param int dim - if 1, then return nRows
@@ -111,6 +115,30 @@ int SubMatrix::size(int dim) const {
 	} else {
 		return nRows > nCols ? nRows : nCols;
 	}
+}
+
+
+// --- Mathematical Operations Support --- //
+
+// Construct a Matix by multipliying this SubMatrix with a Matrix. This lives here in order to
+// overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
+// @param const Matrix& RHS - the RHS Matix involved in the operation
+// @return Matrix& - new Matrix formed from multiplying these two.
+Matrix& SubMatrix::operator*(const Matrix& RHS) {
+	Matrix& outMatrix = MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
+	delete this;
+	return outMatrix;
+}
+
+// Construct a Matix by multipliying this SubMatrix with another. This lives here in order to
+// overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
+// @param SubMatrix& RHS - the RHS SubMatix involved in the operation
+// @return Matrix& - new Matrix formed from multiplying these two.
+Matrix& SubMatrix::operator*(SubMatrix& RHS) {
+	Matrix& outMatrix = MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
+	delete &RHS;
+	delete this;
+	return outMatrix;
 }
 
 

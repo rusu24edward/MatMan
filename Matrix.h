@@ -43,11 +43,9 @@ public:
 	Matrix& operator=(const Matrix&);
 	Matrix& operator=(SubMatrix&);
 
-
 	// --- Accessors & Mutators --- //
 	const string& getName() const;
 	void setName(const string&);
-
 
 	// --- Functions and Operators --- //
 	double& operator()(int, int);
@@ -56,6 +54,10 @@ public:
 	SubMatrix& operator()(int, int, int, int);
 	int length() const;
 	int size(int dim = 0) const;
+	Matrix& operator*(const Matrix&) const;
+	Matrix& operator*(SubMatrix&) const;
+
+	// --- Printing --- //
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const Matrix&);
 	void Print(ofstream&) const;
