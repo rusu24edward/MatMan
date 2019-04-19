@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "math.h"
+
 #include "Matrix.h"
 #include "SubMatrix.h"
 #include "Reader.h"
@@ -44,16 +46,17 @@ int main (int argc, char** argv) {
 		Print(response, outFile);
 
 		outFile << "Adding a vector of ones to the features..." << std::endl;
-		Matrix tmpOnes(numberOfSamples, 1, 1.0);
 		features = MatrixBuilder::BuildMatrixFromCombination(Matrix(numberOfSamples, 1, 1.0), features, MatrixCombinationType::LeftRight);
 		Print(features, outFile);
 
 		outFile << "Creating theta..." << std::endl;
 		Matrix theta(2,1);
 		theta.setName("theta");
+		Print(theta, outFile);
 
 		outFile << "Computing cost..." << std::endl;
-		// (2) Compute cost
+		double cost = computCost(features, response, theta);
+		outFile << "With theta = [0; 0], the cost is " << cost << std::endl;
 		// (2a) Matrix multiplication
 		// (2b) Matrix/Vector norms
 
@@ -75,7 +78,15 @@ int main (int argc, char** argv) {
 }
 
 double computCost(const Matrix& features, const Matrix& response, const Matrix& fitParameters) {
-	return 0.0;
+	int numberOfSamples = response.length();
+	// Matrix featuresFit = features * fitParameters;
+	double cost = 0.0;
+	// cost = pow((response - featuresFit).norm(), 2) / (2 * numberOfSamples);
+
+
+
+
+	return cost;
 }
 
 void Print(const Matrix& mat, ofstream& outFile) {
