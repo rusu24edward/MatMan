@@ -13,6 +13,7 @@
 
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
+double computCost(const Matrix&, const Matrix&, const Matrix&);
 
 // TODO: add baseline comparison test AFTER we verify against Matlab results.
 int main (int argc, char** argv) {
@@ -71,6 +72,10 @@ int main (int argc, char** argv) {
 	outFile.close();
 
 	return status;
+}
+
+double computCost(const Matrix& features, const Matrix& response, const Matrix& fitParameters) {
+	return 0.0;
 }
 
 void Print(const Matrix& mat, ofstream& outFile) {
