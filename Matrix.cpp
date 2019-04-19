@@ -1,6 +1,11 @@
 
 #include "Matrix.h"
 
+#include <math.h>
+
+#include "MatrixBuilder.h"
+
+
 using namespace std;
 
 // -------------------- //
@@ -218,6 +223,54 @@ int Matrix::size(int dim) const {
 		return length();
 	}
 }
+
+
+// --- Mathematical Operations Support --- //
+
+// Construct a Matix by multipliying this Matrix with another. This lives here in order to
+// overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
+// @param const Matrix& RHS - the RHS Matix involved in the operation
+// @return Matrix& - new Matrix formed from multiplying these two.
+Matrix& Matrix::operator*(const Matrix& RHS) const {
+	return MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
+}
+
+// Construct a Matix by multipliying this Matrix with a SubMatrix. This lives here in order to
+// overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
+// @param SubMatrix& RHS - the RHS SubMatix involved in the operation
+// @return Matrix& - new Matrix formed from multiplying these two.
+Matrix& Matrix::operator*(SubMatrix& RHS) const {
+	Matrix& outMatrix = MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
+	delete &RHS;
+	return outMatrix;
+}
+
+// Calculate the vector 2-norm of this Matrix.
+// @return double - the vector 2-norm of this Matrix.
+// throws an error if the Matrix is not a vector
+double Matrix::norm() const {
+	if (nRows != 1 && nCols != 1) {
+		throw "ERROR:  "
+			  "double Matrix::norm() const\n"
+			  "You are asking for the norm of a matrix, but we only support the 2-norm of a vector.";
+	} else if (nRows == 1 && nCols == 1) {
+		return data[0][0];
+	} else if (nRows == 1 && nCols != 1) {
+		double norm2 = 0.0;
+		for (int n = 0; n < nCols; ++n) {
+			norm2 += pow(data[0][n], 2);
+		}
+		return sqrt(norm2);
+	} else { // nRows != 1 && nCols == 1
+		double norm2 = 0.0;
+		for (int n = 0; n < nRows; ++n) {
+			norm2 += pow(data[n][0], 2);
+		}
+		return sqrt(norm2);
+	}
+}
+
+
 
 // ---------------- //
 // --- Printing --- //
