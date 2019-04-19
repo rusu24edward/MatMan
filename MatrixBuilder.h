@@ -24,6 +24,7 @@ public:
 	static Matrix& BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&);
 	static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&);
 	static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&);
+	static Matrix& BuildMatrixFromAddition(const Matrix&, const Matrix&);
 };
 
 #endif

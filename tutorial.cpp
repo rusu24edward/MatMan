@@ -544,15 +544,15 @@ int TestMatrixAddition() {
 		mat3.setName("Matrix 3");
 		Print(mat3, outFile);
 
-		// Matrix mat4 = mat1 + mat2;
-		// mat4.setName("Matrix 4");
-		// Print(mat4, outFile)
+		Matrix mat4 = mat1 + mat2;
+		mat4.setName("Matrix 4");
+		Print(mat4, outFile);
 
-		// try {
-		// 	Matrix mat0 = mat1 + mat3;
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
+		try {
+			Matrix mat0 = mat1 + mat3;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
 		status = 0;
 

@@ -55,6 +55,7 @@ public:
 	int length() const;
 	int size(int dim = 0) const;
 	Matrix& operator*(const Matrix&) const;
+	Matrix& operator+(const Matrix&) const;
 	Matrix& operator*(SubMatrix&) const;
 	double norm() const;
 
