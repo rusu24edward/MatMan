@@ -18,6 +18,7 @@ int TestMatrix();
 int TestMatrixBuilder();
 int TestMatrixMultiplication();
 int TestReader();
+int TestMatrixNorms();
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
 
@@ -34,6 +35,7 @@ int main (int argc, char** argv) {
 	testNames.push_back("TestMatrixBuilder");
 	testNames.push_back("TestMatrixMultiplication");
 	testNames.push_back("ReaderTest");
+	testNames.push_back("TestMatrixNorms");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -70,6 +72,8 @@ int RunTests(const std::string& testName) {
 		status = TestMatrixMultiplication();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
+	} else if (testName == "TestMatrixNorms") {
+		status = TestMatrixNorms();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -545,6 +549,64 @@ int TestReader() {
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Reader Test!" << std::endl;
 		outFile << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+}
+
+
+
+// Test Matrix norms
+// @return int - 1 if failed, 0 if passed.
+int TestMatrixNorms() {
+	int status = 1;
+
+	std::string testFileName = "current/TestMatrixNorms.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+
+		Matrix mat1(1,1,14.0);
+		mat1.setName("Matrix 1");
+		Print(mat1, outFile);
+		outFile << "Vector 2 norm is " << mat1.norm() << std::endl;
+
+		Matrix mat2(4,1);
+		mat2.setName("Matrix 2");
+		for (int i = 0; i < 4; ++i) {
+			mat2(i,0) = i;
+		}
+		Print(mat2, outFile);
+		outFile << "Vector 2 norm is " << mat2.norm() << std::endl;
+
+		Matrix mat3(1,3);
+		mat3.setName("Matrix 3");
+		for (int i = 0; i < 2; ++i) {
+			mat3(0,i+1) = mat3(0,i) + 2.6;
+		}
+		Print(mat3, outFile);
+		outFile << "Vector 2 norm is " << mat3.norm() << std::endl;
+
+		Matrix mat4(3,5,2);
+		mat4.setName("Matrix 4");
+		Print(mat4, outFile);
+
+		try {
+			outFile << "Vector 2 norm is " << mat4.norm() << std::endl;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Matrix Norms Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Norms Test!" << std::endl;
 		status = 1;
 	}
 
