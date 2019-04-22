@@ -97,9 +97,14 @@ Matrix& GradientDescent(const Matrix& features, const Matrix& response, const Ma
 	Matrix& outParameters = *(new Matrix(fitParameters));
 	for (int iter = 0; iter < iterations; ++iter) {
 		Matrix error = features * fitParameters - response; // difference between hypothesis and data)
-		Matrix errorDerivatives(2,1);
-		errorDerivatives(0,0) = MatrixBuilder::Reduce(features(0,numberOfSamples-1,0,0) * error);
-		errorDerivatives(1,0) = MatrixBuilder::Reduce(features(0,numberOfSamples-1,1,1) * error);
+		Matrix errorDerivativesHelper(numberOfSamples,2);
+		// errorDerivativesHelper(0,numberOfSamples-1,0,0) = error;
+		errorDerivativesHelper(0,numberOfSamples-1,0,0) = MatrixBuilder::ElementMultiply(features(0,numberOfSamples-1,0,0), error);
+		// Pretty sure the first column of featrues is just a bunch of ones, so we can probably just
+		// use error instead of element-wise multiplication.
+		// I wish there was a better syntax to do this....
+		errorDerivativesHelper(0,numberOfSamples-1,1,1) = MatrixBuilder::ElementMultiply(features(0,numberOfSamples-1,1,1), error);
+		errorDerivatives = MatrixBuilder::Tranpose(MatrixBuilder::SumReduce(errorDerivativesHelper, 1));
 
 		outParameters = outParameters - (alpha / numberOfSamples) * errorDerivatives;
 	}
