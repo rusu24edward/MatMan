@@ -392,13 +392,29 @@ Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix& left, cons
 Matrix& MatrixBuilder::BuildMatrixFromAddition(const Matrix& left, const Matrix& right) {
 	if (left.size(1) != right.size(1) || left.size(2) != right.size(2)) {
 		throw "ERROR:  "
-			  "Matrix& MatrixBuilder::BuildMatrixFromAddition(const Matrix&, const Matix&)\n"
+			  "Matrix& MatrixBuilder::BuildMatrixFromAddition(const Matrix&, const Matrix&)\n"
 			  "\tInput Matrices must have compatible dimensions for Matrix Addition.";
 	} else {
 		Matrix& outMatrix = *(new Matrix(left));
 		for (int i = 0; i < left.size(1); ++i) {
 			for (int j = 0; j < left.size(2); ++j) {
 				outMatrix(i,j) += right(i,j);
+			}
+		}
+		return outMatrix;
+	}
+}
+
+Matrix& MatrixBuilder::BuildMatrixFromSubtraction(const Matrix& left, const Matrix& right) {
+	if (left.size(1) != right.size(1) || left.size(2) != right.size(2)) {
+		throw "ERROR:  "
+			  "Matrix& MatrixBuilder::BuildMatrixFromSubtraction(const Matrix&, const Matrix&)\n"
+			  "\tInput Matrices must have compatible dimensions for Matrix Subtraction.";
+	} else {
+		Matrix& outMatrix = *(new Matrix(left));
+		for (int i = 0; i < left.size(1); ++i) {
+			for (int j = 0; j < left.size(2); ++j) {
+				outMatrix(i,j) -= right(i,j);
 			}
 		}
 		return outMatrix;

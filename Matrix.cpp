@@ -249,6 +249,10 @@ Matrix& Matrix::operator+(const Matrix& RHS) const {
 	return MatrixBuilder::BuildMatrixFromAddition(*this, RHS);
 }
 
+Matrix& Matrix::operator-(const Matrix& RHS) const {
+	return MatrixBuilder::BuildMatrixFromSubtraction(*this, RHS);
+}
+
 
 // Calculate the vector 2-norm of this Matrix.
 // @return double - the vector 2-norm of this Matrix.

@@ -17,7 +17,7 @@ int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 int TestMatrixBuilder();
 int TestMatrixMultiplication();
-int TestMatrixAddition();
+int TestMatrixAdditionAndSubtraction();
 int TestReader();
 int TestMatrixNorms();
 void Print(const Matrix&, ofstream&);
@@ -35,7 +35,7 @@ int main (int argc, char** argv) {
 	testNames.push_back("MatrixTest");
 	testNames.push_back("TestMatrixBuilder");
 	testNames.push_back("TestMatrixMultiplication");
-	testNames.push_back("TestMatrixAddition");
+	testNames.push_back("TestMatrixAdditionAndSubtraction");
 	testNames.push_back("ReaderTest");
 	testNames.push_back("TestMatrixNorms");
 
@@ -72,8 +72,8 @@ int RunTests(const std::string& testName) {
 		status = TestMatrixBuilder();
 	} else if (testName == "TestMatrixMultiplication") {
 		status = TestMatrixMultiplication();
-	} else if (testName == "TestMatrixAddition") {
-		status = TestMatrixAddition();
+	} else if (testName == "TestMatrixAdditionAndSubtraction") {
+		status = TestMatrixAdditionAndSubtraction();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
 	} else if (testName == "TestMatrixNorms") {
@@ -515,10 +515,10 @@ int TestMatrixMultiplication() {
 }
 
 
-int TestMatrixAddition() {
+int TestMatrixAdditionAndSubtraction() {
 	int status = 1;
 
-	std::string testFileName = "current/TestMatrixAddition.out";
+	std::string testFileName = "current/TestMatrixAdditionAndSubtraction.out";
 	std::ofstream outFile(testFileName);
 	if (!outFile.is_open()) {
 		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
@@ -554,11 +554,21 @@ int TestMatrixAddition() {
 			outFile << msg << std::endl;
 		}
 
+		Matrix mat5 = mat1 - mat4;
+		mat5.setName("Matrix 5");
+		Print(mat5, outFile);
+
+		try {
+			Matrix mat0 = mat1 - mat3;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
 		status = 0;
 
 	} catch (...) {
-		std::cout << "FAILURE: Cannot complete Matrix Addition Test!" << std::endl;
-		outFile << "FAILURE: Cannot complete Matrix Addition Test!" << std::endl;
+		std::cout << "FAILURE: Cannot complete Matrix Addition and Subtraction Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Addition and Subtraction Test!" << std::endl;
 		status = 1;
 	}
 
