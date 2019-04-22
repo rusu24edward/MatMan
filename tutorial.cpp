@@ -17,6 +17,7 @@ int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 int TestMatrixBuilder();
 int TestMatrixMultiplication();
+int TestMatrixAdditionAndSubtraction();
 int TestReader();
 int TestMatrixNorms();
 void Print(const Matrix&, ofstream&);
@@ -34,6 +35,7 @@ int main (int argc, char** argv) {
 	testNames.push_back("MatrixTest");
 	testNames.push_back("TestMatrixBuilder");
 	testNames.push_back("TestMatrixMultiplication");
+	testNames.push_back("TestMatrixAdditionAndSubtraction");
 	testNames.push_back("ReaderTest");
 	testNames.push_back("TestMatrixNorms");
 
@@ -70,6 +72,8 @@ int RunTests(const std::string& testName) {
 		status = TestMatrixBuilder();
 	} else if (testName == "TestMatrixMultiplication") {
 		status = TestMatrixMultiplication();
+	} else if (testName == "TestMatrixAdditionAndSubtraction") {
+		status = TestMatrixAdditionAndSubtraction();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
 	} else if (testName == "TestMatrixNorms") {
@@ -503,6 +507,68 @@ int TestMatrixMultiplication() {
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
 		outFile << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+}
+
+
+int TestMatrixAdditionAndSubtraction() {
+	int status = 1;
+
+	std::string testFileName = "current/TestMatrixAdditionAndSubtraction.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+
+		Matrix mat1(4, 7, 2.0);
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 6; j++) {
+				mat1(i+1,j+1) = mat1(i,j)*(i+1)+(j+i);
+			}
+		}
+		mat1.setName("Matrix 1");
+		Print(mat1, outFile);
+
+		Matrix mat2(4,7,-2);
+		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
+
+		Matrix mat3(4,4,1.0);
+		mat3.setName("Matrix 3");
+		Print(mat3, outFile);
+
+		Matrix mat4 = mat1 + mat2;
+		mat4.setName("Matrix 4");
+		Print(mat4, outFile);
+
+		try {
+			Matrix mat0 = mat1 + mat3;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		Matrix mat5 = mat1 - mat4;
+		mat5.setName("Matrix 5");
+		Print(mat5, outFile);
+
+		try {
+			Matrix mat0 = mat1 - mat3;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		status = 0;
+
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Matrix Addition and Subtraction Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Addition and Subtraction Test!" << std::endl;
 		status = 1;
 	}
 
