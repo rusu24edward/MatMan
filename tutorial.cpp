@@ -18,8 +18,9 @@ int TestMatrix();
 int TestMatrixBuilder();
 int TestMatrixMultiplication();
 int TestMatrixAdditionAndSubtraction();
-int TestReader();
 int TestMatrixNorms();
+int TestMatrixReduction();
+int TestReader();
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
 
@@ -36,8 +37,9 @@ int main (int argc, char** argv) {
 	testNames.push_back("TestMatrixBuilder");
 	testNames.push_back("TestMatrixMultiplication");
 	testNames.push_back("TestMatrixAdditionAndSubtraction");
-	testNames.push_back("ReaderTest");
 	testNames.push_back("TestMatrixNorms");
+	testNames.push_back("TestMatrixReduction");
+	testNames.push_back("ReaderTest");
 
 	// Run all the tests
 	int finalStatus = 0;
@@ -74,10 +76,12 @@ int RunTests(const std::string& testName) {
 		status = TestMatrixMultiplication();
 	} else if (testName == "TestMatrixAdditionAndSubtraction") {
 		status = TestMatrixAdditionAndSubtraction();
-	} else if (testName == "ReaderTest") {
-		status = TestReader();
 	} else if (testName == "TestMatrixNorms") {
 		status = TestMatrixNorms();
+	} else if (testName == "TestMatrixReduction") {
+		status = TestMatrixReduction();
+	} else if (testName == "ReaderTest") {
+		status = TestReader();
 	} else {
 		std::cout << "WARNING: " << testName << " does not exist." << std::endl;
 		status = 1;
@@ -578,52 +582,6 @@ int TestMatrixAdditionAndSubtraction() {
 
 
 
-// The test for the Reader class.
-// @return int - 1 if failed, 0 if passed.
-int TestReader() {
-	int status = 1;
-
-	std::string testFileName = "current/ReaderTest.out";
-	std::ofstream outFile(testFileName);
-	if (!outFile.is_open()) {
-		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
-		return 1;
-	}
-
-	try{
-		Matrix mat1 = Reader::Read("ex1data1.txt", ',');
-		mat1.setName("Matrix 1");
-		Print(mat1,outFile);
-
-		try {
-			Matrix mat2 = Reader::Read("ex1data2.txt", ',');
-			mat2.setName("Matrix 2");
-			Print(mat2, outFile);
-		} catch (const char* msg) {
-			outFile << msg << std::endl;
-		}
-
-		try {
-			Matrix mat3 = Reader::Read("ex1data3.txt", ',');
-			mat3.setName("Matrix 3");
-			Print(mat3, outFile);
-		} catch (const char* msg) {
-			outFile << msg << std::endl;
-		}
-
-		status = 0;
-	} catch (...) {
-		std::cout << "FAILURE: Cannot complete Reader Test!" << std::endl;
-		outFile << "FAILURE: Cannot complete Reader Test!" << std::endl;
-		status = 1;
-	}
-
-	outFile.close();
-	return status;
-}
-
-
-
 // Test Matrix norms
 // @return int - 1 if failed, 0 if passed.
 int TestMatrixNorms() {
@@ -673,6 +631,103 @@ int TestMatrixNorms() {
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Norms Test!" << std::endl;
 		outFile << "FAILURE: Cannot complete Matrix Norms Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+}
+
+int TestMatrixReduction() {
+	int status = 1;
+
+	std::string testFileName = "current/TestMatrixReduction.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+
+		Matrix mat1(3,5);
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 5; ++j) {
+				mat1(i,j) = -(i+1) + 5*j;
+			}
+		}
+		mat1.setName("Matrix 1");
+		Print(mat1, outFile);
+
+		Matrix mat2 = MatrixBuilder::SumReduce(mat1);
+		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
+
+		Matrix mat3 = MatrixBuilder::SumReduce(mat1, 1);
+		mat3.setName("Matrix 3");
+		Print(mat3, outFile);
+
+		Matrix mat4 = MatrixBuilder::SumReduce(mat1, 2);
+		mat4.setName("Matrix 4");
+		Print(mat4, outFile);
+
+		try {
+			Matrix mat0 = MatrixBuilder::SumReduce(mat1, 3);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Matrix Reduction Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Reduction Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+
+}
+
+
+
+// The test for the Reader class.
+// @return int - 1 if failed, 0 if passed.
+int TestReader() {
+	int status = 1;
+
+	std::string testFileName = "current/ReaderTest.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+		Matrix mat1 = Reader::Read("ex1data1.txt", ',');
+		mat1.setName("Matrix 1");
+		Print(mat1,outFile);
+
+		try {
+			Matrix mat2 = Reader::Read("ex1data2.txt", ',');
+			mat2.setName("Matrix 2");
+			Print(mat2, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		try {
+			Matrix mat3 = Reader::Read("ex1data3.txt", ',');
+			mat3.setName("Matrix 3");
+			Print(mat3, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Reader Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Reader Test!" << std::endl;
 		status = 1;
 	}
 

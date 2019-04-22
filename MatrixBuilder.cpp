@@ -421,5 +421,31 @@ Matrix& MatrixBuilder::BuildMatrixFromSubtraction(const Matrix& left, const Matr
 	}
 }
 
+Matrix& MatrixBuilder::SumReduce(const Matrix& mat, int dim) {
+	int nRows = mat.size(1);
+	int nCols = mat.size(2);
+	if (dim == 1) {
+		Matrix& outMatrix = *(new Matrix(1, nCols));
+		for (int j = 0; j < nCols; ++j) {
+			for (int i = 0; i < nRows; ++i) {
+				outMatrix(0,j) += mat(i,j);
+			}
+		}
+		return outMatrix;
+	} else if (dim == 2) {
+		Matrix& outMatrix = *(new Matrix(nRows, 1));
+		for (int i = 0; i < nRows; ++i) {
+			for (int j = 0; j < nCols; ++j) {
+				outMatrix(i,0) += mat(i,j);
+			}
+		}
+		return outMatrix;
+	} else {
+		throw "ERROR:  "
+			  "Matrix& MatrixBuilder::SumReduce(const Matrix&, int)\n"
+			  "\tWe only support Matrix reduction with the first or second dimension.";
+	}
+}
+
 
 
