@@ -447,5 +447,22 @@ Matrix& MatrixBuilder::SumReduce(const Matrix& mat, int dim) {
 	}
 }
 
+Matrix& MatrixBuilder::ElementMultiply(SubMatrix& left, const Matrix& right) {
+	if (left.size(1) != right.size(1) || left.size(2) != right.size(2)) {
+		delete &left;
+		throw "ERROR:  "
+			  "Matrix& MatrixBuilder::ElementMultiply(SubMatrix&, const Matrix&)\n"
+			  "\tInput Matrices must have compatible dimensions for Matrix element-wise multiplication.";
+	} else {
+		Matrix& outMatrix = *(new Matrix(left));
+		for (int i = 0; i < right.size(1); ++i) {
+			for (int j = 0; j < right.size(2); ++j) {
+				outMatrix(i,j) *= right(i,j);
+			}
+		}
+		return outMatrix;
+	}
+}
+
 
 
