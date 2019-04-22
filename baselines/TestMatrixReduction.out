@@ -26,5 +26,5 @@ Matrix 4
 		[ 40 ]
 		[ 35 ]
 
-ERROR:  Matrix& MatrixBuilder::Reduce(const Matrix&, int)
+ERROR:  Matrix& MatrixBuilder::SumReduce(const Matrix&, int)
 	We only support Matrix reduction with the first or second dimension.
