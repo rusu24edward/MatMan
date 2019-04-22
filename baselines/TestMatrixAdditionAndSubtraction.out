@@ -1,0 +1,49 @@
+
+Matrix 1
+	Rows: 4
+	Cols: 7
+		[ 2 2 2 2 2 2 2 ]
+		[ 2 2 3 4 5 6 7 ]
+		[ 2 5 6 9 12 15 18 ]
+		[ 2 8 18 22 32 42 52 ]
+
+
+Matrix 2
+	Rows: 4
+	Cols: 7
+		[ -2 -2 -2 -2 -2 -2 -2 ]
+		[ -2 -2 -2 -2 -2 -2 -2 ]
+		[ -2 -2 -2 -2 -2 -2 -2 ]
+		[ -2 -2 -2 -2 -2 -2 -2 ]
+
+
+Matrix 3
+	Rows: 4
+	Cols: 4
+		[ 1 1 1 1 ]
+		[ 1 1 1 1 ]
+		[ 1 1 1 1 ]
+		[ 1 1 1 1 ]
+
+
+Matrix 4
+	Rows: 4
+	Cols: 7
+		[ 0 0 0 0 0 0 0 ]
+		[ 0 0 1 2 3 4 5 ]
+		[ 0 3 4 7 10 13 16 ]
+		[ 0 6 16 20 30 40 50 ]
+
+ERROR:  Matrix& MatrixBuilder::BuildMatrixFromAddition(const Matrix&, const Matrix&)
+	Input Matrices must have compatible dimensions for Matrix Addition.
+
+Matrix 5
+	Rows: 4
+	Cols: 7
+		[ 2 2 2 2 2 2 2 ]
+		[ 2 2 2 2 2 2 2 ]
+		[ 2 2 2 2 2 2 2 ]
+		[ 2 2 2 2 2 2 2 ]
+
+ERROR:  Matrix& MatrixBuilder::BuildMatrixFromSubtraction(const Matrix&, const Matrix&)
+	Input Matrices must have compatible dimensions for Matrix Subtraction.
