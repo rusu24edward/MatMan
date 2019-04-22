@@ -57,10 +57,13 @@ int main (int argc, char** argv) {
 		outFile << "Computing cost..." << std::endl;
 		double cost = computCost(features, response, theta);
 		outFile << "With theta = [0; 0], the cost is " << cost << std::endl;
-		// (2a) Matrix multiplication
-		// (2b) Matrix/Vector norms
+		outFile << "The expected cost is approximately 32.07" << std::endl;
 
-		outFile << "Gradient descent..." << std::endl;
+		theta(0,0) = -1; theta(1,0) = 2;
+		outFile << "With theta = [-1; 2], the cost is " << computCost(features, response, theta) << std::endl;
+		outFile << "The expected cost is approximately 54.24" << std::endl;
+
+		outFile << "\nGradient descent..." << std::endl;
 		// (3) Gradient descent
 		// (3a) Matrix multiplication and subtraction
 		// (3b) Matrix Sum
@@ -79,14 +82,8 @@ int main (int argc, char** argv) {
 
 double computCost(const Matrix& features, const Matrix& response, const Matrix& fitParameters) {
 	int numberOfSamples = response.length();
-	// Matrix featuresFit = features * fitParameters;
-	double cost = 0.0;
-	// cost = pow((response - featuresFit).norm(), 2) / (2 * numberOfSamples);
-
-
-
-
-	return cost;
+	Matrix featuresFit = features * fitParameters;
+	return pow((response - featuresFit).norm(), 2) / (2 * numberOfSamples);
 }
 
 void Print(const Matrix& mat, ofstream& outFile) {
