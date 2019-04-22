@@ -15,7 +15,8 @@
 
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
-double computCost(const Matrix&, const Matrix&, const Matrix&);
+double ComputeCost(const Matrix&, const Matrix&, const Matrix&);
+Matrix& GradientDescent(const Matrix&, const Matrix&, const Matrix&, double, int);
 
 // TODO: add baseline comparison test AFTER we verify against Matlab results.
 int main (int argc, char** argv) {
@@ -55,15 +56,19 @@ int main (int argc, char** argv) {
 		Print(theta, outFile);
 
 		outFile << "Computing cost..." << std::endl;
-		double cost = computCost(features, response, theta);
+		double cost = ComputeCost(features, response, theta);
 		outFile << "With theta = [0; 0], the cost is " << cost << std::endl;
 		outFile << "The expected cost is approximately 32.07" << std::endl;
 
-		theta(0,0) = -1; theta(1,0) = 2;
-		outFile << "With theta = [-1; 2], the cost is " << computCost(features, response, theta) << std::endl;
+		Matrix theta2(2,1);
+		theta2(0,0) = -1; theta2(1,0) = 2;
+		outFile << "With theta = [-1; 2], the cost is " << ComputeCost(features, response, theta2) << std::endl;
 		outFile << "The expected cost is approximately 54.24" << std::endl;
 
 		outFile << "\nGradient descent..." << std::endl;
+		double alpha = 0.01;
+		int iterations = 1500;
+		theta = GradientDescent(features, response, theta, alpha, iterations);
 		// (3) Gradient descent
 		// (3a) Matrix multiplication and subtraction
 		// (3b) Matrix Sum
@@ -80,10 +85,26 @@ int main (int argc, char** argv) {
 	return status;
 }
 
-double computCost(const Matrix& features, const Matrix& response, const Matrix& fitParameters) {
+double ComputeCost(const Matrix& features, const Matrix& response, const Matrix& fitParameters) {
 	int numberOfSamples = response.length();
 	Matrix featuresFit = features * fitParameters;
 	return pow((response - featuresFit).norm(), 2) / (2 * numberOfSamples);
+}
+
+Matrix& GradientDescent(const Matrix& features, const Matrix& response, const Matrix& fitParameters,
+					   double alpha, int iterations) {
+	int numberOfSamples = response.length();
+	Matrix& outParameters = *(new Matrix(fitParameters));
+	for (int iter = 0; iter < iterations; ++iter) {
+		Matrix error = features * fitParameters - response; // difference between hypothesis and data)
+		Matrix errorDerivatives(2,1);
+		errorDerivatives(0,0) = MatrixBuilder::Reduce(features(0,numberOfSamples-1,0,0) * error);
+		errorDerivatives(1,0) = MatrixBuilder::Reduce(features(0,numberOfSamples-1,1,1) * error);
+
+		outParameters = outParameters - (alpha / numberOfSamples) * errorDerivatives;
+	}
+
+	return outParameters;
 }
 
 void Print(const Matrix& mat, ofstream& outFile) {
