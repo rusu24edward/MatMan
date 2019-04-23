@@ -20,6 +20,7 @@ int TestMatrixMultiplication();
 int TestMatrixAdditionAndSubtraction();
 int TestMatrixNorms();
 int TestMatrixReduction();
+int TestMatrixTranspose();
 int TestReader();
 void Print(const Matrix&, ofstream&);
 void Print(const SubMatrix&, ofstream&);
@@ -39,6 +40,7 @@ int main (int argc, char** argv) {
 	testNames.push_back("TestMatrixAdditionAndSubtraction");
 	testNames.push_back("TestMatrixNorms");
 	testNames.push_back("TestMatrixReduction");
+	testNames.push_back("TestMatrixTranspose");
 	testNames.push_back("ReaderTest");
 
 	// Run all the tests
@@ -80,6 +82,8 @@ int RunTests(const std::string& testName) {
 		status = TestMatrixNorms();
 	} else if (testName == "TestMatrixReduction") {
 		status = TestMatrixReduction();
+	} else if (testName == "TestMatrixTranspose") {
+		status = TestMatrixTranspose();
 	} else if (testName == "ReaderTest") {
 		status = TestReader();
 	} else {
@@ -691,6 +695,43 @@ int TestMatrixReduction() {
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Reduction Test!" << std::endl;
 		outFile << "FAILURE: Cannot complete Matrix Reduction Test!" << std::endl;
+		status = 1;
+	}
+
+	outFile.close();
+	return status;
+
+}
+
+int TestMatrixTranspose() {
+	int status = 1;
+
+	std::string testFileName = "current/TestMatrixTranspose.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
+
+	try{
+
+		Matrix mat1(6,3);
+		for (int i = 0; i < 6; ++i) {
+			for (int j = 0; j < 3; ++j) {
+				mat1(i,j) = j*j + 3*i + i*j;
+			}
+		}
+		mat1.setName("Matrix 1");
+		Print(mat1, outFile);
+
+		Matrix mat2 = MatrixBuilder::Transpose(mat1);
+		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
+
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Matrix Transpose Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Transpose Test!" << std::endl;
 		status = 1;
 	}
 
