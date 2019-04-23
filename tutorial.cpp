@@ -7,6 +7,7 @@
 #include "Matrix.h"
 #include "SubMatrix.h"
 #include "MatrixBuilder.h"
+#include "MatrixUtils.h"
 #include "Reader.h"
 
 #include "Enums.h"
@@ -520,6 +521,14 @@ int TestMatrixMultiplication() {
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
+
+		Matrix mat8 = mat1 * 2;
+		mat8.setName("Matrix 8");
+		Print(mat8, outFile);
+
+		Matrix mat9 = 0.5 * mat8;
+		mat9.setName("Matrix 9");
+		Print(mat9, outFile);
 
 		status = 0;
 	} catch (...) {
