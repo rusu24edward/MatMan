@@ -91,8 +91,12 @@ double ComputeCost(const Matrix& features, const Matrix& response, const Matrix&
 	return pow((response - featuresFit).norm(), 2) / (2 * numberOfSamples);
 }
 
-Matrix& GradientDescent(const Matrix& features, const Matrix& response, const Matrix& fitParameters,
+
+
+Matrix& GradientDescent(const Matrix& featuresIn, const Matrix& response, const Matrix& fitParameters,
 					   double alpha, int iterations) {
+	Matrix features(featuresIn); // Must make a copy to get around the promise of constant yet still
+								 // make a SubMatrix out of features.
 	int numberOfSamples = response.length();
 	Matrix& outParameters = *(new Matrix(fitParameters));
 	for (int iter = 0; iter < iterations; ++iter) {
@@ -104,7 +108,7 @@ Matrix& GradientDescent(const Matrix& features, const Matrix& response, const Ma
 		// use error instead of element-wise multiplication.
 		// I wish there was a better syntax to do this....
 		errorDerivativesHelper(0,numberOfSamples-1,1,1) = MatrixBuilder::ElementMultiply(features(0,numberOfSamples-1,1,1), error);
-		errorDerivatives = MatrixBuilder::Tranpose(MatrixBuilder::SumReduce(errorDerivativesHelper, 1));
+		Matrix errorDerivatives = MatrixBuilder::Transpose(MatrixBuilder::SumReduce(errorDerivativesHelper, 1));
 
 		outParameters = outParameters - (alpha / numberOfSamples) * errorDerivatives;
 	}
