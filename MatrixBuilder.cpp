@@ -464,5 +464,17 @@ Matrix& MatrixBuilder::ElementMultiply(SubMatrix& left, const Matrix& right) {
 	}
 }
 
+Matrix& MatrixBuilder::Transpose(const Matrix& mat) {
+	int nRows = mat.size(1);
+	int nCols = mat.size(2);
+	Matrix& outMatrix = *(new Matrix(nCols, nRows));
+	for (int i = 0; i < nRows; ++i) {
+		for (int j = 0; j < nCols; ++j) {
+			outMatrix(j,i) = mat(i,j);
+		}
+	}
+	return outMatrix;
+}
+
 
 
