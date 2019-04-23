@@ -8,8 +8,9 @@
 
 #include "Matrix.h"
 #include "SubMatrix.h"
-#include "Reader.h"
 #include "MatrixBuilder.h"
+#include "MatrixUtils.h"
+#include "Reader.h"
 
 #include "Enums.h"
 
@@ -68,10 +69,20 @@ int main (int argc, char** argv) {
 		outFile << "\nGradient descent..." << std::endl;
 		double alpha = 0.01;
 		int iterations = 1500;
+
+// DEBUG DEBUG DEBUG DEBUG DEBUG //
+		outFile << "DEBUG DEBUG DEBUG DEBUG DEBUG" << std::endl;
+		Print(features, outFile);
+		Print(response, outFile);
+		Print(theta, outFile);
+// DEBUG DEBUG DEBUG DEBUG DEBUG //
+
+
+
 		theta = GradientDescent(features, response, theta, alpha, iterations);
-		// (3) Gradient descent
-		// (3a) Matrix multiplication and subtraction
-		// (3b) Matrix Sum
+		outFile << "Theta found by gradient descent:" << std::endl;
+		Print(theta, outFile);
+		outFile << "Expected theta values: [-3.6303; 1.1664]" << std::endl;
 
 		status = 0;
 	} catch (...) {
@@ -100,17 +111,16 @@ Matrix& GradientDescent(const Matrix& featuresIn, const Matrix& response, const 
 	int numberOfSamples = response.length();
 	Matrix& outParameters = *(new Matrix(fitParameters));
 	for (int iter = 0; iter < iterations; ++iter) {
-		Matrix error = features * fitParameters - response; // difference between hypothesis and data)
+		Matrix error = (features * outParameters) - response; // difference between hypothesis and data)
 		Matrix errorDerivativesHelper(numberOfSamples,2);
-		// errorDerivativesHelper(0,numberOfSamples-1,0,0) = error;
-		errorDerivativesHelper(0,numberOfSamples-1,0,0) = MatrixBuilder::ElementMultiply(features(0,numberOfSamples-1,0,0), error);
+		errorDerivativesHelper(0,numberOfSamples-1,0,0) = error;
+		// errorDerivativesHelper(0,numberOfSamples-1,0,0) = MatrixBuilder::ElementMultiply(features(0,numberOfSamples-1,0,0), error);
 		// Pretty sure the first column of featrues is just a bunch of ones, so we can probably just
 		// use error instead of element-wise multiplication.
 		// I wish there was a better syntax to do this....
 		errorDerivativesHelper(0,numberOfSamples-1,1,1) = MatrixBuilder::ElementMultiply(features(0,numberOfSamples-1,1,1), error);
 		Matrix errorDerivatives = MatrixBuilder::Transpose(MatrixBuilder::SumReduce(errorDerivativesHelper, 1));
-
-		outParameters = outParameters - (alpha / numberOfSamples) * errorDerivatives;
+		outParameters = outParameters - ((alpha / numberOfSamples) * errorDerivatives);
 	}
 
 	return outParameters;
