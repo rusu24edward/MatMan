@@ -58,6 +58,7 @@ public:
 	Matrix& operator+(const Matrix&) const;
 	Matrix& operator-(const Matrix&) const;
 	Matrix& operator*(SubMatrix&) const;
+	Matrix& operator*(double) const;
 	double norm() const;
 
 	// --- Printing --- //
