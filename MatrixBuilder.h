@@ -27,6 +27,8 @@ public:
 	static Matrix& BuildMatrixFromAddition(const Matrix&, const Matrix&);
 	static Matrix& BuildMatrixFromSubtraction(const Matrix&, const Matrix&);
 	static Matrix& SumReduce(const Matrix&, int dim = 1);
+	static Matrix& ElementMultiply(SubMatrix&, const Matrix&);
+	static Matrix& Transpose(const Matrix&);
 };
 
 #endif

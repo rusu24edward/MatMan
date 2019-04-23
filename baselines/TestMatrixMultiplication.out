@@ -56,3 +56,11 @@ Matrix 6
 
 ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&)
 	Input Matrices must have compatible dimensions for Matrix Multiplication.
+
+Matrix 7
+	Rows: 1
+	Cols: 2
+		[ 5304 9204 ]
+
+ERROR:  Matrix& MatrixBuilder::ElementMultiply(SubMatrix&, const Matrix&)
+	Input Matrices must have compatible dimensions for Matrix element-wise multiplication.
