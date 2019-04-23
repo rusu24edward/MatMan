@@ -530,6 +530,14 @@ int TestMatrixMultiplication() {
 		mat9.setName("Matrix 9");
 		Print(mat9, outFile);
 
+		Matrix mat10 = mat9 * 0;
+		mat10.setName("Matrix 10");
+		Print(mat10, outFile);
+
+		Matrix mat11 = 1*mat8;
+		mat11.setName("Matrix 11");
+		Print(mat11, outFile);
+
 		status = 0;
 	} catch (...) {
 		std::cout << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
