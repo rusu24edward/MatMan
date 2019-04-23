@@ -389,6 +389,22 @@ Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix& left, cons
 	}
 }
 
+Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& mat, double scale) {
+	if (scale == 0) {
+		return *(new Matrix(mat.size(1), mat.size(2)));
+	} else if (scale == 1) {
+		return *(new Matrix(mat));
+	} else {
+		Matrix& outMatrix = *(new Matrix(mat));
+		for (int i = 0; i < mat.size(1); ++i) {
+			for (int j = 0; j < mat.size(2); ++j) {
+				outMatrix(i,j) *= scale;
+			}
+		}
+		return outMatrix;
+	}
+}
+
 Matrix& MatrixBuilder::BuildMatrixFromAddition(const Matrix& left, const Matrix& right) {
 	if (left.size(1) != right.size(1) || left.size(2) != right.size(2)) {
 		throw "ERROR:  "
