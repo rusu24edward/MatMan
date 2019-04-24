@@ -31,58 +31,44 @@ int main (int argc, char** argv) {
 
 	try {
 
+		// Step 1: Read the data
 		outFile << "Reading data..." << std::endl;
 		Matrix data = Reader::Read("ex1data1.txt", ',');
 		data.setName("Data");
 		Print(data, outFile);
 
+		// Step 2: Setup features and response
 		outFile << "Extracting features..." << std::endl;
 		int numberOfSamples = data.size(1);
-		Matrix features = data(0, numberOfSamples-1, 0, 0);
+		Matrix features = MatrixBuilder::BuildMatrixFromCombination(Matrix(numberOfSamples, 1, 1.0),
+				data(0, numberOfSamples-1, 0, 0), MatrixCombinationType::LeftRight);
 		features.setName("Features");
 		Print(features, outFile);
 
-		outFile << "Extracting response" << std::endl;
+		outFile << "Extracting response..." << std::endl;
 		Matrix response = data(0, numberOfSamples-1, 1, 1);
 		response.setName("Response");
 		Print(response, outFile);
 
-		outFile << "Adding a vector of ones to the features..." << std::endl;
-		features = MatrixBuilder::BuildMatrixFromCombination(Matrix(numberOfSamples, 1, 1.0), features, MatrixCombinationType::LeftRight);
-		Print(features, outFile);
-
-		outFile << "Creating theta..." << std::endl;
-		Matrix theta(2,1);
-		theta.setName("theta");
-		Print(theta, outFile);
-
-		outFile << "Computing cost..." << std::endl;
-		double cost = ComputeCost(features, response, theta);
-		outFile << "With theta = [0; 0], the cost is " << cost << std::endl;
-		outFile << "The expected cost is approximately 32.07" << std::endl;
-
-		Matrix theta2(2,1);
-		theta2(0,0) = -1; theta2(1,0) = 2;
-		outFile << "With theta = [-1; 2], the cost is " << ComputeCost(features, response, theta2) << std::endl;
-		outFile << "The expected cost is approximately 54.24" << std::endl;
-
+		// Step 3: Gradient Descent for theta
 		outFile << "\nGradient descent..." << std::endl;
 		double alpha = 0.01;
 		int iterations = 1500;
 
-// DEBUG DEBUG DEBUG DEBUG DEBUG //
-		outFile << "DEBUG DEBUG DEBUG DEBUG DEBUG" << std::endl;
-		Print(features, outFile);
-		Print(response, outFile);
-		Print(theta, outFile);
-// DEBUG DEBUG DEBUG DEBUG DEBUG //
-
-
-
-		theta = GradientDescent(features, response, theta, alpha, iterations);
+		Matrix theta = GradientDescent(features, response, Matrix(2,1), alpha, iterations);
+		theta.setName("theta");
 		outFile << "Theta found by gradient descent:" << std::endl;
 		Print(theta, outFile);
-		outFile << "Expected theta values: [-3.6303; 1.1664]" << std::endl;
+		outFile << "Expected theta values: [-3.6303; 1.1664]\n" << std::endl;
+
+		// Step 4: Predict profit from populations
+		Matrix pop1(1,2,1); pop1(0,1) = 3.5;
+		Matrix pop2(1,2,1); pop2(0,1) = 7;
+		Matrix predict1 = pop1*theta;
+		Matrix predict2 = pop2*theta;
+
+		outFile << "For population of 35,000, we predict a profit of " << 10000*predict1(0,0) << std::endl;
+		outFile << "For population of 70,000, we predict a profit of " << 10000*predict2(0,0) << std::endl;
 
 		status = 0;
 	} catch (...) {
