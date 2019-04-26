@@ -26,7 +26,7 @@ public:
 	void operator=(double);
 	double& operator()(int, int);
 	const double& operator()(int, int) const;
-	int size(int dim = 0) const;
+	// int size(int dim = 0) const;
 	Matrix& operator*(const Matrix&);
 	Matrix& operator*(SubMatrix&);
 
@@ -44,7 +44,6 @@ private:
 	// --- Underlying Data --- //
 	Matrix* data;
 	int left, right, top, down;
-	// int nRows, nCols;
 
 };
 

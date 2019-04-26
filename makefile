@@ -1,13 +1,13 @@
 all: tutorial.exe Example1.exe
 
-Example1.exe: Example1.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
-	g++ -o Example1.exe Example1.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
+Example1.exe: Example1.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
+	g++ -o Example1.exe Example1.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
 
 Example1.o: Example1.cpp
 	g++ -c Example1.cpp
 
-tutorial.exe: tutorial.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
-	g++ -o tutorial.exe tutorial.o NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
+tutorial.exe: tutorial.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
+	g++ -o tutorial.exe tutorial.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
 
 tutorial.o: tutorial.cpp
 	g++ -c tutorial.cpp
@@ -24,9 +24,12 @@ SubMatrix.o: SubMatrix.cpp SubMatrix.h
 Matrix.o: Matrix.cpp Matrix.h
 	g++ -c Matrix.cpp
 
+MatrixBase.o: MatrixBase.cpp MatrixBase.h
+	g++ -c MatrixBase.cpp
+
 NamedObject.o: NamedObject.cpp NamedObject.h
 	g++ -c NamedObject.cpp
 
 clean:
-	rm -rf NamedObject.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o tutorial.o tutorial.exe Example1.o Example1.exe
+	rm -rf NamedObject.o MatrixBase.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o tutorial.o tutorial.exe Example1.o Example1.exe
 

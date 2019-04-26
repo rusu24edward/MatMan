@@ -214,15 +214,15 @@ int Matrix::length() const {
 //				  - if 2, then return nCols
 //				  - else, return the larger length
 // @return int - the length
-int Matrix::size(int dim) const {
-	if (dim == 1) {
-		return nRows;
-	} else if (dim == 2) {
-		return nCols;
-	} else {
-		return length();
-	}
-}
+// int Matrix::size(int dim) const {
+// 	if (dim == 1) {
+// 		return nRows;
+// 	} else if (dim == 2) {
+// 		return nCols;
+// 	} else {
+// 		return length();
+// 	}
+// }
 
 
 // --- Mathematical Operations Support --- //

@@ -107,15 +107,15 @@ const double& SubMatrix::operator()(int i, int j) const {
 //				  - if 2, then return nCols
 //				  - else, return the larger length
 // @return int - the length
-int SubMatrix::size(int dim) const {
-	if (dim == 1) {
-		return nRows;
-	} else if (dim == 2) {
-		return nCols;
-	} else {
-		return nRows > nCols ? nRows : nCols;
-	}
-}
+// int SubMatrix::size(int dim) const {
+// 	if (dim == 1) {
+// 		return nRows;
+// 	} else if (dim == 2) {
+// 		return nCols;
+// 	} else {
+// 		return nRows > nCols ? nRows : nCols;
+// 	}
+// }
 
 
 // --- Mathematical Operations Support --- //
