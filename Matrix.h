@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 
+#include "MatrixBase.h"
 #include "NamedObject.h"
 #include "SubMatrix.h"
 class SubMatrix;
@@ -23,7 +24,7 @@ using namespace std;
 //		- Extract SubMatrices
 //		- Construct new Matrices from SubMatrices
 //		- Query the matrix size
-class Matrix : public NamedObject {
+class Matrix : public NamedObject, public MatrixBase {
 
 public:
 
@@ -81,8 +82,8 @@ private:
 
 	// --- Underlying Data --- //
 	vector<vector<double>> data;
-	int nRows;
-	int nCols;
+	// int nRows;
+	// int nCols;
 };
 
 #endif

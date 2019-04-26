@@ -5,12 +5,13 @@
 #include <iostream>
 #include <fstream>
 
+#include "MatrixBase.h"
 #include "Matrix.h"
 class Matrix;
 
 using namespace std;
 
-class SubMatrix {
+class SubMatrix : public MatrixBase {
 
 friend class Matrix;
 
@@ -43,7 +44,7 @@ private:
 	// --- Underlying Data --- //
 	Matrix* data;
 	int left, right, top, down;
-	int nRows, nCols;
+	// int nRows, nCols;
 
 };
 
