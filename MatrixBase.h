@@ -7,11 +7,11 @@ class MatrixBase {
 public:
 
 	// virtual void operator=(double) = 0;
-	int size(int dim = 0) const;
 	// virtual void Print(ostream&) const = 0;
 	// virtual void Print(ofstream&) const = 0;
 
 protected:
+	int sizeHelper(int dim) const;
 	int nRows;
 	int nCols;
 };
