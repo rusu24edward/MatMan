@@ -54,7 +54,6 @@ public:
 	void operator=(double);
 	SubMatrix& operator()(int, int, int, int);
 	int length() const;
-	int size(int dim = 0) const;
 	Matrix& operator*(const Matrix&) const;
 	Matrix& operator+(const Matrix&) const;
 	Matrix& operator-(const Matrix&) const;

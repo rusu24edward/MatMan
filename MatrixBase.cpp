@@ -1,7 +1,7 @@
 
 #include "MatrixBase.h"
 
-int MatrixBase::sizeHelper(int dim) const {
+int MatrixBase::size(int dim) const {
 	if (dim == 1) {
 		return nRows;
 	} else if (dim == 2) {

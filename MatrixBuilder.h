@@ -4,6 +4,8 @@
 
 #include <vector>
 
+// #include "MatrixBase.h"
+// class MatrixBase;
 #include "Matrix.h"
 #include "SubMatrix.h"
 

@@ -209,15 +209,6 @@ int Matrix::length() const {
 	return nRows > nCols ? nRows : nCols;
 }
 
-// Return the size of the specified dimension.
-// @param int dim - if 1, then return nRows
-//				  - if 2, then return nCols
-//				  - else, return the larger length
-// @return int - the length
-int Matrix::size(int dim) const {
-	return sizeHelper(dim);
-}
-
 
 // --- Mathematical Operations Support --- //
 
