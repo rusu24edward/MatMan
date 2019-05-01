@@ -37,6 +37,7 @@ private:
 
 	// --- Constructors --- //
 	SubMatrix(vector<vector<double>>*, int, int, int, int);
+	SubMatrix();
 
 };
 

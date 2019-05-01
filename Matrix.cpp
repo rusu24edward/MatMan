@@ -133,8 +133,8 @@ void Matrix::setName(const string& n) {
 // 	return *(new SubMatrix());
 // }
 
-void Matrix::operator()(int i, int j, int k, int l) {
-
+SubMatrix& Matrix::operator()(int i, int j, int k, int l) {
+	return *(new SubMatrix());
 }
 
 
