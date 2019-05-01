@@ -175,8 +175,6 @@ int TestMatrix() {
 
 		try {
 			Matrix mat5(helperMat2);
-			mat5.setName("Matrix 5");
-			Print(mat5, outFile);
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
 		}
@@ -428,6 +426,28 @@ int TestMatrixBuilder() {
 			Print(combinedMatrix107, outFile);
 		} catch (const char* msg) {
 			outFile << msg << std::endl;
+		}
+
+		try {
+			Matrix combinedMatrix000 = MatrixBuilder::Combine(mat1, mat2, MatrixCombinationType::LeftRight);
+			combinedMatrix000.setName("Matrix Matrix LeftRight");
+			Print(combinedMatrix000, outFile);
+			Matrix combinedMatrix001 = MatrixBuilder::Combine(mat1, mat3, MatrixCombinationType::TopDown);
+			Print(combinedMatrix001, outFile);
+			// Matrix combinedMatrix006 = MatrixBuilder::Combine(mat2, mat1(0,3,3,4), MatrixCombinationType::TopDown);
+			// Print(combinedMatrix006, outFile);
+			// Matrix combinedMatrix007 = MatrixBuilder::Combine(mat3, mat2(0,2,1,1), MatrixCombinationType::LeftRight);
+			// Print(combinedMatrix007, outFile);
+			// Matrix combinedMatrix004 = MatrixBuilder::Combine(mat3(0,2,2,3), mat2, MatrixCombinationType::TopDown);
+			// Print(combinedMatrix004, outFile);
+			// Matrix combinedMatrix005 = MatrixBuilder::Combine(mat3(0,2,2,3), mat2, MatrixCombinationType::LeftRight);
+			// Print(combinedMatrix005, outFile);
+			// Matrix combinedMatrix002 = MatrixBuilder::Combine(mat1(2,2,2,2), mat2(2,2,0,0), MatrixCombinationType::TopDown);
+			// Print(combinedMatrix002, outFile);
+			// Matrix combinedMatrix003 = MatrixBuilder::Combine(mat1(2,2,2,2), mat2(1,2,0,0), MatrixCombinationType::LeftRight);
+			// Print(combinedMatrix003, outFile);
+		} catch (const char* msg) {
+			std::cout << msg << std::endl;
 		}
 
 		status = 0;

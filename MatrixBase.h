@@ -2,8 +2,7 @@
 #ifndef MATRIXBASE_H
 #define MATRIXBASE_H
 
-// #include "MatrixBuilder.h"
-// class MatrixBuilder;
+#include <vector>
 
 using namespace std;
 
@@ -14,6 +13,8 @@ friend class MatrixBuilder;
 public:
 
 	int size(int dim = 0) const;
+	double& operator()(int, int);
+	const double& operator()(int, int) const;
 	// virtual void operator=(double) = 0;
 	// virtual void Print(ostream&) const = 0;
 	// virtual void Print(ofstream&) const = 0;
@@ -21,6 +22,11 @@ public:
 protected:
 	int nRows;
 	int nCols;
+	int top;
+	int down;
+	int left;
+	int right;
+	vector<vector<double>> data;
 };
 
 #endif

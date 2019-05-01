@@ -4,7 +4,7 @@
 
 #include <vector>
 
-// #include "MatrixBase.h"
+#include "MatrixBase.h"
 // class MatrixBase;
 #include "Matrix.h"
 #include "SubMatrix.h"
@@ -14,6 +14,7 @@
 class MatrixBuilder {
 
 public:
+	static Matrix& Combine(const MatrixBase&, const MatrixBase&, MatrixCombinationType);
 	static Matrix& BuildMatrixFromCombination(
 		const Matrix&, const Matrix&, MatrixCombinationType);
 	static Matrix& BuildMatrixFromCombination(

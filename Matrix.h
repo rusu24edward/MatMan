@@ -80,7 +80,7 @@ private:
 
 
 	// --- Underlying Data --- //
-	vector<vector<double>> data;
+	// vector<vector<double>> data;
 };
 
 #endif

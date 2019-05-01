@@ -1,6 +1,70 @@
 
 #include "MatrixBuilder.h"
 
+
+ Matrix& MatrixBuilder::Combine(
+ 		const MatrixBase& first, const MatrixBase& last, MatrixCombinationType rule) {
+// std::cout << "\nIn MatrixBuilder::Combine" << std::endl;
+ 	switch (rule) {
+ 		case LeftRight:
+// std::cout << "LeftRight" << std::endl;
+ 			if (first.size(1) != last.size(1)) {
+ 				throw "ERROR:  "
+ 					  "Matrix& MatrixBuilder::Combine(const MatrixBase&, const MatrixBase&, MatrixCombinationType)\n"
+ 					  "\tInput Matrices must have the same number of rows for LeftRight Matrix Combination.";
+ 			} else {
+// std::cout << "Sizes are consistent." << std::endl;
+				int nRows = first.size(1);
+				int nColsLeft = first.size(2);
+				int nColsRight = last.size(2);
+				Matrix& outMatrix = *(new Matrix(nRows, nColsLeft + nColsRight));
+// std::cout << "Generated the return Matrix." << std::endl;
+				for (int i = 0; i < nRows; ++i) {
+// std::cout << "i is: " << i << std::endl;
+					for (int j = 0; j < nColsLeft; ++j) {
+// std::cout << "j is: " << j << std::endl;
+						outMatrix(i,j) = first(i,j);
+					}
+					for (int j = 0; j < nColsRight; ++j) {
+						outMatrix(i,j+nColsLeft) = last(i,j);
+					}
+				}
+// std::cout << "Populated the return Matrix." << std::endl;
+				return outMatrix;
+			}
+			break;
+		case TopDown:
+// std::cout << "LeftRight" << std::endl;
+			if (first.size(2) != last.size(2)) {
+				throw "ERROR  "
+				  "Matrix& MatrixBuilder::Combine(const MatrixBase&, const MatrixBase&, MatrixCombinationType)\n"
+				  "\tInput Matrices must have the same number of columns for TopDown Matrix Combination";
+			} else {
+				int nCols = first.size(2);
+				int nRowsTop = first.size(1);
+				int nRowsDown = last.size(1);
+				Matrix& outMatrix = *(new Matrix(nRowsTop + nRowsDown, nCols));
+				for (int i = 0; i < nRowsTop; ++i) {
+					for (int j = 0; j < nCols; ++j) {
+						outMatrix(i,j) = first(i,j);
+					}
+				}
+				for (int i = 0; i < nRowsDown; ++i) {
+					for (int j = 0; j < nCols; ++j) {
+						outMatrix(i+nRowsTop,j) = last(i,j);
+					}
+				}
+				return outMatrix;
+			}
+			break;
+		default:
+			throw "ERROR:  "
+				  "Matrix& MatrixBuilder::Combine(const MatrixBase&, const MatrixBase&, MatrixCombinationType)\n"
+				  "\tUnsupported MatrixCombinationType";
+ 	}
+
+ }
+
 // Build a new Matrix by combining two Matrices according to specification.
 // @param const Matrix& first - the first Matrix involved in the combination
 // @param const Matrix& last - the second Matrix involved in the combination

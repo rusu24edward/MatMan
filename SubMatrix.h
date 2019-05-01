@@ -42,7 +42,6 @@ private:
 
 	// --- Underlying Data --- //
 	Matrix* data;
-	int left, right, top, down;
 
 };
 

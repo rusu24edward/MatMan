@@ -333,6 +333,9 @@ void Matrix::setFields(int r, int c, double value) {
 	nRows = r;
 	nCols = c;
 	data = vector<vector<double>>(r, vector<double>(c, value));
+	top = left = 0;
+	down = nRows;
+	right = nCols;
 }
 
 // Set the class fields
@@ -341,6 +344,9 @@ void Matrix::setFields(const vector<vector<double>>& d) {
 	data = d;
 	nRows = data.size();
 	nCols = data[0].size();
+	top = left = 0;
+	down = nRows;
+	right = nCols;
 }
 
 // Set the class fields
@@ -349,6 +355,9 @@ void Matrix::setFields(const Matrix& mat) {
 	data = mat.data;
 	nRows = data.size();
 	nCols = data[0].size();
+	top = left = 0;
+	down = nRows;
+	right = nCols;
 }
 
 // Set the class fields
@@ -362,12 +371,15 @@ void Matrix::setFields(SubMatrix& sm) {
 			data[i][j] = sm(i, j);
 		}
 	}
+	top = left = 0;
+	down = nRows;
+	right = nCols;
 }
 
 // Delete the class fields
 void Matrix::deleteFields() {
 	data.clear();
-	nRows = nCols = 0;
+	nRows = nCols = top = down = left = right = 0;
 }
 
 // Check that the number of elements in each vector is the same
