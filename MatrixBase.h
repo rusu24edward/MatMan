@@ -15,6 +15,9 @@ class MatrixBase {
 public:
 
 	double& operator()(int, int);
+	const double& operator()(int, int) const;
+	void operator=(double);
+
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const MatrixBase&);
 	void Print(ofstream&) const;

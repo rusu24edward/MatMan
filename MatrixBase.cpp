@@ -2,15 +2,32 @@
 #include "MatrixBase.h"
 
 
-double& MatrixBase::operator()(int r_, int c_) {
-	if (r_ >= nRows || c_ >= nCols || r_ < 0 || c_ < 0) {
+double& MatrixBase::operator()(int r, int c) {
+	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
 		throw "ERROR:  "
 			  "double& MatrixBase::operator()(int, int)\n"
 			  "\tAttempting to access elements outside the matrix range.";
 	}
-	int r = r_ + top;
-	int c = c_ + left;
-	return (*data_ptr)[r][c];
+	return (*data_ptr)[r+top][c+left];
+}
+
+const double& MatrixBase::operator()(int r, int c) const {
+	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
+		throw "ERROR:  "
+			  "double& MatrixBase::operator()(int, int)\n"
+			  "\tAttempting to access elements outside the matrix range.";
+	}
+	return (*data_ptr)[r+top][c+left];
+}
+
+// Set the entire Matrix equal to the input value
+// @param double value - the value to insert
+void MatrixBase::operator=(double value) {
+	for (int i = 0; i < nRows; ++i) {
+		for (int j = 0; j < nCols; ++j) {
+			(*data_ptr)[i+top][j+left] = value;
+		}
+	}
 }
 
 
