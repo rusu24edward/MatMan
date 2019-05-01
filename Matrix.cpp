@@ -3,8 +3,6 @@
 
 #include <math.h>
 
-// #include "MatrixBuilder.h"
-
 
 using namespace std;
 
@@ -57,6 +55,10 @@ Matrix::Matrix(const Matrix& mat) {
 	name = UNAMED;
 }
 
+Matrix::Matrix(SubMatrix& sm) {
+
+}
+
 
 
 // ------------------ //
@@ -100,6 +102,10 @@ Matrix& Matrix::operator=(const Matrix& mat) {
 	return *this;
 }
 
+Matrix& Matrix::operator=(SubMatrix& sm) {
+	return *this;
+}
+
 
 
 
@@ -120,6 +126,12 @@ const string& Matrix::getName() const {
 void Matrix::setName(const string& n) {
 	name = n;
 }
+
+
+
+// SubMatrix& operator()(int i, int j, int k, int l) {
+// 	return *(new SubMatrix());
+// }
 
 
 
