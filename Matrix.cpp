@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-#include "MatrixBuilder.h"
+// #include "MatrixBuilder.h"
 
 
 using namespace std;
@@ -57,14 +57,6 @@ Matrix::Matrix(const Matrix& mat) {
 	name = UNAMED;
 }
 
-// Copy constructor copies the input SubMatrix
-// @param SubMatrix& sm - input SubMatrix from which to copy
-Matrix::Matrix(SubMatrix& sm) {
-	setFields(sm);
-	name = UNAMED;
-	delete &sm;
-}
-
 
 
 // ------------------ //
@@ -108,16 +100,6 @@ Matrix& Matrix::operator=(const Matrix& mat) {
 	return *this;
 }
 
-// Assignemnt operator blows out the Matrix and sets it to the RHS
-// @param SubMatrix& sm - SubMatrix frrom which to copy
-// @return Matrix& - this Matrix
-Matrix& Matrix::operator=(SubMatrix& sm) {
-	deleteFields();
-	setFields(sm);
-	delete &sm;
-	return *this;
-}
-
 
 
 
@@ -141,182 +123,6 @@ void Matrix::setName(const string& n) {
 
 
 
-// ------------------------------- //
-// --- Functions and Operators --- //
-// ------------------------------- //
-
-// --- Element support --- //
-
-// Extract the value at the specified index
-// @param int r - the row index
-// @param int c - the column index
-// @return double& - the value at this index
-double& Matrix::operator()(int r, int c) {
-	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
-		throw "ERROR:  "
-			  "double& Matrix::operator()(int, int)\n"
-			  "\tAttempting to access elements outside the matrix range.";
-	}
-	return data[r][c];
-}
-const double& Matrix::operator()(int r, int c) const {
-	if (r >= nRows || c >= nCols || r < 0 || c < 0) {
-		throw "ERROR:  "
-			  "double& Matrix::operator()(int, int)\n"
-			  "\tAttempting to access elements outside the matrix range.";
-	}
-	return data[r][c];
-}
-
-// Set the entire Matrix equal to the input value
-// @param double value - the value to insert
-void Matrix::operator=(double value) {
-	for (int i = 0; i < nRows; ++i) {
-		for (int j = 0; j < nCols; ++j) {
-			data[i][j] = value;
-		}
-	}
-}
-
-
-// --- SubMatrix Support --- //
-
-// Generate a SubMatrix from this Matrix using the indicies
-// @param int top - top index
-// @param int down - bottom index
-// @param int left - left index
-// @param int right - right index
-// @return SubMatrix& - the SubMatrix
-SubMatrix& Matrix::operator()(int top, int down, int left, int right) {
-	if (down < top || right < left) {
-		throw "ERROR:  "
-			  "SubMatrix& Matrix::operator()(int, int, int, int)\n"
-			  "\tUnordered Range.";
-	}
-	if (top < 0 || down >= nRows || left < 0 || right >= nCols) {
-		throw "ERROR:  "
-			  "SubMatrix& Matrix::operator()(int, int, int, int)\n"
-			  "\tAttempting to access elements outside the Matrix range.";
-	}
-	return *(new SubMatrix(this, top, down, left, right));
-}
-
-
-// --- Query Support --- //
-
-// Return the length of the greater dimension
-int Matrix::length() const {
-	return nRows > nCols ? nRows : nCols;
-}
-
-
-// --- Mathematical Operations Support --- //
-
-// Construct a Matix by multipliying this Matrix with another. This lives here in order to
-// overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
-// @param const Matrix& RHS - the RHS Matix involved in the operation
-// @return Matrix& - new Matrix formed from multiplying these two.
-Matrix& Matrix::operator*(const Matrix& RHS) const {
-	return MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
-}
-
-// Construct a Matix by multipliying this Matrix with a SubMatrix. This lives here in order to
-// overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
-// @param SubMatrix& RHS - the RHS SubMatix involved in the operation
-// @return Matrix& - new Matrix formed from multiplying these two.
-Matrix& Matrix::operator*(SubMatrix& RHS) const {
-	Matrix& outMatrix = MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
-	delete &RHS;
-	return outMatrix;
-}
-
-Matrix& Matrix::operator+(const Matrix& RHS) const {
-	return MatrixBuilder::BuildMatrixFromAddition(*this, RHS);
-}
-
-Matrix& Matrix::operator-(const Matrix& RHS) const {
-	return MatrixBuilder::BuildMatrixFromSubtraction(*this, RHS);
-}
-
-Matrix& Matrix::operator*(double RHS) const {
-	return MatrixBuilder::BuildMatrixFromMultiplication(*this, RHS);
-}
-
-
-
-// Calculate the vector 2-norm of this Matrix.
-// @return double - the vector 2-norm of this Matrix.
-// throws an error if the Matrix is not a vector
-double Matrix::norm() const {
-	if (nRows != 1 && nCols != 1) {
-		throw "ERROR:  "
-			  "double Matrix::norm() const\n"
-			  "You are asking for the norm of a matrix, but we only support the 2-norm of a vector.";
-	} else if (nRows == 1 && nCols == 1) {
-		return data[0][0];
-	} else if (nRows == 1 && nCols != 1) {
-		double norm2 = 0.0;
-		for (int n = 0; n < nCols; ++n) {
-			norm2 += pow(data[0][n], 2);
-		}
-		return sqrt(norm2);
-	} else { // nRows != 1 && nCols == 1
-		double norm2 = 0.0;
-		for (int n = 0; n < nRows; ++n) {
-			norm2 += pow(data[n][0], 2);
-		}
-		return sqrt(norm2);
-	}
-}
-
-
-
-// ---------------- //
-// --- Printing --- //
-// ---------------- //
-
-// Print to an ostream
-// @param ostream& streamer - print to this ostream
-void Matrix::Print(ostream& streamer) const {
-	streamer << endl << name << endl;
-	streamer << "\tRows: " << nRows << endl;
-	streamer << "\tCols: " << nCols << endl;
-	for (vector<vector<double>>::const_iterator
-		 i = data.begin(); i != data.end(); ++i) {
-		streamer << "\t\t[ ";
-		for (vector<double>::const_iterator
-			 j = i->begin(); j != i->end(); ++j) {
-			streamer << *j << " ";
-		}
-		streamer << "]" << endl;
-	}
-}
-ostream& operator<<(ostream& streamer, const Matrix& mat) {
-	mat.Print(streamer);
-	return streamer;
-}
-
-// Print to an fstream
-// @param ofstream& fileOut - print to this ofstream
-void Matrix::Print(ofstream& fileOut) const {
-	fileOut << endl << name << endl;
-	fileOut << "\tRows: " << nRows << endl;
-	fileOut << "\tCols: " << nCols << endl;
-	for (vector<vector<double>>::const_iterator
-		 i = data.begin(); i != data.end(); ++i) {
-		fileOut << "\t\t[ ";
-		for (vector<double>::const_iterator
-			 j = i->begin(); j != i->end(); ++j) {
-			fileOut << *j << " ";
-		}
-		fileOut << "]" << endl;
-	}
-}
-ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
-	mat.Print(fileOut);
-	return fileOut;
-}
-
 
 
 // ------------------------ //
@@ -332,16 +138,18 @@ ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
 void Matrix::setFields(int r, int c, double value) {
 	nRows = r;
 	nCols = c;
-	data = vector<vector<double>>(r, vector<double>(c, value));
 	top = left = 0;
 	down = nRows;
 	right = nCols;
+	data = vector<vector<double>>(r, vector<double>(c, value));
+	data_ptr = &data;
 }
 
 // Set the class fields
 // @param const vector<vector<double>>& d - the input vector from which to copy
 void Matrix::setFields(const vector<vector<double>>& d) {
 	data = d;
+	data_ptr = &data;
 	nRows = data.size();
 	nCols = data[0].size();
 	top = left = 0;
@@ -353,6 +161,7 @@ void Matrix::setFields(const vector<vector<double>>& d) {
 // @param const Matrix& mat - the input Matrix from which to copy
 void Matrix::setFields(const Matrix& mat) {
 	data = mat.data;
+	data_ptr = &data;
 	nRows = data.size();
 	nCols = data[0].size();
 	top = left = 0;
@@ -360,24 +169,9 @@ void Matrix::setFields(const Matrix& mat) {
 	right = nCols;
 }
 
-// Set the class fields
-// @param const SubMatrix& sm - the input SubMatrix from which to copy
-void Matrix::setFields(SubMatrix& sm) {
-	nRows = sm.nRows;
-	nCols = sm.nCols;
-	data = vector<vector<double>>(sm.nRows, vector<double>(sm.nCols));
-	for (int i = 0; i < nRows; ++i) {
-		for (int j = 0; j < nCols; ++j) {
-			data[i][j] = sm(i, j);
-		}
-	}
-	top = left = 0;
-	down = nRows;
-	right = nCols;
-}
-
 // Delete the class fields
 void Matrix::deleteFields() {
+	data_ptr = 0;
 	data.clear();
 	nRows = nCols = top = down = left = right = 0;
 }

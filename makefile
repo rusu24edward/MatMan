@@ -6,6 +6,9 @@ Example1.exe: Example1.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o MatrixB
 Example1.o: Example1.cpp
 	g++ -c Example1.cpp
 
+tutorial_modified.exe: tutorial.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o
+	g++ -o tutorial.exe tutorial.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o
+
 tutorial.exe: tutorial.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
 	g++ -o tutorial.exe tutorial.o NamedObject.o MatrixBase.o Matrix.o SubMatrix.o MatrixBuilder.o Reader.o
 

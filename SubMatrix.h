@@ -21,27 +21,22 @@ public:
 	~SubMatrix();
 
 	// --- Functions and Operators --- //
-	void operator=(const Matrix&);
-	void operator=(SubMatrix&);
-	void operator=(double);
-	double& operator()(int, int);
-	const double& operator()(int, int) const;
-	Matrix& operator*(const Matrix&);
-	Matrix& operator*(SubMatrix&);
+	// void operator=(const Matrix&);
+	// void operator=(SubMatrix&);
+	// void operator=(double);
+	// Matrix& operator*(const Matrix&);
+	// Matrix& operator*(SubMatrix&);
 
 	// --- Printing --- //
-	void Print(ostream&) const;
-	friend ostream& operator<<(ostream&, const SubMatrix&);
-	void Print(fstream&) const;
-	friend ofstream& operator<<(ofstream&, const SubMatrix&);
+	// void Print(ostream&) const;
+	// friend ostream& operator<<(ostream&, const SubMatrix&);
+	// void Print(fstream&) const;
+	// friend ofstream& operator<<(ofstream&, const SubMatrix&);
 
 private:
 
 	// --- Constructors --- //
-	SubMatrix(Matrix*, int, int, int, int);
-
-	// --- Underlying Data --- //
-	Matrix* data;
+	SubMatrix(vector<vector<double>>*, int, int, int, int);
 
 };
 

@@ -7,10 +7,8 @@
 #include <vector>
 #include <string>
 
-#include "MatrixBase.h"
 #include "NamedObject.h"
-#include "SubMatrix.h"
-class SubMatrix;
+#include "MatrixBase.h"
 
 using namespace std;
 
@@ -34,7 +32,6 @@ public:
 	Matrix(int, int, double);
 	Matrix(const vector<vector<double>>&);
 	Matrix(const Matrix&);
-	Matrix(SubMatrix&);
 
 	// --- Destructor --- //
 	~Matrix();
@@ -42,30 +39,10 @@ public:
 	// --- Assignment Operators --- //
 	Matrix& operator=(const vector<vector<double>>&);
 	Matrix& operator=(const Matrix&);
-	Matrix& operator=(SubMatrix&);
 
 	// --- Accessors & Mutators --- //
 	const string& getName() const;
 	void setName(const string&);
-
-	// --- Functions and Operators --- //
-	double& operator()(int, int);
-	const double& operator()(int, int) const;
-	void operator=(double);
-	SubMatrix& operator()(int, int, int, int);
-	int length() const;
-	Matrix& operator*(const Matrix&) const;
-	Matrix& operator+(const Matrix&) const;
-	Matrix& operator-(const Matrix&) const;
-	Matrix& operator*(SubMatrix&) const;
-	Matrix& operator*(double) const;
-	double norm() const;
-
-	// --- Printing --- //
-	void Print(ostream&) const;
-	friend ostream& operator<<(ostream&, const Matrix&);
-	void Print(ofstream&) const;
-	friend ofstream& operator<<(ofstream&, const Matrix&);
 
 
 private:
@@ -74,13 +51,12 @@ private:
 	void setFields(int r = 0, int c = 0, double value = 0);
 	void setFields(const vector<vector<double>>&);
 	void setFields(const Matrix&);
-	void setFields(SubMatrix&);
 	void deleteFields();
 	bool checkCols(const vector<vector<double>>&);
 
 
 	// --- Underlying Data --- //
-	// vector<vector<double>> data;
+	vector<vector<double>> data;
 };
 
 #endif
