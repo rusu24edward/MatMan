@@ -24,7 +24,6 @@ SubMatrix::SubMatrix(vector<vector<double>>* _data_ptr, int _top, int _down, int
 	nCols = right - left;
 }
 
-SubMatrix::SubMatrix() {}
 
 
 

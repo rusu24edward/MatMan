@@ -134,7 +134,7 @@ void Matrix::setName(const string& n) {
 // }
 
 SubMatrix& Matrix::operator()(int i, int j, int k, int l) {
-	return *(new SubMatrix());
+	return *(new SubMatrix(data_ptr, i, j, k, l));
 }
 
 
