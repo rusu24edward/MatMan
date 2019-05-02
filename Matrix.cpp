@@ -137,6 +137,10 @@ SubMatrix& Matrix::operator()(int i, int j, int k, int l) {
 	return *(new SubMatrix(data_ptr, i, j, k, l));
 }
 
+double& Matrix::operator()(int r, int c) {
+	return MatrixBase::operator()(r, c);
+}
+
 
 
 

@@ -50,6 +50,7 @@ public:
 
 	// --- Functions and Operators --- //
 	SubMatrix& operator()(int, int, int, int);
+	double& operator()(int, int);
 
 
 private:
