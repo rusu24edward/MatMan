@@ -129,9 +129,9 @@ void Matrix::setName(const string& n) {
 
 
 
-// SubMatrix& operator()(int i, int j, int k, int l) {
-// 	return *(new SubMatrix());
-// }
+// ------------------------------------ //
+// --- SubMatrix and Element Access --- //
+// ------------------------------------ //
 
 SubMatrix& Matrix::operator()(int i, int j, int k, int l) {
 	return *(new SubMatrix(data_ptr, i, j, k, l));
@@ -141,6 +141,41 @@ double& Matrix::operator()(int r, int c) {
 	return MatrixBase::operator()(r, c);
 }
 
+
+
+
+// ------------------------------- //
+// --- Mathematical Operations --- //
+// ------------------------------- //
+
+int Matrix::length() const {
+	return nRows > nCols ? nRows : nCols;
+}
+
+// Calculate the vector 2-norm of this Matrix.
+// @return double - the vector 2-norm of this Matrix.
+// throws an error if the Matrix is not a vector
+double Matrix::norm() const {
+	if (nRows != 1 && nCols != 1) {
+		throw "ERROR:  "
+			  "double Matrix::norm() const\n"
+			  "You are asking for the norm of a matrix, but we only support the 2-norm of a vector.";
+	} else if (nRows == 1 && nCols == 1) {
+		return data[0][0];
+	} else if (nRows == 1 && nCols != 1) {
+		double norm2 = 0.0;
+		for (int n = 0; n < nCols; ++n) {
+			norm2 += pow(data[0][n], 2);
+		}
+		return sqrt(norm2);
+	} else { // nRows != 1 && nCols == 1
+		double norm2 = 0.0;
+		for (int n = 0; n < nRows; ++n) {
+			norm2 += pow(data[n][0], 2);
+		}
+		return sqrt(norm2);
+	}
+}
 
 
 

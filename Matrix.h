@@ -48,9 +48,13 @@ public:
 	const string& getName() const;
 	void setName(const string&);
 
-	// --- Functions and Operators --- //
+	// --- SubMatrix and Element Access --- //
 	SubMatrix& operator()(int, int, int, int);
 	double& operator()(int, int);
+
+	// --- Mathematical Operations --- //
+	int length() const;
+	double norm() const;
 
 
 private:
