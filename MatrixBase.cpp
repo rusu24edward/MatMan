@@ -30,6 +30,21 @@ void MatrixBase::operator=(double value) {
 	}
 }
 
+// Return the size of the specified dimension.
+// @param int dim - if 1, then return nRows
+//				  - if 2, then return nCols
+//				  - else, return the larger length
+// @return int - the length
+int MatrixBase::size(int dim) const {
+	if (dim == 1) {
+		return nRows;
+	} else if (dim == 2) {
+		return nCols;
+	} else {
+		return nRows > nCols ? nRows : nCols;
+	}
+}
+
 
 
 // Print to an ostream

@@ -17,6 +17,7 @@ public:
 	double& operator()(int, int);
 	const double& operator()(int, int) const;
 	void operator=(double);
+	int size(int dim = 0) const;
 
 	void Print(ostream&) const;
 	friend ostream& operator<<(ostream&, const MatrixBase&);
