@@ -63,22 +63,22 @@ void SubMatrix::operator=(const Matrix& mat) {
 
 // Set the values to the values from the input SubMatrix
 // @param const SubMatrix& sm - the input SubMatrix from which to copy
-// void SubMatrix::operator=(SubMatrix& sm) {
-// 	if (nRows != sm.nRows || nCols != sm.nCols) {
-// 		throw "ERROR:  "
-// 			  "void SubMatrix::operator=(SubMatrix&)\n"
-// 			  "\tMatrices are not the same size.";
-// 	}
+void SubMatrix::operator=(SubMatrix& sm) {
+	if (nRows != sm.nRows || nCols != sm.nCols) {
+		throw "ERROR:  "
+			  "void SubMatrix::operator=(SubMatrix&)\n"
+			  "\tMatrices are not the same size.";
+	}
 
-// 	for (int i = 0; i < nRows; ++i) {
-// 		for (int j = 0; j < nCols; ++j) {
-// 			this->operator()(i, j) = sm(i, j);
-// 		}
-// 	}
+	for (int i = 0; i < nRows; ++i) {
+		for (int j = 0; j < nCols; ++j) {
+			operator()(i, j) = sm(i, j);
+		}
+	}
 
-// 	delete &sm;
-// 	delete this;
-// }
+	delete &sm;
+	delete this;
+}
 
 // Set the values to the input double
 // @param double - set values to this double
