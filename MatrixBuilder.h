@@ -14,24 +14,24 @@ class MatrixBuilder {
 
 public:
 	static Matrix& Combine(const MatrixBase&, const MatrixBase&, MatrixCombinationType);
-	static Matrix& BuildMatrixFromCombination(
-		const Matrix&, const Matrix&, MatrixCombinationType);
-	static Matrix& BuildMatrixFromCombination(
-		const Matrix&, SubMatrix&, MatrixCombinationType);
-	static Matrix& BuildMatrixFromCombination(
-		SubMatrix&, const Matrix&, MatrixCombinationType);
-	static Matrix& BuildMatrixFromCombination(
-		SubMatrix&, SubMatrix&, MatrixCombinationType);
-	static Matrix& BuildMatrixFromMultiplication(const Matrix&, const Matrix&);
-	static Matrix& BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&);
-	static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&);
-	static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&);
-	static Matrix& BuildMatrixFromMultiplication(const Matrix&, double);
-	static Matrix& BuildMatrixFromAddition(const Matrix&, const Matrix&);
-	static Matrix& BuildMatrixFromSubtraction(const Matrix&, const Matrix&);
-	static Matrix& SumReduce(const Matrix&, int dim = 1);
-	static Matrix& ElementMultiply(SubMatrix&, const Matrix&);
-	static Matrix& Transpose(const Matrix&);
+	// static Matrix& BuildMatrixFromCombination(
+	// 	const Matrix&, const Matrix&, MatrixCombinationType);
+	// static Matrix& BuildMatrixFromCombination(
+	// 	const Matrix&, SubMatrix&, MatrixCombinationType);
+	// static Matrix& BuildMatrixFromCombination(
+	// 	SubMatrix&, const Matrix&, MatrixCombinationType);
+	// static Matrix& BuildMatrixFromCombination(
+	// 	SubMatrix&, SubMatrix&, MatrixCombinationType);
+	// static Matrix& BuildMatrixFromMultiplication(const Matrix&, const Matrix&);
+	// static Matrix& BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&);
+	// static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&);
+	// static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&);
+	// static Matrix& BuildMatrixFromMultiplication(const Matrix&, double);
+	// static Matrix& BuildMatrixFromAddition(const Matrix&, const Matrix&);
+	// static Matrix& BuildMatrixFromSubtraction(const Matrix&, const Matrix&);
+	// static Matrix& SumReduce(const Matrix&, int dim = 1);
+	// static Matrix& ElementMultiply(SubMatrix&, const Matrix&);
+	// static Matrix& Transpose(const Matrix&);
 };
 
 #endif

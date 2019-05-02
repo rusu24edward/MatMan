@@ -187,35 +187,30 @@ int TestMatrix() {
 		mat6 = mat2;
 		Print(mat6, outFile);
 
-		Matrix mat10;
-		mat10(1,1);
+		mat6(1,1) = mat3(0,1);
+		Print(mat6, outFile);
 
-		// double tmp = mat6(0,0);
+		try {
+			mat6(6,6) = 12;
+			Print(mat6, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat6(1,2) = mat4(10,0);
+			Print(mat6, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
-		// mat6(1,1) = mat3(0,1);
-		// Print(mat6, outFile);
-
-		// try {
-		// 	mat6(6,6) = 12;
-		// 	Print(mat6, outFile);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
-		// try {
-		// 	mat6(1,2) = mat4(10,0);
-		// 	Print(mat6, outFile);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
-
-		// Matrix mat7(10,10);
-		// mat7.setName("Matrix 7");
-		// for (int i = 0; i < 10; ++i) {
-		// 	for (int j = 0; j < 10; ++j) {
-		// 		mat7(i,j) = (i+1)*j;
-		// 	}
-		// }
-		// Print(mat7, outFile);
+		Matrix mat7(10,10);
+		mat7.setName("Matrix 7");
+		for (int i = 0; i < 10; ++i) {
+			for (int j = 0; j < 10; ++j) {
+				mat7(i,j) = (i+1)*j;
+			}
+		}
+		Print(mat7, outFile);
 
 		// try {
 		// 	mat7(4,3,1,2);

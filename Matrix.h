@@ -52,9 +52,13 @@ public:
 	SubMatrix& operator()(int, int, int, int);
 	double& operator()(int, int);
 
-	// --- Mathematical Operations --- //
+	// --- Query Support --- //
 	int length() const;
+
+	// --- Mathematical Operations --- //
 	double norm() const;
+	// Matrix& operator*(const Matrix&) const;
+	// Matrix& operator*(SubMatrix&) const;
 
 
 private:
