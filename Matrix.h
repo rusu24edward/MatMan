@@ -61,6 +61,13 @@ public:
 	// Matrix& operator*(const Matrix&) const;
 	// Matrix& operator*(SubMatrix&) const;
 
+	// --- Printing --- //
+	void Print(ostream&) const;
+	friend ostream& operator<<(ostream&, const Matrix&);
+	void Print(ofstream&) const;
+	friend ofstream& operator<<(ofstream&, const Matrix&);
+
+
 
 private:
 

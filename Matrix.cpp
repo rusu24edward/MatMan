@@ -200,6 +200,25 @@ double Matrix::norm() const {
 
 
 
+void Matrix::Print(ostream& streamer) const {
+	streamer << endl << name << endl;
+	MatrixBase::Print(streamer);
+}
+ostream& operator<<(ostream& streamer, const Matrix& mat) {
+	mat.Print(streamer);
+	return streamer;
+}
+void Matrix::Print(ofstream& fileOut) const {
+	fileOut << endl << name << endl;
+	MatrixBase::Print(fileOut);
+}
+ofstream& operator<<(ofstream& fileOut, const Matrix& mat) {
+	mat.Print(fileOut);
+	return fileOut;
+}
+
+
+
 
 // ------------------------ //
 // --- Helper Functions --- //

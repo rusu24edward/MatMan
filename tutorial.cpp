@@ -212,26 +212,26 @@ int TestMatrix() {
 		}
 		Print(mat7, outFile);
 
-		// try {
-		// 	mat7(4,3,1,2);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
-		// try {
-		// 	mat7(3,4,6,4);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
-		// try {
-		// 	mat7(4,11,1,2);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
-		// try {
-		// 	mat7(3,4,-1,2);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
+		try {
+			mat7(4,3,1,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat7(3,4,6,4);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat7(4,11,1,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
+		try {
+			mat7(3,4,-1,2);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
 		// Matrix mat8(mat7(3,4,2,7));
 		// mat8.setName("Matrix 8");

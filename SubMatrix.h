@@ -23,15 +23,8 @@ public:
 	// --- Functions and Operators --- //
 	void operator=(const Matrix&);
 	void operator=(SubMatrix&);
-	// void operator=(double);
 	// Matrix& operator*(const Matrix&);
 	// Matrix& operator*(SubMatrix&);
-
-	// --- Printing --- //
-	// void Print(ostream&) const;
-	// friend ostream& operator<<(ostream&, const SubMatrix&);
-	// void Print(fstream&) const;
-	// friend ofstream& operator<<(ofstream&, const SubMatrix&);
 
 private:
 
