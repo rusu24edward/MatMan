@@ -140,6 +140,9 @@ SubMatrix& Matrix::operator()(int i, int j, int k, int l) {
 double& Matrix::operator()(int r, int c) {
 	return MatrixBase::operator()(r, c);
 }
+const double& Matrix::operator()(int r, int c) const {
+	return MatrixBase::operator()(r, c);
+}
 
 
 

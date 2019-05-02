@@ -21,7 +21,7 @@ public:
 	~SubMatrix();
 
 	// --- Functions and Operators --- //
-	// void operator=(const Matrix&);
+	void operator=(const Matrix&);
 	// void operator=(SubMatrix&);
 	// void operator=(double);
 	// Matrix& operator*(const Matrix&);

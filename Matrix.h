@@ -51,6 +51,7 @@ public:
 	// --- SubMatrix and Element Access --- //
 	SubMatrix& operator()(int, int, int, int);
 	double& operator()(int, int);
+	const double& operator()(int, int) const;
 
 	// --- Query Support --- //
 	int length() const;

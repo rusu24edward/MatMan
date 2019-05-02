@@ -45,21 +45,21 @@ SubMatrix::~SubMatrix() {
 
 // Set the values to the values from the input Matrix
 // @param const Matrix& mat - the input Matrix from which to copy
-// void SubMatrix::operator=(const Matrix& mat) {
-// 	if (nRows != mat.size(1) || nCols != mat.size(2)) {
-// 		throw "ERROR:  "
-// 			  "void SubMatrix::operator=(const Matrix&)\n"
-// 			  "\tMatrices are not the same size.";
-// 	}
+void SubMatrix::operator=(const Matrix& mat) {
+	if (nRows != mat.size(1) || nCols != mat.size(2)) {
+		throw "ERROR:  "
+			  "void SubMatrix::operator=(const Matrix&)\n"
+			  "\tMatrices are not the same size.";
+	}
 
-// 	for (int i = 0; i < nRows; ++i) {
-// 		for (int j = 0; j < nCols; ++j) {
-// 			this->operator()(i, j) = mat(i, j);
-// 		}
-// 	}
+	for (int i = 0; i < nRows; ++i) {
+		for (int j = 0; j < nCols; ++j) {
+			operator()(i, j) = mat(i, j);
+		}
+	}
 
-// 	delete this;
-// }
+	delete this;
+}
 
 // Set the values to the values from the input SubMatrix
 // @param const SubMatrix& sm - the input SubMatrix from which to copy
@@ -88,6 +88,9 @@ SubMatrix::~SubMatrix() {
 // 			this->operator()(i, j) = d;
 // 		}
 // 	}
+// void SubMatrix::operator=(double d) {
+// 	MatrixBase::operator=(d);
+// }
 
 // 	delete this;
 // }
