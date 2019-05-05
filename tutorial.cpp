@@ -233,9 +233,9 @@ int TestMatrix() {
 			outFile << msg << std::endl;
 		}
 
-		// Matrix mat8(mat7(3,4,2,7));
-		// mat8.setName("Matrix 8");
-		// Print(mat8, outFile);
+		Matrix mat8(mat7(3,4,2,7));
+		mat8.setName("Matrix 8");
+		Print(mat8, outFile);
 
 		// mat8 = mat7(5,9,1,2);
 		// Print(mat8, outFile);
@@ -260,7 +260,7 @@ int TestMatrix() {
 		// 	outFile << msg << std::endl;
 		// }
 
-		// mat8(0,1,0,1) = -2;
+		// mat8(0,1,0,1) = -2.0;
 		// Print(mat8, outFile);
 
 		status = 0;

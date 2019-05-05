@@ -56,7 +56,9 @@ Matrix::Matrix(const Matrix& mat) {
 }
 
 Matrix::Matrix(SubMatrix& sm) {
-
+	setFields(sm);
+	name = UNAMED;
+	delete &sm;
 }
 
 
@@ -133,8 +135,18 @@ void Matrix::setName(const string& n) {
 // --- SubMatrix and Element Access --- //
 // ------------------------------------ //
 
-SubMatrix& Matrix::operator()(int i, int j, int k, int l) {
-	return *(new SubMatrix(data_ptr, i, j, k, l));
+SubMatrix& Matrix::operator()(int _top, int _down, int _left, int _right) {
+	if (_down < _top || _right < _left) {
+		throw "ERROR:  "
+			  "SubMatrix& Matrix::operator()(int, int, int, int)\n"
+			  "\tUnordered Range.";
+	}
+	if (_top < 0 || _down >= nRows || _left < 0 || _right >= nCols) {
+		throw "ERROR:  "
+			  "SubMatrix& Matrix::operator()(int, int, int, int)\n"
+			  "\tAttempting to access elements outside the Matrix range.";
+	}
+	return *(new SubMatrix(data_ptr, _top, _down, _left, _right));
 }
 
 double& Matrix::operator()(int r, int c) {
@@ -262,6 +274,18 @@ void Matrix::setFields(const Matrix& mat) {
 	top = left = 0;
 	down = nRows;
 	right = nCols;
+}
+
+void Matrix::setFields(SubMatrix& sm) {
+	nRows = sm.nRows;
+	nCols = sm.nCols;
+	data = vector<vector<double>>(sm.nRows, vector<double>(sm.nCols));
+	data_ptr = &data;
+	for (int i = 0; i < nRows; ++i) {
+		for (int j = 0; j < nCols; ++j) {
+			data[i][j] = sm(i, j);
+		}
+	}
 }
 
 // Delete the class fields
