@@ -105,6 +105,9 @@ Matrix& Matrix::operator=(const Matrix& mat) {
 }
 
 Matrix& Matrix::operator=(SubMatrix& sm) {
+	deleteFields();
+	setFields(sm);
+	delete &sm;
 	return *this;
 }
 
@@ -154,6 +157,10 @@ double& Matrix::operator()(int r, int c) {
 }
 const double& Matrix::operator()(int r, int c) const {
 	return MatrixBase::operator()(r, c);
+}
+
+void Matrix::operator=(double value) {
+	MatrixBase::operator=(value);
 }
 
 

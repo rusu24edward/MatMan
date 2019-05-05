@@ -52,6 +52,7 @@ public:
 	SubMatrix& operator()(int, int, int, int);
 	double& operator()(int, int);
 	const double& operator()(int, int) const;
+	void operator=(double);
 
 	// --- Query Support --- //
 	int length() const;

@@ -237,31 +237,34 @@ int TestMatrix() {
 		mat8.setName("Matrix 8");
 		Print(mat8, outFile);
 
-		// mat8 = mat7(5,9,1,2);
-		// Print(mat8, outFile);
+		mat8 = mat7(5,9,1,2);
+		Print(mat8, outFile);
 
-		// mat7(1,3,1,3) = mat2;
-		// Print(mat7, outFile);
+		mat7(1,3,1,3) = mat2;
+		Print(mat7, outFile);
 
-		// try {
-		// 	mat8(1,1,0,1) = mat6;
-		// 	Print(mat8, outFile);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
+		try {
+			mat8(1,1,0,1) = mat6;
+			Print(mat8, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
-		// mat7(5,7,6,8) = mat7(0,2,7,9);
-		// Print(mat7, outFile);
+		mat7(5,7,6,8) = mat7(0,2,7,9);
+		Print(mat7, outFile);
 
-		// try {
-		// 	mat7(1,2,3,4) = mat4(1,1,1,2);
-		// 	Print(mat7, outFile);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
+		try {
+			mat7(1,2,3,4) = mat4(1,1,1,2);
+			Print(mat7, outFile);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
-		// mat8(0,1,0,1) = -2.0;
-		// Print(mat8, outFile);
+		mat8 = -1.0;
+		Print(mat8, outFile);
+
+		mat8(0,1,0,1) = -2.0;
+		Print(mat8, outFile);
 
 		status = 0;
 	} catch (...) {

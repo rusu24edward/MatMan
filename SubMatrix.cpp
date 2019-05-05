@@ -82,15 +82,9 @@ void SubMatrix::operator=(SubMatrix& sm) {
 
 // Set the values to the input double
 // @param double - set values to this double
-// void SubMatrix::operator=(double d) {
-// 	for (int i = 0; i < nRows; ++i) {
-// 		for (int j = 0; j < nCols; ++j) {
-// 			this->operator()(i, j) = d;
-// 		}
-// 	}
-// void SubMatrix::operator=(double d) {
-// 	MatrixBase::operator=(d);
-// }
+void SubMatrix::operator=(double value) {
+	MatrixBase::operator=(value);
+}
 
 // 	delete this;
 // }
