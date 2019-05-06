@@ -525,21 +525,25 @@ int TestMatrixMultiplication() {
 		mat8.setName("Matrix 8");
 		Print(mat8, outFile);
 
-		// Matrix mat9 = mat1(2,3,0,3) * -3;
-		// mat9.setName("Matrix 9");
-		// Print(mat9, outFile);
-
-		Matrix mat9 = 0.5 * mat8;
+		Matrix mat9 = mat1(2,3,0,3) * -3;
 		mat9.setName("Matrix 9");
 		Print(mat9, outFile);
 
-		Matrix mat10 = mat9 * 0;
+		Matrix mat10 = 0.5 * mat8;
 		mat10.setName("Matrix 10");
 		Print(mat10, outFile);
 
-		Matrix mat11 = 1*mat8;
+		Matrix mat11 = mat10 * 0;
 		mat11.setName("Matrix 11");
 		Print(mat11, outFile);
+
+		Matrix mat12 = 1*mat8;
+		mat12.setName("Matrix 12");
+		Print(mat12, outFile);
+
+		Matrix mat13 = 0.3*mat8(1,2,2,3);
+		mat13.setName("Matrix 13");
+		Print(mat13, outFile);
 
 		status = 0;
 	} catch (...) {
