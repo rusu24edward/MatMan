@@ -14,14 +14,7 @@ class MatrixBuilder {
 
 public:
 	static Matrix& Combine(const MatrixBase&, const MatrixBase&, MatrixCombinationType);
-	// static Matrix& BuildMatrixFromCombination(
-	// 	const Matrix&, const Matrix&, MatrixCombinationType);
-	// static Matrix& BuildMatrixFromCombination(
-	// 	const Matrix&, SubMatrix&, MatrixCombinationType);
-	// static Matrix& BuildMatrixFromCombination(
-	// 	SubMatrix&, const Matrix&, MatrixCombinationType);
-	// static Matrix& BuildMatrixFromCombination(
-	// 	SubMatrix&, SubMatrix&, MatrixCombinationType);
+
 	// static Matrix& BuildMatrixFromMultiplication(const Matrix&, const Matrix&);
 	// static Matrix& BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&);
 	// static Matrix& BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&);
