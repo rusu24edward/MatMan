@@ -61,6 +61,7 @@ public:
 	double norm() const;
 	Matrix& operator*(const Matrix&) const;
 	Matrix& operator*(SubMatrix&) const;
+	Matrix& operator*(double) const;
 
 	// --- Printing --- //
 	void Print(ostream&) const;

@@ -218,6 +218,10 @@ Matrix& Matrix::operator*(SubMatrix& RHS) const {
 	return outMatrix;
 }
 
+Matrix& Matrix::operator*(double RHS) const {
+	return MatrixBuilder::Multiply(*this, RHS);
+}
+
 
 
 void Matrix::Print(ostream& streamer) const {

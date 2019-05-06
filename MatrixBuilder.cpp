@@ -79,6 +79,18 @@ Matrix& MatrixBuilder::Multiply(const MatrixBase& left, const MatrixBase& right)
 	}
 }
 
+Matrix& MatrixBuilder::Multiply(const MatrixBase& left, double scale) {
+	int nRows = left.size(1);
+	int nCols = left.size(2);
+	Matrix& outMatrix = *(new Matrix(nRows, nCols));
+	for (int i = 0; i < nRows; ++i) {
+		for (int j = 0; j < nCols; ++j) {
+			outMatrix(i,j) = left(i,j) * scale;
+		}
+	}
+	return outMatrix;
+}
+
 Matrix& MatrixBuilder::ElementMultiply(const MatrixBase& left, const MatrixBase& right) {
 	int nRows = left.size(1);
 	int nCols = left.size(2);

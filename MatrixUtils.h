@@ -5,8 +5,10 @@
 #include "Matrix.h"
 #include "MatrixBuilder.h"
 
-Matrix& operator*(double scale, const Matrix& RHS) {
- 	return MatrixBuilder::BuildMatrixFromMultiplication(RHS, scale);
+#include <iostream>
+
+Matrix& operator*(double scale, const MatrixBase& RHS) {
+	return MatrixBuilder::Multiply(RHS, scale);
 }
 
 #endif

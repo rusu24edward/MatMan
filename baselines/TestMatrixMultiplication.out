@@ -27,7 +27,7 @@ Matrix 3
 		[ 136 236 ]
 		[ 170 295 ]
 
-ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, const Matrix&)
+ERROR:  Matrix& MatrixBuilder::Multiply(const MatrixBase&, const MatrixBase&)
 	Input Matrices must have compatible dimensions for Matrix Multiplication.
 
 Matrix 4
@@ -38,7 +38,7 @@ Matrix 4
 		[ 1724 2332 ]
 		[ 2155 2915 ]
 
-ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&)
+ERROR:  Matrix& MatrixBuilder::Multiply(const MatrixBase&, const MatrixBase&)
 	Input Matrices must have compatible dimensions for Matrix Multiplication.
 
 Matrix 5
@@ -46,7 +46,7 @@ Matrix 5
 	Cols: 2
 		[ 1768 3068 ]
 
-ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&)
+ERROR:  Matrix& MatrixBuilder::Multiply(const MatrixBase&, const MatrixBase&)
 	Input Matrices must have compatible dimensions for Matrix Multiplication.
 
 Matrix 6
@@ -54,7 +54,7 @@ Matrix 6
 	Cols: 1
 		[ 63 ]
 
-ERROR:  Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&)
+ERROR:  Matrix& MatrixBuilder::Multiply(const MatrixBase&, const MatrixBase&)
 	Input Matrices must have compatible dimensions for Matrix Multiplication.
 
 Matrix 7
@@ -62,7 +62,7 @@ Matrix 7
 	Cols: 2
 		[ 5304 9204 ]
 
-ERROR:  Matrix& MatrixBuilder::ElementMultiply(SubMatrix&, const Matrix&)
+ERROR:  Matrix& MatrixBuilder::ElementMultiply(const MatrixBase&, const MatrixBase&)
 	Input Matrices must have compatible dimensions for Matrix element-wise multiplication.
 
 Matrix 8
@@ -86,10 +86,10 @@ Matrix 9
 Matrix 10
 	Rows: 4
 	Cols: 6
-		[ 0 0 0 0 0 0 ]
-		[ 0 0 0 0 0 0 ]
-		[ 0 0 0 0 0 0 ]
-		[ 0 0 0 0 0 0 ]
+		[ -0 -0 0 0 0 0 ]
+		[ -0 -0 0 0 0 0 ]
+		[ -0 -0 0 0 0 0 ]
+		[ -0 -0 0 0 0 0 ]
 
 
 Matrix 11

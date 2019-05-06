@@ -113,6 +113,10 @@ Matrix& SubMatrix::operator*(SubMatrix& RHS) {
 	return outMatrix;
 }
 
+Matrix& SubMatrix::operator*(double RHS) {
+	return MatrixBuilder::Multiply(*this, RHS);
+}
+
 
 
 
