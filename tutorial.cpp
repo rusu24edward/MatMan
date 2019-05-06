@@ -511,15 +511,15 @@ int TestMatrixMultiplication() {
 			outFile << msg << std::endl;
 		}
 
-		// Matrix mat7 = MatrixBuilder::ElementMultiply(mat2(0,0,0,1), mat5);
-		// mat7.setName("Matrix 7");
-		// Print(mat7, outFile);
+		Matrix mat7 = MatrixBuilder::ElementMultiply(mat2(0,0,0,1), mat5);
+		mat7.setName("Matrix 7");
+		Print(mat7, outFile);
 
-		// try {
-		// 	Matrix mat0 = MatrixBuilder::ElementMultiply(mat3(0,1,0,1), mat5);
-		// } catch (const char* msg) {
-		// 	outFile << msg << std::endl;
-		// }
+		try {
+			Matrix mat0 = MatrixBuilder::ElementMultiply(mat3(0,1,0,1), mat5);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
 		// Matrix mat8 = mat1 * 2;
 		// mat8.setName("Matrix 8");

@@ -58,14 +58,16 @@
  }
 
 Matrix& MatrixBuilder::Multiply(const MatrixBase& left, const MatrixBase& right) {
+	int nRows = left.size(1);
+	int nCols = right.size(2);
 	if (left.size(2) != right.size(1)) {
 		throw "ERROR:  "
 			  "Matrix& MatrixBuilder::Multiply(const MatrixBase&, const MatrixBase&)\n"
 			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
 	} else {
-		Matrix& outMatrix = *(new Matrix(left.size(1), right.size(2)));
-		for (int i = 0; i < left.size(1); ++i) {
-			for (int j = 0; j < right.size(2); ++j) {
+		Matrix& outMatrix = *(new Matrix(nRows, nCols));
+		for (int i = 0; i < nRows; ++i) {
+			for (int j = 0; j < nCols; ++j) {
 				double addingValue = 0.0;
 				for (int k = 0; k < left.size(2); ++k) {
 					addingValue += left(i, k) * right(k, j);
@@ -77,96 +79,26 @@ Matrix& MatrixBuilder::Multiply(const MatrixBase& left, const MatrixBase& right)
 	}
 }
 
-// // Build a new Matrix by multiplying a matrix with a submatrix
-// // @param const Matrix& left - the left Matrix in the multiplication
-// // @param const SubMatrix& right - the right SubMatrix in the multiplication
-// // @return - a new Matrix from the multiplication of the other two
-// // @throws exceptions for mismatched dimensions.
-// Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& left, const SubMatrix& right) {
-// 	if (left.size(2) != right.size(1)) {
-// 		throw "ERROR:  "
-// 			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix&, const SubMatrix&)\n"
-// 			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
-// 	} else {
-// 		Matrix& outMatrix = *(new Matrix(left.size(1), right.size(2)));
-// 		for (int i = 0; i < left.size(1); ++i) {
-// 			for (int j = 0; j < right.size(2); ++j) {
-// 				double addingValue = 0.0;
-// 				for (int k = 0; k < left.size(2); ++k) {
-// 					addingValue += left(i, k) * right(k, j);
-// 				}
-// 				outMatrix(i, j) = addingValue;
-// 			}
-// 		}
-// 		return outMatrix;
-// 	}
-// }
+Matrix& MatrixBuilder::ElementMultiply(const MatrixBase& left, const MatrixBase& right) {
+	int nRows = left.size(1);
+	int nCols = left.size(2);
+	if (nRows != right.size(1) || nCols != right.size(2)) {
+		throw "ERROR:  "
+			  "Matrix& MatrixBuilder::ElementMultiply(const MatrixBase&, const MatrixBase&)\n"
+			  "\tInput Matrices must have compatible dimensions for Matrix element-wise multiplication.";
+	} else {
+		Matrix& outMatrix = *(new Matrix(nRows, nCols));
+		for (int i = 0; i < nRows; ++i) {
+			for (int j = 0; j < nCols; ++j) {
+				outMatrix(i,j) = left(i,j) * right(i,j);
+			}
+		}
+		return outMatrix;
+	}
+}
 
-// // Build a new Matrix by multiplying a submatrix with a matrix.
-// // @param const Matrix& left - the left SubMatrix in the multiplication
-// // @param const Matrix& right - the right Matrix in the multiplication
-// // @return - a new Matrix from the multiplication of the other two
-// // @throws exceptions for mismatched dimensions.
-// Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix& left, const Matrix& right) {
-// 	if (left.size(2) != right.size(1)) {
-// 		throw "ERROR:  "
-// 			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const Matrix&)\n"
-// 			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
-// 	} else {
-// 		Matrix& outMatrix = *(new Matrix(left.size(1), right.size(2)));
-// 		for (int i = 0; i < left.size(1); ++i) {
-// 			for (int j = 0; j < right.size(2); ++j) {
-// 				double addingValue = 0.0;
-// 				for (int k = 0; k < left.size(2); ++k) {
-// 					addingValue += left(i, k) * right(k, j);
-// 				}
-// 				outMatrix(i, j) = addingValue;
-// 			}
-// 		}
-// 		return outMatrix;
-// 	}
-// }
 
-// // Build a new Matrix by multiplying two submatrices together
-// // @param const SubMatrix& left - the left SubMatrix in the multiplication
-// // @param const SubMatrix& right - the right SubMatrix in the multiplication
-// // @return - a new Matrix from the multiplication of the other two
-// // @throws exceptions for mismatched dimensions.
-// Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix& left, const SubMatrix& right) {
-// 	if (left.size(2) != right.size(1)) {
-// 		throw "ERROR:  "
-// 			  "Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const SubMatrix&, const SubMatrix&)\n"
-// 			  "\tInput Matrices must have compatible dimensions for Matrix Multiplication.";
-// 	} else {
-// 		Matrix& outMatrix = *(new Matrix(left.size(1), right.size(2)));
-// 		for (int i = 0; i < left.size(1); ++i) {
-// 			for (int j = 0; j < right.size(2); ++j) {
-// 				double addingValue = 0.0;
-// 				for (int k = 0; k < left.size(2); ++k) {
-// 					addingValue += left(i, k) * right(k, j);
-// 				}
-// 				outMatrix(i, j) = addingValue;
-// 			}
-// 		}
-// 		return outMatrix;
-// 	}
-// }
 
-// Matrix& MatrixBuilder::BuildMatrixFromMultiplication(const Matrix& mat, double scale) {
-// 	if (scale == 0) {
-// 		return *(new Matrix(mat.size(1), mat.size(2)));
-// 	} else if (scale == 1) {
-// 		return *(new Matrix(mat));
-// 	} else {
-// 		Matrix& outMatrix = *(new Matrix(mat));
-// 		for (int i = 0; i < mat.size(1); ++i) {
-// 			for (int j = 0; j < mat.size(2); ++j) {
-// 				outMatrix(i,j) *= scale;
-// 			}
-// 		}
-// 		return outMatrix;
-// 	}
-// }
 
 // Matrix& MatrixBuilder::BuildMatrixFromAddition(const Matrix& left, const Matrix& right) {
 // 	if (left.size(1) != right.size(1) || left.size(2) != right.size(2)) {
@@ -226,22 +158,6 @@ Matrix& MatrixBuilder::Multiply(const MatrixBase& left, const MatrixBase& right)
 // 	}
 // }
 
-// Matrix& MatrixBuilder::ElementMultiply(SubMatrix& left, const Matrix& right) {
-// 	if (left.size(1) != right.size(1) || left.size(2) != right.size(2)) {
-// 		delete &left;
-// 		throw "ERROR:  "
-// 			  "Matrix& MatrixBuilder::ElementMultiply(SubMatrix&, const Matrix&)\n"
-// 			  "\tInput Matrices must have compatible dimensions for Matrix element-wise multiplication.";
-// 	} else {
-// 		Matrix& outMatrix = *(new Matrix(left));
-// 		for (int i = 0; i < right.size(1); ++i) {
-// 			for (int j = 0; j < right.size(2); ++j) {
-// 				outMatrix(i,j) *= right(i,j);
-// 			}
-// 		}
-// 		return outMatrix;
-// 	}
-// }
 
 // Matrix& MatrixBuilder::Transpose(const Matrix& mat) {
 // 	int nRows = mat.size(1);
