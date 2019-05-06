@@ -16,7 +16,7 @@ int RunTests(const std::string&);
 int CompareAgainstBaseline(const std::string&);
 int TestMatrix();
 int TestMatrixBuilder();
-// int TestMatrixMultiplication();
+int TestMatrixMultiplication();
 // int TestMatrixAdditionAndSubtraction();
 // int TestMatrixNorms();
 // int TestMatrixReduction();
@@ -35,7 +35,7 @@ int main (int argc, char** argv) {
 	// TODO: testNames.push_back("TestsTest"); // For testing the testing
 	testNames.push_back("MatrixTest");
 	testNames.push_back("TestMatrixBuilder");
-	// testNames.push_back("TestMatrixMultiplication");
+	testNames.push_back("TestMatrixMultiplication");
 	// testNames.push_back("TestMatrixAdditionAndSubtraction");
 	// testNames.push_back("TestMatrixNorms");
 	// testNames.push_back("TestMatrixReduction");
@@ -73,8 +73,8 @@ int RunTests(const std::string& testName) {
 		status = TestMatrix();
 	} else if (testName == "TestMatrixBuilder") {
 		status = TestMatrixBuilder();
-	// } else if (testName == "TestMatrixMultiplication") {
-	// 	status = TestMatrixMultiplication();
+	} else if (testName == "TestMatrixMultiplication") {
+		status = TestMatrixMultiplication();
 	// } else if (testName == "TestMatrixAdditionAndSubtraction") {
 	// 	status = TestMatrixAdditionAndSubtraction();
 	// } else if (testName == "TestMatrixNorms") {
@@ -442,111 +442,111 @@ int TestMatrixBuilder() {
 
 
 
-// int TestMatrixMultiplication() {
-// 	int status = 1;
+int TestMatrixMultiplication() {
+	int status = 1;
 
-// 	std::string testFileName = "current/TestMatrixMultiplication.out";
-// 	std::ofstream outFile(testFileName);
-// 	if (!outFile.is_open()) {
-// 		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
-// 		return 1;
-// 	}
+	std::string testFileName = "current/TestMatrixMultiplication.out";
+	std::ofstream outFile(testFileName);
+	if (!outFile.is_open()) {
+		std::cout << "FAILURE: Cannot open " << testFileName << "!" << std::endl;
+		return 1;
+	}
 
-// 	try{
-// 		Matrix mat1(4,6);
-// 		for (int i = 0; i < 4; ++i) {
-// 			for (int j = 0; j < 6; ++j) {
-// 				mat1(i,j) = (i+2)*(j-2);
-// 			}
-// 		}
-// 		mat1.setName("Matrix 1");
-// 		Print(mat1, outFile);
+	try{
+		Matrix mat1(4,6);
+		for (int i = 0; i < 4; ++i) {
+			for (int j = 0; j < 6; ++j) {
+				mat1(i,j) = (i+2)*(j-2);
+			}
+		}
+		mat1.setName("Matrix 1");
+		Print(mat1, outFile);
 
-// 		Matrix mat2(6,2);
-// 		for (int i = 0; i < 6; ++i) {
-// 			for (int j = 0; j < 2; ++j) {
-// 				mat2(i,j) = 3+i*(j+1);
-// 			}
-// 		}
-// 		mat2.setName("Matrix 2");
-// 		Print(mat2, outFile);
+		Matrix mat2(6,2);
+		for (int i = 0; i < 6; ++i) {
+			for (int j = 0; j < 2; ++j) {
+				mat2(i,j) = 3+i*(j+1);
+			}
+		}
+		mat2.setName("Matrix 2");
+		Print(mat2, outFile);
 
-// 		Matrix mat3 = mat1 * mat2;
-// 		mat3.setName("Matrix 3");
-// 		Print(mat3, outFile);
+		Matrix mat3 = mat1 * mat2;
+		mat3.setName("Matrix 3");
+		Print(mat3, outFile);
 
-// 		try {
-// 			Matrix mat100 = mat2 * mat1;
-// 		} catch (const char* msg) {
-// 			outFile << msg << std::endl;
-// 		}
+		try {
+			Matrix mat100 = mat2 * mat1;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
-// 		Matrix mat4 = mat3 * mat2(1,2,0,1);
-// 		mat4.setName("Matrix 4");
-// 		Print(mat4, outFile);
+		Matrix mat4 = mat3 * mat2(1,2,0,1);
+		mat4.setName("Matrix 4");
+		Print(mat4, outFile);
 
-// 		try {
-// 			Matrix mat0 = mat3 * mat1(0,2,0,0);
-// 		} catch (const char* msg) {
-// 			outFile << msg << std::endl;
-// 		}
+		try {
+			Matrix mat0 = mat3 * mat1(0,2,0,0);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
-// 		Matrix mat5 = mat1(0, 0, 2, 5) * mat3;
-// 		mat5.setName("Matrix 5");
-// 		Print(mat5, outFile);
+		Matrix mat5 = mat1(0, 0, 2, 5) * mat3;
+		mat5.setName("Matrix 5");
+		Print(mat5, outFile);
 
-// 		try {
-// 			Matrix mat0 = mat1(2,3,2,4) * mat4;
-// 		} catch (const char* msg) {
-// 			outFile << msg << std::endl;
-// 		}
+		try {
+			Matrix mat0 = mat1(2,3,2,4) * mat4;
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
-// 		Matrix mat6 = mat2(3,3,0,1) * mat2(0,1,1,1);
-// 		mat6.setName("Matrix 6");
-// 		Print(mat6, outFile);
+		Matrix mat6 = mat2(3,3,0,1) * mat2(0,1,1,1);
+		mat6.setName("Matrix 6");
+		Print(mat6, outFile);
 
-// 		try {
-// 			Matrix mat0 = mat1(0,1,0,1) * mat5(0,0,0,0);
-// 		} catch (const char* msg) {
-// 			outFile << msg << std::endl;
-// 		}
+		try {
+			Matrix mat0 = mat1(0,1,0,1) * mat5(0,0,0,0);
+		} catch (const char* msg) {
+			outFile << msg << std::endl;
+		}
 
-// 		Matrix mat7 = MatrixBuilder::ElementMultiply(mat2(0,0,0,1), mat5);
-// 		mat7.setName("Matrix 7");
-// 		Print(mat7, outFile);
+		// Matrix mat7 = MatrixBuilder::ElementMultiply(mat2(0,0,0,1), mat5);
+		// mat7.setName("Matrix 7");
+		// Print(mat7, outFile);
 
-// 		try {
-// 			Matrix mat0 = MatrixBuilder::ElementMultiply(mat3(0,1,0,1), mat5);
-// 		} catch (const char* msg) {
-// 			outFile << msg << std::endl;
-// 		}
+		// try {
+		// 	Matrix mat0 = MatrixBuilder::ElementMultiply(mat3(0,1,0,1), mat5);
+		// } catch (const char* msg) {
+		// 	outFile << msg << std::endl;
+		// }
 
-// 		Matrix mat8 = mat1 * 2;
-// 		mat8.setName("Matrix 8");
-// 		Print(mat8, outFile);
+		// Matrix mat8 = mat1 * 2;
+		// mat8.setName("Matrix 8");
+		// Print(mat8, outFile);
 
-// 		Matrix mat9 = 0.5 * mat8;
-// 		mat9.setName("Matrix 9");
-// 		Print(mat9, outFile);
+		// Matrix mat9 = 0.5 * mat8;
+		// mat9.setName("Matrix 9");
+		// Print(mat9, outFile);
 
-// 		Matrix mat10 = mat9 * 0;
-// 		mat10.setName("Matrix 10");
-// 		Print(mat10, outFile);
+		// Matrix mat10 = mat9 * 0;
+		// mat10.setName("Matrix 10");
+		// Print(mat10, outFile);
 
-// 		Matrix mat11 = 1*mat8;
-// 		mat11.setName("Matrix 11");
-// 		Print(mat11, outFile);
+		// Matrix mat11 = 1*mat8;
+		// mat11.setName("Matrix 11");
+		// Print(mat11, outFile);
 
-// 		status = 0;
-// 	} catch (...) {
-// 		std::cout << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
-// 		outFile << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
-// 		status = 1;
-// 	}
+		status = 0;
+	} catch (...) {
+		std::cout << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
+		outFile << "FAILURE: Cannot complete Matrix Multiplication Test!" << std::endl;
+		status = 1;
+	}
 
-// 	outFile.close();
-// 	return status;
-// }
+	outFile.close();
+	return status;
+}
 
 
 // int TestMatrixAdditionAndSubtraction() {

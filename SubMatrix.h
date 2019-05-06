@@ -24,8 +24,8 @@ public:
 	void operator=(const Matrix&);
 	void operator=(SubMatrix&);
 	void operator=(double);
-	// Matrix& operator*(const Matrix&);
-	// Matrix& operator*(SubMatrix&);
+	Matrix& operator*(const Matrix&);
+	Matrix& operator*(SubMatrix&);
 
 
 private:

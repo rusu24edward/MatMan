@@ -59,8 +59,8 @@ public:
 
 	// --- Mathematical Operations --- //
 	double norm() const;
-	// Matrix& operator*(const Matrix&) const;
-	// Matrix& operator*(SubMatrix&) const;
+	Matrix& operator*(const Matrix&) const;
+	Matrix& operator*(SubMatrix&) const;
 
 	// --- Printing --- //
 	void Print(ostream&) const;

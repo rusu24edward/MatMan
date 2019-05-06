@@ -1,5 +1,6 @@
 
 #include "Matrix.h"
+#include "MatrixBuilder.h"
 
 #include <math.h>
 
@@ -199,23 +200,23 @@ double Matrix::norm() const {
 	}
 }
 
-// Construct a Matix by multipliying this Matrix with another. This lives here in order to
+// Construct a Matrix by multipliying this Matrix with another. This lives here in order to
 // overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
-// @param const Matrix& RHS - the RHS Matix involved in the operation
+// @param const MatrixBase& RHS - the RHS Matrix involved in the operation
 // @return Matrix& - new Matrix formed from multiplying these two.
-// Matrix& Matrix::operator*(const Matrix& RHS) const {
-// 	return MatrixBuilder::Multiply(*this, RHS);
-// }
+Matrix& Matrix::operator*(const Matrix& RHS) const {
+	return MatrixBuilder::Multiply(*this, RHS);
+}
 
 // Construct a Matix by multipliying this Matrix with a SubMatrix. This lives here in order to
 // overload the multiplication operator, but all the work is offloaded to MatrixBuilder.
 // @param SubMatrix& RHS - the RHS SubMatix involved in the operation
 // @return Matrix& - new Matrix formed from multiplying these two.
-// Matrix& Matrix::operator*(SubMatrix& RHS) const {
-// 	Matrix& outMatrix = MatrixBuilder::Multiply(*this, RHS);
-// 	delete &RHS;
-// 	return outMatrix;
-// }
+Matrix& Matrix::operator*(SubMatrix& RHS) const {
+	Matrix& outMatrix = MatrixBuilder::Multiply(*this, RHS);
+	delete &RHS;
+	return outMatrix;
+}
 
 
 
